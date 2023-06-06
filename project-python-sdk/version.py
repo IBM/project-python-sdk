@@ -15,6 +15,6 @@
 # limitations under the License.
 
 """
-Version of mysdk
+Version of project-python-sdk
 """
 __version__ = '0.0.1'

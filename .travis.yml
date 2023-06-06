@@ -10,12 +10,10 @@ cache: pip
 notifications:
   email: true
 
-# After creating your SDK project from this template repository,
-# uncomment this section to enable builds on the appropriate python versions.
-# matrix:
-#   include:
-#     - python: 3.7
-#     - python: 3.8
+matrix:
+  include:
+    - python: 3.7
+    - python: 3.8
 #     - python: 3.9
 #     - python: 3.10
 
@@ -29,26 +27,6 @@ install:
 script:
 - make ci
 
-# After creating your SDK project from this template repository,
-# remove this entire "jobs" section as this is only applicable
-# to the template repo's travis build.
-jobs:
-  include:
-    - stage: Build and test project
-      python: "3.7"
-    - python: "3.8"
-    - python: "3.9"
-    - python: "3.10"
-    - stage: Run system test with template
-      python: "3.7"
-      script:
-        - |
-          if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then
-            echo "Running Python System Test"
-            git clone https://github.ibm.com/CloudEngineering/sdkgen-systest.git
-            cd sdkgen-systest
-            ./install_scripts/install_deps_ubuntu.sh
-            ./setup_and_generate.sh -l ibm-python -t $TRAVIS_BRANCH -s -i tests -i apidocs
           else
             echo "Skipping systest stage for PR build..."
           fi
