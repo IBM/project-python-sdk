@@ -28,7 +28,7 @@ import re
 import requests
 import responses
 import urllib
-from github.com/IBM/project-python-sdk.project_v1 import *
+from project.project_v1 import *
 
 
 _service = ProjectV1(
