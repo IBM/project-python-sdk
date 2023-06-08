@@ -40,8 +40,7 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance(
-            )
+            cls.project_service = ProjectV1.new_instance()
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)

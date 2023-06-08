@@ -16,9 +16,7 @@ install:
   - echo -e "machine github.ibm.com\n  login $GITHUB_ACCESS_TOKEN" > ~/.netrc
   - pip install setuptools=="60.8.2"
 script:
-  - |-
-    make ci
-    else echo "Skipping systest stage for PR build..." fi
+  - make ci    
 deploy:
   - provider: script
     script: npm run semantic-release

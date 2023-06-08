@@ -56,9 +56,7 @@ class ProjectV1(BaseService):
                and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(
-            authenticator
-            )
+        service = cls(authenticator)
         service.configure_service(service_name)
         return service
 
@@ -1171,7 +1169,6 @@ class InputVariable:
         OBJECT = 'object'
 
 
-
 class OutputValue:
     """
     OutputValue.
@@ -1838,7 +1835,6 @@ class ProjectConfig:
         SCHEMATICS_BLUEPRINT = 'schematics_blueprint'
 
 
-
 class ProjectConfigAuth:
     """
     The authorization for a configuration. You can authorize by using a trusted profile or
@@ -2287,7 +2283,6 @@ class ProjectConfigCollectionMember:
         SCHEMATICS_BLUEPRINT = 'schematics_blueprint'
 
 
-
 class ProjectConfigComplianceProfile:
     """
     The profile required for compliance.
@@ -2646,7 +2641,6 @@ class ProjectConfigDraft:
 
         TERRAFORM_TEMPLATE = 'terraform_template'
         SCHEMATICS_BLUEPRINT = 'schematics_blueprint'
-
 
 
 class ProjectConfigDraftMetadata:
@@ -3102,7 +3096,6 @@ class ProjectConfigGetResponse:
         SCHEMATICS_BLUEPRINT = 'schematics_blueprint'
 
 
-
 class ProjectConfigInputVariable:
     """
     ProjectConfigInputVariable.
@@ -3310,7 +3303,9 @@ class ProjectConfigMetadata:
         if 'cost_estimate' in _dict:
             args['cost_estimate'] = ProjectConfigMetadataCostEstimate.from_dict(_dict.get('cost_estimate'))
         if 'last_deployment_job_summary' in _dict:
-            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(_dict.get('last_deployment_job_summary'))
+            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(
+                _dict.get('last_deployment_job_summary')
+            )
         return cls(**args)
 
     @classmethod
@@ -4308,7 +4303,9 @@ class ProjectMetadata:
         if 'created_at' in _dict:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         if 'cumulative_needs_attention_view_err' in _dict:
             args['cumulative_needs_attention_view_err'] = _dict.get('cumulative_needs_attention_view_err')
         if 'location' in _dict:
@@ -4341,7 +4338,10 @@ class ProjectMetadata:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_err') and self.cumulative_needs_attention_view_err is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_err')
+            and self.cumulative_needs_attention_view_err is not None
+        ):
             _dict['cumulative_needs_attention_view_err'] = self.cumulative_needs_attention_view_err
         if hasattr(self, 'location') and self.location is not None:
             _dict['location'] = self.location
@@ -4469,6 +4469,7 @@ class ProjectSummary:
     def __ne__(self, other: 'ProjectSummary') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
 
 ##############################################################################
 # Pagers

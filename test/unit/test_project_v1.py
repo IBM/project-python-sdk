@@ -31,9 +31,7 @@ import urllib
 from project.project_v1 import *
 
 
-_service = ProjectV1(
-    authenticator=NoAuthAuthenticator()
-)
+_service = ProjectV1(authenticator=NoAuthAuthenticator())
 
 _base_url = 'https://projects.api.cloud.ibm.com'
 _service.set_service_url(_base_url)
@@ -157,7 +155,9 @@ class TestCreateProject:
         project_config_prototype_model['description'] = 'testString'
         project_config_prototype_model['authorizations'] = project_config_auth_model
         project_config_prototype_model['compliance_profile'] = project_config_compliance_profile_model
-        project_config_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_prototype_model[
+            'locator_id'
+        ] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
         project_config_prototype_model['input'] = [project_config_input_variable_model]
         project_config_prototype_model['setting'] = [project_config_setting_collection_model]
 
@@ -257,7 +257,9 @@ class TestCreateProject:
         project_config_prototype_model['description'] = 'testString'
         project_config_prototype_model['authorizations'] = project_config_auth_model
         project_config_prototype_model['compliance_profile'] = project_config_compliance_profile_model
-        project_config_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_prototype_model[
+            'locator_id'
+        ] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
         project_config_prototype_model['input'] = [project_config_input_variable_model]
         project_config_prototype_model['setting'] = [project_config_setting_collection_model]
 
@@ -761,10 +763,15 @@ class TestCreateConfig:
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
         assert req_body['name'] == 'env-stage'
-        assert req_body['locator_id'] == '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        assert (
+            req_body['locator_id'] == '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        )
         assert req_body['id'] == 'testString'
         assert req_body['labels'] == ['env:stage', 'governance:test', 'build:0']
-        assert req_body['description'] == 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
+        assert (
+            req_body['description']
+            == 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
+        )
         assert req_body['authorizations'] == project_config_auth_model
         assert req_body['compliance_profile'] == project_config_compliance_profile_model
         assert req_body['input'] == [project_config_input_variable_model]
@@ -1969,7 +1976,9 @@ class TestModel_CumulativeNeedsAttention:
         assert cumulative_needs_attention_model != False
 
         # Construct a model instance of CumulativeNeedsAttention by calling from_dict on the json representation
-        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(cumulative_needs_attention_model_json).__dict__
+        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(
+            cumulative_needs_attention_model_json
+        ).__dict__
         cumulative_needs_attention_model2 = CumulativeNeedsAttention(**cumulative_needs_attention_model_dict)
 
         # Verify the model instances are equivalent
@@ -2095,7 +2104,9 @@ class TestModel_Project:
         cumulative_needs_attention_model['config_version'] = 38
 
         project_metadata_model = {}  # ProjectMetadata
-        project_metadata_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_metadata_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_metadata_model['created_at'] = '2019-01-01T12:00:00Z'
         project_metadata_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_metadata_model['cumulative_needs_attention_view_err'] = 'testString'
@@ -2196,7 +2207,9 @@ class TestModel_ProjectCollection:
         cumulative_needs_attention_model['config_version'] = 38
 
         project_metadata_model = {}  # ProjectMetadata
-        project_metadata_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_metadata_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_metadata_model['created_at'] = '2019-01-01T12:00:00Z'
         project_metadata_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_metadata_model['cumulative_needs_attention_view_err'] = 'testString'
@@ -2256,7 +2269,9 @@ class TestModel_ProjectCollectionMemberWithMetadata:
         cumulative_needs_attention_model['config_version'] = 38
 
         project_metadata_model = {}  # ProjectMetadata
-        project_metadata_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_metadata_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_metadata_model['created_at'] = '2019-01-01T12:00:00Z'
         project_metadata_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_metadata_model['cumulative_needs_attention_view_err'] = 'testString'
@@ -2273,12 +2288,18 @@ class TestModel_ProjectCollectionMemberWithMetadata:
         project_collection_member_with_metadata_model_json['metadata'] = project_metadata_model
 
         # Construct a model instance of ProjectCollectionMemberWithMetadata by calling from_dict on the json representation
-        project_collection_member_with_metadata_model = ProjectCollectionMemberWithMetadata.from_dict(project_collection_member_with_metadata_model_json)
+        project_collection_member_with_metadata_model = ProjectCollectionMemberWithMetadata.from_dict(
+            project_collection_member_with_metadata_model_json
+        )
         assert project_collection_member_with_metadata_model != False
 
         # Construct a model instance of ProjectCollectionMemberWithMetadata by calling from_dict on the json representation
-        project_collection_member_with_metadata_model_dict = ProjectCollectionMemberWithMetadata.from_dict(project_collection_member_with_metadata_model_json).__dict__
-        project_collection_member_with_metadata_model2 = ProjectCollectionMemberWithMetadata(**project_collection_member_with_metadata_model_dict)
+        project_collection_member_with_metadata_model_dict = ProjectCollectionMemberWithMetadata.from_dict(
+            project_collection_member_with_metadata_model_json
+        ).__dict__
+        project_collection_member_with_metadata_model2 = ProjectCollectionMemberWithMetadata(
+            **project_collection_member_with_metadata_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_collection_member_with_metadata_model == project_collection_member_with_metadata_model2
@@ -2415,12 +2436,18 @@ class TestModel_ProjectConfigAuthTrustedProfile:
         project_config_auth_trusted_profile_model_json['target_iam_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigAuthTrustedProfile by calling from_dict on the json representation
-        project_config_auth_trusted_profile_model = ProjectConfigAuthTrustedProfile.from_dict(project_config_auth_trusted_profile_model_json)
+        project_config_auth_trusted_profile_model = ProjectConfigAuthTrustedProfile.from_dict(
+            project_config_auth_trusted_profile_model_json
+        )
         assert project_config_auth_trusted_profile_model != False
 
         # Construct a model instance of ProjectConfigAuthTrustedProfile by calling from_dict on the json representation
-        project_config_auth_trusted_profile_model_dict = ProjectConfigAuthTrustedProfile.from_dict(project_config_auth_trusted_profile_model_json).__dict__
-        project_config_auth_trusted_profile_model2 = ProjectConfigAuthTrustedProfile(**project_config_auth_trusted_profile_model_dict)
+        project_config_auth_trusted_profile_model_dict = ProjectConfigAuthTrustedProfile.from_dict(
+            project_config_auth_trusted_profile_model_json
+        ).__dict__
+        project_config_auth_trusted_profile_model2 = ProjectConfigAuthTrustedProfile(
+            **project_config_auth_trusted_profile_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_auth_trusted_profile_model == project_config_auth_trusted_profile_model2
@@ -2528,7 +2555,9 @@ class TestModel_ProjectConfigCollection:
         assert project_config_collection_model != False
 
         # Construct a model instance of ProjectConfigCollection by calling from_dict on the json representation
-        project_config_collection_model_dict = ProjectConfigCollection.from_dict(project_config_collection_model_json).__dict__
+        project_config_collection_model_dict = ProjectConfigCollection.from_dict(
+            project_config_collection_model_json
+        ).__dict__
         project_config_collection_model2 = ProjectConfigCollection(**project_config_collection_model_dict)
 
         # Verify the model instances are equivalent
@@ -2629,12 +2658,18 @@ class TestModel_ProjectConfigCollectionMember:
         project_config_collection_member_model_json['metadata'] = project_config_metadata_common_model
 
         # Construct a model instance of ProjectConfigCollectionMember by calling from_dict on the json representation
-        project_config_collection_member_model = ProjectConfigCollectionMember.from_dict(project_config_collection_member_model_json)
+        project_config_collection_member_model = ProjectConfigCollectionMember.from_dict(
+            project_config_collection_member_model_json
+        )
         assert project_config_collection_member_model != False
 
         # Construct a model instance of ProjectConfigCollectionMember by calling from_dict on the json representation
-        project_config_collection_member_model_dict = ProjectConfigCollectionMember.from_dict(project_config_collection_member_model_json).__dict__
-        project_config_collection_member_model2 = ProjectConfigCollectionMember(**project_config_collection_member_model_dict)
+        project_config_collection_member_model_dict = ProjectConfigCollectionMember.from_dict(
+            project_config_collection_member_model_json
+        ).__dict__
+        project_config_collection_member_model2 = ProjectConfigCollectionMember(
+            **project_config_collection_member_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_collection_member_model == project_config_collection_member_model2
@@ -2663,12 +2698,18 @@ class TestModel_ProjectConfigComplianceProfile:
         project_config_compliance_profile_model_json['profile_name'] = 'testString'
 
         # Construct a model instance of ProjectConfigComplianceProfile by calling from_dict on the json representation
-        project_config_compliance_profile_model = ProjectConfigComplianceProfile.from_dict(project_config_compliance_profile_model_json)
+        project_config_compliance_profile_model = ProjectConfigComplianceProfile.from_dict(
+            project_config_compliance_profile_model_json
+        )
         assert project_config_compliance_profile_model != False
 
         # Construct a model instance of ProjectConfigComplianceProfile by calling from_dict on the json representation
-        project_config_compliance_profile_model_dict = ProjectConfigComplianceProfile.from_dict(project_config_compliance_profile_model_json).__dict__
-        project_config_compliance_profile_model2 = ProjectConfigComplianceProfile(**project_config_compliance_profile_model_dict)
+        project_config_compliance_profile_model_dict = ProjectConfigComplianceProfile.from_dict(
+            project_config_compliance_profile_model_json
+        ).__dict__
+        project_config_compliance_profile_model2 = ProjectConfigComplianceProfile(
+            **project_config_compliance_profile_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_compliance_profile_model == project_config_compliance_profile_model2
@@ -2807,11 +2848,15 @@ class TestModel_ProjectConfigDraftMetadata:
         project_config_draft_metadata_model_json['pipeline_state'] = 'testString'
 
         # Construct a model instance of ProjectConfigDraftMetadata by calling from_dict on the json representation
-        project_config_draft_metadata_model = ProjectConfigDraftMetadata.from_dict(project_config_draft_metadata_model_json)
+        project_config_draft_metadata_model = ProjectConfigDraftMetadata.from_dict(
+            project_config_draft_metadata_model_json
+        )
         assert project_config_draft_metadata_model != False
 
         # Construct a model instance of ProjectConfigDraftMetadata by calling from_dict on the json representation
-        project_config_draft_metadata_model_dict = ProjectConfigDraftMetadata.from_dict(project_config_draft_metadata_model_json).__dict__
+        project_config_draft_metadata_model_dict = ProjectConfigDraftMetadata.from_dict(
+            project_config_draft_metadata_model_json
+        ).__dict__
         project_config_draft_metadata_model2 = ProjectConfigDraftMetadata(**project_config_draft_metadata_model_dict)
 
         # Verify the model instances are equivalent
@@ -2846,11 +2891,15 @@ class TestModel_ProjectConfigDraftSummary:
         project_config_draft_summary_model_json['href'] = 'testString'
 
         # Construct a model instance of ProjectConfigDraftSummary by calling from_dict on the json representation
-        project_config_draft_summary_model = ProjectConfigDraftSummary.from_dict(project_config_draft_summary_model_json)
+        project_config_draft_summary_model = ProjectConfigDraftSummary.from_dict(
+            project_config_draft_summary_model_json
+        )
         assert project_config_draft_summary_model != False
 
         # Construct a model instance of ProjectConfigDraftSummary by calling from_dict on the json representation
-        project_config_draft_summary_model_dict = ProjectConfigDraftSummary.from_dict(project_config_draft_summary_model_json).__dict__
+        project_config_draft_summary_model_dict = ProjectConfigDraftSummary.from_dict(
+            project_config_draft_summary_model_json
+        ).__dict__
         project_config_draft_summary_model2 = ProjectConfigDraftSummary(**project_config_draft_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -2890,12 +2939,18 @@ class TestModel_ProjectConfigDraftSummaryCollection:
         project_config_draft_summary_collection_model_json['drafts'] = [project_config_draft_summary_model]
 
         # Construct a model instance of ProjectConfigDraftSummaryCollection by calling from_dict on the json representation
-        project_config_draft_summary_collection_model = ProjectConfigDraftSummaryCollection.from_dict(project_config_draft_summary_collection_model_json)
+        project_config_draft_summary_collection_model = ProjectConfigDraftSummaryCollection.from_dict(
+            project_config_draft_summary_collection_model_json
+        )
         assert project_config_draft_summary_collection_model != False
 
         # Construct a model instance of ProjectConfigDraftSummaryCollection by calling from_dict on the json representation
-        project_config_draft_summary_collection_model_dict = ProjectConfigDraftSummaryCollection.from_dict(project_config_draft_summary_collection_model_json).__dict__
-        project_config_draft_summary_collection_model2 = ProjectConfigDraftSummaryCollection(**project_config_draft_summary_collection_model_dict)
+        project_config_draft_summary_collection_model_dict = ProjectConfigDraftSummaryCollection.from_dict(
+            project_config_draft_summary_collection_model_json
+        ).__dict__
+        project_config_draft_summary_collection_model2 = ProjectConfigDraftSummaryCollection(
+            **project_config_draft_summary_collection_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_draft_summary_collection_model == project_config_draft_summary_collection_model2
@@ -3030,7 +3085,9 @@ class TestModel_ProjectConfigGetResponse:
         assert project_config_get_response_model != False
 
         # Construct a model instance of ProjectConfigGetResponse by calling from_dict on the json representation
-        project_config_get_response_model_dict = ProjectConfigGetResponse.from_dict(project_config_get_response_model_json).__dict__
+        project_config_get_response_model_dict = ProjectConfigGetResponse.from_dict(
+            project_config_get_response_model_json
+        ).__dict__
         project_config_get_response_model2 = ProjectConfigGetResponse(**project_config_get_response_model_dict)
 
         # Verify the model instances are equivalent
@@ -3057,11 +3114,15 @@ class TestModel_ProjectConfigInputVariable:
         project_config_input_variable_model_json['value'] = 'testString'
 
         # Construct a model instance of ProjectConfigInputVariable by calling from_dict on the json representation
-        project_config_input_variable_model = ProjectConfigInputVariable.from_dict(project_config_input_variable_model_json)
+        project_config_input_variable_model = ProjectConfigInputVariable.from_dict(
+            project_config_input_variable_model_json
+        )
         assert project_config_input_variable_model != False
 
         # Construct a model instance of ProjectConfigInputVariable by calling from_dict on the json representation
-        project_config_input_variable_model_dict = ProjectConfigInputVariable.from_dict(project_config_input_variable_model_json).__dict__
+        project_config_input_variable_model_dict = ProjectConfigInputVariable.from_dict(
+            project_config_input_variable_model_json
+        ).__dict__
         project_config_input_variable_model2 = ProjectConfigInputVariable(**project_config_input_variable_model_dict)
 
         # Verify the model instances are equivalent
@@ -3141,7 +3202,9 @@ class TestModel_ProjectConfigMetadata:
         assert project_config_metadata_model != False
 
         # Construct a model instance of ProjectConfigMetadata by calling from_dict on the json representation
-        project_config_metadata_model_dict = ProjectConfigMetadata.from_dict(project_config_metadata_model_json).__dict__
+        project_config_metadata_model_dict = ProjectConfigMetadata.from_dict(
+            project_config_metadata_model_json
+        ).__dict__
         project_config_metadata_model2 = ProjectConfigMetadata(**project_config_metadata_model_dict)
 
         # Verify the model instances are equivalent
@@ -3185,11 +3248,15 @@ class TestModel_ProjectConfigMetadataCommon:
         project_config_metadata_common_model_json['last_save'] = '2019-01-01T12:00:00Z'
 
         # Construct a model instance of ProjectConfigMetadataCommon by calling from_dict on the json representation
-        project_config_metadata_common_model = ProjectConfigMetadataCommon.from_dict(project_config_metadata_common_model_json)
+        project_config_metadata_common_model = ProjectConfigMetadataCommon.from_dict(
+            project_config_metadata_common_model_json
+        )
         assert project_config_metadata_common_model != False
 
         # Construct a model instance of ProjectConfigMetadataCommon by calling from_dict on the json representation
-        project_config_metadata_common_model_dict = ProjectConfigMetadataCommon.from_dict(project_config_metadata_common_model_json).__dict__
+        project_config_metadata_common_model_dict = ProjectConfigMetadataCommon.from_dict(
+            project_config_metadata_common_model_json
+        ).__dict__
         project_config_metadata_common_model2 = ProjectConfigMetadataCommon(**project_config_metadata_common_model_dict)
 
         # Verify the model instances are equivalent
@@ -3224,12 +3291,18 @@ class TestModel_ProjectConfigMetadataCostEstimate:
         project_config_metadata_cost_estimate_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json)
+        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(
+            project_config_metadata_cost_estimate_model_json
+        )
         assert project_config_metadata_cost_estimate_model != False
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json).__dict__
-        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(**project_config_metadata_cost_estimate_model_dict)
+        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(
+            project_config_metadata_cost_estimate_model_json
+        ).__dict__
+        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(
+            **project_config_metadata_cost_estimate_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_cost_estimate_model == project_config_metadata_cost_estimate_model2
@@ -3258,12 +3331,18 @@ class TestModel_ProjectConfigMetadataCraLogs:
         project_config_metadata_cra_logs_model_json['timestamp'] = '2019-01-01T12:00:00Z'
 
         # Construct a model instance of ProjectConfigMetadataCraLogs by calling from_dict on the json representation
-        project_config_metadata_cra_logs_model = ProjectConfigMetadataCraLogs.from_dict(project_config_metadata_cra_logs_model_json)
+        project_config_metadata_cra_logs_model = ProjectConfigMetadataCraLogs.from_dict(
+            project_config_metadata_cra_logs_model_json
+        )
         assert project_config_metadata_cra_logs_model != False
 
         # Construct a model instance of ProjectConfigMetadataCraLogs by calling from_dict on the json representation
-        project_config_metadata_cra_logs_model_dict = ProjectConfigMetadataCraLogs.from_dict(project_config_metadata_cra_logs_model_json).__dict__
-        project_config_metadata_cra_logs_model2 = ProjectConfigMetadataCraLogs(**project_config_metadata_cra_logs_model_dict)
+        project_config_metadata_cra_logs_model_dict = ProjectConfigMetadataCraLogs.from_dict(
+            project_config_metadata_cra_logs_model_json
+        ).__dict__
+        project_config_metadata_cra_logs_model2 = ProjectConfigMetadataCraLogs(
+            **project_config_metadata_cra_logs_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_cra_logs_model == project_config_metadata_cra_logs_model2
@@ -3294,12 +3373,18 @@ class TestModel_ProjectConfigMetadataJobSummary:
         project_config_metadata_job_summary_model_json['destroy_messages'] = {'anyKey': 'anyValue'}
 
         # Construct a model instance of ProjectConfigMetadataJobSummary by calling from_dict on the json representation
-        project_config_metadata_job_summary_model = ProjectConfigMetadataJobSummary.from_dict(project_config_metadata_job_summary_model_json)
+        project_config_metadata_job_summary_model = ProjectConfigMetadataJobSummary.from_dict(
+            project_config_metadata_job_summary_model_json
+        )
         assert project_config_metadata_job_summary_model != False
 
         # Construct a model instance of ProjectConfigMetadataJobSummary by calling from_dict on the json representation
-        project_config_metadata_job_summary_model_dict = ProjectConfigMetadataJobSummary.from_dict(project_config_metadata_job_summary_model_json).__dict__
-        project_config_metadata_job_summary_model2 = ProjectConfigMetadataJobSummary(**project_config_metadata_job_summary_model_dict)
+        project_config_metadata_job_summary_model_dict = ProjectConfigMetadataJobSummary.from_dict(
+            project_config_metadata_job_summary_model_json
+        ).__dict__
+        project_config_metadata_job_summary_model2 = ProjectConfigMetadataJobSummary(
+            **project_config_metadata_job_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_job_summary_model == project_config_metadata_job_summary_model2
@@ -3327,12 +3412,18 @@ class TestModel_ProjectConfigMetadataLastApproved:
         project_config_metadata_last_approved_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json)
+        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(
+            project_config_metadata_last_approved_model_json
+        )
         assert project_config_metadata_last_approved_model != False
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json).__dict__
-        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(**project_config_metadata_last_approved_model_dict)
+        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(
+            project_config_metadata_last_approved_model_json
+        ).__dict__
+        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(
+            **project_config_metadata_last_approved_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_last_approved_model == project_config_metadata_last_approved_model2
@@ -3395,7 +3486,9 @@ class TestModel_ProjectConfigPrototype:
         assert project_config_prototype_model != False
 
         # Construct a model instance of ProjectConfigPrototype by calling from_dict on the json representation
-        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(project_config_prototype_model_json).__dict__
+        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(
+            project_config_prototype_model_json
+        ).__dict__
         project_config_prototype_model2 = ProjectConfigPrototype(**project_config_prototype_model_dict)
 
         # Verify the model instances are equivalent
@@ -3422,12 +3515,18 @@ class TestModel_ProjectConfigSettingCollection:
         project_config_setting_collection_model_json['value'] = 'testString'
 
         # Construct a model instance of ProjectConfigSettingCollection by calling from_dict on the json representation
-        project_config_setting_collection_model = ProjectConfigSettingCollection.from_dict(project_config_setting_collection_model_json)
+        project_config_setting_collection_model = ProjectConfigSettingCollection.from_dict(
+            project_config_setting_collection_model_json
+        )
         assert project_config_setting_collection_model != False
 
         # Construct a model instance of ProjectConfigSettingCollection by calling from_dict on the json representation
-        project_config_setting_collection_model_dict = ProjectConfigSettingCollection.from_dict(project_config_setting_collection_model_json).__dict__
-        project_config_setting_collection_model2 = ProjectConfigSettingCollection(**project_config_setting_collection_model_dict)
+        project_config_setting_collection_model_dict = ProjectConfigSettingCollection.from_dict(
+            project_config_setting_collection_model_json
+        ).__dict__
+        project_config_setting_collection_model2 = ProjectConfigSettingCollection(
+            **project_config_setting_collection_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_setting_collection_model == project_config_setting_collection_model2
@@ -3457,7 +3556,9 @@ class TestModel_ProjectMetadata:
 
         # Construct a json representation of a ProjectMetadata model
         project_metadata_model_json = {}
-        project_metadata_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_metadata_model_json[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_metadata_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_metadata_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_metadata_model_json['cumulative_needs_attention_view_err'] = 'testString'
@@ -3501,7 +3602,9 @@ class TestModel_ProjectSummary:
         cumulative_needs_attention_model['config_version'] = 38
 
         project_metadata_model = {}  # ProjectMetadata
-        project_metadata_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_metadata_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_metadata_model['created_at'] = '2019-01-01T12:00:00Z'
         project_metadata_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_metadata_model['cumulative_needs_attention_view_err'] = 'testString'

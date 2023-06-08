@@ -63,8 +63,7 @@ class TestProjectV1Examples:
 
             # begin-common
 
-            project_service = ProjectV1.new_instance(
-            )
+            project_service = ProjectV1.new_instance()
 
             # end-common
             assert project_service is not None
