@@ -40,8 +40,7 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance(
-            )
+            cls.project_service = ProjectV1.new_instance()
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)
@@ -153,13 +152,12 @@ class TestProjectV1:
             'name': 'cos_bucket_name',
             'value': 'test-bucket-2',
         }
-        
+
         # Construct a dict representation of a ProjectConfigSettingCollection model
         project_config_setting_collection_model = {
             'name': 'IBMCLOUD_TOOLCHAIN_ENDPOINT',
             'value': 'https://api.us-south.devops.dev.cloud.ibm.com',
         }
-
 
         response = self.project_service.create_config(
             project_id=project_id_link,
