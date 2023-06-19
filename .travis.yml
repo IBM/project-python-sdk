@@ -1,6 +1,7 @@
 ---
 language: python
 dist: focal
+group: focal
 cache: pip
 notifications:
   email: true
