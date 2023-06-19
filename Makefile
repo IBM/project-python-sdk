@@ -9,27 +9,27 @@ all: upgrade_pip setup test-unit lint
 ci: setup test-unit lint
 
 upgrade_pip:
-	python -m pip install --upgrade pip
+	python3 -m pip install --upgrade pip
 
 deps:
-	python -m pip install -r requirements.txt
+	python3 -m pip install -r requirements.txt
 
 dev_deps:
-	python -m pip install -r requirements-dev.txt
+	python3 -m pip install -r requirements-dev.txt
 
 install_project:
-	python -m pip install -e .
+	python3 -m pip install -e .
 
 test: test-unit test-int
 
 test-unit:
-	python -m pytest --cov=project test/unit
+	python3 -m pytest --cov=project test/unit
 
 test-int:
-	python -m pytest test/integration
+	python3 -m pytest test/integration
 
 test-examples:
-	python -m pytest examples
+	python3 -m pytest examples
 
 lint:
 	./pylint.sh && black --check .

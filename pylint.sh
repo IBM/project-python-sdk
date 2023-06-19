@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python -m pylint project test --exit-zero
+python3 -m pylint project test --exit-zero
