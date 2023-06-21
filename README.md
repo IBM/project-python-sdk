@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/IBM/project-python-sdk.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/IBM/project-python-sdk)
+[![Build Status](https://travis-ci.com/IBM/project-python-sdk.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis-ci.com/IBM/project-python-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 # Project Services Python SDK
 
@@ -35,12 +35,12 @@ Changes might occur which impact applications that use this SDK.
 
 ## Overview
 
-The IBM Cloud Platform Services Python SDK allows developers to programmatically interact with the following
+Project Python SDK allows developers to programmatically interact with the following
 IBM Cloud services:
 
 Service Name | Module Name | Imported Class Name
 --- | --- | ---
-<!-- [Example Service](https://cloud.ibm.com/apidocs/example-service) | example_service_v1 | ExampleServiceV1 -->
+[Project](https://test.cloud.ibm.com/apidocs/projects) | project/v1 | ProjectV1
 
 ## Prerequisites
 

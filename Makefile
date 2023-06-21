@@ -9,7 +9,7 @@ all: upgrade_pip setup test-unit lint
 ci: setup test-unit lint
 
 upgrade_pip:
-	python3 -m pip install --upgrade pip
+	python -m pip install --upgrade pip
 
 deps:
 	python3 -m pip install -r requirements.txt
