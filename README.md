@@ -40,7 +40,7 @@ IBM Cloud services:
 
 Service Name | Module Name | Imported Class Name
 --- | --- | ---
-[Project](https://test.cloud.ibm.com/apidocs/projects) | project/v1 | ProjectV1
+[Project](https://test.cloud.ibm.com/apidocs/projects) | project_v1 | ProjectV1
 
 ## Prerequisites
 
