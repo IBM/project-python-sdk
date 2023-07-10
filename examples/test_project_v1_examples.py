@@ -121,7 +121,7 @@ class TestProjectV1Examples:
             # begin-create_config
 
             project_config_input_variable_model = {
-                'name': 'cos_bucket_namet',
+                'name': 'cos_bucket_name',
                 'value': 'test-bucket',
             }
 
@@ -135,7 +135,7 @@ class TestProjectV1Examples:
                 name='env-stage',
                 locator_id='1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
                 labels=['env:stage', 'governance:test', 'build:0'],
-                description='Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
+                description='Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a GitHub repo hosting the Terraform modules that can be deployed by a Schematics workspace.',
                 input=[project_config_input_variable_model],
                 setting=[project_config_setting_collection_model],
             )
