@@ -28,10 +28,12 @@ import re
 import requests
 import responses
 import urllib
-from project.project_v1 import *
+from ibm_cloud.project_v1 import *
 
 
-_service = ProjectV1(authenticator=NoAuthAuthenticator())
+_service = ProjectV1(
+    authenticator=NoAuthAuthenticator()
+)
 
 _base_url = 'https://projects.api.cloud.ibm.com'
 _service.set_service_url(_base_url)
@@ -109,7 +111,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "state", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}, "configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}, "configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
         responses.add(
             responses.POST,
             url,
@@ -154,9 +156,7 @@ class TestCreateProject:
         project_config_prototype_model['description'] = 'testString'
         project_config_prototype_model['authorizations'] = project_config_auth_model
         project_config_prototype_model['compliance_profile'] = project_config_compliance_profile_model
-        project_config_prototype_model[
-            'locator_id'
-        ] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
         project_config_prototype_model['input'] = [project_config_input_variable_model]
         project_config_prototype_model['setting'] = [project_config_setting_collection_model]
 
@@ -210,7 +210,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "state", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}, "configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}, "configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
         responses.add(
             responses.POST,
             url,
@@ -255,9 +255,7 @@ class TestCreateProject:
         project_config_prototype_model['description'] = 'testString'
         project_config_prototype_model['authorizations'] = project_config_auth_model
         project_config_prototype_model['compliance_profile'] = project_config_compliance_profile_model
-        project_config_prototype_model[
-            'locator_id'
-        ] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
         project_config_prototype_model['input'] = [project_config_input_variable_model]
         project_config_prototype_model['setting'] = [project_config_setting_collection_model]
 
@@ -302,7 +300,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href", "start": "start"}, "last": {"href": "href", "start": "start"}, "previous": {"href": "href", "start": "start"}, "next": {"href": "href", "start": "start"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "state", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}]}'
+        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href", "start": "start"}, "last": {"href": "href", "start": "start"}, "previous": {"href": "href", "start": "start"}, "next": {"href": "href", "start": "start"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}]}'
         responses.add(
             responses.GET,
             url,
@@ -347,7 +345,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href", "start": "start"}, "last": {"href": "href", "start": "start"}, "previous": {"href": "href", "start": "start"}, "next": {"href": "href", "start": "start"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "state", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}]}'
+        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href", "start": "start"}, "last": {"href": "href", "start": "start"}, "previous": {"href": "href", "start": "start"}, "next": {"href": "href", "start": "start"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}]}'
         responses.add(
             responses.GET,
             url,
@@ -379,8 +377,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"start":"1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"state","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"state","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"start":"1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -415,8 +413,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"start":"1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"state","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"state","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"start":"1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":true}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -454,7 +452,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "state", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}'
         responses.add(
             responses.GET,
             url,
@@ -492,7 +490,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "state", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}'
         responses.add(
             responses.GET,
             url,
@@ -521,6 +519,101 @@ class TestGetProject:
         # Disable retries and run test_get_project_value_error.
         _service.disable_retries()
         self.test_get_project_value_error()
+
+
+class TestUpdateProject:
+    """
+    Test Class for update_project
+    """
+
+    @responses.activate
+    def test_update_project_all_params(self):
+        """
+        update_project()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/projects/testString')
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}'
+        responses.add(
+            responses.PATCH,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        id = 'testString'
+        name = 'acme-microservice'
+        description = 'A microservice to deploy on top of ACME infrastructure.'
+        destroy_on_delete = True
+
+        # Invoke method
+        response = _service.update_project(
+            id,
+            name=name,
+            description=description,
+            destroy_on_delete=destroy_on_delete,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 200
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['name'] == 'acme-microservice'
+        assert req_body['description'] == 'A microservice to deploy on top of ACME infrastructure.'
+        assert req_body['destroy_on_delete'] == True
+
+    def test_update_project_all_params_with_retries(self):
+        # Enable retries and run test_update_project_all_params.
+        _service.enable_retries()
+        self.test_update_project_all_params()
+
+        # Disable retries and run test_update_project_all_params.
+        _service.disable_retries()
+        self.test_update_project_all_params()
+
+    @responses.activate
+    def test_update_project_value_error(self):
+        """
+        test_update_project_value_error()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/projects/testString')
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": true}}'
+        responses.add(
+            responses.PATCH,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=200,
+        )
+
+        # Set up parameter values
+        id = 'testString'
+        name = 'acme-microservice'
+        description = 'A microservice to deploy on top of ACME infrastructure.'
+        destroy_on_delete = True
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "id": id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.update_project(**req_copy)
+
+    def test_update_project_value_error_with_retries(self):
+        # Enable retries and run test_update_project_value_error.
+        _service.enable_retries()
+        self.test_update_project_value_error()
+
+        # Disable retries and run test_update_project_value_error.
+        _service.disable_retries()
+        self.test_update_project_value_error()
 
 
 class TestDeleteProject:
@@ -649,7 +742,7 @@ class TestCreateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -718,14 +811,9 @@ class TestCreateConfig:
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
         assert req_body['name'] == 'env-stage'
-        assert (
-            req_body['locator_id'] == '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
-        )
+        assert req_body['locator_id'] == '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
         assert req_body['labels'] == ['env:stage', 'governance:test', 'build:0']
-        assert (
-            req_body['description']
-            == 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
-        )
+        assert req_body['description'] == 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
         assert req_body['authorizations'] == project_config_auth_model
         assert req_body['compliance_profile'] == project_config_compliance_profile_model
         assert req_body['input'] == [project_config_input_variable_model]
@@ -747,7 +835,7 @@ class TestCreateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -829,7 +917,7 @@ class TestListConfigs:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
+        mock_response = '{"configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
         responses.add(
             responses.GET,
             url,
@@ -867,7 +955,7 @@ class TestListConfigs:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
+        mock_response = '{"configs": [{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}, "href": "href"}]}'
         responses.add(
             responses.GET,
             url,
@@ -910,7 +998,7 @@ class TestGetConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.GET,
             url,
@@ -950,7 +1038,7 @@ class TestGetConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.GET,
             url,
@@ -995,7 +1083,7 @@ class TestUpdateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1090,7 +1178,7 @@ class TestUpdateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1291,6 +1379,97 @@ class TestDeleteConfig:
         self.test_delete_config_value_error()
 
 
+class TestForceApprove:
+    """
+    Test Class for force_approve
+    """
+
+    @responses.activate
+    def test_force_approve_all_params(self):
+        """
+        force_approve()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/projects/testString/configs/testString/force_approve')
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        responses.add(
+            responses.POST,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=201,
+        )
+
+        # Set up parameter values
+        project_id = 'testString'
+        id = 'testString'
+        comment = 'Approving the changes'
+
+        # Invoke method
+        response = _service.force_approve(
+            project_id,
+            id,
+            comment=comment,
+            headers={},
+        )
+
+        # Check for correct operation
+        assert len(responses.calls) == 1
+        assert response.status_code == 201
+        # Validate body params
+        req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
+        assert req_body['comment'] == 'Approving the changes'
+
+    def test_force_approve_all_params_with_retries(self):
+        # Enable retries and run test_force_approve_all_params.
+        _service.enable_retries()
+        self.test_force_approve_all_params()
+
+        # Disable retries and run test_force_approve_all_params.
+        _service.disable_retries()
+        self.test_force_approve_all_params()
+
+    @responses.activate
+    def test_force_approve_value_error(self):
+        """
+        test_force_approve_value_error()
+        """
+        # Set up mock
+        url = preprocess_url('/v1/projects/testString/configs/testString/force_approve')
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        responses.add(
+            responses.POST,
+            url,
+            body=mock_response,
+            content_type='application/json',
+            status=201,
+        )
+
+        # Set up parameter values
+        project_id = 'testString'
+        id = 'testString'
+        comment = 'Approving the changes'
+
+        # Pass in all but one required param and check for a ValueError
+        req_param_dict = {
+            "project_id": project_id,
+            "id": id,
+        }
+        for param in req_param_dict.keys():
+            req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
+            with pytest.raises(ValueError):
+                _service.force_approve(**req_copy)
+
+    def test_force_approve_value_error_with_retries(self):
+        # Enable retries and run test_force_approve_value_error.
+        _service.enable_retries()
+        self.test_force_approve_value_error()
+
+        # Disable retries and run test_force_approve_value_error.
+        _service.disable_retries()
+        self.test_force_approve_value_error()
+
+
 class TestApprove:
     """
     Test Class for approve
@@ -1303,7 +1482,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1348,7 +1527,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1388,7 +1567,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1433,7 +1612,7 @@ class TestCheckConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/check')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1481,7 +1660,7 @@ class TestCheckConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/check')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1521,7 +1700,7 @@ class TestCheckConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/check')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1566,7 +1745,7 @@ class TestInstallConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/install')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1606,7 +1785,7 @@ class TestInstallConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/install')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "active_draft": {"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.POST,
             url,
@@ -1815,9 +1994,7 @@ class TestListConfigDrafts:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/drafts')
-        mock_response = (
-            '{"drafts": [{"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}]}'
-        )
+        mock_response = '{"drafts": [{"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}]}'
         responses.add(
             responses.GET,
             url,
@@ -1857,9 +2034,7 @@ class TestListConfigDrafts:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/drafts')
-        mock_response = (
-            '{"drafts": [{"version": 7, "state": "state", "pipeline_state": "pipeline_state", "href": "href"}]}'
-        )
+        mock_response = '{"drafts": [{"version": 7, "state": "discarded", "pipeline_state": "pipeline_failed", "href": "href"}]}'
         responses.add(
             responses.GET,
             url,
@@ -1904,7 +2079,7 @@ class TestGetConfigDraft:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/drafts/38')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.GET,
             url,
@@ -1946,7 +2121,7 @@ class TestGetConfigDraft:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/drafts/38')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "state", "pipeline_state": "pipeline_state", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
+        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "deleted", "pipeline_state": "pipeline_failed", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "updated_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_deployment_job_summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}, "definition": {"name": "name", "labels": ["labels"], "description": "description", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "type": "terraform_template", "input": [{"name": "name", "type": "array", "value": "anyValue", "required": true}], "output": [{"name": "name", "description": "description", "value": "anyValue"}], "setting": [{"name": "name", "value": "value"}]}}'
         responses.add(
             responses.GET,
             url,
@@ -2015,9 +2190,7 @@ class TestModel_CumulativeNeedsAttention:
         assert cumulative_needs_attention_model != False
 
         # Construct a model instance of CumulativeNeedsAttention by calling from_dict on the json representation
-        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(
-            cumulative_needs_attention_model_json
-        ).__dict__
+        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(cumulative_needs_attention_model_json).__dict__
         cumulative_needs_attention_model2 = CumulativeNeedsAttention(**cumulative_needs_attention_model_dict)
 
         # Verify the model instances are equivalent
@@ -2155,8 +2328,8 @@ class TestModel_Project:
 
         project_config_draft_summary_model = {}  # ProjectConfigDraftSummary
         project_config_draft_summary_model['version'] = 38
-        project_config_draft_summary_model['state'] = 'testString'
-        project_config_draft_summary_model['pipeline_state'] = 'testString'
+        project_config_draft_summary_model['state'] = 'discarded'
+        project_config_draft_summary_model['pipeline_state'] = 'pipeline_failed'
         project_config_draft_summary_model['href'] = 'testString'
 
         project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
@@ -2208,8 +2381,8 @@ class TestModel_Project:
         project_config_collection_member_model['version'] = 38
         project_config_collection_member_model['is_draft'] = True
         project_config_collection_member_model['needs_attention_state'] = []
-        project_config_collection_member_model['state'] = 'testString'
-        project_config_collection_member_model['pipeline_state'] = 'testString'
+        project_config_collection_member_model['state'] = 'deleted'
+        project_config_collection_member_model['pipeline_state'] = 'pipeline_failed'
         project_config_collection_member_model['update_available'] = True
         project_config_collection_member_model['created_at'] = '2019-01-01T12:00:00Z'
         project_config_collection_member_model['updated_at'] = '2019-01-01T12:00:00Z'
@@ -2221,16 +2394,14 @@ class TestModel_Project:
 
         # Construct a json representation of a Project model
         project_model_json = {}
-        project_model_json[
-            'crn'
-        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_model_json['cumulative_needs_attention_view_error'] = True
         project_model_json['id'] = 'testString'
         project_model_json['location'] = 'testString'
         project_model_json['resource_group'] = 'testString'
-        project_model_json['state'] = 'testString'
+        project_model_json['state'] = 'ready'
         project_model_json['event_notifications_crn'] = 'testString'
         project_model_json['definition'] = project_definition_response_model
         project_model_json['configs'] = [project_config_collection_member_model]
@@ -2279,18 +2450,14 @@ class TestModel_ProjectCollection:
         project_definition_response_model['destroy_on_delete'] = True
 
         project_collection_member_with_metadata_model = {}  # ProjectCollectionMemberWithMetadata
-        project_collection_member_with_metadata_model[
-            'crn'
-        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_collection_member_with_metadata_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_collection_member_with_metadata_model['created_at'] = '2019-01-01T12:00:00Z'
-        project_collection_member_with_metadata_model['cumulative_needs_attention_view'] = [
-            cumulative_needs_attention_model
-        ]
+        project_collection_member_with_metadata_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_collection_member_with_metadata_model['cumulative_needs_attention_view_error'] = True
         project_collection_member_with_metadata_model['id'] = 'testString'
         project_collection_member_with_metadata_model['location'] = 'testString'
         project_collection_member_with_metadata_model['resource_group'] = 'testString'
-        project_collection_member_with_metadata_model['state'] = 'testString'
+        project_collection_member_with_metadata_model['state'] = 'ready'
         project_collection_member_with_metadata_model['event_notifications_crn'] = 'testString'
         project_collection_member_with_metadata_model['definition'] = project_definition_response_model
 
@@ -2345,34 +2512,24 @@ class TestModel_ProjectCollectionMemberWithMetadata:
 
         # Construct a json representation of a ProjectCollectionMemberWithMetadata model
         project_collection_member_with_metadata_model_json = {}
-        project_collection_member_with_metadata_model_json[
-            'crn'
-        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_collection_member_with_metadata_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_collection_member_with_metadata_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        project_collection_member_with_metadata_model_json['cumulative_needs_attention_view'] = [
-            cumulative_needs_attention_model
-        ]
+        project_collection_member_with_metadata_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_collection_member_with_metadata_model_json['cumulative_needs_attention_view_error'] = True
         project_collection_member_with_metadata_model_json['id'] = 'testString'
         project_collection_member_with_metadata_model_json['location'] = 'testString'
         project_collection_member_with_metadata_model_json['resource_group'] = 'testString'
-        project_collection_member_with_metadata_model_json['state'] = 'testString'
+        project_collection_member_with_metadata_model_json['state'] = 'ready'
         project_collection_member_with_metadata_model_json['event_notifications_crn'] = 'testString'
         project_collection_member_with_metadata_model_json['definition'] = project_definition_response_model
 
         # Construct a model instance of ProjectCollectionMemberWithMetadata by calling from_dict on the json representation
-        project_collection_member_with_metadata_model = ProjectCollectionMemberWithMetadata.from_dict(
-            project_collection_member_with_metadata_model_json
-        )
+        project_collection_member_with_metadata_model = ProjectCollectionMemberWithMetadata.from_dict(project_collection_member_with_metadata_model_json)
         assert project_collection_member_with_metadata_model != False
 
         # Construct a model instance of ProjectCollectionMemberWithMetadata by calling from_dict on the json representation
-        project_collection_member_with_metadata_model_dict = ProjectCollectionMemberWithMetadata.from_dict(
-            project_collection_member_with_metadata_model_json
-        ).__dict__
-        project_collection_member_with_metadata_model2 = ProjectCollectionMemberWithMetadata(
-            **project_collection_member_with_metadata_model_dict
-        )
+        project_collection_member_with_metadata_model_dict = ProjectCollectionMemberWithMetadata.from_dict(project_collection_member_with_metadata_model_json).__dict__
+        project_collection_member_with_metadata_model2 = ProjectCollectionMemberWithMetadata(**project_collection_member_with_metadata_model_dict)
 
         # Verify the model instances are equivalent
         assert project_collection_member_with_metadata_model == project_collection_member_with_metadata_model2
@@ -2436,18 +2593,12 @@ class TestModel_ProjectConfigAuthTrustedProfile:
         project_config_auth_trusted_profile_model_json['target_iam_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigAuthTrustedProfile by calling from_dict on the json representation
-        project_config_auth_trusted_profile_model = ProjectConfigAuthTrustedProfile.from_dict(
-            project_config_auth_trusted_profile_model_json
-        )
+        project_config_auth_trusted_profile_model = ProjectConfigAuthTrustedProfile.from_dict(project_config_auth_trusted_profile_model_json)
         assert project_config_auth_trusted_profile_model != False
 
         # Construct a model instance of ProjectConfigAuthTrustedProfile by calling from_dict on the json representation
-        project_config_auth_trusted_profile_model_dict = ProjectConfigAuthTrustedProfile.from_dict(
-            project_config_auth_trusted_profile_model_json
-        ).__dict__
-        project_config_auth_trusted_profile_model2 = ProjectConfigAuthTrustedProfile(
-            **project_config_auth_trusted_profile_model_dict
-        )
+        project_config_auth_trusted_profile_model_dict = ProjectConfigAuthTrustedProfile.from_dict(project_config_auth_trusted_profile_model_json).__dict__
+        project_config_auth_trusted_profile_model2 = ProjectConfigAuthTrustedProfile(**project_config_auth_trusted_profile_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_auth_trusted_profile_model == project_config_auth_trusted_profile_model2
@@ -2477,8 +2628,8 @@ class TestModel_ProjectConfigCollection:
 
         project_config_draft_summary_model = {}  # ProjectConfigDraftSummary
         project_config_draft_summary_model['version'] = 38
-        project_config_draft_summary_model['state'] = 'testString'
-        project_config_draft_summary_model['pipeline_state'] = 'testString'
+        project_config_draft_summary_model['state'] = 'discarded'
+        project_config_draft_summary_model['pipeline_state'] = 'pipeline_failed'
         project_config_draft_summary_model['href'] = 'testString'
 
         project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
@@ -2530,8 +2681,8 @@ class TestModel_ProjectConfigCollection:
         project_config_collection_member_model['version'] = 38
         project_config_collection_member_model['is_draft'] = True
         project_config_collection_member_model['needs_attention_state'] = []
-        project_config_collection_member_model['state'] = 'testString'
-        project_config_collection_member_model['pipeline_state'] = 'testString'
+        project_config_collection_member_model['state'] = 'deleted'
+        project_config_collection_member_model['pipeline_state'] = 'pipeline_failed'
         project_config_collection_member_model['update_available'] = True
         project_config_collection_member_model['created_at'] = '2019-01-01T12:00:00Z'
         project_config_collection_member_model['updated_at'] = '2019-01-01T12:00:00Z'
@@ -2550,9 +2701,7 @@ class TestModel_ProjectConfigCollection:
         assert project_config_collection_model != False
 
         # Construct a model instance of ProjectConfigCollection by calling from_dict on the json representation
-        project_config_collection_model_dict = ProjectConfigCollection.from_dict(
-            project_config_collection_model_json
-        ).__dict__
+        project_config_collection_model_dict = ProjectConfigCollection.from_dict(project_config_collection_model_json).__dict__
         project_config_collection_model2 = ProjectConfigCollection(**project_config_collection_model_dict)
 
         # Verify the model instances are equivalent
@@ -2583,8 +2732,8 @@ class TestModel_ProjectConfigCollectionMember:
 
         project_config_draft_summary_model = {}  # ProjectConfigDraftSummary
         project_config_draft_summary_model['version'] = 38
-        project_config_draft_summary_model['state'] = 'testString'
-        project_config_draft_summary_model['pipeline_state'] = 'testString'
+        project_config_draft_summary_model['state'] = 'discarded'
+        project_config_draft_summary_model['pipeline_state'] = 'pipeline_failed'
         project_config_draft_summary_model['href'] = 'testString'
 
         project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
@@ -2637,8 +2786,8 @@ class TestModel_ProjectConfigCollectionMember:
         project_config_collection_member_model_json['version'] = 38
         project_config_collection_member_model_json['is_draft'] = True
         project_config_collection_member_model_json['needs_attention_state'] = []
-        project_config_collection_member_model_json['state'] = 'testString'
-        project_config_collection_member_model_json['pipeline_state'] = 'testString'
+        project_config_collection_member_model_json['state'] = 'deleted'
+        project_config_collection_member_model_json['pipeline_state'] = 'pipeline_failed'
         project_config_collection_member_model_json['update_available'] = True
         project_config_collection_member_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_config_collection_member_model_json['updated_at'] = '2019-01-01T12:00:00Z'
@@ -2649,18 +2798,12 @@ class TestModel_ProjectConfigCollectionMember:
         project_config_collection_member_model_json['href'] = 'testString'
 
         # Construct a model instance of ProjectConfigCollectionMember by calling from_dict on the json representation
-        project_config_collection_member_model = ProjectConfigCollectionMember.from_dict(
-            project_config_collection_member_model_json
-        )
+        project_config_collection_member_model = ProjectConfigCollectionMember.from_dict(project_config_collection_member_model_json)
         assert project_config_collection_member_model != False
 
         # Construct a model instance of ProjectConfigCollectionMember by calling from_dict on the json representation
-        project_config_collection_member_model_dict = ProjectConfigCollectionMember.from_dict(
-            project_config_collection_member_model_json
-        ).__dict__
-        project_config_collection_member_model2 = ProjectConfigCollectionMember(
-            **project_config_collection_member_model_dict
-        )
+        project_config_collection_member_model_dict = ProjectConfigCollectionMember.from_dict(project_config_collection_member_model_json).__dict__
+        project_config_collection_member_model2 = ProjectConfigCollectionMember(**project_config_collection_member_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_collection_member_model == project_config_collection_member_model2
@@ -2689,18 +2832,12 @@ class TestModel_ProjectConfigComplianceProfile:
         project_config_compliance_profile_model_json['profile_name'] = 'testString'
 
         # Construct a model instance of ProjectConfigComplianceProfile by calling from_dict on the json representation
-        project_config_compliance_profile_model = ProjectConfigComplianceProfile.from_dict(
-            project_config_compliance_profile_model_json
-        )
+        project_config_compliance_profile_model = ProjectConfigComplianceProfile.from_dict(project_config_compliance_profile_model_json)
         assert project_config_compliance_profile_model != False
 
         # Construct a model instance of ProjectConfigComplianceProfile by calling from_dict on the json representation
-        project_config_compliance_profile_model_dict = ProjectConfigComplianceProfile.from_dict(
-            project_config_compliance_profile_model_json
-        ).__dict__
-        project_config_compliance_profile_model2 = ProjectConfigComplianceProfile(
-            **project_config_compliance_profile_model_dict
-        )
+        project_config_compliance_profile_model_dict = ProjectConfigComplianceProfile.from_dict(project_config_compliance_profile_model_json).__dict__
+        project_config_compliance_profile_model2 = ProjectConfigComplianceProfile(**project_config_compliance_profile_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_compliance_profile_model == project_config_compliance_profile_model2
@@ -2771,9 +2908,7 @@ class TestModel_ProjectConfigDefinition:
         assert project_config_definition_model != False
 
         # Construct a model instance of ProjectConfigDefinition by calling from_dict on the json representation
-        project_config_definition_model_dict = ProjectConfigDefinition.from_dict(
-            project_config_definition_model_json
-        ).__dict__
+        project_config_definition_model_dict = ProjectConfigDefinition.from_dict(project_config_definition_model_json).__dict__
         project_config_definition_model2 = ProjectConfigDefinition(**project_config_definition_model_dict)
 
         # Verify the model instances are equivalent
@@ -2910,8 +3045,8 @@ class TestModel_ProjectConfigDraftResponse:
         project_config_draft_response_model_json['version'] = 38
         project_config_draft_response_model_json['is_draft'] = True
         project_config_draft_response_model_json['needs_attention_state'] = []
-        project_config_draft_response_model_json['state'] = 'testString'
-        project_config_draft_response_model_json['pipeline_state'] = 'testString'
+        project_config_draft_response_model_json['state'] = 'deleted'
+        project_config_draft_response_model_json['pipeline_state'] = 'pipeline_failed'
         project_config_draft_response_model_json['update_available'] = True
         project_config_draft_response_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_config_draft_response_model_json['updated_at'] = '2019-01-01T12:00:00Z'
@@ -2920,21 +3055,15 @@ class TestModel_ProjectConfigDraftResponse:
         project_config_draft_response_model_json['job_summary'] = project_config_metadata_job_summary_model
         project_config_draft_response_model_json['cra_logs'] = project_config_metadata_cra_logs_model
         project_config_draft_response_model_json['cost_estimate'] = project_config_metadata_cost_estimate_model
-        project_config_draft_response_model_json[
-            'last_deployment_job_summary'
-        ] = project_config_metadata_job_summary_model
+        project_config_draft_response_model_json['last_deployment_job_summary'] = project_config_metadata_job_summary_model
         project_config_draft_response_model_json['definition'] = project_config_definition_model
 
         # Construct a model instance of ProjectConfigDraftResponse by calling from_dict on the json representation
-        project_config_draft_response_model = ProjectConfigDraftResponse.from_dict(
-            project_config_draft_response_model_json
-        )
+        project_config_draft_response_model = ProjectConfigDraftResponse.from_dict(project_config_draft_response_model_json)
         assert project_config_draft_response_model != False
 
         # Construct a model instance of ProjectConfigDraftResponse by calling from_dict on the json representation
-        project_config_draft_response_model_dict = ProjectConfigDraftResponse.from_dict(
-            project_config_draft_response_model_json
-        ).__dict__
+        project_config_draft_response_model_dict = ProjectConfigDraftResponse.from_dict(project_config_draft_response_model_json).__dict__
         project_config_draft_response_model2 = ProjectConfigDraftResponse(**project_config_draft_response_model_dict)
 
         # Verify the model instances are equivalent
@@ -2958,20 +3087,16 @@ class TestModel_ProjectConfigDraftSummary:
         # Construct a json representation of a ProjectConfigDraftSummary model
         project_config_draft_summary_model_json = {}
         project_config_draft_summary_model_json['version'] = 38
-        project_config_draft_summary_model_json['state'] = 'testString'
-        project_config_draft_summary_model_json['pipeline_state'] = 'testString'
+        project_config_draft_summary_model_json['state'] = 'discarded'
+        project_config_draft_summary_model_json['pipeline_state'] = 'pipeline_failed'
         project_config_draft_summary_model_json['href'] = 'testString'
 
         # Construct a model instance of ProjectConfigDraftSummary by calling from_dict on the json representation
-        project_config_draft_summary_model = ProjectConfigDraftSummary.from_dict(
-            project_config_draft_summary_model_json
-        )
+        project_config_draft_summary_model = ProjectConfigDraftSummary.from_dict(project_config_draft_summary_model_json)
         assert project_config_draft_summary_model != False
 
         # Construct a model instance of ProjectConfigDraftSummary by calling from_dict on the json representation
-        project_config_draft_summary_model_dict = ProjectConfigDraftSummary.from_dict(
-            project_config_draft_summary_model_json
-        ).__dict__
+        project_config_draft_summary_model_dict = ProjectConfigDraftSummary.from_dict(project_config_draft_summary_model_json).__dict__
         project_config_draft_summary_model2 = ProjectConfigDraftSummary(**project_config_draft_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -2996,8 +3121,8 @@ class TestModel_ProjectConfigDraftSummaryCollection:
 
         project_config_draft_summary_model = {}  # ProjectConfigDraftSummary
         project_config_draft_summary_model['version'] = 38
-        project_config_draft_summary_model['state'] = 'testString'
-        project_config_draft_summary_model['pipeline_state'] = 'testString'
+        project_config_draft_summary_model['state'] = 'discarded'
+        project_config_draft_summary_model['pipeline_state'] = 'pipeline_failed'
         project_config_draft_summary_model['href'] = 'testString'
 
         # Construct a json representation of a ProjectConfigDraftSummaryCollection model
@@ -3005,18 +3130,12 @@ class TestModel_ProjectConfigDraftSummaryCollection:
         project_config_draft_summary_collection_model_json['drafts'] = [project_config_draft_summary_model]
 
         # Construct a model instance of ProjectConfigDraftSummaryCollection by calling from_dict on the json representation
-        project_config_draft_summary_collection_model = ProjectConfigDraftSummaryCollection.from_dict(
-            project_config_draft_summary_collection_model_json
-        )
+        project_config_draft_summary_collection_model = ProjectConfigDraftSummaryCollection.from_dict(project_config_draft_summary_collection_model_json)
         assert project_config_draft_summary_collection_model != False
 
         # Construct a model instance of ProjectConfigDraftSummaryCollection by calling from_dict on the json representation
-        project_config_draft_summary_collection_model_dict = ProjectConfigDraftSummaryCollection.from_dict(
-            project_config_draft_summary_collection_model_json
-        ).__dict__
-        project_config_draft_summary_collection_model2 = ProjectConfigDraftSummaryCollection(
-            **project_config_draft_summary_collection_model_dict
-        )
+        project_config_draft_summary_collection_model_dict = ProjectConfigDraftSummaryCollection.from_dict(project_config_draft_summary_collection_model_json).__dict__
+        project_config_draft_summary_collection_model2 = ProjectConfigDraftSummaryCollection(**project_config_draft_summary_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_draft_summary_collection_model == project_config_draft_summary_collection_model2
@@ -3074,8 +3193,8 @@ class TestModel_ProjectConfigGetResponse:
 
         project_config_draft_summary_model = {}  # ProjectConfigDraftSummary
         project_config_draft_summary_model['version'] = 38
-        project_config_draft_summary_model['state'] = 'testString'
-        project_config_draft_summary_model['pipeline_state'] = 'testString'
+        project_config_draft_summary_model['state'] = 'discarded'
+        project_config_draft_summary_model['pipeline_state'] = 'pipeline_failed'
         project_config_draft_summary_model['href'] = 'testString'
 
         project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
@@ -3128,8 +3247,8 @@ class TestModel_ProjectConfigGetResponse:
         project_config_get_response_model_json['version'] = 38
         project_config_get_response_model_json['is_draft'] = True
         project_config_get_response_model_json['needs_attention_state'] = []
-        project_config_get_response_model_json['state'] = 'testString'
-        project_config_get_response_model_json['pipeline_state'] = 'testString'
+        project_config_get_response_model_json['state'] = 'deleted'
+        project_config_get_response_model_json['pipeline_state'] = 'pipeline_failed'
         project_config_get_response_model_json['update_available'] = True
         project_config_get_response_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_config_get_response_model_json['updated_at'] = '2019-01-01T12:00:00Z'
@@ -3138,9 +3257,7 @@ class TestModel_ProjectConfigGetResponse:
         project_config_get_response_model_json['job_summary'] = project_config_metadata_job_summary_model
         project_config_get_response_model_json['cra_logs'] = project_config_metadata_cra_logs_model
         project_config_get_response_model_json['cost_estimate'] = project_config_metadata_cost_estimate_model
-        project_config_get_response_model_json[
-            'last_deployment_job_summary'
-        ] = project_config_metadata_job_summary_model
+        project_config_get_response_model_json['last_deployment_job_summary'] = project_config_metadata_job_summary_model
         project_config_get_response_model_json['active_draft'] = project_config_draft_summary_model
         project_config_get_response_model_json['definition'] = project_config_definition_model
 
@@ -3149,9 +3266,7 @@ class TestModel_ProjectConfigGetResponse:
         assert project_config_get_response_model != False
 
         # Construct a model instance of ProjectConfigGetResponse by calling from_dict on the json representation
-        project_config_get_response_model_dict = ProjectConfigGetResponse.from_dict(
-            project_config_get_response_model_json
-        ).__dict__
+        project_config_get_response_model_dict = ProjectConfigGetResponse.from_dict(project_config_get_response_model_json).__dict__
         project_config_get_response_model2 = ProjectConfigGetResponse(**project_config_get_response_model_dict)
 
         # Verify the model instances are equivalent
@@ -3178,15 +3293,11 @@ class TestModel_ProjectConfigInputVariable:
         project_config_input_variable_model_json['value'] = 'testString'
 
         # Construct a model instance of ProjectConfigInputVariable by calling from_dict on the json representation
-        project_config_input_variable_model = ProjectConfigInputVariable.from_dict(
-            project_config_input_variable_model_json
-        )
+        project_config_input_variable_model = ProjectConfigInputVariable.from_dict(project_config_input_variable_model_json)
         assert project_config_input_variable_model != False
 
         # Construct a model instance of ProjectConfigInputVariable by calling from_dict on the json representation
-        project_config_input_variable_model_dict = ProjectConfigInputVariable.from_dict(
-            project_config_input_variable_model_json
-        ).__dict__
+        project_config_input_variable_model_dict = ProjectConfigInputVariable.from_dict(project_config_input_variable_model_json).__dict__
         project_config_input_variable_model2 = ProjectConfigInputVariable(**project_config_input_variable_model_dict)
 
         # Verify the model instances are equivalent
@@ -3221,18 +3332,12 @@ class TestModel_ProjectConfigMetadataCostEstimate:
         project_config_metadata_cost_estimate_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(
-            project_config_metadata_cost_estimate_model_json
-        )
+        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json)
         assert project_config_metadata_cost_estimate_model != False
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(
-            project_config_metadata_cost_estimate_model_json
-        ).__dict__
-        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(
-            **project_config_metadata_cost_estimate_model_dict
-        )
+        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json).__dict__
+        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(**project_config_metadata_cost_estimate_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_metadata_cost_estimate_model == project_config_metadata_cost_estimate_model2
@@ -3261,18 +3366,12 @@ class TestModel_ProjectConfigMetadataCraLogs:
         project_config_metadata_cra_logs_model_json['timestamp'] = '2019-01-01T12:00:00Z'
 
         # Construct a model instance of ProjectConfigMetadataCraLogs by calling from_dict on the json representation
-        project_config_metadata_cra_logs_model = ProjectConfigMetadataCraLogs.from_dict(
-            project_config_metadata_cra_logs_model_json
-        )
+        project_config_metadata_cra_logs_model = ProjectConfigMetadataCraLogs.from_dict(project_config_metadata_cra_logs_model_json)
         assert project_config_metadata_cra_logs_model != False
 
         # Construct a model instance of ProjectConfigMetadataCraLogs by calling from_dict on the json representation
-        project_config_metadata_cra_logs_model_dict = ProjectConfigMetadataCraLogs.from_dict(
-            project_config_metadata_cra_logs_model_json
-        ).__dict__
-        project_config_metadata_cra_logs_model2 = ProjectConfigMetadataCraLogs(
-            **project_config_metadata_cra_logs_model_dict
-        )
+        project_config_metadata_cra_logs_model_dict = ProjectConfigMetadataCraLogs.from_dict(project_config_metadata_cra_logs_model_json).__dict__
+        project_config_metadata_cra_logs_model2 = ProjectConfigMetadataCraLogs(**project_config_metadata_cra_logs_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_metadata_cra_logs_model == project_config_metadata_cra_logs_model2
@@ -3303,18 +3402,12 @@ class TestModel_ProjectConfigMetadataJobSummary:
         project_config_metadata_job_summary_model_json['destroy_messages'] = {'anyKey': 'anyValue'}
 
         # Construct a model instance of ProjectConfigMetadataJobSummary by calling from_dict on the json representation
-        project_config_metadata_job_summary_model = ProjectConfigMetadataJobSummary.from_dict(
-            project_config_metadata_job_summary_model_json
-        )
+        project_config_metadata_job_summary_model = ProjectConfigMetadataJobSummary.from_dict(project_config_metadata_job_summary_model_json)
         assert project_config_metadata_job_summary_model != False
 
         # Construct a model instance of ProjectConfigMetadataJobSummary by calling from_dict on the json representation
-        project_config_metadata_job_summary_model_dict = ProjectConfigMetadataJobSummary.from_dict(
-            project_config_metadata_job_summary_model_json
-        ).__dict__
-        project_config_metadata_job_summary_model2 = ProjectConfigMetadataJobSummary(
-            **project_config_metadata_job_summary_model_dict
-        )
+        project_config_metadata_job_summary_model_dict = ProjectConfigMetadataJobSummary.from_dict(project_config_metadata_job_summary_model_json).__dict__
+        project_config_metadata_job_summary_model2 = ProjectConfigMetadataJobSummary(**project_config_metadata_job_summary_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_metadata_job_summary_model == project_config_metadata_job_summary_model2
@@ -3342,18 +3435,12 @@ class TestModel_ProjectConfigMetadataLastApproved:
         project_config_metadata_last_approved_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(
-            project_config_metadata_last_approved_model_json
-        )
+        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json)
         assert project_config_metadata_last_approved_model != False
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(
-            project_config_metadata_last_approved_model_json
-        ).__dict__
-        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(
-            **project_config_metadata_last_approved_model_dict
-        )
+        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json).__dict__
+        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(**project_config_metadata_last_approved_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_metadata_last_approved_model == project_config_metadata_last_approved_model2
@@ -3415,9 +3502,7 @@ class TestModel_ProjectConfigPrototype:
         assert project_config_prototype_model != False
 
         # Construct a model instance of ProjectConfigPrototype by calling from_dict on the json representation
-        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(
-            project_config_prototype_model_json
-        ).__dict__
+        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(project_config_prototype_model_json).__dict__
         project_config_prototype_model2 = ProjectConfigPrototype(**project_config_prototype_model_dict)
 
         # Verify the model instances are equivalent
@@ -3440,9 +3525,7 @@ class TestModel_ProjectConfigResource:
 
         # Construct a json representation of a ProjectConfigResource model
         project_config_resource_model_json = {}
-        project_config_resource_model_json[
-            'resource_crn'
-        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_config_resource_model_json['resource_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_config_resource_model_json['resource_name'] = 'testString'
         project_config_resource_model_json['resource_type'] = 'testString'
         project_config_resource_model_json['resource_tainted'] = True
@@ -3453,9 +3536,7 @@ class TestModel_ProjectConfigResource:
         assert project_config_resource_model != False
 
         # Construct a model instance of ProjectConfigResource by calling from_dict on the json representation
-        project_config_resource_model_dict = ProjectConfigResource.from_dict(
-            project_config_resource_model_json
-        ).__dict__
+        project_config_resource_model_dict = ProjectConfigResource.from_dict(project_config_resource_model_json).__dict__
         project_config_resource_model2 = ProjectConfigResource(**project_config_resource_model_dict)
 
         # Verify the model instances are equivalent
@@ -3479,9 +3560,7 @@ class TestModel_ProjectConfigResourceCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         project_config_resource_model = {}  # ProjectConfigResource
-        project_config_resource_model[
-            'resource_crn'
-        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_config_resource_model['resource_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_config_resource_model['resource_name'] = 'testString'
         project_config_resource_model['resource_type'] = 'testString'
         project_config_resource_model['resource_tainted'] = True
@@ -3493,18 +3572,12 @@ class TestModel_ProjectConfigResourceCollection:
         project_config_resource_collection_model_json['resources_count'] = 38
 
         # Construct a model instance of ProjectConfigResourceCollection by calling from_dict on the json representation
-        project_config_resource_collection_model = ProjectConfigResourceCollection.from_dict(
-            project_config_resource_collection_model_json
-        )
+        project_config_resource_collection_model = ProjectConfigResourceCollection.from_dict(project_config_resource_collection_model_json)
         assert project_config_resource_collection_model != False
 
         # Construct a model instance of ProjectConfigResourceCollection by calling from_dict on the json representation
-        project_config_resource_collection_model_dict = ProjectConfigResourceCollection.from_dict(
-            project_config_resource_collection_model_json
-        ).__dict__
-        project_config_resource_collection_model2 = ProjectConfigResourceCollection(
-            **project_config_resource_collection_model_dict
-        )
+        project_config_resource_collection_model_dict = ProjectConfigResourceCollection.from_dict(project_config_resource_collection_model_json).__dict__
+        project_config_resource_collection_model2 = ProjectConfigResourceCollection(**project_config_resource_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_resource_collection_model == project_config_resource_collection_model2
@@ -3530,18 +3603,12 @@ class TestModel_ProjectConfigSettingCollection:
         project_config_setting_collection_model_json['value'] = 'testString'
 
         # Construct a model instance of ProjectConfigSettingCollection by calling from_dict on the json representation
-        project_config_setting_collection_model = ProjectConfigSettingCollection.from_dict(
-            project_config_setting_collection_model_json
-        )
+        project_config_setting_collection_model = ProjectConfigSettingCollection.from_dict(project_config_setting_collection_model_json)
         assert project_config_setting_collection_model != False
 
         # Construct a model instance of ProjectConfigSettingCollection by calling from_dict on the json representation
-        project_config_setting_collection_model_dict = ProjectConfigSettingCollection.from_dict(
-            project_config_setting_collection_model_json
-        ).__dict__
-        project_config_setting_collection_model2 = ProjectConfigSettingCollection(
-            **project_config_setting_collection_model_dict
-        )
+        project_config_setting_collection_model_dict = ProjectConfigSettingCollection.from_dict(project_config_setting_collection_model_json).__dict__
+        project_config_setting_collection_model2 = ProjectConfigSettingCollection(**project_config_setting_collection_model_dict)
 
         # Verify the model instances are equivalent
         assert project_config_setting_collection_model == project_config_setting_collection_model2
@@ -3572,9 +3639,7 @@ class TestModel_ProjectDefinitionResponse:
         assert project_definition_response_model != False
 
         # Construct a model instance of ProjectDefinitionResponse by calling from_dict on the json representation
-        project_definition_response_model_dict = ProjectDefinitionResponse.from_dict(
-            project_definition_response_model_json
-        ).__dict__
+        project_definition_response_model_dict = ProjectDefinitionResponse.from_dict(project_definition_response_model_json).__dict__
         project_definition_response_model2 = ProjectDefinitionResponse(**project_definition_response_model_dict)
 
         # Verify the model instances are equivalent
@@ -3610,16 +3675,14 @@ class TestModel_ProjectSummary:
 
         # Construct a json representation of a ProjectSummary model
         project_summary_model_json = {}
-        project_summary_model_json[
-            'crn'
-        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_summary_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_summary_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_summary_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_summary_model_json['cumulative_needs_attention_view_error'] = True
         project_summary_model_json['id'] = 'testString'
         project_summary_model_json['location'] = 'testString'
         project_summary_model_json['resource_group'] = 'testString'
-        project_summary_model_json['state'] = 'testString'
+        project_summary_model_json['state'] = 'ready'
         project_summary_model_json['event_notifications_crn'] = 'testString'
         project_summary_model_json['definition'] = project_definition_response_model
 
