@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.73.0-eeee85a9-20230607-165104
+# IBM OpenAPI SDK Code Generator Version: 3.74.0-89f1dbab-20230630-160213
 
 """
 This document is the **REST API specification** for the Projects Service. The Projects
