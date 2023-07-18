@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# IBM OpenAPI SDK Code Generator Version: 3.72.2-2bede9d2-20230601-202845
+# IBM OpenAPI SDK Code Generator Version: 3.74.0-89f1dbab-20230630-160213
 
 """
 This document is the **REST API specification** for the Projects Service. The Projects
@@ -56,7 +56,9 @@ class ProjectV1(BaseService):
                and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(authenticator)
+        service = cls(
+            authenticator
+            )
         service.configure_service(service_name)
         return service
 
@@ -253,6 +255,68 @@ class ProjectV1(BaseService):
             method='GET',
             url=url,
             headers=headers,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
+    def update_project(
+        self,
+        id: str,
+        *,
+        name: str = None,
+        description: str = None,
+        destroy_on_delete: bool = None,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Update a project.
+
+        Update a project by the ID.
+
+        :param str id: The unique project ID.
+        :param str name: (optional) The project name.
+        :param str description: (optional) The description of the project.
+        :param bool destroy_on_delete: (optional) The policy that indicates whether
+               the resources are destroyed or not when a project is deleted.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `ProjectSummary` object
+        """
+
+        if not id:
+            raise ValueError('id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V1',
+            operation_id='update_project',
+        )
+        headers.update(sdk_headers)
+
+        data = {
+            'name': name,
+            'description': description,
+            'destroy_on_delete': destroy_on_delete,
+        }
+        data = {k: v for (k, v) in data.items() if v is not None}
+        data = json.dumps(data)
+        headers['content-type'] = 'application/json'
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+            del kwargs['headers']
+        headers['Accept'] = 'application/json'
+
+        path_param_keys = ['id']
+        path_param_values = self.encode_path_vars(id)
+        path_param_dict = dict(zip(path_param_keys, path_param_values))
+        url = '/v1/projects/{id}'.format(**path_param_dict)
+        request = self.prepare_request(
+            method='PATCH',
+            url=url,
+            headers=headers,
+            data=data,
         )
 
         response = self.send(request, **kwargs)
@@ -650,6 +714,68 @@ class ProjectV1(BaseService):
         response = self.send(request, **kwargs)
         return response
 
+    def force_approve(
+        self,
+        project_id: str,
+        id: str,
+        *,
+        comment: str = None,
+        **kwargs,
+    ) -> DetailedResponse:
+        """
+        Force approve project configuration.
+
+        Force approve configuration edits to the main configuration with an approving
+        comment.
+
+        :param str project_id: The unique project ID.
+        :param str id: The unique config ID.
+        :param str comment: (optional) Notes on the project draft action. If this
+               is a forced approve on the draft configuration, a non-empty comment is
+               required.
+        :param dict headers: A `dict` containing the request headers
+        :return: A `DetailedResponse` containing the result, headers and HTTP status code.
+        :rtype: DetailedResponse with `dict` result representing a `ProjectConfigGetResponse` object
+        """
+
+        if not project_id:
+            raise ValueError('project_id must be provided')
+        if not id:
+            raise ValueError('id must be provided')
+        headers = {}
+        sdk_headers = get_sdk_headers(
+            service_name=self.DEFAULT_SERVICE_NAME,
+            service_version='V1',
+            operation_id='force_approve',
+        )
+        headers.update(sdk_headers)
+
+        data = {
+            'comment': comment,
+        }
+        data = {k: v for (k, v) in data.items() if v is not None}
+        data = json.dumps(data)
+        headers['content-type'] = 'application/json'
+
+        if 'headers' in kwargs:
+            headers.update(kwargs.get('headers'))
+            del kwargs['headers']
+        headers['Accept'] = 'application/json'
+
+        path_param_keys = ['project_id', 'id']
+        path_param_values = self.encode_path_vars(project_id, id)
+        path_param_dict = dict(zip(path_param_keys, path_param_values))
+        url = '/v1/projects/{project_id}/configs/{id}/force_approve'.format(**path_param_dict)
+        request = self.prepare_request(
+            method='POST',
+            url=url,
+            headers=headers,
+            data=data,
+        )
+
+        response = self.send(request, **kwargs)
+        return response
+
     def approve(
         self,
         project_id: str,
@@ -927,7 +1053,7 @@ class ProjectV1(BaseService):
         **kwargs,
     ) -> DetailedResponse:
         """
-        Get a list of project configuration drafts.
+        Get a list of drafts in a project configuration.
 
         Returns a list of previous and current configuration drafts in a specific project.
 
@@ -976,7 +1102,7 @@ class ProjectV1(BaseService):
         **kwargs,
     ) -> DetailedResponse:
         """
-        Get a project configuration draft.
+        Get a configuration draft in a project.
 
         Returns the specific version of a configuration draft in a specific project.
 
@@ -1031,8 +1157,8 @@ class CumulativeNeedsAttention:
     CumulativeNeedsAttention.
 
     :attr str event: (optional) The event name.
-    :attr str event_id: (optional) The unique ID of a project.
-    :attr str config_id: (optional) The unique ID of a project.
+    :attr str event_id: (optional) A unique ID for that individual event.
+    :attr str config_id: (optional) A unique ID for the configuration.
     :attr int config_version: (optional) The version number of the configuration.
     """
 
@@ -1048,8 +1174,8 @@ class CumulativeNeedsAttention:
         Initialize a CumulativeNeedsAttention object.
 
         :param str event: (optional) The event name.
-        :param str event_id: (optional) The unique ID of a project.
-        :param str config_id: (optional) The unique ID of a project.
+        :param str event_id: (optional) A unique ID for that individual event.
+        :param str config_id: (optional) A unique ID for the configuration.
         :param int config_version: (optional) The version number of the
                configuration.
         """
@@ -1209,6 +1335,7 @@ class InputVariable:
         PASSWORD = 'password'
         STRING = 'string'
         OBJECT = 'object'
+
 
 
 class OutputValue:
@@ -1454,9 +1581,7 @@ class Project:
         else:
             raise ValueError('Required property \'created_at\' not present in Project JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [
-                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
-            ]
+            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -1503,10 +1628,7 @@ class Project:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if (
-            hasattr(self, 'cumulative_needs_attention_view_error')
-            and self.cumulative_needs_attention_view_error is not None
-        ):
+        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -1550,6 +1672,16 @@ class Project:
     def __ne__(self, other: 'Project') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        The project status value.
+        """
+
+        READY = 'ready'
+        DELETING = 'deleting'
+        DELETING_FAILED = 'deleting_failed'
+
 
 
 class ProjectCollection:
@@ -1773,9 +1905,7 @@ class ProjectCollectionMemberWithMetadata:
         else:
             raise ValueError('Required property \'created_at\' not present in ProjectCollectionMemberWithMetadata JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [
-                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
-            ]
+            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -1787,9 +1917,7 @@ class ProjectCollectionMemberWithMetadata:
         if 'resource_group' in _dict:
             args['resource_group'] = _dict.get('resource_group')
         else:
-            raise ValueError(
-                'Required property \'resource_group\' not present in ProjectCollectionMemberWithMetadata JSON'
-            )
+            raise ValueError('Required property \'resource_group\' not present in ProjectCollectionMemberWithMetadata JSON')
         if 'state' in _dict:
             args['state'] = _dict.get('state')
         else:
@@ -1820,10 +1948,7 @@ class ProjectCollectionMemberWithMetadata:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if (
-            hasattr(self, 'cumulative_needs_attention_view_error')
-            and self.cumulative_needs_attention_view_error is not None
-        ):
+        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -1859,6 +1984,16 @@ class ProjectCollectionMemberWithMetadata:
     def __ne__(self, other: 'ProjectCollectionMemberWithMetadata') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        The project status value.
+        """
+
+        READY = 'ready'
+        DELETING = 'deleting'
+        DELETING_FAILED = 'deleting_failed'
+
 
 
 class ProjectConfigAuth:
@@ -2302,6 +2437,34 @@ class ProjectConfigCollectionMember:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
+    class StateEnum(str, Enum):
+        """
+        The state of the configuration.
+        """
+
+        DELETED = 'deleted'
+        DELETING = 'deleting'
+        DELETING_FAILED = 'deleting_failed'
+        INSTALLED = 'installed'
+        INSTALLED_FAILED = 'installed_failed'
+        INSTALLING = 'installing'
+        NOT_INSTALLED = 'not_installed'
+        UNINSTALLING = 'uninstalling'
+        UNINSTALLING_FAILED = 'uninstalling_failed'
+        ACTIVE = 'active'
+
+
+    class PipelineStateEnum(str, Enum):
+        """
+        The pipeline state of the configuration. It only exists after the first
+        configuration validation.
+        """
+
+        PIPELINE_FAILED = 'pipeline_failed'
+        PIPELINE_RUNNING = 'pipeline_running'
+        PIPELINE_SUCCEEDED = 'pipeline_succeeded'
+
+
 
 class ProjectConfigComplianceProfile:
     """
@@ -2579,6 +2742,7 @@ class ProjectConfigDefinition:
         SCHEMATICS_BLUEPRINT = 'schematics_blueprint'
 
 
+
 class ProjectConfigDelete:
     """
     Deletes the configuration response.
@@ -2807,9 +2971,7 @@ class ProjectConfigDraftResponse:
         if 'cost_estimate' in _dict:
             args['cost_estimate'] = ProjectConfigMetadataCostEstimate.from_dict(_dict.get('cost_estimate'))
         if 'last_deployment_job_summary' in _dict:
-            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(
-                _dict.get('last_deployment_job_summary')
-            )
+            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(_dict.get('last_deployment_job_summary'))
         if 'definition' in _dict:
             args['definition'] = ProjectConfigDefinition.from_dict(_dict.get('definition'))
         else:
@@ -2895,6 +3057,34 @@ class ProjectConfigDraftResponse:
     def __ne__(self, other: 'ProjectConfigDraftResponse') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        The state of the configuration.
+        """
+
+        DELETED = 'deleted'
+        DELETING = 'deleting'
+        DELETING_FAILED = 'deleting_failed'
+        INSTALLED = 'installed'
+        INSTALLED_FAILED = 'installed_failed'
+        INSTALLING = 'installing'
+        NOT_INSTALLED = 'not_installed'
+        UNINSTALLING = 'uninstalling'
+        UNINSTALLING_FAILED = 'uninstalling_failed'
+        ACTIVE = 'active'
+
+
+    class PipelineStateEnum(str, Enum):
+        """
+        The pipeline state of the configuration. It only exists after the first
+        configuration validation.
+        """
+
+        PIPELINE_FAILED = 'pipeline_failed'
+        PIPELINE_RUNNING = 'pipeline_running'
+        PIPELINE_SUCCEEDED = 'pipeline_succeeded'
+
 
 
 class ProjectConfigDraftSummary:
@@ -2983,6 +3173,27 @@ class ProjectConfigDraftSummary:
     def __ne__(self, other: 'ProjectConfigDraftSummary') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        The state of the configuration draft.
+        """
+
+        DISCARDED = 'discarded'
+        MERGED = 'merged'
+        ACTIVE = 'active'
+
+
+    class PipelineStateEnum(str, Enum):
+        """
+        The pipeline state of the configuration. It only exists after the first
+        configuration validation.
+        """
+
+        PIPELINE_FAILED = 'pipeline_failed'
+        PIPELINE_RUNNING = 'pipeline_running'
+        PIPELINE_SUCCEEDED = 'pipeline_succeeded'
+
 
 
 class ProjectConfigDraftSummaryCollection:
@@ -3228,9 +3439,7 @@ class ProjectConfigGetResponse:
         if 'cost_estimate' in _dict:
             args['cost_estimate'] = ProjectConfigMetadataCostEstimate.from_dict(_dict.get('cost_estimate'))
         if 'last_deployment_job_summary' in _dict:
-            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(
-                _dict.get('last_deployment_job_summary')
-            )
+            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(_dict.get('last_deployment_job_summary'))
         if 'active_draft' in _dict:
             args['active_draft'] = ProjectConfigDraftSummary.from_dict(_dict.get('active_draft'))
         if 'definition' in _dict:
@@ -3323,6 +3532,34 @@ class ProjectConfigGetResponse:
     def __ne__(self, other: 'ProjectConfigGetResponse') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        The state of the configuration.
+        """
+
+        DELETED = 'deleted'
+        DELETING = 'deleting'
+        DELETING_FAILED = 'deleting_failed'
+        INSTALLED = 'installed'
+        INSTALLED_FAILED = 'installed_failed'
+        INSTALLING = 'installing'
+        NOT_INSTALLED = 'not_installed'
+        UNINSTALLING = 'uninstalling'
+        UNINSTALLING_FAILED = 'uninstalling_failed'
+        ACTIVE = 'active'
+
+
+    class PipelineStateEnum(str, Enum):
+        """
+        The pipeline state of the configuration. It only exists after the first
+        configuration validation.
+        """
+
+        PIPELINE_FAILED = 'pipeline_failed'
+        PIPELINE_RUNNING = 'pipeline_running'
+        PIPELINE_SUCCEEDED = 'pipeline_succeeded'
+
 
 
 class ProjectConfigInputVariable:
@@ -4148,9 +4385,7 @@ class ProjectConfigResourceCollection:
         if 'resources_count' in _dict:
             args['resources_count'] = _dict.get('resources_count')
         else:
-            raise ValueError(
-                'Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON'
-            )
+            raise ValueError('Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON')
         return cls(**args)
 
     @classmethod
@@ -4435,9 +4670,7 @@ class ProjectSummary:
         else:
             raise ValueError('Required property \'created_at\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [
-                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
-            ]
+            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -4480,10 +4713,7 @@ class ProjectSummary:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if (
-            hasattr(self, 'cumulative_needs_attention_view_error')
-            and self.cumulative_needs_attention_view_error is not None
-        ):
+        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -4519,6 +4749,15 @@ class ProjectSummary:
     def __ne__(self, other: 'ProjectSummary') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
+    class StateEnum(str, Enum):
+        """
+        The project status value.
+        """
+
+        READY = 'ready'
+        DELETING = 'deleting'
+        DELETING_FAILED = 'deleting_failed'
 
 
 ##############################################################################

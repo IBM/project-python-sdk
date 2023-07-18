@@ -167,7 +167,7 @@ class TestProjectV1:
             description='Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
             authorizations=project_config_auth_model,
             compliance_profile=project_config_compliance_profile_model,
-            input=[project_config_input_variable_model, project_config_input_collection_resource_group],
+            input=[project_config_input_variable_model],
             setting=[project_config_setting_collection_model],
         )
 
@@ -222,6 +222,18 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_summary = response.get_result()
         assert project_summary is not None
+
+    @needscredentials
+    def test_update_project(self):
+        response = self.project_service.update_project(
+            id=project_id_link,
+            name='acme-microservice',
+            description='A microservice to deploy on top of ACME infrastructure.',
+            destroy_on_delete=True,
+        )
+        assert response.get_status_code() == 200
+        project_summary = response.get_result()
+        assert project_summary is not None    
 
     @needscredentials
     def test_list_configs(self):
@@ -292,6 +304,17 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_draft_response = response.get_result()
         assert project_config_draft_response is not None
+
+    @needscredentials
+    def test_force_approve(self):
+        response = self.project_service.force_approve(
+            project_id=project_id_link,
+            id=config_id_link,
+            comment='Approving the changes',
+        )
+        assert response.get_status_code() == 201
+        project_config_get_response = response.get_result()
+        assert project_config_get_response is not None    
 
     @needscredentials
     def test_approve(self):
@@ -370,3 +393,20 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_draft_response = response.get_result()
         assert project_config_draft_response is not None
+
+    @needscredentials
+    def test_delete_config(self):
+        response = self.project_service.delete_config(
+            project_id=project_id_link,
+            id=config_id_link,
+            draft_only=False,
+        )
+        assert response.get_status_code() == 200
+        project_config_delete = response.get_result()
+        assert project_config_delete is not None
+    @needscredentials
+    def test_delete_project(self):
+        response = self.project_service.delete_project(
+            id=project_id_link,
+        )
+        assert response.get_status_code() == 204    
