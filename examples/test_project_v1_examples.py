@@ -20,7 +20,7 @@ Examples for ProjectV1
 from ibm_cloud_sdk_core import ApiException, read_external_sources
 import os
 import pytest
-from project.project_v1 import *
+from ibm_cloud.project_v1 import *
 
 #
 # This file provides an example of how to use the project service.
@@ -63,7 +63,8 @@ class TestProjectV1Examples:
 
             # begin-common
 
-            project_service = ProjectV1.new_instance()
+            project_service = ProjectV1.new_instance(
+            )
 
             # end-common
             assert project_service is not None
@@ -90,7 +91,7 @@ class TestProjectV1Examples:
 
             project_config_prototype_model = {
                 'name': 'common-variables',
-                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.145be7c1-9ec4-4719-b586-584ee52fbed0-global',
+                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
             }
 
             response = project_service.create_project(
@@ -121,8 +122,8 @@ class TestProjectV1Examples:
             # begin-create_config
 
             project_config_input_variable_model = {
-                'name': 'cos_bucket_name',
-                'value': 'test-bucket',
+                'name': 'account_id',
+                'value': '$configs[].name[\"account-stage\"].input.account_id',
             }
 
             project_config_setting_collection_model = {
@@ -135,7 +136,7 @@ class TestProjectV1Examples:
                 name='env-stage',
                 locator_id='1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
                 labels=['env:stage', 'governance:test', 'build:0'],
-                description='Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a GitHub repo hosting the Terraform modules that can be deployed by a Schematics workspace.',
+                description='Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
                 input=[project_config_input_variable_model],
                 setting=[project_config_setting_collection_model],
             )
@@ -191,6 +192,29 @@ class TestProjectV1Examples:
             print(json.dumps(project_summary, indent=2))
 
             # end-get_project
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_update_project_example(self):
+        """
+        update_project request example
+        """
+        try:
+            print('\nupdate_project() result:')
+            # begin-update_project
+
+            response = project_service.update_project(
+                id=project_id_link,
+                name='acme-microservice',
+                description='A microservice to deploy on top of ACME infrastructure.',
+            )
+            project_summary = response.get_result()
+
+            print(json.dumps(project_summary, indent=2))
+
+            # end-update_project
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -262,6 +286,29 @@ class TestProjectV1Examples:
             print(json.dumps(project_config_draft_response, indent=2))
 
             # end-update_config
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_force_approve_example(self):
+        """
+        force_approve request example
+        """
+        try:
+            print('\nforce_approve() result:')
+            # begin-force_approve
+
+            response = project_service.force_approve(
+                project_id=project_id_link,
+                id=config_id_link,
+                comment='Approving the changes',
+            )
+            project_config_get_response = response.get_result()
+
+            print(json.dumps(project_config_get_response, indent=2))
+
+            # end-force_approve
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -385,7 +432,7 @@ class TestProjectV1Examples:
 
             response = project_service.list_config_drafts(
                 project_id=project_id_link,
-                config_id=config_id_link,
+                config_id='testString',
             )
             project_config_draft_summary_collection = response.get_result()
 
@@ -407,7 +454,7 @@ class TestProjectV1Examples:
 
             response = project_service.get_config_draft(
                 project_id=project_id_link,
-                config_id=config_id_link,
+                config_id='testString',
                 version=38,
             )
             project_config_draft_response = response.get_result()
