@@ -122,8 +122,8 @@ class TestProjectV1Examples:
             # begin-create_config
 
             project_config_input_variable_model = {
-                'name': 'account_id',
-                'value': '$configs[].name[\"account-stage\"].input.account_id',
+                'name': 'cos_bucket_namet',
+                'value': 'test-bucket',
             }
 
             project_config_setting_collection_model = {
