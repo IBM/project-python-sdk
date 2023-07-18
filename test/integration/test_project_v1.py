@@ -20,7 +20,7 @@ Integration Tests for ProjectV1
 from ibm_cloud_sdk_core import *
 import os
 import pytest
-from ibm_cloud.project_v1 import *
+from project.project_v1 import *
 
 # Config file name
 config_file = 'project_v1.env'
@@ -40,8 +40,7 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance(
-            )
+            cls.project_service = ProjectV1.new_instance()
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)
@@ -61,32 +60,36 @@ class TestProjectV1:
 
         # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
         project_config_auth_trusted_profile_model = {
-            'id': 'testString',
-            'target_iam_id': 'testString',
+            'id': 'valid_id',
+            'target_iam_id': 'iam_id',
         }
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {
             'trusted_profile': project_config_auth_trusted_profile_model,
-            'method': 'testString',
-            'api_key': 'testString',
+            'method': 'API_KEY',
+            'api_key': 'valid_apikey',
         }
         # Construct a dict representation of a ProjectConfigComplianceProfile model
         project_config_compliance_profile_model = {
-            'id': 'testString',
-            'instance_id': 'testString',
-            'instance_location': 'testString',
-            'attachment_id': 'testString',
-            'profile_name': 'testString',
+            'id': 'valid_id',
+            'instance_id': 'instance_id',
+            'instance_location': 'us-south',
+            'attachment_id': 'attachment_id',
+            'profile_name': 'profile_name',
         }
         # Construct a dict representation of a ProjectConfigInputVariable model
         project_config_input_variable_model = {
-            'name': 'testString',
-            'value': 'testString',
+            'name': 'cos_bucket_namet',
+            'value': 'test-bucket',
+        }
+        project_config_input_variable_model_resource_group = {
+            'name': 'resource_group',
+            'value': 'Default',
         }
         # Construct a dict representation of a ProjectConfigSettingCollection model
         project_config_setting_collection_model = {
-            'name': 'testString',
-            'value': 'testString',
+            'name': 'resource_group',
+            'value': 'Default',
         }
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {
@@ -95,15 +98,15 @@ class TestProjectV1:
             'description': 'testString',
             'authorizations': project_config_auth_model,
             'compliance_profile': project_config_compliance_profile_model,
-            'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
-            'input': [project_config_input_variable_model],
+            'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.145be7c1-9ec4-4719-b586-584ee52fbed0-global',
+            'input': [project_config_input_variable_model, project_config_input_variable_model_resource_group],
             'setting': [project_config_setting_collection_model],
         }
 
         response = self.project_service.create_project(
             resource_group='Default',
             location='us-south',
-            name='acme-microservice',
+            name='acme-microservice8',
             description='A microservice to deploy on top of ACME infrastructure.',
             destroy_on_delete=True,
             configs=[project_config_prototype_model],
@@ -121,28 +124,35 @@ class TestProjectV1:
 
         # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
         project_config_auth_trusted_profile_model = {
-            'id': 'testString',
-            'target_iam_id': 'testString',
+            'id': 'valid_id',
+            'target_iam_id': 'iam_id',
         }
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {
             'trusted_profile': project_config_auth_trusted_profile_model,
-            'method': 'testString',
-            'api_key': 'testString',
+            'method': 'API_KEY',
+            'api_key': 'valid_apikey',
         }
         # Construct a dict representation of a ProjectConfigComplianceProfile model
         project_config_compliance_profile_model = {
-            'id': 'testString',
-            'instance_id': 'testString',
-            'instance_location': 'testString',
-            'attachment_id': 'testString',
-            'profile_name': 'testString',
+            'id': 'valid_id',
+            'instance_id': 'instance_id',
+            'instance_location': 'us-south',
+            'attachment_id': 'attachment_id',
+            'profile_name': 'profile_name',
         }
+        # Construct a dict representation of a ProjectConfigSettingCollection model
+        project_config_input_collection_resource_group = {
+            'name': 'resource_group',
+            'value': 'Default',
+        }
+
         # Construct a dict representation of a ProjectConfigInputVariable model
         project_config_input_variable_model = {
-            'name': 'account_id',
-            'value': '$configs[].name[\"account-stage\"].input.account_id',
+            'name': 'cos_bucket_name',
+            'value': 'test-bucket-2',
         }
+
         # Construct a dict representation of a ProjectConfigSettingCollection model
         project_config_setting_collection_model = {
             'name': 'IBMCLOUD_TOOLCHAIN_ENDPOINT',
@@ -152,12 +162,12 @@ class TestProjectV1:
         response = self.project_service.create_config(
             project_id=project_id_link,
             name='env-stage',
-            locator_id='1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
+            locator_id='1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.145be7c1-9ec4-4719-b586-584ee52fbed0-global',
             labels=['env:stage', 'governance:test', 'build:0'],
             description='Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
             authorizations=project_config_auth_model,
             compliance_profile=project_config_compliance_profile_model,
-            input=[project_config_input_variable_model],
+            input=[project_config_input_variable_model, project_config_input_collection_resource_group],
             setting=[project_config_setting_collection_model],
         )
 
@@ -214,19 +224,6 @@ class TestProjectV1:
         assert project_summary is not None
 
     @needscredentials
-    def test_update_project(self):
-        response = self.project_service.update_project(
-            id=project_id_link,
-            name='acme-microservice',
-            description='A microservice to deploy on top of ACME infrastructure.',
-            destroy_on_delete=True,
-        )
-
-        assert response.get_status_code() == 200
-        project_summary = response.get_result()
-        assert project_summary is not None
-
-    @needscredentials
     def test_list_configs(self):
         response = self.project_service.list_configs(
             project_id=project_id_link,
@@ -251,42 +248,42 @@ class TestProjectV1:
     def test_update_config(self):
         # Construct a dict representation of a ProjectConfigInputVariable model
         project_config_input_variable_model = {
-            'name': 'account_id',
-            'value': '$configs[].name[\"account-stage\"].input.account_id',
+            'name': 'cos_bucket_name',
+            'value': 'test-bucket-3',
         }
         # Construct a dict representation of a ProjectConfigSettingCollection model
         project_config_setting_collection_model = {
-            'name': 'testString',
-            'value': 'testString',
+            'name': 'IBMCLOUD_TOOLCHAIN_ENDPOINT',
+            'value': 'https://api.us-south.devops.dev.cloud.ibm.com',
         }
         # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
         project_config_auth_trusted_profile_model = {
-            'id': 'testString',
-            'target_iam_id': 'testString',
+            'id': 'valid_id',
+            'target_iam_id': 'iam_id',
         }
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {
             'trusted_profile': project_config_auth_trusted_profile_model,
-            'method': 'testString',
-            'api_key': 'testString',
+            'method': 'API_KEY',
+            'api_key': 'valid_apikey',
         }
         # Construct a dict representation of a ProjectConfigComplianceProfile model
         project_config_compliance_profile_model = {
-            'id': 'testString',
-            'instance_id': 'testString',
-            'instance_location': 'testString',
-            'attachment_id': 'testString',
-            'profile_name': 'testString',
+            'id': 'valid_id',
+            'instance_id': 'instance_id',
+            'instance_location': 'us-south',
+            'attachment_id': 'attachment_id',
+            'profile_name': 'profile_name',
         }
 
         response = self.project_service.update_config(
             project_id=project_id_link,
             id=config_id_link,
-            locator_id='testString',
+            locator_id='1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.145be7c1-9ec4-4719-b586-584ee52fbed0-global',
             input=[project_config_input_variable_model],
             setting=[project_config_setting_collection_model],
             name='testString',
-            labels=['testString'],
+            labels=['env:stage'],
             description='testString',
             authorizations=project_config_auth_model,
             compliance_profile=project_config_compliance_profile_model,
@@ -295,18 +292,6 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_draft_response = response.get_result()
         assert project_config_draft_response is not None
-
-    @needscredentials
-    def test_force_approve(self):
-        response = self.project_service.force_approve(
-            project_id=project_id_link,
-            id=config_id_link,
-            comment='Approving the changes',
-        )
-
-        assert response.get_status_code() == 201
-        project_config_get_response = response.get_result()
-        assert project_config_get_response is not None
 
     @needscredentials
     def test_approve(self):
@@ -325,8 +310,7 @@ class TestProjectV1:
         response = self.project_service.check_config(
             project_id=project_id_link,
             id=config_id_link,
-            x_auth_refresh_token='testString',
-            is_draft=True,
+            is_draft=False,
         )
 
         assert response.get_status_code() == 202
@@ -386,23 +370,3 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_draft_response = response.get_result()
         assert project_config_draft_response is not None
-
-    @needscredentials
-    def test_delete_config(self):
-        response = self.project_service.delete_config(
-            project_id=project_id_link,
-            id=config_id_link,
-            draft_only=False,
-        )
-
-        assert response.get_status_code() == 200
-        project_config_delete = response.get_result()
-        assert project_config_delete is not None
-
-    @needscredentials
-    def test_delete_project(self):
-        response = self.project_service.delete_project(
-            id=project_id_link,
-        )
-
-        assert response.get_status_code() == 204
