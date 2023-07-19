@@ -56,9 +56,7 @@ class ProjectV1(BaseService):
                and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(
-            authenticator
-            )
+        service = cls(authenticator)
         service.configure_service(service_name)
         return service
 
@@ -1337,7 +1335,6 @@ class InputVariable:
         OBJECT = 'object'
 
 
-
 class OutputValue:
     """
     OutputValue.
@@ -1581,7 +1578,9 @@ class Project:
         else:
             raise ValueError('Required property \'created_at\' not present in Project JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -1628,7 +1627,10 @@ class Project:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -1681,7 +1683,6 @@ class Project:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class ProjectCollection:
@@ -1905,7 +1906,9 @@ class ProjectCollectionMemberWithMetadata:
         else:
             raise ValueError('Required property \'created_at\' not present in ProjectCollectionMemberWithMetadata JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -1917,7 +1920,9 @@ class ProjectCollectionMemberWithMetadata:
         if 'resource_group' in _dict:
             args['resource_group'] = _dict.get('resource_group')
         else:
-            raise ValueError('Required property \'resource_group\' not present in ProjectCollectionMemberWithMetadata JSON')
+            raise ValueError(
+                'Required property \'resource_group\' not present in ProjectCollectionMemberWithMetadata JSON'
+            )
         if 'state' in _dict:
             args['state'] = _dict.get('state')
         else:
@@ -1948,7 +1953,10 @@ class ProjectCollectionMemberWithMetadata:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -1993,7 +2001,6 @@ class ProjectCollectionMemberWithMetadata:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class ProjectConfigAuth:
@@ -2453,7 +2460,6 @@ class ProjectConfigCollectionMember:
         UNINSTALLING_FAILED = 'uninstalling_failed'
         ACTIVE = 'active'
 
-
     class PipelineStateEnum(str, Enum):
         """
         The pipeline state of the configuration. It only exists after the first
@@ -2463,7 +2469,6 @@ class ProjectConfigCollectionMember:
         PIPELINE_FAILED = 'pipeline_failed'
         PIPELINE_RUNNING = 'pipeline_running'
         PIPELINE_SUCCEEDED = 'pipeline_succeeded'
-
 
 
 class ProjectConfigComplianceProfile:
@@ -2742,7 +2747,6 @@ class ProjectConfigDefinition:
         SCHEMATICS_BLUEPRINT = 'schematics_blueprint'
 
 
-
 class ProjectConfigDelete:
     """
     Deletes the configuration response.
@@ -2971,7 +2975,9 @@ class ProjectConfigDraftResponse:
         if 'cost_estimate' in _dict:
             args['cost_estimate'] = ProjectConfigMetadataCostEstimate.from_dict(_dict.get('cost_estimate'))
         if 'last_deployment_job_summary' in _dict:
-            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(_dict.get('last_deployment_job_summary'))
+            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(
+                _dict.get('last_deployment_job_summary')
+            )
         if 'definition' in _dict:
             args['definition'] = ProjectConfigDefinition.from_dict(_dict.get('definition'))
         else:
@@ -3074,7 +3080,6 @@ class ProjectConfigDraftResponse:
         UNINSTALLING_FAILED = 'uninstalling_failed'
         ACTIVE = 'active'
 
-
     class PipelineStateEnum(str, Enum):
         """
         The pipeline state of the configuration. It only exists after the first
@@ -3084,7 +3089,6 @@ class ProjectConfigDraftResponse:
         PIPELINE_FAILED = 'pipeline_failed'
         PIPELINE_RUNNING = 'pipeline_running'
         PIPELINE_SUCCEEDED = 'pipeline_succeeded'
-
 
 
 class ProjectConfigDraftSummary:
@@ -3183,7 +3187,6 @@ class ProjectConfigDraftSummary:
         MERGED = 'merged'
         ACTIVE = 'active'
 
-
     class PipelineStateEnum(str, Enum):
         """
         The pipeline state of the configuration. It only exists after the first
@@ -3193,7 +3196,6 @@ class ProjectConfigDraftSummary:
         PIPELINE_FAILED = 'pipeline_failed'
         PIPELINE_RUNNING = 'pipeline_running'
         PIPELINE_SUCCEEDED = 'pipeline_succeeded'
-
 
 
 class ProjectConfigDraftSummaryCollection:
@@ -3439,7 +3441,9 @@ class ProjectConfigGetResponse:
         if 'cost_estimate' in _dict:
             args['cost_estimate'] = ProjectConfigMetadataCostEstimate.from_dict(_dict.get('cost_estimate'))
         if 'last_deployment_job_summary' in _dict:
-            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(_dict.get('last_deployment_job_summary'))
+            args['last_deployment_job_summary'] = ProjectConfigMetadataJobSummary.from_dict(
+                _dict.get('last_deployment_job_summary')
+            )
         if 'active_draft' in _dict:
             args['active_draft'] = ProjectConfigDraftSummary.from_dict(_dict.get('active_draft'))
         if 'definition' in _dict:
@@ -3549,7 +3553,6 @@ class ProjectConfigGetResponse:
         UNINSTALLING_FAILED = 'uninstalling_failed'
         ACTIVE = 'active'
 
-
     class PipelineStateEnum(str, Enum):
         """
         The pipeline state of the configuration. It only exists after the first
@@ -3559,7 +3562,6 @@ class ProjectConfigGetResponse:
         PIPELINE_FAILED = 'pipeline_failed'
         PIPELINE_RUNNING = 'pipeline_running'
         PIPELINE_SUCCEEDED = 'pipeline_succeeded'
-
 
 
 class ProjectConfigInputVariable:
@@ -4385,7 +4387,9 @@ class ProjectConfigResourceCollection:
         if 'resources_count' in _dict:
             args['resources_count'] = _dict.get('resources_count')
         else:
-            raise ValueError('Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON')
+            raise ValueError(
+                'Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON'
+            )
         return cls(**args)
 
     @classmethod
@@ -4670,7 +4674,9 @@ class ProjectSummary:
         else:
             raise ValueError('Required property \'created_at\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -4713,7 +4719,10 @@ class ProjectSummary:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id

@@ -187,7 +187,7 @@ class TestProjectV1:
         )
         assert response.get_status_code() == 200
         project_summary = response.get_result()
-        assert project_summary is not None        
+        assert project_summary is not None
 
     @needscredentials
     def test_list_projects(self):
@@ -393,7 +393,7 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_draft_response = response.get_result()
         assert project_config_draft_response is not None
-        
+
     @needscredentials
     def test_delete_config(self):
         response = self.project_service.delete_config(
@@ -404,9 +404,10 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_delete = response.get_result()
         assert project_config_delete is not None
+
     @needscredentials
     def test_delete_project(self):
         response = self.project_service.delete_project(
             id=project_id_link,
         )
-        assert response.get_status_code() == 204        
+        assert response.get_status_code() == 204

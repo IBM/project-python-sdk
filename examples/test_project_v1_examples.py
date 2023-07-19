@@ -166,7 +166,7 @@ class TestProjectV1Examples:
             print(json.dumps(project_summary, indent=2))
             # end-update_project
         except ApiException as e:
-            pytest.fail(str(e))        
+            pytest.fail(str(e))
 
     @needscredentials
     def test_list_projects_example(self):
@@ -302,7 +302,7 @@ class TestProjectV1Examples:
             print(json.dumps(project_config_get_response, indent=2))
             # end-force_approve
         except ApiException as e:
-            pytest.fail(str(e))       
+            pytest.fail(str(e))
 
     @needscredentials
     def test_approve_example(self):
