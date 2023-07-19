@@ -178,6 +178,18 @@ class TestProjectV1:
         config_id_link = project_config_draft_response['id']
 
     @needscredentials
+    def test_update_project(self):
+        response = self.project_service.update_project(
+            id=project_id_link,
+            name='acme-microservice',
+            description='A microservice to deploy on top of ACME infrastructure.',
+            destroy_on_delete=True,
+        )
+        assert response.get_status_code() == 200
+        project_summary = response.get_result()
+        assert project_summary is not None
+
+    @needscredentials
     def test_list_projects(self):
         response = self.project_service.list_projects(
             start='testString',
@@ -294,6 +306,17 @@ class TestProjectV1:
         assert project_config_draft_response is not None
 
     @needscredentials
+    def test_force_approve(self):
+        response = self.project_service.force_approve(
+            project_id=project_id_link,
+            id=config_id_link,
+            comment='Approving the changes',
+        )
+        assert response.get_status_code() == 201
+        project_config_get_response = response.get_result()
+        assert project_config_get_response is not None
+
+    @needscredentials
     def test_approve(self):
         response = self.project_service.approve(
             project_id=project_id_link,
@@ -370,3 +393,21 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_draft_response = response.get_result()
         assert project_config_draft_response is not None
+
+    @needscredentials
+    def test_delete_config(self):
+        response = self.project_service.delete_config(
+            project_id=project_id_link,
+            id=config_id_link,
+            draft_only=False,
+        )
+        assert response.get_status_code() == 200
+        project_config_delete = response.get_result()
+        assert project_config_delete is not None
+
+    @needscredentials
+    def test_delete_project(self):
+        response = self.project_service.delete_project(
+            id=project_id_link,
+        )
+        assert response.get_status_code() == 204

@@ -150,6 +150,25 @@ class TestProjectV1Examples:
             pytest.fail(str(e))
 
     @needscredentials
+    def test_update_project_example(self):
+        """
+        update_project request example
+        """
+        try:
+            print('\nupdate_project() result:')
+            # begin-update_project
+            response = project_service.update_project(
+                id=project_id_link,
+                name='acme-microservice',
+                description='A microservice to deploy on top of ACME infrastructure.',
+            )
+            project_summary = response.get_result()
+            print(json.dumps(project_summary, indent=2))
+            # end-update_project
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
     def test_list_projects_example(self):
         """
         list_projects request example
@@ -263,6 +282,25 @@ class TestProjectV1Examples:
 
             # end-update_config
 
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_force_approve_example(self):
+        """
+        force_approve request example
+        """
+        try:
+            print('\nforce_approve() result:')
+            # begin-force_approve
+            response = project_service.force_approve(
+                project_id=project_id_link,
+                id=config_id_link,
+                comment='Approving the changes',
+            )
+            project_config_get_response = response.get_result()
+            print(json.dumps(project_config_get_response, indent=2))
+            # end-force_approve
         except ApiException as e:
             pytest.fail(str(e))
 
