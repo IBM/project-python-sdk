@@ -20,7 +20,7 @@ Examples for ProjectV1
 from ibm_cloud_sdk_core import ApiException, read_external_sources
 import os
 import pytest
-from project.project_v1 import *
+from ibm_cloud.project_v1 import *
 
 #
 # This file provides an example of how to use the project service.
@@ -63,7 +63,8 @@ class TestProjectV1Examples:
 
             # begin-common
 
-            project_service = ProjectV1.new_instance()
+            project_service = ProjectV1.new_instance(
+            )
 
             # end-common
             assert project_service is not None
@@ -88,17 +89,15 @@ class TestProjectV1Examples:
             print('\ncreate_project() result:')
             # begin-create_project
 
-            project_config_prototype_model = {
-                'name': 'common-variables',
-                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.145be7c1-9ec4-4719-b586-584ee52fbed0-global',
+            project_prototype_definition_model = {
+                'name': 'acme-microservice',
+                'description': 'A microservice to deploy on top of ACME infrastructure.',
             }
 
             response = project_service.create_project(
-                resource_group='Default',
+                definition=project_prototype_definition_model,
                 location='us-south',
-                name='acme-microservice',
-                description='A microservice to deploy on top of ACME infrastructure.',
-                configs=[project_config_prototype_model],
+                resource_group='Default',
             )
             project = response.get_result()
 
@@ -120,51 +119,38 @@ class TestProjectV1Examples:
             print('\ncreate_config() result:')
             # begin-create_config
 
-            project_config_input_variable_model = {
-                'name': 'cos_bucket_namet',
-                'value': 'test-bucket',
+            input_variable_model = {
+                'account_id': '$configs[].name[\"account-stage\"].input.account_id',
+                'resource_group': 'stage',
+                'access_tags': '["env:stage"]',
+                'logdna_name': 'Name of the LogDNA stage service instance',
+                'sysdig_name': 'Name of the SysDig stage service instance',
             }
 
-            project_config_setting_collection_model = {
-                'name': 'IBMCLOUD_TOOLCHAIN_ENDPOINT',
-                'value': 'https://api.us-south.devops.dev.cloud.ibm.com',
+            project_config_setting_model = {
+                'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com',
+            }
+
+            project_config_prototype_definition_block_model = {
+                'name': 'env-stage',
+                'description': 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
+                'labels': ['env:stage', 'governance:test', 'build:0'],
+                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
+                'input': input_variable_model,
+                'setting': project_config_setting_model,
             }
 
             response = project_service.create_config(
                 project_id=project_id_link,
-                name='env-stage',
-                locator_id='1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
-                labels=['env:stage', 'governance:test', 'build:0'],
-                description='Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
-                input=[project_config_input_variable_model],
-                setting=[project_config_setting_collection_model],
+                definition=project_config_prototype_definition_block_model,
             )
-            project_config_draft_response = response.get_result()
+            project_config = response.get_result()
 
-            print(json.dumps(project_config_draft_response, indent=2))
+            print(json.dumps(project_config, indent=2))
 
             # end-create_config
 
-            config_id_link = project_config_draft_response['id']
-        except ApiException as e:
-            pytest.fail(str(e))
-
-    @needscredentials
-    def test_update_project_example(self):
-        """
-        update_project request example
-        """
-        try:
-            print('\nupdate_project() result:')
-            # begin-update_project
-            response = project_service.update_project(
-                id=project_id_link,
-                name='acme-microservice',
-                description='A microservice to deploy on top of ACME infrastructure.',
-            )
-            project_summary = response.get_result()
-            print(json.dumps(project_summary, indent=2))
-            # end-update_project
+            config_id_link = project_config['id']
         except ApiException as e:
             pytest.fail(str(e))
 
@@ -205,11 +191,178 @@ class TestProjectV1Examples:
             response = project_service.get_project(
                 id=project_id_link,
             )
-            project_summary = response.get_result()
+            project = response.get_result()
 
-            print(json.dumps(project_summary, indent=2))
+            print(json.dumps(project, indent=2))
 
             # end-get_project
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_update_project_example(self):
+        """
+        update_project request example
+        """
+        try:
+            print('\nupdate_project() result:')
+            # begin-update_project
+
+            project_prototype_patch_definition_block_model = {
+                'name': 'acme-microservice',
+                'description': 'A microservice to deploy on top of ACME infrastructure.',
+            }
+
+            response = project_service.update_project(
+                id=project_id_link,
+                definition=project_prototype_patch_definition_block_model,
+            )
+            project = response.get_result()
+
+            print(json.dumps(project, indent=2))
+
+            # end-update_project
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_create_project_environment_example(self):
+        """
+        create_project_environment request example
+        """
+        try:
+            print('\ncreate_project_environment() result:')
+            # begin-create_project_environment
+
+            environment_auth_model = {
+                'method': 'API_KEY',
+                'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
+            }
+
+            input_variable_model = {
+                'resource_group': 'stage',
+                'region': 'us-south',
+            }
+
+            project_compliance_profile_model = {
+                'id': 'some-profile-id',
+                'instance_id': 'some-instance-id',
+                'instance_location': 'us-south',
+                'attachment_id': 'some-attachment-id',
+                'profile_name': 'some-profile-name',
+            }
+
+            environment_definition_required_properties_model = {
+                'name': 'development',
+                'description': 'The environment \'development\'',
+                'authorizations': environment_auth_model,
+                'inputs': input_variable_model,
+                'compliance_profile': project_compliance_profile_model,
+            }
+
+            response = project_service.create_project_environment(
+                project_id=project_id_link,
+                definition=environment_definition_required_properties_model,
+            )
+            environment = response.get_result()
+
+            print(json.dumps(environment, indent=2))
+
+            # end-create_project_environment
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_list_project_environments_example(self):
+        """
+        list_project_environments request example
+        """
+        try:
+            print('\nlist_project_environments() result:')
+            # begin-list_project_environments
+
+            response = project_service.list_project_environments(
+                project_id=project_id_link,
+            )
+            environment_list_response = response.get_result()
+
+            print(json.dumps(environment_list_response, indent=2))
+
+            # end-list_project_environments
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_get_project_environment_example(self):
+        """
+        get_project_environment request example
+        """
+        try:
+            print('\nget_project_environment() result:')
+            # begin-get_project_environment
+
+            response = project_service.get_project_environment(
+                project_id=project_id_link,
+                id=project_id_link,
+            )
+            environment = response.get_result()
+
+            print(json.dumps(environment, indent=2))
+
+            # end-get_project_environment
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_update_project_environment_example(self):
+        """
+        update_project_environment request example
+        """
+        try:
+            print('\nupdate_project_environment() result:')
+            # begin-update_project_environment
+
+            environment_auth_model = {
+                'method': 'API_KEY',
+                'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
+            }
+
+            input_variable_model = {
+                'resource_group': 'stage',
+                'region': 'us-south',
+            }
+
+            project_compliance_profile_model = {
+                'id': 'some-profile-id',
+                'instance_id': 'some-instance-id',
+                'instance_location': 'us-south',
+                'attachment_id': 'some-attachment-id',
+                'profile_name': 'some-profile-name',
+            }
+
+            environment_definition_properties_model = {
+                'name': 'development',
+                'description': 'The environment \'development\'',
+                'authorizations': environment_auth_model,
+                'inputs': input_variable_model,
+                'compliance_profile': project_compliance_profile_model,
+            }
+
+            response = project_service.update_project_environment(
+                project_id=project_id_link,
+                id=project_id_link,
+                definition=environment_definition_properties_model,
+            )
+            environment = response.get_result()
+
+            print(json.dumps(environment, indent=2))
+
+            # end-update_project_environment
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -248,9 +401,9 @@ class TestProjectV1Examples:
                 project_id=project_id_link,
                 id=config_id_link,
             )
-            project_config_get_response = response.get_result()
+            project_config = response.get_result()
 
-            print(json.dumps(project_config_get_response, indent=2))
+            print(json.dumps(project_config, indent=2))
 
             # end-get_config
 
@@ -266,19 +419,26 @@ class TestProjectV1Examples:
             print('\nupdate_config() result:')
             # begin-update_config
 
-            project_config_input_variable_model = {
-                'name': 'account_id',
-                'value': '$configs[].name[\"account-stage\"].input.account_id',
+            input_variable_model = {
+                'account_id': '$configs[].name[\"account-stage\"].input.account_id',
+                'resource_group': 'stage',
+                'access_tags': '["env:stage"]',
+                'logdna_name': 'Name of the LogDNA stage service instance',
+                'sysdig_name': 'Name of the SysDig stage service instance',
+            }
+
+            project_config_prototype_patch_definition_block_model = {
+                'input': input_variable_model,
             }
 
             response = project_service.update_config(
                 project_id=project_id_link,
                 id=config_id_link,
-                input=[project_config_input_variable_model],
+                definition=project_config_prototype_patch_definition_block_model,
             )
-            project_config_draft_response = response.get_result()
+            project_config = response.get_result()
 
-            print(json.dumps(project_config_draft_response, indent=2))
+            print(json.dumps(project_config, indent=2))
 
             # end-update_config
 
@@ -293,14 +453,18 @@ class TestProjectV1Examples:
         try:
             print('\nforce_approve() result:')
             # begin-force_approve
+
             response = project_service.force_approve(
                 project_id=project_id_link,
                 id=config_id_link,
                 comment='Approving the changes',
             )
-            project_config_get_response = response.get_result()
-            print(json.dumps(project_config_get_response, indent=2))
+            project_config_version = response.get_result()
+
+            print(json.dumps(project_config_version, indent=2))
+
             # end-force_approve
+
         except ApiException as e:
             pytest.fail(str(e))
 
@@ -318,9 +482,9 @@ class TestProjectV1Examples:
                 id=config_id_link,
                 comment='Approving the changes',
             )
-            project_config_get_response = response.get_result()
+            project_config_version = response.get_result()
 
-            print(json.dumps(project_config_get_response, indent=2))
+            print(json.dumps(project_config_version, indent=2))
 
             # end-approve
 
@@ -328,64 +492,88 @@ class TestProjectV1Examples:
             pytest.fail(str(e))
 
     @needscredentials
-    def test_check_config_example(self):
+    def test_validate_config_example(self):
         """
-        check_config request example
+        validate_config request example
         """
         try:
-            print('\ncheck_config() result:')
-            # begin-check_config
+            print('\nvalidate_config() result:')
+            # begin-validate_config
 
-            response = project_service.check_config(
+            response = project_service.validate_config(
                 project_id=project_id_link,
                 id=config_id_link,
             )
-            project_config_get_response = response.get_result()
+            project_config_version = response.get_result()
 
-            print(json.dumps(project_config_get_response, indent=2))
+            print(json.dumps(project_config_version, indent=2))
 
-            # end-check_config
+            # end-validate_config
 
         except ApiException as e:
             pytest.fail(str(e))
 
     @needscredentials
-    def test_install_config_example(self):
+    def test_deploy_config_example(self):
         """
-        install_config request example
+        deploy_config request example
         """
         try:
-            print('\ninstall_config() result:')
-            # begin-install_config
+            print('\ndeploy_config() result:')
+            # begin-deploy_config
 
-            response = project_service.install_config(
+            response = project_service.deploy_config(
                 project_id=project_id_link,
                 id=config_id_link,
             )
-            project_config_get_response = response.get_result()
+            project_config_version = response.get_result()
 
-            print(json.dumps(project_config_get_response, indent=2))
+            print(json.dumps(project_config_version, indent=2))
 
-            # end-install_config
+            # end-deploy_config
 
         except ApiException as e:
             pytest.fail(str(e))
 
     @needscredentials
-    def test_uninstall_config_example(self):
+    def test_undeploy_config_example(self):
         """
-        uninstall_config request example
+        undeploy_config request example
         """
         try:
-            # begin-uninstall_config
+            # begin-undeploy_config
 
-            response = project_service.uninstall_config(
+            response = project_service.undeploy_config(
                 project_id=project_id_link,
                 id=config_id_link,
             )
 
-            # end-uninstall_config
-            print('\nuninstall_config() response status code: ', response.get_status_code())
+            # end-undeploy_config
+            print('\nundeploy_config() response status code: ', response.get_status_code())
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_sync_config_example(self):
+        """
+        sync_config request example
+        """
+        try:
+            # begin-sync_config
+
+            schematics_workspace_model = {
+                'workspace_id': 'us-south.workspace.service.e0106139',
+            }
+
+            response = project_service.sync_config(
+                project_id=project_id_link,
+                id=config_id_link,
+                schematics=schematics_workspace_model,
+            )
+
+            # end-sync_config
+            print('\nsync_config() response status code: ', response.get_status_code())
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -413,46 +601,68 @@ class TestProjectV1Examples:
             pytest.fail(str(e))
 
     @needscredentials
-    def test_list_config_drafts_example(self):
+    def test_list_config_versions_example(self):
         """
-        list_config_drafts request example
+        list_config_versions request example
         """
         try:
-            print('\nlist_config_drafts() result:')
-            # begin-list_config_drafts
+            print('\nlist_config_versions() result:')
+            # begin-list_config_versions
 
-            response = project_service.list_config_drafts(
+            response = project_service.list_config_versions(
                 project_id=project_id_link,
-                config_id=config_id_link,
+                id=config_id_link,
             )
-            project_config_draft_summary_collection = response.get_result()
+            project_config_version_summary_collection = response.get_result()
 
-            print(json.dumps(project_config_draft_summary_collection, indent=2))
+            print(json.dumps(project_config_version_summary_collection, indent=2))
 
-            # end-list_config_drafts
+            # end-list_config_versions
 
         except ApiException as e:
             pytest.fail(str(e))
 
     @needscredentials
-    def test_get_config_draft_example(self):
+    def test_get_config_version_example(self):
         """
-        get_config_draft request example
+        get_config_version request example
         """
         try:
-            print('\nget_config_draft() result:')
-            # begin-get_config_draft
+            print('\nget_config_version() result:')
+            # begin-get_config_version
 
-            response = project_service.get_config_draft(
+            response = project_service.get_config_version(
                 project_id=project_id_link,
-                config_id=config_id_link,
+                id=config_id_link,
                 version=38,
             )
-            project_config_draft_response = response.get_result()
+            project_config_version = response.get_result()
 
-            print(json.dumps(project_config_draft_response, indent=2))
+            print(json.dumps(project_config_version, indent=2))
 
-            # end-get_config_draft
+            # end-get_config_version
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_delete_project_environment_example(self):
+        """
+        delete_project_environment request example
+        """
+        try:
+            print('\ndelete_project_environment() result:')
+            # begin-delete_project_environment
+
+            response = project_service.delete_project_environment(
+                project_id=project_id_link,
+                id=project_id_link,
+            )
+            environment_delete_response = response.get_result()
+
+            print(json.dumps(environment_delete_response, indent=2))
+
+            # end-delete_project_environment
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -475,6 +685,29 @@ class TestProjectV1Examples:
             print(json.dumps(project_config_delete, indent=2))
 
             # end-delete_config
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_delete_config_version_example(self):
+        """
+        delete_config_version request example
+        """
+        try:
+            print('\ndelete_config_version() result:')
+            # begin-delete_config_version
+
+            response = project_service.delete_config_version(
+                project_id=project_id_link,
+                id=config_id_link,
+                version=38,
+            )
+            project_config_delete = response.get_result()
+
+            print(json.dumps(project_config_delete, indent=2))
+
+            # end-delete_config_version
 
         except ApiException as e:
             pytest.fail(str(e))
