@@ -1014,8 +1014,6 @@ class ProjectV1(BaseService):
         self,
         project_id: str,
         id: str,
-        *,
-        x_auth_refresh_token: str = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -1027,7 +1025,6 @@ class ProjectV1(BaseService):
 
         :param str project_id: The unique project ID.
         :param str id: The unique config ID.
-        :param str x_auth_refresh_token: (optional) The IAM refresh token.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `ProjectConfigVersion` object
@@ -1037,9 +1034,7 @@ class ProjectV1(BaseService):
             raise ValueError('project_id must be provided')
         if not id:
             raise ValueError('id must be provided')
-        headers = {
-            'X-Auth-Refresh-Token': x_auth_refresh_token,
-        }
+        headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
             service_version='V1',
@@ -1434,54 +1429,712 @@ class ProjectV1(BaseService):
 ##############################################################################
 
 
-class ActionJobSummary:
+class ActionJobApplyMessagesSummary:
     """
-    The summaries of jobs that were performed on the configuration.
+    The messages of apply jobs on the configuration.
 
-    :attr dict plan_summary: (optional) The summary of the plan jobs on the
-          configuration.
-    :attr dict apply_summary: (optional) The summary of the apply jobs on the
-          configuration.
-    :attr dict destroy_summary: (optional) The summary of the destroy jobs on the
-          configuration.
-    :attr dict message_summary: (optional) The message summaries of jobs on the
-          configuration.
-    :attr dict plan_messages: (optional) The messages of plan jobs on the
-          configuration.
-    :attr dict apply_messages: (optional) The messages of apply jobs on the
-          configuration.
-    :attr dict destroy_messages: (optional) The messages of destroy jobs on the
-          configuration.
+    :attr List[str] error_messages: (optional) The collection of error messages.
+    :attr List[str] sucess_message: (optional) The collection of success messages.
     """
 
     def __init__(
         self,
         *,
-        plan_summary: dict = None,
-        apply_summary: dict = None,
-        destroy_summary: dict = None,
-        message_summary: dict = None,
-        plan_messages: dict = None,
-        apply_messages: dict = None,
-        destroy_messages: dict = None,
+        error_messages: List[str] = None,
+        sucess_message: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ActionJobApplyMessagesSummary object.
+
+        :param List[str] error_messages: (optional) The collection of error
+               messages.
+        :param List[str] sucess_message: (optional) The collection of success
+               messages.
+        """
+        self.error_messages = error_messages
+        self.sucess_message = sucess_message
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobApplyMessagesSummary':
+        """Initialize a ActionJobApplyMessagesSummary object from a json dictionary."""
+        args = {}
+        if 'error_messages' in _dict:
+            args['error_messages'] = _dict.get('error_messages')
+        if 'sucess_message' in _dict:
+            args['sucess_message'] = _dict.get('sucess_message')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobApplyMessagesSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'error_messages') and self.error_messages is not None:
+            _dict['error_messages'] = self.error_messages
+        if hasattr(self, 'sucess_message') and self.sucess_message is not None:
+            _dict['sucess_message'] = self.sucess_message
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobApplyMessagesSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobApplyMessagesSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobApplyMessagesSummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobApplySummary:
+    """
+    The summary of the apply jobs on the configuration.
+
+    :attr int success: (optional) The number of applied resources.
+    :attr int failed: (optional) The number of failed resources.
+    :attr List[str] success_resources: (optional) The collection of successfully
+          applied resources.
+    :attr List[str] failed_resources: (optional) The collection of failed applied
+          resources.
+    """
+
+    def __init__(
+        self,
+        *,
+        success: int = None,
+        failed: int = None,
+        success_resources: List[str] = None,
+        failed_resources: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ActionJobApplySummary object.
+
+        :param int success: (optional) The number of applied resources.
+        :param int failed: (optional) The number of failed resources.
+        :param List[str] success_resources: (optional) The collection of
+               successfully applied resources.
+        :param List[str] failed_resources: (optional) The collection of failed
+               applied resources.
+        """
+        self.success = success
+        self.failed = failed
+        self.success_resources = success_resources
+        self.failed_resources = failed_resources
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobApplySummary':
+        """Initialize a ActionJobApplySummary object from a json dictionary."""
+        args = {}
+        if 'success' in _dict:
+            args['success'] = _dict.get('success')
+        if 'failed' in _dict:
+            args['failed'] = _dict.get('failed')
+        if 'success_resources' in _dict:
+            args['success_resources'] = _dict.get('success_resources')
+        if 'failed_resources' in _dict:
+            args['failed_resources'] = _dict.get('failed_resources')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobApplySummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'success') and self.success is not None:
+            _dict['success'] = self.success
+        if hasattr(self, 'failed') and self.failed is not None:
+            _dict['failed'] = self.failed
+        if hasattr(self, 'success_resources') and self.success_resources is not None:
+            _dict['success_resources'] = self.success_resources
+        if hasattr(self, 'failed_resources') and self.failed_resources is not None:
+            _dict['failed_resources'] = self.failed_resources
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobApplySummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobApplySummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobApplySummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobDestroyMessagesSummary:
+    """
+    The messages of destroy jobs on the configuration.
+
+    :attr List[str] error_messages: (optional) The collection of error messages.
+    """
+
+    def __init__(
+        self,
+        *,
+        error_messages: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ActionJobDestroyMessagesSummary object.
+
+        :param List[str] error_messages: (optional) The collection of error
+               messages.
+        """
+        self.error_messages = error_messages
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobDestroyMessagesSummary':
+        """Initialize a ActionJobDestroyMessagesSummary object from a json dictionary."""
+        args = {}
+        if 'error_messages' in _dict:
+            args['error_messages'] = _dict.get('error_messages')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobDestroyMessagesSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'error_messages') and self.error_messages is not None:
+            _dict['error_messages'] = self.error_messages
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobDestroyMessagesSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobDestroyMessagesSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobDestroyMessagesSummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobDestroySummary:
+    """
+    The summary of the destroy jobs on the configuration.
+
+    :attr int success: (optional) The number of destroyed resources.
+    :attr int failed: (optional) The number of failed resources.
+    :attr int tainted: (optional) The number of tainted resources.
+    :attr ActionJobDestroySummaryResources resources: (optional) The destroy
+          resources results from the job.
+    """
+
+    def __init__(
+        self,
+        *,
+        success: int = None,
+        failed: int = None,
+        tainted: int = None,
+        resources: 'ActionJobDestroySummaryResources' = None,
+    ) -> None:
+        """
+        Initialize a ActionJobDestroySummary object.
+
+        :param int success: (optional) The number of destroyed resources.
+        :param int failed: (optional) The number of failed resources.
+        :param int tainted: (optional) The number of tainted resources.
+        :param ActionJobDestroySummaryResources resources: (optional) The destroy
+               resources results from the job.
+        """
+        self.success = success
+        self.failed = failed
+        self.tainted = tainted
+        self.resources = resources
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobDestroySummary':
+        """Initialize a ActionJobDestroySummary object from a json dictionary."""
+        args = {}
+        if 'success' in _dict:
+            args['success'] = _dict.get('success')
+        if 'failed' in _dict:
+            args['failed'] = _dict.get('failed')
+        if 'tainted' in _dict:
+            args['tainted'] = _dict.get('tainted')
+        if 'resources' in _dict:
+            args['resources'] = ActionJobDestroySummaryResources.from_dict(_dict.get('resources'))
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobDestroySummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'success') and self.success is not None:
+            _dict['success'] = self.success
+        if hasattr(self, 'failed') and self.failed is not None:
+            _dict['failed'] = self.failed
+        if hasattr(self, 'tainted') and self.tainted is not None:
+            _dict['tainted'] = self.tainted
+        if hasattr(self, 'resources') and self.resources is not None:
+            if isinstance(self.resources, dict):
+                _dict['resources'] = self.resources
+            else:
+                _dict['resources'] = self.resources.to_dict()
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobDestroySummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobDestroySummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobDestroySummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobDestroySummaryResources:
+    """
+    The destroy resources results from the job.
+
+    :attr List[str] success: (optional) The collection of destroyed resources.
+    :attr List[str] failed: (optional) The collection of failed resources.
+    :attr List[str] tainted: (optional) The collection of tainted resources.
+    """
+
+    def __init__(
+        self,
+        *,
+        success: List[str] = None,
+        failed: List[str] = None,
+        tainted: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ActionJobDestroySummaryResources object.
+
+        :param List[str] success: (optional) The collection of destroyed resources.
+        :param List[str] failed: (optional) The collection of failed resources.
+        :param List[str] tainted: (optional) The collection of tainted resources.
+        """
+        self.success = success
+        self.failed = failed
+        self.tainted = tainted
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobDestroySummaryResources':
+        """Initialize a ActionJobDestroySummaryResources object from a json dictionary."""
+        args = {}
+        if 'success' in _dict:
+            args['success'] = _dict.get('success')
+        if 'failed' in _dict:
+            args['failed'] = _dict.get('failed')
+        if 'tainted' in _dict:
+            args['tainted'] = _dict.get('tainted')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobDestroySummaryResources object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'success') and self.success is not None:
+            _dict['success'] = self.success
+        if hasattr(self, 'failed') and self.failed is not None:
+            _dict['failed'] = self.failed
+        if hasattr(self, 'tainted') and self.tainted is not None:
+            _dict['tainted'] = self.tainted
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobDestroySummaryResources object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobDestroySummaryResources') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobDestroySummaryResources') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobMessageSummary:
+    """
+    The message summaries of jobs on the configuration.
+
+    :attr int info: (optional) The number of info messages.
+    :attr int debug: (optional) The number of debug messages.
+    :attr int error: (optional) The number of error messages.
+    """
+
+    def __init__(
+        self,
+        *,
+        info: int = None,
+        debug: int = None,
+        error: int = None,
+    ) -> None:
+        """
+        Initialize a ActionJobMessageSummary object.
+
+        :param int info: (optional) The number of info messages.
+        :param int debug: (optional) The number of debug messages.
+        :param int error: (optional) The number of error messages.
+        """
+        self.info = info
+        self.debug = debug
+        self.error = error
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobMessageSummary':
+        """Initialize a ActionJobMessageSummary object from a json dictionary."""
+        args = {}
+        if 'info' in _dict:
+            args['info'] = _dict.get('info')
+        if 'debug' in _dict:
+            args['debug'] = _dict.get('debug')
+        if 'error' in _dict:
+            args['error'] = _dict.get('error')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobMessageSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'info') and self.info is not None:
+            _dict['info'] = self.info
+        if hasattr(self, 'debug') and self.debug is not None:
+            _dict['debug'] = self.debug
+        if hasattr(self, 'error') and self.error is not None:
+            _dict['error'] = self.error
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobMessageSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobMessageSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobMessageSummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobPlanMessagesSummary:
+    """
+    The plan messages on the configuration.
+
+    :attr List[str] error_messages: (optional) The collection of error messages.
+    :attr List[str] sucess_message: (optional) The collection of success messages.
+    :attr List[str] update_message: (optional) The collection of update messages.
+    :attr List[str] destroy_message: (optional) The collection of destroy messages.
+    """
+
+    def __init__(
+        self,
+        *,
+        error_messages: List[str] = None,
+        sucess_message: List[str] = None,
+        update_message: List[str] = None,
+        destroy_message: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ActionJobPlanMessagesSummary object.
+
+        :param List[str] error_messages: (optional) The collection of error
+               messages.
+        :param List[str] sucess_message: (optional) The collection of success
+               messages.
+        :param List[str] update_message: (optional) The collection of update
+               messages.
+        :param List[str] destroy_message: (optional) The collection of destroy
+               messages.
+        """
+        self.error_messages = error_messages
+        self.sucess_message = sucess_message
+        self.update_message = update_message
+        self.destroy_message = destroy_message
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobPlanMessagesSummary':
+        """Initialize a ActionJobPlanMessagesSummary object from a json dictionary."""
+        args = {}
+        if 'error_messages' in _dict:
+            args['error_messages'] = _dict.get('error_messages')
+        if 'sucess_message' in _dict:
+            args['sucess_message'] = _dict.get('sucess_message')
+        if 'update_message' in _dict:
+            args['update_message'] = _dict.get('update_message')
+        if 'destroy_message' in _dict:
+            args['destroy_message'] = _dict.get('destroy_message')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobPlanMessagesSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'error_messages') and self.error_messages is not None:
+            _dict['error_messages'] = self.error_messages
+        if hasattr(self, 'sucess_message') and self.sucess_message is not None:
+            _dict['sucess_message'] = self.sucess_message
+        if hasattr(self, 'update_message') and self.update_message is not None:
+            _dict['update_message'] = self.update_message
+        if hasattr(self, 'destroy_message') and self.destroy_message is not None:
+            _dict['destroy_message'] = self.destroy_message
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobPlanMessagesSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobPlanMessagesSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobPlanMessagesSummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobPlanSummary:
+    """
+    The summary of the plan jobs on the configuration.
+
+    :attr int add: (optional) The number of resources to be added.
+    :attr int failed: (optional) The number of resources that failed during the plan
+          job.
+    :attr int update: (optional) The number of resources to be updated.
+    :attr int destroy: (optional) The number of resources to be destroyed.
+    :attr List[str] add_resources: (optional) The collection of planned added
+          resources.
+    :attr List[str] failed_resources: (optional) The collection of failed planned
+          resources.
+    :attr List[str] updated_resources: (optional) The collection of planned updated
+          resources.
+    :attr List[str] destroy_resources: (optional) The collection of planned destroy
+          resources.
+    """
+
+    def __init__(
+        self,
+        *,
+        add: int = None,
+        failed: int = None,
+        update: int = None,
+        destroy: int = None,
+        add_resources: List[str] = None,
+        failed_resources: List[str] = None,
+        updated_resources: List[str] = None,
+        destroy_resources: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ActionJobPlanSummary object.
+
+        :param int add: (optional) The number of resources to be added.
+        :param int failed: (optional) The number of resources that failed during
+               the plan job.
+        :param int update: (optional) The number of resources to be updated.
+        :param int destroy: (optional) The number of resources to be destroyed.
+        :param List[str] add_resources: (optional) The collection of planned added
+               resources.
+        :param List[str] failed_resources: (optional) The collection of failed
+               planned resources.
+        :param List[str] updated_resources: (optional) The collection of planned
+               updated resources.
+        :param List[str] destroy_resources: (optional) The collection of planned
+               destroy resources.
+        """
+        self.add = add
+        self.failed = failed
+        self.update = update
+        self.destroy = destroy
+        self.add_resources = add_resources
+        self.failed_resources = failed_resources
+        self.updated_resources = updated_resources
+        self.destroy_resources = destroy_resources
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ActionJobPlanSummary':
+        """Initialize a ActionJobPlanSummary object from a json dictionary."""
+        args = {}
+        if 'add' in _dict:
+            args['add'] = _dict.get('add')
+        if 'failed' in _dict:
+            args['failed'] = _dict.get('failed')
+        if 'update' in _dict:
+            args['update'] = _dict.get('update')
+        if 'destroy' in _dict:
+            args['destroy'] = _dict.get('destroy')
+        if 'add_resources' in _dict:
+            args['add_resources'] = _dict.get('add_resources')
+        if 'failed_resources' in _dict:
+            args['failed_resources'] = _dict.get('failed_resources')
+        if 'updated_resources' in _dict:
+            args['updated_resources'] = _dict.get('updated_resources')
+        if 'destroy_resources' in _dict:
+            args['destroy_resources'] = _dict.get('destroy_resources')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ActionJobPlanSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'add') and self.add is not None:
+            _dict['add'] = self.add
+        if hasattr(self, 'failed') and self.failed is not None:
+            _dict['failed'] = self.failed
+        if hasattr(self, 'update') and self.update is not None:
+            _dict['update'] = self.update
+        if hasattr(self, 'destroy') and self.destroy is not None:
+            _dict['destroy'] = self.destroy
+        if hasattr(self, 'add_resources') and self.add_resources is not None:
+            _dict['add_resources'] = self.add_resources
+        if hasattr(self, 'failed_resources') and self.failed_resources is not None:
+            _dict['failed_resources'] = self.failed_resources
+        if hasattr(self, 'updated_resources') and self.updated_resources is not None:
+            _dict['updated_resources'] = self.updated_resources
+        if hasattr(self, 'destroy_resources') and self.destroy_resources is not None:
+            _dict['destroy_resources'] = self.destroy_resources
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ActionJobPlanSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ActionJobPlanSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ActionJobPlanSummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ActionJobSummary:
+    """
+    The summaries of jobs that were performed on the configuration.
+
+    :attr ActionJobPlanSummary plan_summary: (optional) The summary of the plan jobs
+          on the configuration.
+    :attr ActionJobApplySummary apply_summary: (optional) The summary of the apply
+          jobs on the configuration.
+    :attr ActionJobDestroySummary destroy_summary: (optional) The summary of the
+          destroy jobs on the configuration.
+    :attr ActionJobMessageSummary message_summary: (optional) The message summaries
+          of jobs on the configuration.
+    :attr ActionJobPlanMessagesSummary plan_messages: (optional) The plan messages
+          on the configuration.
+    :attr ActionJobApplyMessagesSummary apply_messages: (optional) The messages of
+          apply jobs on the configuration.
+    :attr ActionJobDestroyMessagesSummary destroy_messages: (optional) The messages
+          of destroy jobs on the configuration.
+    """
+
+    def __init__(
+        self,
+        *,
+        plan_summary: 'ActionJobPlanSummary' = None,
+        apply_summary: 'ActionJobApplySummary' = None,
+        destroy_summary: 'ActionJobDestroySummary' = None,
+        message_summary: 'ActionJobMessageSummary' = None,
+        plan_messages: 'ActionJobPlanMessagesSummary' = None,
+        apply_messages: 'ActionJobApplyMessagesSummary' = None,
+        destroy_messages: 'ActionJobDestroyMessagesSummary' = None,
     ) -> None:
         """
         Initialize a ActionJobSummary object.
 
-        :param dict plan_summary: (optional) The summary of the plan jobs on the
-               configuration.
-        :param dict apply_summary: (optional) The summary of the apply jobs on the
-               configuration.
-        :param dict destroy_summary: (optional) The summary of the destroy jobs on
-               the configuration.
-        :param dict message_summary: (optional) The message summaries of jobs on
-               the configuration.
-        :param dict plan_messages: (optional) The messages of plan jobs on the
-               configuration.
-        :param dict apply_messages: (optional) The messages of apply jobs on the
-               configuration.
-        :param dict destroy_messages: (optional) The messages of destroy jobs on
-               the configuration.
+        :param ActionJobPlanSummary plan_summary: (optional) The summary of the
+               plan jobs on the configuration.
+        :param ActionJobApplySummary apply_summary: (optional) The summary of the
+               apply jobs on the configuration.
+        :param ActionJobDestroySummary destroy_summary: (optional) The summary of
+               the destroy jobs on the configuration.
+        :param ActionJobMessageSummary message_summary: (optional) The message
+               summaries of jobs on the configuration.
+        :param ActionJobPlanMessagesSummary plan_messages: (optional) The plan
+               messages on the configuration.
+        :param ActionJobApplyMessagesSummary apply_messages: (optional) The
+               messages of apply jobs on the configuration.
+        :param ActionJobDestroyMessagesSummary destroy_messages: (optional) The
+               messages of destroy jobs on the configuration.
         """
         self.plan_summary = plan_summary
         self.apply_summary = apply_summary
@@ -1496,19 +2149,19 @@ class ActionJobSummary:
         """Initialize a ActionJobSummary object from a json dictionary."""
         args = {}
         if 'plan_summary' in _dict:
-            args['plan_summary'] = _dict.get('plan_summary')
+            args['plan_summary'] = ActionJobPlanSummary.from_dict(_dict.get('plan_summary'))
         if 'apply_summary' in _dict:
-            args['apply_summary'] = _dict.get('apply_summary')
+            args['apply_summary'] = ActionJobApplySummary.from_dict(_dict.get('apply_summary'))
         if 'destroy_summary' in _dict:
-            args['destroy_summary'] = _dict.get('destroy_summary')
+            args['destroy_summary'] = ActionJobDestroySummary.from_dict(_dict.get('destroy_summary'))
         if 'message_summary' in _dict:
-            args['message_summary'] = _dict.get('message_summary')
+            args['message_summary'] = ActionJobMessageSummary.from_dict(_dict.get('message_summary'))
         if 'plan_messages' in _dict:
-            args['plan_messages'] = _dict.get('plan_messages')
+            args['plan_messages'] = ActionJobPlanMessagesSummary.from_dict(_dict.get('plan_messages'))
         if 'apply_messages' in _dict:
-            args['apply_messages'] = _dict.get('apply_messages')
+            args['apply_messages'] = ActionJobApplyMessagesSummary.from_dict(_dict.get('apply_messages'))
         if 'destroy_messages' in _dict:
-            args['destroy_messages'] = _dict.get('destroy_messages')
+            args['destroy_messages'] = ActionJobDestroyMessagesSummary.from_dict(_dict.get('destroy_messages'))
         return cls(**args)
 
     @classmethod
@@ -1520,19 +2173,40 @@ class ActionJobSummary:
         """Return a json dictionary representing this model."""
         _dict = {}
         if hasattr(self, 'plan_summary') and self.plan_summary is not None:
-            _dict['plan_summary'] = self.plan_summary
+            if isinstance(self.plan_summary, dict):
+                _dict['plan_summary'] = self.plan_summary
+            else:
+                _dict['plan_summary'] = self.plan_summary.to_dict()
         if hasattr(self, 'apply_summary') and self.apply_summary is not None:
-            _dict['apply_summary'] = self.apply_summary
+            if isinstance(self.apply_summary, dict):
+                _dict['apply_summary'] = self.apply_summary
+            else:
+                _dict['apply_summary'] = self.apply_summary.to_dict()
         if hasattr(self, 'destroy_summary') and self.destroy_summary is not None:
-            _dict['destroy_summary'] = self.destroy_summary
+            if isinstance(self.destroy_summary, dict):
+                _dict['destroy_summary'] = self.destroy_summary
+            else:
+                _dict['destroy_summary'] = self.destroy_summary.to_dict()
         if hasattr(self, 'message_summary') and self.message_summary is not None:
-            _dict['message_summary'] = self.message_summary
+            if isinstance(self.message_summary, dict):
+                _dict['message_summary'] = self.message_summary
+            else:
+                _dict['message_summary'] = self.message_summary.to_dict()
         if hasattr(self, 'plan_messages') and self.plan_messages is not None:
-            _dict['plan_messages'] = self.plan_messages
+            if isinstance(self.plan_messages, dict):
+                _dict['plan_messages'] = self.plan_messages
+            else:
+                _dict['plan_messages'] = self.plan_messages.to_dict()
         if hasattr(self, 'apply_messages') and self.apply_messages is not None:
-            _dict['apply_messages'] = self.apply_messages
+            if isinstance(self.apply_messages, dict):
+                _dict['apply_messages'] = self.apply_messages
+            else:
+                _dict['apply_messages'] = self.apply_messages.to_dict()
         if hasattr(self, 'destroy_messages') and self.destroy_messages is not None:
-            _dict['destroy_messages'] = self.destroy_messages
+            if isinstance(self.destroy_messages, dict):
+                _dict['destroy_messages'] = self.destroy_messages
+            else:
+                _dict['destroy_messages'] = self.destroy_messages.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -1717,8 +2391,6 @@ class Environment:
     :attr datetime created_at: A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
-    :attr str project_crn: An IBM Cloud resource name, which uniquely identifies a
-          resource.
     :attr str target_account: (optional) The target account ID derived from the
           authentication block values.
     :attr datetime user_modified_at: A date and time value in the format
@@ -1733,7 +2405,6 @@ class Environment:
         id: str,
         project_id: str,
         created_at: datetime,
-        project_crn: str,
         user_modified_at: datetime,
         definition: 'EnvironmentDefinitionRequiredProperties',
         *,
@@ -1747,8 +2418,6 @@ class Environment:
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
-        :param str project_crn: An IBM Cloud resource name, which uniquely
-               identifies a resource.
         :param datetime user_modified_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
@@ -1760,7 +2429,6 @@ class Environment:
         self.id = id
         self.project_id = project_id
         self.created_at = created_at
-        self.project_crn = project_crn
         self.target_account = target_account
         self.user_modified_at = user_modified_at
         self.definition = definition
@@ -1781,10 +2449,6 @@ class Environment:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
         else:
             raise ValueError('Required property \'created_at\' not present in Environment JSON')
-        if 'project_crn' in _dict:
-            args['project_crn'] = _dict.get('project_crn')
-        else:
-            raise ValueError('Required property \'project_crn\' not present in Environment JSON')
         if 'target_account' in _dict:
             args['target_account'] = _dict.get('target_account')
         if 'user_modified_at' in _dict:
@@ -1811,8 +2475,6 @@ class Environment:
             _dict['project_id'] = self.project_id
         if hasattr(self, 'created_at') and self.created_at is not None:
             _dict['created_at'] = datetime_to_string(self.created_at)
-        if hasattr(self, 'project_crn') and self.project_crn is not None:
-            _dict['project_crn'] = self.project_crn
         if hasattr(self, 'target_account') and self.target_account is not None:
             _dict['target_account'] = self.target_account
         if hasattr(self, 'user_modified_at') and self.user_modified_at is not None:
@@ -1839,82 +2501,6 @@ class Environment:
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: 'Environment') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
-
-
-class EnvironmentAuth:
-    """
-    The authorizations for the environment.
-
-    :attr str trusted_profile_id: (optional) The unique ID.
-    :attr str method: (optional) The authorization for a configuration. You can
-          authorize by using a trusted profile or an API key in Secrets Manager.
-    :attr str api_key: (optional) The IBM Cloud API Key.
-    """
-
-    def __init__(
-        self,
-        *,
-        trusted_profile_id: str = None,
-        method: str = None,
-        api_key: str = None,
-    ) -> None:
-        """
-        Initialize a EnvironmentAuth object.
-
-        :param str trusted_profile_id: (optional) The unique ID.
-        :param str method: (optional) The authorization for a configuration. You
-               can authorize by using a trusted profile or an API key in Secrets Manager.
-        :param str api_key: (optional) The IBM Cloud API Key.
-        """
-        self.trusted_profile_id = trusted_profile_id
-        self.method = method
-        self.api_key = api_key
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'EnvironmentAuth':
-        """Initialize a EnvironmentAuth object from a json dictionary."""
-        args = {}
-        if 'trusted_profile_id' in _dict:
-            args['trusted_profile_id'] = _dict.get('trusted_profile_id')
-        if 'method' in _dict:
-            args['method'] = _dict.get('method')
-        if 'api_key' in _dict:
-            args['api_key'] = _dict.get('api_key')
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a EnvironmentAuth object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'trusted_profile_id') and self.trusted_profile_id is not None:
-            _dict['trusted_profile_id'] = self.trusted_profile_id
-        if hasattr(self, 'method') and self.method is not None:
-            _dict['method'] = self.method
-        if hasattr(self, 'api_key') and self.api_key is not None:
-            _dict['api_key'] = self.api_key
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this EnvironmentAuth object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'EnvironmentAuth') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'EnvironmentAuth') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -1991,8 +2577,8 @@ class EnvironmentDefinitionProperties:
 
     :attr str name: (optional) The name of the environment.
     :attr str description: (optional) The description of the environment.
-    :attr EnvironmentAuth authorizations: (optional) The authorizations for the
-          environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
@@ -2004,7 +2590,7 @@ class EnvironmentDefinitionProperties:
         *,
         name: str = None,
         description: str = None,
-        authorizations: 'EnvironmentAuth' = None,
+        authorizations: 'ProjectConfigAuth' = None,
         inputs: 'InputVariable' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
     ) -> None:
@@ -2013,8 +2599,9 @@ class EnvironmentDefinitionProperties:
 
         :param str name: (optional) The name of the environment.
         :param str description: (optional) The description of the environment.
-        :param EnvironmentAuth authorizations: (optional) The authorizations for
-               the environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
         :param InputVariable inputs: (optional) The input variables for
                configuration definition and environment.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
@@ -2035,7 +2622,7 @@ class EnvironmentDefinitionProperties:
         if 'description' in _dict:
             args['description'] = _dict.get('description')
         if 'authorizations' in _dict:
-            args['authorizations'] = EnvironmentAuth.from_dict(_dict.get('authorizations'))
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'inputs' in _dict:
             args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
         if 'compliance_profile' in _dict:
@@ -2096,8 +2683,8 @@ class EnvironmentDefinitionRequiredProperties:
 
     :attr str name: The name of the environment.
     :attr str description: (optional) The description of the environment.
-    :attr EnvironmentAuth authorizations: (optional) The authorizations for the
-          environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
@@ -2109,7 +2696,7 @@ class EnvironmentDefinitionRequiredProperties:
         name: str,
         *,
         description: str = None,
-        authorizations: 'EnvironmentAuth' = None,
+        authorizations: 'ProjectConfigAuth' = None,
         inputs: 'InputVariable' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
     ) -> None:
@@ -2118,8 +2705,9 @@ class EnvironmentDefinitionRequiredProperties:
 
         :param str name: The name of the environment.
         :param str description: (optional) The description of the environment.
-        :param EnvironmentAuth authorizations: (optional) The authorizations for
-               the environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
         :param InputVariable inputs: (optional) The input variables for
                configuration definition and environment.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
@@ -2142,7 +2730,7 @@ class EnvironmentDefinitionRequiredProperties:
         if 'description' in _dict:
             args['description'] = _dict.get('description')
         if 'authorizations' in _dict:
-            args['authorizations'] = EnvironmentAuth.from_dict(_dict.get('authorizations'))
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'inputs' in _dict:
             args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
         if 'compliance_profile' in _dict:
@@ -2391,7 +2979,7 @@ class LastActionWithSummary:
     """
     The action job performed on the project configuration.
 
-    :attr str href: (optional) A relative URL.
+    :attr str href: A URL.
     :attr str result: (optional) The result of the last action.
     :attr PrePostActionJobWithIdAndSummary pre_job: (optional) A brief summary of a
           pre/post action.
@@ -2402,8 +2990,8 @@ class LastActionWithSummary:
 
     def __init__(
         self,
+        href: str,
         *,
-        href: str = None,
         result: str = None,
         pre_job: 'PrePostActionJobWithIdAndSummary' = None,
         post_job: 'PrePostActionJobWithIdAndSummary' = None,
@@ -2412,7 +3000,7 @@ class LastActionWithSummary:
         """
         Initialize a LastActionWithSummary object.
 
-        :param str href: (optional) A relative URL.
+        :param str href: A URL.
         :param str result: (optional) The result of the last action.
         :param PrePostActionJobWithIdAndSummary pre_job: (optional) A brief summary
                of a pre/post action.
@@ -2433,6 +3021,8 @@ class LastActionWithSummary:
         args = {}
         if 'href' in _dict:
             args['href'] = _dict.get('href')
+        else:
+            raise ValueError('Required property \'href\' not present in LastActionWithSummary JSON')
         if 'result' in _dict:
             args['result'] = _dict.get('result')
         if 'pre_job' in _dict:
@@ -2504,7 +3094,7 @@ class LastValidatedActionWithSummary:
     """
     The action job performed on the project configuration.
 
-    :attr str href: (optional) A relative URL.
+    :attr str href: A URL.
     :attr str result: (optional) The result of the last action.
     :attr PrePostActionJobWithIdAndSummary pre_job: (optional) A brief summary of a
           pre/post action.
@@ -2520,8 +3110,8 @@ class LastValidatedActionWithSummary:
 
     def __init__(
         self,
+        href: str,
         *,
-        href: str = None,
         result: str = None,
         pre_job: 'PrePostActionJobWithIdAndSummary' = None,
         post_job: 'PrePostActionJobWithIdAndSummary' = None,
@@ -2532,7 +3122,7 @@ class LastValidatedActionWithSummary:
         """
         Initialize a LastValidatedActionWithSummary object.
 
-        :param str href: (optional) A relative URL.
+        :param str href: A URL.
         :param str result: (optional) The result of the last action.
         :param PrePostActionJobWithIdAndSummary pre_job: (optional) A brief summary
                of a pre/post action.
@@ -2560,6 +3150,8 @@ class LastValidatedActionWithSummary:
         args = {}
         if 'href' in _dict:
             args['href'] = _dict.get('href')
+        else:
+            raise ValueError('Required property \'href\' not present in LastValidatedActionWithSummary JSON')
         if 'result' in _dict:
             args['result'] = _dict.get('result')
         if 'pre_job' in _dict:
@@ -2723,7 +3315,7 @@ class PaginationLink:
     """
     A pagination link.
 
-    :attr str href: A relative URL.
+    :attr str href: A URL.
     """
 
     def __init__(
@@ -2733,7 +3325,7 @@ class PaginationLink:
         """
         Initialize a PaginationLink object.
 
-        :param str href: A relative URL.
+        :param str href: A URL.
         """
         self.href = href
 
@@ -3469,9 +4061,6 @@ class ProjectConfig:
           configuration is draft, or active.
     :attr List[object] needs_attention_state: (optional) The needs attention state
           of a configuration.
-    :attr str state: The state of the configuration.
-    :attr bool update_available: The flag that indicates whether a configuration
-          update is available.
     :attr datetime created_at: (optional) A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
@@ -3480,19 +4069,24 @@ class ProjectConfig:
           format as specified by RFC 3339.
     :attr ProjectConfigMetadataLastApproved last_approved: (optional) The last
           approved metadata of the configuration.
-    :attr datetime last_save: (optional) A date and time value in the format
+    :attr datetime last_saved_at: (optional) A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
-    :attr dict references: (optional) The references used in the config to resolve
-          input values.
     :attr LastValidatedActionWithSummary last_validated: (optional) The action job
           performed on the project configuration.
     :attr LastActionWithSummary last_deployed: (optional) The action job performed
           on the project configuration.
     :attr LastActionWithSummary last_undeployed: (optional) The action job performed
           on the project configuration.
+    :attr List[OutputValue] outputs: (optional) The outputs of a Schematics template
+          property.
+    :attr dict references: (optional) The references used in the config to resolve
+          input values.
     :attr SchematicsWorkspace schematics: (optional) A schematics workspace
           associated to a project configuration.
+    :attr str state: The state of the configuration.
+    :attr bool update_available: The flag that indicates whether a configuration
+          update is available.
     :attr ProjectConfigResponseDefinition definition: The type and output of a
           project configuration.
     :attr ProjectConfigVersionSummary approved_version: (optional) The project
@@ -3515,11 +4109,12 @@ class ProjectConfig:
         created_at: datetime = None,
         user_modified_at: datetime = None,
         last_approved: 'ProjectConfigMetadataLastApproved' = None,
-        last_save: datetime = None,
-        references: dict = None,
+        last_saved_at: datetime = None,
         last_validated: 'LastValidatedActionWithSummary' = None,
         last_deployed: 'LastActionWithSummary' = None,
         last_undeployed: 'LastActionWithSummary' = None,
+        outputs: List['OutputValue'] = None,
+        references: dict = None,
         schematics: 'SchematicsWorkspace' = None,
         approved_version: 'ProjectConfigVersionSummary' = None,
         deployed_version: 'ProjectConfigVersionSummary' = None,
@@ -3548,17 +4143,19 @@ class ProjectConfig:
                and time format as specified by RFC 3339.
         :param ProjectConfigMetadataLastApproved last_approved: (optional) The last
                approved metadata of the configuration.
-        :param datetime last_save: (optional) A date and time value in the format
-               YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
-               time format as specified by RFC 3339.
-        :param dict references: (optional) The references used in the config to
-               resolve input values.
+        :param datetime last_saved_at: (optional) A date and time value in the
+               format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date
+               and time format as specified by RFC 3339.
         :param LastValidatedActionWithSummary last_validated: (optional) The action
                job performed on the project configuration.
         :param LastActionWithSummary last_deployed: (optional) The action job
                performed on the project configuration.
         :param LastActionWithSummary last_undeployed: (optional) The action job
                performed on the project configuration.
+        :param List[OutputValue] outputs: (optional) The outputs of a Schematics
+               template property.
+        :param dict references: (optional) The references used in the config to
+               resolve input values.
         :param SchematicsWorkspace schematics: (optional) A schematics workspace
                associated to a project configuration.
         :param ProjectConfigVersionSummary approved_version: (optional) The project
@@ -3571,17 +4168,18 @@ class ProjectConfig:
         self.version = version
         self.is_draft = is_draft
         self.needs_attention_state = needs_attention_state
-        self.state = state
-        self.update_available = update_available
         self.created_at = created_at
         self.user_modified_at = user_modified_at
         self.last_approved = last_approved
-        self.last_save = last_save
-        self.references = references
+        self.last_saved_at = last_saved_at
         self.last_validated = last_validated
         self.last_deployed = last_deployed
         self.last_undeployed = last_undeployed
+        self.outputs = outputs
+        self.references = references
         self.schematics = schematics
+        self.state = state
+        self.update_available = update_available
         self.definition = definition
         self.approved_version = approved_version
         self.deployed_version = deployed_version
@@ -3608,6 +4206,26 @@ class ProjectConfig:
             raise ValueError('Required property \'is_draft\' not present in ProjectConfig JSON')
         if 'needs_attention_state' in _dict:
             args['needs_attention_state'] = _dict.get('needs_attention_state')
+        if 'created_at' in _dict:
+            args['created_at'] = string_to_datetime(_dict.get('created_at'))
+        if 'user_modified_at' in _dict:
+            args['user_modified_at'] = string_to_datetime(_dict.get('user_modified_at'))
+        if 'last_approved' in _dict:
+            args['last_approved'] = ProjectConfigMetadataLastApproved.from_dict(_dict.get('last_approved'))
+        if 'last_saved_at' in _dict:
+            args['last_saved_at'] = string_to_datetime(_dict.get('last_saved_at'))
+        if 'last_validated' in _dict:
+            args['last_validated'] = LastValidatedActionWithSummary.from_dict(_dict.get('last_validated'))
+        if 'last_deployed' in _dict:
+            args['last_deployed'] = LastActionWithSummary.from_dict(_dict.get('last_deployed'))
+        if 'last_undeployed' in _dict:
+            args['last_undeployed'] = LastActionWithSummary.from_dict(_dict.get('last_undeployed'))
+        if 'outputs' in _dict:
+            args['outputs'] = [OutputValue.from_dict(v) for v in _dict.get('outputs')]
+        if 'references' in _dict:
+            args['references'] = _dict.get('references')
+        if 'schematics' in _dict:
+            args['schematics'] = SchematicsWorkspace.from_dict(_dict.get('schematics'))
         if 'state' in _dict:
             args['state'] = _dict.get('state')
         else:
@@ -3616,24 +4234,6 @@ class ProjectConfig:
             args['update_available'] = _dict.get('update_available')
         else:
             raise ValueError('Required property \'update_available\' not present in ProjectConfig JSON')
-        if 'created_at' in _dict:
-            args['created_at'] = string_to_datetime(_dict.get('created_at'))
-        if 'user_modified_at' in _dict:
-            args['user_modified_at'] = string_to_datetime(_dict.get('user_modified_at'))
-        if 'last_approved' in _dict:
-            args['last_approved'] = ProjectConfigMetadataLastApproved.from_dict(_dict.get('last_approved'))
-        if 'last_save' in _dict:
-            args['last_save'] = string_to_datetime(_dict.get('last_save'))
-        if 'references' in _dict:
-            args['references'] = _dict.get('references')
-        if 'last_validated' in _dict:
-            args['last_validated'] = LastValidatedActionWithSummary.from_dict(_dict.get('last_validated'))
-        if 'last_deployed' in _dict:
-            args['last_deployed'] = LastActionWithSummary.from_dict(_dict.get('last_deployed'))
-        if 'last_undeployed' in _dict:
-            args['last_undeployed'] = LastActionWithSummary.from_dict(_dict.get('last_undeployed'))
-        if 'schematics' in _dict:
-            args['schematics'] = SchematicsWorkspace.from_dict(_dict.get('schematics'))
         if 'definition' in _dict:
             args['definition'] = ProjectConfigResponseDefinition.from_dict(_dict.get('definition'))
         else:
@@ -3662,10 +4262,6 @@ class ProjectConfig:
             _dict['is_draft'] = self.is_draft
         if hasattr(self, 'needs_attention_state') and self.needs_attention_state is not None:
             _dict['needs_attention_state'] = self.needs_attention_state
-        if hasattr(self, 'state') and self.state is not None:
-            _dict['state'] = self.state
-        if hasattr(self, 'update_available') and self.update_available is not None:
-            _dict['update_available'] = self.update_available
         if hasattr(self, 'created_at') and self.created_at is not None:
             _dict['created_at'] = datetime_to_string(self.created_at)
         if hasattr(self, 'user_modified_at') and self.user_modified_at is not None:
@@ -3675,10 +4271,8 @@ class ProjectConfig:
                 _dict['last_approved'] = self.last_approved
             else:
                 _dict['last_approved'] = self.last_approved.to_dict()
-        if hasattr(self, 'last_save') and self.last_save is not None:
-            _dict['last_save'] = datetime_to_string(self.last_save)
-        if hasattr(self, 'references') and self.references is not None:
-            _dict['references'] = self.references
+        if hasattr(self, 'last_saved_at') and self.last_saved_at is not None:
+            _dict['last_saved_at'] = datetime_to_string(self.last_saved_at)
         if hasattr(self, 'last_validated') and self.last_validated is not None:
             if isinstance(self.last_validated, dict):
                 _dict['last_validated'] = self.last_validated
@@ -3694,11 +4288,25 @@ class ProjectConfig:
                 _dict['last_undeployed'] = self.last_undeployed
             else:
                 _dict['last_undeployed'] = self.last_undeployed.to_dict()
+        if hasattr(self, 'outputs') and self.outputs is not None:
+            outputs_list = []
+            for v in self.outputs:
+                if isinstance(v, dict):
+                    outputs_list.append(v)
+                else:
+                    outputs_list.append(v.to_dict())
+            _dict['outputs'] = outputs_list
+        if hasattr(self, 'references') and self.references is not None:
+            _dict['references'] = self.references
         if hasattr(self, 'schematics') and self.schematics is not None:
             if isinstance(self.schematics, dict):
                 _dict['schematics'] = self.schematics
             else:
                 _dict['schematics'] = self.schematics.to_dict()
+        if hasattr(self, 'state') and self.state is not None:
+            _dict['state'] = self.state
+        if hasattr(self, 'update_available') and self.update_available is not None:
+            _dict['update_available'] = self.update_available
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -3748,7 +4356,7 @@ class ProjectConfig:
         DEPLOYED = 'deployed'
         DEPLOYING_FAILED = 'deploying_failed'
         DEPLOYING = 'deploying'
-        SUPERCEDED = 'superceded'
+        SUPERSEDED = 'superseded'
         UNDEPLOYING = 'undeploying'
         UNDEPLOYING_FAILED = 'undeploying_failed'
         VALIDATED = 'validated'
@@ -3759,33 +4367,31 @@ class ProjectConfig:
 
 class ProjectConfigAuth:
     """
-    The authorization for a configuration. You can authorize by using a trusted profile or
-    an API key in Secrets Manager.
+    The authorization details. You can authorize by using a trusted profile or an API key
+    in Secrets Manager.
 
-    :attr ProjectConfigAuthTrustedProfile trusted_profile: (optional) The trusted
-          profile for authorizations.
-    :attr str method: (optional) The authorization for a configuration. You can
-          authorize by using a trusted profile or an API key in Secrets Manager.
+    :attr str trusted_profile_id: (optional) The trusted profile ID.
+    :attr str method: (optional) The authorization method. You can authorize by
+          using a trusted profile or an API key in Secrets Manager.
     :attr str api_key: (optional) The IBM Cloud API Key.
     """
 
     def __init__(
         self,
         *,
-        trusted_profile: 'ProjectConfigAuthTrustedProfile' = None,
+        trusted_profile_id: str = None,
         method: str = None,
         api_key: str = None,
     ) -> None:
         """
         Initialize a ProjectConfigAuth object.
 
-        :param ProjectConfigAuthTrustedProfile trusted_profile: (optional) The
-               trusted profile for authorizations.
-        :param str method: (optional) The authorization for a configuration. You
-               can authorize by using a trusted profile or an API key in Secrets Manager.
+        :param str trusted_profile_id: (optional) The trusted profile ID.
+        :param str method: (optional) The authorization method. You can authorize
+               by using a trusted profile or an API key in Secrets Manager.
         :param str api_key: (optional) The IBM Cloud API Key.
         """
-        self.trusted_profile = trusted_profile
+        self.trusted_profile_id = trusted_profile_id
         self.method = method
         self.api_key = api_key
 
@@ -3793,8 +4399,8 @@ class ProjectConfigAuth:
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigAuth':
         """Initialize a ProjectConfigAuth object from a json dictionary."""
         args = {}
-        if 'trusted_profile' in _dict:
-            args['trusted_profile'] = ProjectConfigAuthTrustedProfile.from_dict(_dict.get('trusted_profile'))
+        if 'trusted_profile_id' in _dict:
+            args['trusted_profile_id'] = _dict.get('trusted_profile_id')
         if 'method' in _dict:
             args['method'] = _dict.get('method')
         if 'api_key' in _dict:
@@ -3809,11 +4415,8 @@ class ProjectConfigAuth:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'trusted_profile') and self.trusted_profile is not None:
-            if isinstance(self.trusted_profile, dict):
-                _dict['trusted_profile'] = self.trusted_profile
-            else:
-                _dict['trusted_profile'] = self.trusted_profile.to_dict()
+        if hasattr(self, 'trusted_profile_id') and self.trusted_profile_id is not None:
+            _dict['trusted_profile_id'] = self.trusted_profile_id
         if hasattr(self, 'method') and self.method is not None:
             _dict['method'] = self.method
         if hasattr(self, 'api_key') and self.api_key is not None:
@@ -3838,71 +4441,15 @@ class ProjectConfigAuth:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
-
-class ProjectConfigAuthTrustedProfile:
-    """
-    The trusted profile for authorizations.
-
-    :attr str id: (optional) The unique ID.
-    :attr str target_iam_id: (optional) The unique ID.
-    """
-
-    def __init__(
-        self,
-        *,
-        id: str = None,
-        target_iam_id: str = None,
-    ) -> None:
+    class MethodEnum(str, Enum):
         """
-        Initialize a ProjectConfigAuthTrustedProfile object.
-
-        :param str id: (optional) The unique ID.
-        :param str target_iam_id: (optional) The unique ID.
+        The authorization method. You can authorize by using a trusted profile or an API
+        key in Secrets Manager.
         """
-        self.id = id
-        self.target_iam_id = target_iam_id
 
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ProjectConfigAuthTrustedProfile':
-        """Initialize a ProjectConfigAuthTrustedProfile object from a json dictionary."""
-        args = {}
-        if 'id' in _dict:
-            args['id'] = _dict.get('id')
-        if 'target_iam_id' in _dict:
-            args['target_iam_id'] = _dict.get('target_iam_id')
-        return cls(**args)
+        API_KEY = 'api_key'
+        TRUSTED_PROFILE = 'trusted_profile'
 
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a ProjectConfigAuthTrustedProfile object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'target_iam_id') and self.target_iam_id is not None:
-            _dict['target_iam_id'] = self.target_iam_id
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this ProjectConfigAuthTrustedProfile object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'ProjectConfigAuthTrustedProfile') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'ProjectConfigAuthTrustedProfile') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
 
 
 class ProjectConfigCollection:
@@ -3985,35 +4532,14 @@ class ProjectConfigCollectionMember:
           automatically created for the configuration.
     :attr str project_id: The unique ID.
     :attr int version: The version of the configuration.
-    :attr bool is_draft: The flag that indicates whether the version of the
-          configuration is draft, or active.
-    :attr List[object] needs_attention_state: (optional) The needs attention state
-          of a configuration.
     :attr str state: The state of the configuration.
-    :attr bool update_available: The flag that indicates whether a configuration
-          update is available.
     :attr datetime created_at: (optional) A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
     :attr datetime user_modified_at: (optional) A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
-    :attr ProjectConfigMetadataLastApproved last_approved: (optional) The last
-          approved metadata of the configuration.
-    :attr datetime last_save: (optional) A date and time value in the format
-          YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
-          format as specified by RFC 3339.
-    :attr dict references: (optional) The references used in the config to resolve
-          input values.
-    :attr LastValidatedActionWithSummary last_validated: (optional) The action job
-          performed on the project configuration.
-    :attr LastActionWithSummary last_deployed: (optional) The action job performed
-          on the project configuration.
-    :attr LastActionWithSummary last_undeployed: (optional) The action job performed
-          on the project configuration.
-    :attr SchematicsWorkspace schematics: (optional) A schematics workspace
-          associated to a project configuration.
-    :attr str href: A relative URL.
+    :attr str href: A URL.
     :attr ProjectConfigDefinitionNameDescription definition: The name and
           description of a project configuration.
     """
@@ -4023,24 +4549,14 @@ class ProjectConfigCollectionMember:
         id: str,
         project_id: str,
         version: int,
-        is_draft: bool,
         state: str,
-        update_available: bool,
         href: str,
         definition: 'ProjectConfigDefinitionNameDescription',
         *,
         approved_version: 'ProjectConfigVersionSummary' = None,
         deployed_version: 'ProjectConfigVersionSummary' = None,
-        needs_attention_state: List[object] = None,
         created_at: datetime = None,
         user_modified_at: datetime = None,
-        last_approved: 'ProjectConfigMetadataLastApproved' = None,
-        last_save: datetime = None,
-        references: dict = None,
-        last_validated: 'LastValidatedActionWithSummary' = None,
-        last_deployed: 'LastActionWithSummary' = None,
-        last_undeployed: 'LastActionWithSummary' = None,
-        schematics: 'SchematicsWorkspace' = None,
     ) -> None:
         """
         Initialize a ProjectConfigCollectionMember object.
@@ -4049,60 +4565,29 @@ class ProjectConfigCollectionMember:
                ID is automatically created for the configuration.
         :param str project_id: The unique ID.
         :param int version: The version of the configuration.
-        :param bool is_draft: The flag that indicates whether the version of the
-               configuration is draft, or active.
         :param str state: The state of the configuration.
-        :param bool update_available: The flag that indicates whether a
-               configuration update is available.
-        :param str href: A relative URL.
+        :param str href: A URL.
         :param ProjectConfigDefinitionNameDescription definition: The name and
                description of a project configuration.
         :param ProjectConfigVersionSummary approved_version: (optional) The project
                configuration version.
         :param ProjectConfigVersionSummary deployed_version: (optional) The project
                configuration version.
-        :param List[object] needs_attention_state: (optional) The needs attention
-               state of a configuration.
         :param datetime created_at: (optional) A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
         :param datetime user_modified_at: (optional) A date and time value in the
                format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date
                and time format as specified by RFC 3339.
-        :param ProjectConfigMetadataLastApproved last_approved: (optional) The last
-               approved metadata of the configuration.
-        :param datetime last_save: (optional) A date and time value in the format
-               YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
-               time format as specified by RFC 3339.
-        :param dict references: (optional) The references used in the config to
-               resolve input values.
-        :param LastValidatedActionWithSummary last_validated: (optional) The action
-               job performed on the project configuration.
-        :param LastActionWithSummary last_deployed: (optional) The action job
-               performed on the project configuration.
-        :param LastActionWithSummary last_undeployed: (optional) The action job
-               performed on the project configuration.
-        :param SchematicsWorkspace schematics: (optional) A schematics workspace
-               associated to a project configuration.
         """
         self.approved_version = approved_version
         self.deployed_version = deployed_version
         self.id = id
         self.project_id = project_id
         self.version = version
-        self.is_draft = is_draft
-        self.needs_attention_state = needs_attention_state
         self.state = state
-        self.update_available = update_available
         self.created_at = created_at
         self.user_modified_at = user_modified_at
-        self.last_approved = last_approved
-        self.last_save = last_save
-        self.references = references
-        self.last_validated = last_validated
-        self.last_deployed = last_deployed
-        self.last_undeployed = last_undeployed
-        self.schematics = schematics
         self.href = href
         self.definition = definition
 
@@ -4126,38 +4611,14 @@ class ProjectConfigCollectionMember:
             args['version'] = _dict.get('version')
         else:
             raise ValueError('Required property \'version\' not present in ProjectConfigCollectionMember JSON')
-        if 'is_draft' in _dict:
-            args['is_draft'] = _dict.get('is_draft')
-        else:
-            raise ValueError('Required property \'is_draft\' not present in ProjectConfigCollectionMember JSON')
-        if 'needs_attention_state' in _dict:
-            args['needs_attention_state'] = _dict.get('needs_attention_state')
         if 'state' in _dict:
             args['state'] = _dict.get('state')
         else:
             raise ValueError('Required property \'state\' not present in ProjectConfigCollectionMember JSON')
-        if 'update_available' in _dict:
-            args['update_available'] = _dict.get('update_available')
-        else:
-            raise ValueError('Required property \'update_available\' not present in ProjectConfigCollectionMember JSON')
         if 'created_at' in _dict:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
         if 'user_modified_at' in _dict:
             args['user_modified_at'] = string_to_datetime(_dict.get('user_modified_at'))
-        if 'last_approved' in _dict:
-            args['last_approved'] = ProjectConfigMetadataLastApproved.from_dict(_dict.get('last_approved'))
-        if 'last_save' in _dict:
-            args['last_save'] = string_to_datetime(_dict.get('last_save'))
-        if 'references' in _dict:
-            args['references'] = _dict.get('references')
-        if 'last_validated' in _dict:
-            args['last_validated'] = LastValidatedActionWithSummary.from_dict(_dict.get('last_validated'))
-        if 'last_deployed' in _dict:
-            args['last_deployed'] = LastActionWithSummary.from_dict(_dict.get('last_deployed'))
-        if 'last_undeployed' in _dict:
-            args['last_undeployed'] = LastActionWithSummary.from_dict(_dict.get('last_undeployed'))
-        if 'schematics' in _dict:
-            args['schematics'] = SchematicsWorkspace.from_dict(_dict.get('schematics'))
         if 'href' in _dict:
             args['href'] = _dict.get('href')
         else:
@@ -4192,47 +4653,12 @@ class ProjectConfigCollectionMember:
             _dict['project_id'] = self.project_id
         if hasattr(self, 'version') and self.version is not None:
             _dict['version'] = self.version
-        if hasattr(self, 'is_draft') and self.is_draft is not None:
-            _dict['is_draft'] = self.is_draft
-        if hasattr(self, 'needs_attention_state') and self.needs_attention_state is not None:
-            _dict['needs_attention_state'] = self.needs_attention_state
         if hasattr(self, 'state') and self.state is not None:
             _dict['state'] = self.state
-        if hasattr(self, 'update_available') and self.update_available is not None:
-            _dict['update_available'] = self.update_available
         if hasattr(self, 'created_at') and self.created_at is not None:
             _dict['created_at'] = datetime_to_string(self.created_at)
         if hasattr(self, 'user_modified_at') and self.user_modified_at is not None:
             _dict['user_modified_at'] = datetime_to_string(self.user_modified_at)
-        if hasattr(self, 'last_approved') and self.last_approved is not None:
-            if isinstance(self.last_approved, dict):
-                _dict['last_approved'] = self.last_approved
-            else:
-                _dict['last_approved'] = self.last_approved.to_dict()
-        if hasattr(self, 'last_save') and self.last_save is not None:
-            _dict['last_save'] = datetime_to_string(self.last_save)
-        if hasattr(self, 'references') and self.references is not None:
-            _dict['references'] = self.references
-        if hasattr(self, 'last_validated') and self.last_validated is not None:
-            if isinstance(self.last_validated, dict):
-                _dict['last_validated'] = self.last_validated
-            else:
-                _dict['last_validated'] = self.last_validated.to_dict()
-        if hasattr(self, 'last_deployed') and self.last_deployed is not None:
-            if isinstance(self.last_deployed, dict):
-                _dict['last_deployed'] = self.last_deployed
-            else:
-                _dict['last_deployed'] = self.last_deployed.to_dict()
-        if hasattr(self, 'last_undeployed') and self.last_undeployed is not None:
-            if isinstance(self.last_undeployed, dict):
-                _dict['last_undeployed'] = self.last_undeployed
-            else:
-                _dict['last_undeployed'] = self.last_undeployed.to_dict()
-        if hasattr(self, 'schematics') and self.schematics is not None:
-            if isinstance(self.schematics, dict):
-                _dict['schematics'] = self.schematics
-            else:
-                _dict['schematics'] = self.schematics.to_dict()
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
         if hasattr(self, 'definition') and self.definition is not None:
@@ -4274,7 +4700,7 @@ class ProjectConfigCollectionMember:
         DEPLOYED = 'deployed'
         DEPLOYING_FAILED = 'deploying_failed'
         DEPLOYING = 'deploying'
-        SUPERCEDED = 'superceded'
+        SUPERSEDED = 'superseded'
         UNDEPLOYING = 'undeploying'
         UNDEPLOYING_FAILED = 'undeploying_failed'
         VALIDATED = 'validated'
@@ -4665,20 +5091,20 @@ class ProjectConfigMetadataLastApproved:
     """
     The last approved metadata of the configuration.
 
-    :attr bool is_forced: The flag that indicates whether the approval was forced
-          approved.
+    :attr datetime at: A date and time value in the format YYYY-MM-DDTHH:mm:ssZ or
+          YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time format as specified by RFC
+          3339.
     :attr str comment: (optional) The comment left by the user who approved the
           configuration.
-    :attr datetime timestamp: A date and time value in the format
-          YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
-          format as specified by RFC 3339.
+    :attr bool is_forced: The flag that indicates whether the approval was forced
+          approved.
     :attr str user_id: The unique ID.
     """
 
     def __init__(
         self,
+        at: datetime,
         is_forced: bool,
-        timestamp: datetime,
         user_id: str,
         *,
         comment: str = None,
@@ -4686,34 +5112,34 @@ class ProjectConfigMetadataLastApproved:
         """
         Initialize a ProjectConfigMetadataLastApproved object.
 
-        :param bool is_forced: The flag that indicates whether the approval was
-               forced approved.
-        :param datetime timestamp: A date and time value in the format
+        :param datetime at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
+        :param bool is_forced: The flag that indicates whether the approval was
+               forced approved.
         :param str user_id: The unique ID.
         :param str comment: (optional) The comment left by the user who approved
                the configuration.
         """
-        self.is_forced = is_forced
+        self.at = at
         self.comment = comment
-        self.timestamp = timestamp
+        self.is_forced = is_forced
         self.user_id = user_id
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigMetadataLastApproved':
         """Initialize a ProjectConfigMetadataLastApproved object from a json dictionary."""
         args = {}
+        if 'at' in _dict:
+            args['at'] = string_to_datetime(_dict.get('at'))
+        else:
+            raise ValueError('Required property \'at\' not present in ProjectConfigMetadataLastApproved JSON')
+        if 'comment' in _dict:
+            args['comment'] = _dict.get('comment')
         if 'is_forced' in _dict:
             args['is_forced'] = _dict.get('is_forced')
         else:
             raise ValueError('Required property \'is_forced\' not present in ProjectConfigMetadataLastApproved JSON')
-        if 'comment' in _dict:
-            args['comment'] = _dict.get('comment')
-        if 'timestamp' in _dict:
-            args['timestamp'] = string_to_datetime(_dict.get('timestamp'))
-        else:
-            raise ValueError('Required property \'timestamp\' not present in ProjectConfigMetadataLastApproved JSON')
         if 'user_id' in _dict:
             args['user_id'] = _dict.get('user_id')
         else:
@@ -4728,12 +5154,12 @@ class ProjectConfigMetadataLastApproved:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'is_forced') and self.is_forced is not None:
-            _dict['is_forced'] = self.is_forced
+        if hasattr(self, 'at') and self.at is not None:
+            _dict['at'] = datetime_to_string(self.at)
         if hasattr(self, 'comment') and self.comment is not None:
             _dict['comment'] = self.comment
-        if hasattr(self, 'timestamp') and self.timestamp is not None:
-            _dict['timestamp'] = datetime_to_string(self.timestamp)
+        if hasattr(self, 'is_forced') and self.is_forced is not None:
+            _dict['is_forced'] = self.is_forced
         if hasattr(self, 'user_id') and self.user_id is not None:
             _dict['user_id'] = self.user_id
         return _dict
@@ -4843,15 +5269,14 @@ class ProjectConfigPrototypeDefinitionBlock:
     :attr str description: (optional) A project configuration description.
     :attr List[str] labels: (optional) The configuration labels.
     :attr str environment: (optional) The ID of the project environment.
-    :attr ProjectConfigAuth authorizations: (optional) The authorization for a
-          configuration.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
     :attr str locator_id: (optional) A dotted value of catalogID.versionID.
-    :attr InputVariable input: (optional) The input variables for configuration
+    :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
-    :attr ProjectConfigSetting setting: (optional) Schematics environment variables
+    :attr ProjectConfigSetting settings: (optional) Schematics environment variables
           to use to deploy the configuration.
           Settings are only available if they were specified when the configuration was
           initially created.
@@ -4867,8 +5292,8 @@ class ProjectConfigPrototypeDefinitionBlock:
         authorizations: 'ProjectConfigAuth' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
         locator_id: str = None,
-        input: 'InputVariable' = None,
-        setting: 'ProjectConfigSetting' = None,
+        inputs: 'InputVariable' = None,
+        settings: 'ProjectConfigSetting' = None,
     ) -> None:
         """
         Initialize a ProjectConfigPrototypeDefinitionBlock object.
@@ -4877,16 +5302,15 @@ class ProjectConfigPrototypeDefinitionBlock:
         :param str description: (optional) A project configuration description.
         :param List[str] labels: (optional) The configuration labels.
         :param str environment: (optional) The ID of the project environment.
-        :param ProjectConfigAuth authorizations: (optional) The authorization for a
-               configuration.
-               You can authorize by using a trusted profile or an API key in Secrets
-               Manager.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
                required for compliance.
         :param str locator_id: (optional) A dotted value of catalogID.versionID.
-        :param InputVariable input: (optional) The input variables for
+        :param InputVariable inputs: (optional) The input variables for
                configuration definition and environment.
-        :param ProjectConfigSetting setting: (optional) Schematics environment
+        :param ProjectConfigSetting settings: (optional) Schematics environment
                variables to use to deploy the configuration.
                Settings are only available if they were specified when the configuration
                was initially created.
@@ -4898,8 +5322,8 @@ class ProjectConfigPrototypeDefinitionBlock:
         self.authorizations = authorizations
         self.compliance_profile = compliance_profile
         self.locator_id = locator_id
-        self.input = input
-        self.setting = setting
+        self.inputs = inputs
+        self.settings = settings
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigPrototypeDefinitionBlock':
@@ -4921,10 +5345,10 @@ class ProjectConfigPrototypeDefinitionBlock:
             args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
         if 'locator_id' in _dict:
             args['locator_id'] = _dict.get('locator_id')
-        if 'input' in _dict:
-            args['input'] = InputVariable.from_dict(_dict.get('input'))
-        if 'setting' in _dict:
-            args['setting'] = ProjectConfigSetting.from_dict(_dict.get('setting'))
+        if 'inputs' in _dict:
+            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
+        if 'settings' in _dict:
+            args['settings'] = ProjectConfigSetting.from_dict(_dict.get('settings'))
         return cls(**args)
 
     @classmethod
@@ -4955,16 +5379,16 @@ class ProjectConfigPrototypeDefinitionBlock:
                 _dict['compliance_profile'] = self.compliance_profile.to_dict()
         if hasattr(self, 'locator_id') and self.locator_id is not None:
             _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'input') and self.input is not None:
-            if isinstance(self.input, dict):
-                _dict['input'] = self.input
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            if isinstance(self.inputs, dict):
+                _dict['inputs'] = self.inputs
             else:
-                _dict['input'] = self.input.to_dict()
-        if hasattr(self, 'setting') and self.setting is not None:
-            if isinstance(self.setting, dict):
-                _dict['setting'] = self.setting
+                _dict['inputs'] = self.inputs.to_dict()
+        if hasattr(self, 'settings') and self.settings is not None:
+            if isinstance(self.settings, dict):
+                _dict['settings'] = self.settings
             else:
-                _dict['setting'] = self.setting.to_dict()
+                _dict['settings'] = self.settings.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -4994,15 +5418,14 @@ class ProjectConfigPrototypePatchDefinitionBlock:
     :attr str description: (optional) A project configuration description.
     :attr List[str] labels: (optional) The configuration labels.
     :attr str environment: (optional) The ID of the project environment.
-    :attr ProjectConfigAuth authorizations: (optional) The authorization for a
-          configuration.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
     :attr str locator_id: (optional) A dotted value of catalogID.versionID.
-    :attr InputVariable input: (optional) The input variables for configuration
+    :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
-    :attr ProjectConfigSetting setting: (optional) Schematics environment variables
+    :attr ProjectConfigSetting settings: (optional) Schematics environment variables
           to use to deploy the configuration.
           Settings are only available if they were specified when the configuration was
           initially created.
@@ -5018,8 +5441,8 @@ class ProjectConfigPrototypePatchDefinitionBlock:
         authorizations: 'ProjectConfigAuth' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
         locator_id: str = None,
-        input: 'InputVariable' = None,
-        setting: 'ProjectConfigSetting' = None,
+        inputs: 'InputVariable' = None,
+        settings: 'ProjectConfigSetting' = None,
     ) -> None:
         """
         Initialize a ProjectConfigPrototypePatchDefinitionBlock object.
@@ -5028,16 +5451,15 @@ class ProjectConfigPrototypePatchDefinitionBlock:
         :param str description: (optional) A project configuration description.
         :param List[str] labels: (optional) The configuration labels.
         :param str environment: (optional) The ID of the project environment.
-        :param ProjectConfigAuth authorizations: (optional) The authorization for a
-               configuration.
-               You can authorize by using a trusted profile or an API key in Secrets
-               Manager.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
                required for compliance.
         :param str locator_id: (optional) A dotted value of catalogID.versionID.
-        :param InputVariable input: (optional) The input variables for
+        :param InputVariable inputs: (optional) The input variables for
                configuration definition and environment.
-        :param ProjectConfigSetting setting: (optional) Schematics environment
+        :param ProjectConfigSetting settings: (optional) Schematics environment
                variables to use to deploy the configuration.
                Settings are only available if they were specified when the configuration
                was initially created.
@@ -5049,8 +5471,8 @@ class ProjectConfigPrototypePatchDefinitionBlock:
         self.authorizations = authorizations
         self.compliance_profile = compliance_profile
         self.locator_id = locator_id
-        self.input = input
-        self.setting = setting
+        self.inputs = inputs
+        self.settings = settings
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigPrototypePatchDefinitionBlock':
@@ -5070,10 +5492,10 @@ class ProjectConfigPrototypePatchDefinitionBlock:
             args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
         if 'locator_id' in _dict:
             args['locator_id'] = _dict.get('locator_id')
-        if 'input' in _dict:
-            args['input'] = InputVariable.from_dict(_dict.get('input'))
-        if 'setting' in _dict:
-            args['setting'] = ProjectConfigSetting.from_dict(_dict.get('setting'))
+        if 'inputs' in _dict:
+            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
+        if 'settings' in _dict:
+            args['settings'] = ProjectConfigSetting.from_dict(_dict.get('settings'))
         return cls(**args)
 
     @classmethod
@@ -5104,16 +5526,16 @@ class ProjectConfigPrototypePatchDefinitionBlock:
                 _dict['compliance_profile'] = self.compliance_profile.to_dict()
         if hasattr(self, 'locator_id') and self.locator_id is not None:
             _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'input') and self.input is not None:
-            if isinstance(self.input, dict):
-                _dict['input'] = self.input
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            if isinstance(self.inputs, dict):
+                _dict['inputs'] = self.inputs
             else:
-                _dict['input'] = self.input.to_dict()
-        if hasattr(self, 'setting') and self.setting is not None:
-            if isinstance(self.setting, dict):
-                _dict['setting'] = self.setting
+                _dict['inputs'] = self.inputs.to_dict()
+        if hasattr(self, 'settings') and self.settings is not None:
+            if isinstance(self.settings, dict):
+                _dict['settings'] = self.settings
             else:
-                _dict['setting'] = self.setting.to_dict()
+                _dict['settings'] = self.settings.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -5318,21 +5740,18 @@ class ProjectConfigResponseDefinition:
     :attr str description: (optional) A project configuration description.
     :attr List[str] labels: (optional) The configuration labels.
     :attr str environment: (optional) The ID of the project environment.
-    :attr ProjectConfigAuth authorizations: (optional) The authorization for a
-          configuration.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
     :attr str locator_id: A dotted value of catalogID.versionID.
-    :attr InputVariable input: (optional) The input variables for configuration
+    :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
-    :attr ProjectConfigSetting setting: (optional) Schematics environment variables
+    :attr ProjectConfigSetting settings: (optional) Schematics environment variables
           to use to deploy the configuration.
           Settings are only available if they were specified when the configuration was
           initially created.
     :attr str type: (optional) The type of a project configuration manual property.
-    :attr List[OutputValue] output: (optional) The outputs of a Schematics template
-          property.
     """
 
     def __init__(
@@ -5345,10 +5764,9 @@ class ProjectConfigResponseDefinition:
         environment: str = None,
         authorizations: 'ProjectConfigAuth' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
-        input: 'InputVariable' = None,
-        setting: 'ProjectConfigSetting' = None,
+        inputs: 'InputVariable' = None,
+        settings: 'ProjectConfigSetting' = None,
         type: str = None,
-        output: List['OutputValue'] = None,
     ) -> None:
         """
         Initialize a ProjectConfigResponseDefinition object.
@@ -5358,22 +5776,19 @@ class ProjectConfigResponseDefinition:
         :param str description: (optional) A project configuration description.
         :param List[str] labels: (optional) The configuration labels.
         :param str environment: (optional) The ID of the project environment.
-        :param ProjectConfigAuth authorizations: (optional) The authorization for a
-               configuration.
-               You can authorize by using a trusted profile or an API key in Secrets
-               Manager.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
                required for compliance.
-        :param InputVariable input: (optional) The input variables for
+        :param InputVariable inputs: (optional) The input variables for
                configuration definition and environment.
-        :param ProjectConfigSetting setting: (optional) Schematics environment
+        :param ProjectConfigSetting settings: (optional) Schematics environment
                variables to use to deploy the configuration.
                Settings are only available if they were specified when the configuration
                was initially created.
         :param str type: (optional) The type of a project configuration manual
                property.
-        :param List[OutputValue] output: (optional) The outputs of a Schematics
-               template property.
         """
         self.name = name
         self.description = description
@@ -5382,10 +5797,9 @@ class ProjectConfigResponseDefinition:
         self.authorizations = authorizations
         self.compliance_profile = compliance_profile
         self.locator_id = locator_id
-        self.input = input
-        self.setting = setting
+        self.inputs = inputs
+        self.settings = settings
         self.type = type
-        self.output = output
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigResponseDefinition':
@@ -5409,14 +5823,12 @@ class ProjectConfigResponseDefinition:
             args['locator_id'] = _dict.get('locator_id')
         else:
             raise ValueError('Required property \'locator_id\' not present in ProjectConfigResponseDefinition JSON')
-        if 'input' in _dict:
-            args['input'] = InputVariable.from_dict(_dict.get('input'))
-        if 'setting' in _dict:
-            args['setting'] = ProjectConfigSetting.from_dict(_dict.get('setting'))
+        if 'inputs' in _dict:
+            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
+        if 'settings' in _dict:
+            args['settings'] = ProjectConfigSetting.from_dict(_dict.get('settings'))
         if 'type' in _dict:
             args['type'] = _dict.get('type')
-        if 'output' in _dict:
-            args['output'] = [OutputValue.from_dict(v) for v in _dict.get('output')]
         return cls(**args)
 
     @classmethod
@@ -5447,26 +5859,18 @@ class ProjectConfigResponseDefinition:
                 _dict['compliance_profile'] = self.compliance_profile.to_dict()
         if hasattr(self, 'locator_id') and self.locator_id is not None:
             _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'input') and self.input is not None:
-            if isinstance(self.input, dict):
-                _dict['input'] = self.input
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            if isinstance(self.inputs, dict):
+                _dict['inputs'] = self.inputs
             else:
-                _dict['input'] = self.input.to_dict()
-        if hasattr(self, 'setting') and self.setting is not None:
-            if isinstance(self.setting, dict):
-                _dict['setting'] = self.setting
+                _dict['inputs'] = self.inputs.to_dict()
+        if hasattr(self, 'settings') and self.settings is not None:
+            if isinstance(self.settings, dict):
+                _dict['settings'] = self.settings
             else:
-                _dict['setting'] = self.setting.to_dict()
+                _dict['settings'] = self.settings.to_dict()
         if hasattr(self, 'type') and self.type is not None:
             _dict['type'] = self.type
-        if hasattr(self, 'output') and self.output is not None:
-            output_list = []
-            for v in self.output:
-                if isinstance(v, dict):
-                    output_list.append(v)
-                else:
-                    output_list.append(v.to_dict())
-            _dict['output'] = output_list
         return _dict
 
     def _to_dict(self):
@@ -5577,9 +5981,6 @@ class ProjectConfigVersion:
           configuration is draft, or active.
     :attr List[object] needs_attention_state: (optional) The needs attention state
           of a configuration.
-    :attr str state: The state of the configuration.
-    :attr bool update_available: The flag that indicates whether a configuration
-          update is available.
     :attr datetime created_at: (optional) A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
@@ -5588,19 +5989,24 @@ class ProjectConfigVersion:
           format as specified by RFC 3339.
     :attr ProjectConfigMetadataLastApproved last_approved: (optional) The last
           approved metadata of the configuration.
-    :attr datetime last_save: (optional) A date and time value in the format
+    :attr datetime last_saved_at: (optional) A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
-    :attr dict references: (optional) The references used in the config to resolve
-          input values.
     :attr LastValidatedActionWithSummary last_validated: (optional) The action job
           performed on the project configuration.
     :attr LastActionWithSummary last_deployed: (optional) The action job performed
           on the project configuration.
     :attr LastActionWithSummary last_undeployed: (optional) The action job performed
           on the project configuration.
+    :attr List[OutputValue] outputs: (optional) The outputs of a Schematics template
+          property.
+    :attr dict references: (optional) The references used in the config to resolve
+          input values.
     :attr SchematicsWorkspace schematics: (optional) A schematics workspace
           associated to a project configuration.
+    :attr str state: The state of the configuration.
+    :attr bool update_available: The flag that indicates whether a configuration
+          update is available.
     :attr ProjectConfigResponseDefinition definition: The type and output of a
           project configuration.
     """
@@ -5619,11 +6025,12 @@ class ProjectConfigVersion:
         created_at: datetime = None,
         user_modified_at: datetime = None,
         last_approved: 'ProjectConfigMetadataLastApproved' = None,
-        last_save: datetime = None,
-        references: dict = None,
+        last_saved_at: datetime = None,
         last_validated: 'LastValidatedActionWithSummary' = None,
         last_deployed: 'LastActionWithSummary' = None,
         last_undeployed: 'LastActionWithSummary' = None,
+        outputs: List['OutputValue'] = None,
+        references: dict = None,
         schematics: 'SchematicsWorkspace' = None,
     ) -> None:
         """
@@ -5650,17 +6057,19 @@ class ProjectConfigVersion:
                and time format as specified by RFC 3339.
         :param ProjectConfigMetadataLastApproved last_approved: (optional) The last
                approved metadata of the configuration.
-        :param datetime last_save: (optional) A date and time value in the format
-               YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
-               time format as specified by RFC 3339.
-        :param dict references: (optional) The references used in the config to
-               resolve input values.
+        :param datetime last_saved_at: (optional) A date and time value in the
+               format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date
+               and time format as specified by RFC 3339.
         :param LastValidatedActionWithSummary last_validated: (optional) The action
                job performed on the project configuration.
         :param LastActionWithSummary last_deployed: (optional) The action job
                performed on the project configuration.
         :param LastActionWithSummary last_undeployed: (optional) The action job
                performed on the project configuration.
+        :param List[OutputValue] outputs: (optional) The outputs of a Schematics
+               template property.
+        :param dict references: (optional) The references used in the config to
+               resolve input values.
         :param SchematicsWorkspace schematics: (optional) A schematics workspace
                associated to a project configuration.
         """
@@ -5669,17 +6078,18 @@ class ProjectConfigVersion:
         self.version = version
         self.is_draft = is_draft
         self.needs_attention_state = needs_attention_state
-        self.state = state
-        self.update_available = update_available
         self.created_at = created_at
         self.user_modified_at = user_modified_at
         self.last_approved = last_approved
-        self.last_save = last_save
-        self.references = references
+        self.last_saved_at = last_saved_at
         self.last_validated = last_validated
         self.last_deployed = last_deployed
         self.last_undeployed = last_undeployed
+        self.outputs = outputs
+        self.references = references
         self.schematics = schematics
+        self.state = state
+        self.update_available = update_available
         self.definition = definition
 
     @classmethod
@@ -5704,6 +6114,26 @@ class ProjectConfigVersion:
             raise ValueError('Required property \'is_draft\' not present in ProjectConfigVersion JSON')
         if 'needs_attention_state' in _dict:
             args['needs_attention_state'] = _dict.get('needs_attention_state')
+        if 'created_at' in _dict:
+            args['created_at'] = string_to_datetime(_dict.get('created_at'))
+        if 'user_modified_at' in _dict:
+            args['user_modified_at'] = string_to_datetime(_dict.get('user_modified_at'))
+        if 'last_approved' in _dict:
+            args['last_approved'] = ProjectConfigMetadataLastApproved.from_dict(_dict.get('last_approved'))
+        if 'last_saved_at' in _dict:
+            args['last_saved_at'] = string_to_datetime(_dict.get('last_saved_at'))
+        if 'last_validated' in _dict:
+            args['last_validated'] = LastValidatedActionWithSummary.from_dict(_dict.get('last_validated'))
+        if 'last_deployed' in _dict:
+            args['last_deployed'] = LastActionWithSummary.from_dict(_dict.get('last_deployed'))
+        if 'last_undeployed' in _dict:
+            args['last_undeployed'] = LastActionWithSummary.from_dict(_dict.get('last_undeployed'))
+        if 'outputs' in _dict:
+            args['outputs'] = [OutputValue.from_dict(v) for v in _dict.get('outputs')]
+        if 'references' in _dict:
+            args['references'] = _dict.get('references')
+        if 'schematics' in _dict:
+            args['schematics'] = SchematicsWorkspace.from_dict(_dict.get('schematics'))
         if 'state' in _dict:
             args['state'] = _dict.get('state')
         else:
@@ -5712,24 +6142,6 @@ class ProjectConfigVersion:
             args['update_available'] = _dict.get('update_available')
         else:
             raise ValueError('Required property \'update_available\' not present in ProjectConfigVersion JSON')
-        if 'created_at' in _dict:
-            args['created_at'] = string_to_datetime(_dict.get('created_at'))
-        if 'user_modified_at' in _dict:
-            args['user_modified_at'] = string_to_datetime(_dict.get('user_modified_at'))
-        if 'last_approved' in _dict:
-            args['last_approved'] = ProjectConfigMetadataLastApproved.from_dict(_dict.get('last_approved'))
-        if 'last_save' in _dict:
-            args['last_save'] = string_to_datetime(_dict.get('last_save'))
-        if 'references' in _dict:
-            args['references'] = _dict.get('references')
-        if 'last_validated' in _dict:
-            args['last_validated'] = LastValidatedActionWithSummary.from_dict(_dict.get('last_validated'))
-        if 'last_deployed' in _dict:
-            args['last_deployed'] = LastActionWithSummary.from_dict(_dict.get('last_deployed'))
-        if 'last_undeployed' in _dict:
-            args['last_undeployed'] = LastActionWithSummary.from_dict(_dict.get('last_undeployed'))
-        if 'schematics' in _dict:
-            args['schematics'] = SchematicsWorkspace.from_dict(_dict.get('schematics'))
         if 'definition' in _dict:
             args['definition'] = ProjectConfigResponseDefinition.from_dict(_dict.get('definition'))
         else:
@@ -5754,10 +6166,6 @@ class ProjectConfigVersion:
             _dict['is_draft'] = self.is_draft
         if hasattr(self, 'needs_attention_state') and self.needs_attention_state is not None:
             _dict['needs_attention_state'] = self.needs_attention_state
-        if hasattr(self, 'state') and self.state is not None:
-            _dict['state'] = self.state
-        if hasattr(self, 'update_available') and self.update_available is not None:
-            _dict['update_available'] = self.update_available
         if hasattr(self, 'created_at') and self.created_at is not None:
             _dict['created_at'] = datetime_to_string(self.created_at)
         if hasattr(self, 'user_modified_at') and self.user_modified_at is not None:
@@ -5767,10 +6175,8 @@ class ProjectConfigVersion:
                 _dict['last_approved'] = self.last_approved
             else:
                 _dict['last_approved'] = self.last_approved.to_dict()
-        if hasattr(self, 'last_save') and self.last_save is not None:
-            _dict['last_save'] = datetime_to_string(self.last_save)
-        if hasattr(self, 'references') and self.references is not None:
-            _dict['references'] = self.references
+        if hasattr(self, 'last_saved_at') and self.last_saved_at is not None:
+            _dict['last_saved_at'] = datetime_to_string(self.last_saved_at)
         if hasattr(self, 'last_validated') and self.last_validated is not None:
             if isinstance(self.last_validated, dict):
                 _dict['last_validated'] = self.last_validated
@@ -5786,11 +6192,25 @@ class ProjectConfigVersion:
                 _dict['last_undeployed'] = self.last_undeployed
             else:
                 _dict['last_undeployed'] = self.last_undeployed.to_dict()
+        if hasattr(self, 'outputs') and self.outputs is not None:
+            outputs_list = []
+            for v in self.outputs:
+                if isinstance(v, dict):
+                    outputs_list.append(v)
+                else:
+                    outputs_list.append(v.to_dict())
+            _dict['outputs'] = outputs_list
+        if hasattr(self, 'references') and self.references is not None:
+            _dict['references'] = self.references
         if hasattr(self, 'schematics') and self.schematics is not None:
             if isinstance(self.schematics, dict):
                 _dict['schematics'] = self.schematics
             else:
                 _dict['schematics'] = self.schematics.to_dict()
+        if hasattr(self, 'state') and self.state is not None:
+            _dict['state'] = self.state
+        if hasattr(self, 'update_available') and self.update_available is not None:
+            _dict['update_available'] = self.update_available
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -5830,7 +6250,7 @@ class ProjectConfigVersion:
         DEPLOYED = 'deployed'
         DEPLOYING_FAILED = 'deploying_failed'
         DEPLOYING = 'deploying'
-        SUPERCEDED = 'superceded'
+        SUPERSEDED = 'superseded'
         UNDEPLOYING = 'undeploying'
         UNDEPLOYING_FAILED = 'undeploying_failed'
         VALIDATED = 'validated'
@@ -5843,31 +6263,24 @@ class ProjectConfigVersionSummary:
     """
     The project configuration version.
 
-    :attr List[object] needs_attention_state: (optional) The needs attention state
-          of a configuration.
     :attr str state: The state of the configuration.
     :attr int version: The version number of the configuration.
-    :attr str href: (optional) A relative URL.
+    :attr str href: A URL.
     """
 
     def __init__(
         self,
         state: str,
         version: int,
-        *,
-        needs_attention_state: List[object] = None,
-        href: str = None,
+        href: str,
     ) -> None:
         """
         Initialize a ProjectConfigVersionSummary object.
 
         :param str state: The state of the configuration.
         :param int version: The version number of the configuration.
-        :param List[object] needs_attention_state: (optional) The needs attention
-               state of a configuration.
-        :param str href: (optional) A relative URL.
+        :param str href: A URL.
         """
-        self.needs_attention_state = needs_attention_state
         self.state = state
         self.version = version
         self.href = href
@@ -5876,8 +6289,6 @@ class ProjectConfigVersionSummary:
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigVersionSummary':
         """Initialize a ProjectConfigVersionSummary object from a json dictionary."""
         args = {}
-        if 'needs_attention_state' in _dict:
-            args['needs_attention_state'] = _dict.get('needs_attention_state')
         if 'state' in _dict:
             args['state'] = _dict.get('state')
         else:
@@ -5888,6 +6299,8 @@ class ProjectConfigVersionSummary:
             raise ValueError('Required property \'version\' not present in ProjectConfigVersionSummary JSON')
         if 'href' in _dict:
             args['href'] = _dict.get('href')
+        else:
+            raise ValueError('Required property \'href\' not present in ProjectConfigVersionSummary JSON')
         return cls(**args)
 
     @classmethod
@@ -5898,8 +6311,6 @@ class ProjectConfigVersionSummary:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'needs_attention_state') and self.needs_attention_state is not None:
-            _dict['needs_attention_state'] = self.needs_attention_state
         if hasattr(self, 'state') and self.state is not None:
             _dict['state'] = self.state
         if hasattr(self, 'version') and self.version is not None:
@@ -5940,7 +6351,7 @@ class ProjectConfigVersionSummary:
         DEPLOYED = 'deployed'
         DEPLOYING_FAILED = 'deploying_failed'
         DEPLOYING = 'deploying'
-        SUPERCEDED = 'superceded'
+        SUPERSEDED = 'superseded'
         UNDEPLOYING = 'undeploying'
         UNDEPLOYING_FAILED = 'undeploying_failed'
         VALIDATED = 'validated'
@@ -6110,7 +6521,7 @@ class ProjectEnvironmentCollectionMember:
     :attr datetime created_at: A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
-    :attr str href: A relative URL.
+    :attr str href: A URL.
     :attr EnvironmentDefinitionNameDescription definition: The environment
           definition used in the project collection.
     """
@@ -6131,7 +6542,7 @@ class ProjectEnvironmentCollectionMember:
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
-        :param str href: A relative URL.
+        :param str href: A URL.
         :param EnvironmentDefinitionNameDescription definition: The environment
                definition used in the project collection.
         """
@@ -6375,27 +6786,27 @@ class SchematicsWorkspace:
     """
     A schematics workspace associated to a project configuration.
 
-    :attr str workspace_id: (optional) An existing schematics workspace ID.
+    :attr str workspace_crn: (optional) An existing schematics workspace CRN.
     """
 
     def __init__(
         self,
         *,
-        workspace_id: str = None,
+        workspace_crn: str = None,
     ) -> None:
         """
         Initialize a SchematicsWorkspace object.
 
-        :param str workspace_id: (optional) An existing schematics workspace ID.
+        :param str workspace_crn: (optional) An existing schematics workspace CRN.
         """
-        self.workspace_id = workspace_id
+        self.workspace_crn = workspace_crn
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'SchematicsWorkspace':
         """Initialize a SchematicsWorkspace object from a json dictionary."""
         args = {}
-        if 'workspace_id' in _dict:
-            args['workspace_id'] = _dict.get('workspace_id')
+        if 'workspace_crn' in _dict:
+            args['workspace_crn'] = _dict.get('workspace_crn')
         return cls(**args)
 
     @classmethod
@@ -6406,8 +6817,8 @@ class SchematicsWorkspace:
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'workspace_id') and self.workspace_id is not None:
-            _dict['workspace_id'] = self.workspace_id
+        if hasattr(self, 'workspace_crn') and self.workspace_crn is not None:
+            _dict['workspace_crn'] = self.workspace_crn
         return _dict
 
     def _to_dict(self):

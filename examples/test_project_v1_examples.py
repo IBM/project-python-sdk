@@ -120,7 +120,7 @@ class TestProjectV1Examples:
             # begin-create_config
 
             input_variable_model = {
-                'account_id': '$configs[].name[\"account-stage\"].input.account_id',
+                'account_id': '$configs[].name[\"account-stage\"].inputs.account_id',
                 'resource_group': 'stage',
                 'access_tags': '["env:stage"]',
                 'logdna_name': 'Name of the LogDNA stage service instance',
@@ -136,8 +136,8 @@ class TestProjectV1Examples:
                 'description': 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
                 'labels': ['env:stage', 'governance:test', 'build:0'],
                 'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
-                'input': input_variable_model,
-                'setting': project_config_setting_model,
+                'inputs': input_variable_model,
+                'settings': project_config_setting_model,
             }
 
             response = project_service.create_config(
@@ -236,8 +236,8 @@ class TestProjectV1Examples:
             print('\ncreate_project_environment() result:')
             # begin-create_project_environment
 
-            environment_auth_model = {
-                'method': 'API_KEY',
+            project_config_auth_model = {
+                'method': 'api_key',
                 'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
             }
 
@@ -257,7 +257,7 @@ class TestProjectV1Examples:
             environment_definition_required_properties_model = {
                 'name': 'development',
                 'description': 'The environment \'development\'',
-                'authorizations': environment_auth_model,
+                'authorizations': project_config_auth_model,
                 'inputs': input_variable_model,
                 'compliance_profile': project_compliance_profile_model,
             }
@@ -327,8 +327,8 @@ class TestProjectV1Examples:
             print('\nupdate_project_environment() result:')
             # begin-update_project_environment
 
-            environment_auth_model = {
-                'method': 'API_KEY',
+            project_config_auth_model = {
+                'method': 'api_key',
                 'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
             }
 
@@ -348,7 +348,7 @@ class TestProjectV1Examples:
             environment_definition_properties_model = {
                 'name': 'development',
                 'description': 'The environment \'development\'',
-                'authorizations': environment_auth_model,
+                'authorizations': project_config_auth_model,
                 'inputs': input_variable_model,
                 'compliance_profile': project_compliance_profile_model,
             }
@@ -420,7 +420,7 @@ class TestProjectV1Examples:
             # begin-update_config
 
             input_variable_model = {
-                'account_id': '$configs[].name[\"account-stage\"].input.account_id',
+                'account_id': '$configs[].name[\"account-stage\"].inputs.account_id',
                 'resource_group': 'stage',
                 'access_tags': '["env:stage"]',
                 'logdna_name': 'Name of the LogDNA stage service instance',
@@ -428,7 +428,7 @@ class TestProjectV1Examples:
             }
 
             project_config_prototype_patch_definition_block_model = {
-                'input': input_variable_model,
+                'inputs': input_variable_model,
             }
 
             response = project_service.update_config(
@@ -563,7 +563,7 @@ class TestProjectV1Examples:
             # begin-sync_config
 
             schematics_workspace_model = {
-                'workspace_id': 'us-south.workspace.service.e0106139',
+                'workspace_crn': 'crn:v1:staging:public:schematics:us-south:a/38acaf4469814090a4e675dc0c317a0d:95ad49de-ab96-4e7d-a08c-45c38aa448e6:workspace:us-south.workspace.service.e0106139',
             }
 
             response = project_service.sync_config(
