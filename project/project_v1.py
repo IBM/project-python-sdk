@@ -315,7 +315,7 @@ class ProjectV1(BaseService):
         Delete a project.
 
         Delete a project document by the ID. A project can only be deleted after deleting
-        all of its artifacts.
+        all of its resources.
 
         :param str id: The unique project ID.
         :param dict headers: A `dict` containing the request headers
