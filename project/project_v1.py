@@ -2319,34 +2319,34 @@ class CodeRiskAnalyzerLogsSummary:
     """
     The Code Risk Analyzer logs summary of the configuration.
 
-    :attr int total: (optional) The total number of Code Risk Analyzer rules that
+    :attr str total: (optional) The total number of Code Risk Analyzer rules that
           were applied in the scan.
-    :attr int passed: (optional) The number of Code Risk Analyzer rules that passed
+    :attr str passed: (optional) The number of Code Risk Analyzer rules that passed
           in the scan.
-    :attr int failed: (optional) The number of Code Risk Analyzer rules that failed
+    :attr str failed: (optional) The number of Code Risk Analyzer rules that failed
           in the scan.
-    :attr int skipped: (optional) The number of Code Risk Analyzer rules that were
+    :attr str skipped: (optional) The number of Code Risk Analyzer rules that were
           skipped in the scan.
     """
 
     def __init__(
         self,
         *,
-        total: int = None,
-        passed: int = None,
-        failed: int = None,
-        skipped: int = None,
+        total: str = None,
+        passed: str = None,
+        failed: str = None,
+        skipped: str = None,
     ) -> None:
         """
         Initialize a CodeRiskAnalyzerLogsSummary object.
 
-        :param int total: (optional) The total number of Code Risk Analyzer rules
+        :param str total: (optional) The total number of Code Risk Analyzer rules
                that were applied in the scan.
-        :param int passed: (optional) The number of Code Risk Analyzer rules that
+        :param str passed: (optional) The number of Code Risk Analyzer rules that
                passed in the scan.
-        :param int failed: (optional) The number of Code Risk Analyzer rules that
+        :param str failed: (optional) The number of Code Risk Analyzer rules that
                failed in the scan.
-        :param int skipped: (optional) The number of Code Risk Analyzer rules that
+        :param str skipped: (optional) The number of Code Risk Analyzer rules that
                were skipped in the scan.
         """
         self.total = total
