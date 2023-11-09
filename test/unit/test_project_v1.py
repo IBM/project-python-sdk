@@ -28,7 +28,7 @@ import re
 import requests
 import responses
 import urllib
-from project.project_v1 import *
+from ibm_cloud.project_v1 import *
 
 
 _service = ProjectV1(
@@ -111,7 +111,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}], "environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.POST,
             url,
@@ -126,15 +126,10 @@ class TestCreateProject:
         project_prototype_definition_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
         project_prototype_definition_model['destroy_on_delete'] = True
 
-        # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
-        project_config_auth_trusted_profile_model = {}
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {}
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -157,17 +152,16 @@ class TestCreateProject:
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'testString'
         project_config_prototype_definition_block_model['description'] = 'testString'
-        project_config_prototype_definition_block_model['labels'] = ['testString']
         project_config_prototype_definition_block_model['environment'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model['input'] = input_variable_model
-        project_config_prototype_definition_block_model['setting'] = project_config_setting_model
+        project_config_prototype_definition_block_model['inputs'] = input_variable_model
+        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_id'] = 'testString'
+        schematics_workspace_model['workspace_crn'] = 'testString'
 
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {}
@@ -215,7 +209,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}], "environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.POST,
             url,
@@ -230,15 +224,10 @@ class TestCreateProject:
         project_prototype_definition_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
         project_prototype_definition_model['destroy_on_delete'] = True
 
-        # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
-        project_config_auth_trusted_profile_model = {}
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {}
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -261,17 +250,16 @@ class TestCreateProject:
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'testString'
         project_config_prototype_definition_block_model['description'] = 'testString'
-        project_config_prototype_definition_block_model['labels'] = ['testString']
         project_config_prototype_definition_block_model['environment'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model['input'] = input_variable_model
-        project_config_prototype_definition_block_model['setting'] = project_config_setting_model
+        project_config_prototype_definition_block_model['inputs'] = input_variable_model
+        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_id'] = 'testString'
+        schematics_workspace_model['workspace_crn'] = 'testString'
 
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {}
@@ -317,7 +305,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href"}, "last": {"href": "href"}, "previous": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
+        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href"}, "last": {"href": "href"}, "previous": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
         responses.add(
             responses.GET,
             url,
@@ -362,7 +350,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href"}, "last": {"href": "href"}, "previous": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
+        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href"}, "last": {"href": "href"}, "previous": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
         responses.add(
             responses.GET,
             url,
@@ -394,8 +382,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -430,8 +418,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group":"resource_group","state":"ready","event_notifications_crn":"event_notifications_crn","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -469,7 +457,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}], "environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.GET,
             url,
@@ -507,7 +495,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}], "environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.GET,
             url,
@@ -550,7 +538,7 @@ class TestUpdateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}], "environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.PATCH,
             url,
@@ -559,15 +547,15 @@ class TestUpdateProject:
             status=200,
         )
 
-        # Construct a dict representation of a ProjectPrototypePatchDefinitionBlock model
-        project_prototype_patch_definition_block_model = {}
-        project_prototype_patch_definition_block_model['name'] = 'acme-microservice'
-        project_prototype_patch_definition_block_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
-        project_prototype_patch_definition_block_model['destroy_on_delete'] = True
+        # Construct a dict representation of a ProjectPatchDefinitionBlock model
+        project_patch_definition_block_model = {}
+        project_patch_definition_block_model['name'] = 'acme-microservice'
+        project_patch_definition_block_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
+        project_patch_definition_block_model['destroy_on_delete'] = True
 
         # Set up parameter values
         id = 'testString'
-        definition = project_prototype_patch_definition_block_model
+        definition = project_patch_definition_block_model
 
         # Invoke method
         response = _service.update_project(
@@ -581,7 +569,7 @@ class TestUpdateProject:
         assert response.status_code == 200
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
-        assert req_body['definition'] == project_prototype_patch_definition_block_model
+        assert req_body['definition'] == project_patch_definition_block_model
 
     def test_update_project_all_params_with_retries(self):
         # Enable retries and run test_update_project_all_params.
@@ -599,7 +587,7 @@ class TestUpdateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group": "resource_group", "state": "ready", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}], "environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.PATCH,
             url,
@@ -608,15 +596,15 @@ class TestUpdateProject:
             status=200,
         )
 
-        # Construct a dict representation of a ProjectPrototypePatchDefinitionBlock model
-        project_prototype_patch_definition_block_model = {}
-        project_prototype_patch_definition_block_model['name'] = 'acme-microservice'
-        project_prototype_patch_definition_block_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
-        project_prototype_patch_definition_block_model['destroy_on_delete'] = True
+        # Construct a dict representation of a ProjectPatchDefinitionBlock model
+        project_patch_definition_block_model = {}
+        project_patch_definition_block_model['name'] = 'acme-microservice'
+        project_patch_definition_block_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
+        project_patch_definition_block_model['destroy_on_delete'] = True
 
         # Set up parameter values
         id = 'testString'
-        definition = project_prototype_patch_definition_block_model
+        definition = project_patch_definition_block_model
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -764,7 +752,7 @@ class TestCreateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.POST,
             url,
@@ -773,11 +761,11 @@ class TestCreateProjectEnvironment:
             status=201,
         )
 
-        # Construct a dict representation of a EnvironmentAuth model
-        environment_auth_model = {}
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'API_KEY'
-        environment_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
+        # Construct a dict representation of a ProjectConfigAuth model
+        project_config_auth_model = {}
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
@@ -796,7 +784,7 @@ class TestCreateProjectEnvironment:
         environment_definition_required_properties_model = {}
         environment_definition_required_properties_model['name'] = 'development'
         environment_definition_required_properties_model['description'] = 'The environment \'development\''
-        environment_definition_required_properties_model['authorizations'] = environment_auth_model
+        environment_definition_required_properties_model['authorizations'] = project_config_auth_model
         environment_definition_required_properties_model['inputs'] = input_variable_model
         environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
 
@@ -834,7 +822,7 @@ class TestCreateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.POST,
             url,
@@ -843,11 +831,11 @@ class TestCreateProjectEnvironment:
             status=201,
         )
 
-        # Construct a dict representation of a EnvironmentAuth model
-        environment_auth_model = {}
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'API_KEY'
-        environment_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
+        # Construct a dict representation of a ProjectConfigAuth model
+        project_config_auth_model = {}
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
@@ -866,7 +854,7 @@ class TestCreateProjectEnvironment:
         environment_definition_required_properties_model = {}
         environment_definition_required_properties_model['name'] = 'development'
         environment_definition_required_properties_model['description'] = 'The environment \'development\''
-        environment_definition_required_properties_model['authorizations'] = environment_auth_model
+        environment_definition_required_properties_model['authorizations'] = project_config_auth_model
         environment_definition_required_properties_model['inputs'] = input_variable_model
         environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
 
@@ -906,7 +894,7 @@ class TestListProjectEnvironments:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
+        mock_response = '{"environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
         responses.add(
             responses.GET,
             url,
@@ -944,7 +932,7 @@ class TestListProjectEnvironments:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"environments": [{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
+        mock_response = '{"environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
         responses.add(
             responses.GET,
             url,
@@ -987,7 +975,7 @@ class TestGetProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.GET,
             url,
@@ -1027,7 +1015,7 @@ class TestGetProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.GET,
             url,
@@ -1072,7 +1060,7 @@ class TestUpdateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1081,11 +1069,11 @@ class TestUpdateProjectEnvironment:
             status=200,
         )
 
-        # Construct a dict representation of a EnvironmentAuth model
-        environment_auth_model = {}
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'API_KEY'
-        environment_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
+        # Construct a dict representation of a ProjectConfigAuth model
+        project_config_auth_model = {}
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
@@ -1104,7 +1092,7 @@ class TestUpdateProjectEnvironment:
         environment_definition_properties_model = {}
         environment_definition_properties_model['name'] = 'development'
         environment_definition_properties_model['description'] = 'The environment \'development\''
-        environment_definition_properties_model['authorizations'] = environment_auth_model
+        environment_definition_properties_model['authorizations'] = project_config_auth_model
         environment_definition_properties_model['inputs'] = input_variable_model
         environment_definition_properties_model['compliance_profile'] = project_compliance_profile_model
 
@@ -1144,7 +1132,7 @@ class TestUpdateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "created_at": "2019-01-01T12:00:00.000Z", "project_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "target_account": "target_account", "user_modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "method", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1153,11 +1141,11 @@ class TestUpdateProjectEnvironment:
             status=200,
         )
 
-        # Construct a dict representation of a EnvironmentAuth model
-        environment_auth_model = {}
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'API_KEY'
-        environment_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
+        # Construct a dict representation of a ProjectConfigAuth model
+        project_config_auth_model = {}
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
@@ -1176,7 +1164,7 @@ class TestUpdateProjectEnvironment:
         environment_definition_properties_model = {}
         environment_definition_properties_model['name'] = 'development'
         environment_definition_properties_model['description'] = 'The environment \'development\''
-        environment_definition_properties_model['authorizations'] = environment_auth_model
+        environment_definition_properties_model['authorizations'] = project_config_auth_model
         environment_definition_properties_model['inputs'] = input_variable_model
         environment_definition_properties_model['compliance_profile'] = project_compliance_profile_model
 
@@ -1342,7 +1330,7 @@ class TestCreateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}, "approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.POST,
             url,
@@ -1351,15 +1339,10 @@ class TestCreateConfig:
             status=201,
         )
 
-        # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
-        project_config_auth_trusted_profile_model = {}
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {}
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -1372,7 +1355,7 @@ class TestCreateConfig:
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].input.account_id'
+        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
         input_variable_model['resource_group'] = 'stage'
         input_variable_model['access_tags'] = '["env:stage"]'
         input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
@@ -1386,17 +1369,16 @@ class TestCreateConfig:
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'env-stage'
         project_config_prototype_definition_block_model['description'] = 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
-        project_config_prototype_definition_block_model['labels'] = ['env:stage', 'governance:test', 'build:0']
         project_config_prototype_definition_block_model['environment'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
-        project_config_prototype_definition_block_model['input'] = input_variable_model
-        project_config_prototype_definition_block_model['setting'] = project_config_setting_model
+        project_config_prototype_definition_block_model['inputs'] = input_variable_model
+        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_id'] = 'testString'
+        schematics_workspace_model['workspace_crn'] = 'testString'
 
         # Set up parameter values
         project_id = 'testString'
@@ -1435,7 +1417,7 @@ class TestCreateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}, "approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.POST,
             url,
@@ -1444,15 +1426,10 @@ class TestCreateConfig:
             status=201,
         )
 
-        # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
-        project_config_auth_trusted_profile_model = {}
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {}
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -1465,7 +1442,7 @@ class TestCreateConfig:
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].input.account_id'
+        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
         input_variable_model['resource_group'] = 'stage'
         input_variable_model['access_tags'] = '["env:stage"]'
         input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
@@ -1479,17 +1456,16 @@ class TestCreateConfig:
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'env-stage'
         project_config_prototype_definition_block_model['description'] = 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
-        project_config_prototype_definition_block_model['labels'] = ['env:stage', 'governance:test', 'build:0']
         project_config_prototype_definition_block_model['environment'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
-        project_config_prototype_definition_block_model['input'] = input_variable_model
-        project_config_prototype_definition_block_model['setting'] = project_config_setting_model
+        project_config_prototype_definition_block_model['inputs'] = input_variable_model
+        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_id'] = 'testString'
+        schematics_workspace_model['workspace_crn'] = 'testString'
 
         # Set up parameter values
         project_id = 'testString'
@@ -1528,7 +1504,7 @@ class TestListConfigs:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}]}'
+        mock_response = '{"configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}]}'
         responses.add(
             responses.GET,
             url,
@@ -1566,7 +1542,7 @@ class TestListConfigs:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"configs": [{"approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "href": "href", "definition": {"name": "name", "description": "description"}}]}'
+        mock_response = '{"configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}]}'
         responses.add(
             responses.GET,
             url,
@@ -1609,7 +1585,7 @@ class TestGetConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}, "approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.GET,
             url,
@@ -1649,7 +1625,7 @@ class TestGetConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}, "approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.GET,
             url,
@@ -1694,7 +1670,7 @@ class TestUpdateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}, "approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1703,15 +1679,10 @@ class TestUpdateConfig:
             status=200,
         )
 
-        # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
-        project_config_auth_trusted_profile_model = {}
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {}
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -1724,7 +1695,7 @@ class TestUpdateConfig:
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].input.account_id'
+        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
         input_variable_model['resource_group'] = 'stage'
         input_variable_model['access_tags'] = '["env:stage"]'
         input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
@@ -1734,22 +1705,21 @@ class TestUpdateConfig:
         project_config_setting_model = {}
         project_config_setting_model['foo'] = 'testString'
 
-        # Construct a dict representation of a ProjectConfigPrototypePatchDefinitionBlock model
-        project_config_prototype_patch_definition_block_model = {}
-        project_config_prototype_patch_definition_block_model['name'] = 'testString'
-        project_config_prototype_patch_definition_block_model['description'] = 'testString'
-        project_config_prototype_patch_definition_block_model['labels'] = ['testString']
-        project_config_prototype_patch_definition_block_model['environment'] = 'testString'
-        project_config_prototype_patch_definition_block_model['authorizations'] = project_config_auth_model
-        project_config_prototype_patch_definition_block_model['compliance_profile'] = project_compliance_profile_model
-        project_config_prototype_patch_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_patch_definition_block_model['input'] = input_variable_model
-        project_config_prototype_patch_definition_block_model['setting'] = project_config_setting_model
+        # Construct a dict representation of a ProjectConfigPatchDefinitionBlock model
+        project_config_patch_definition_block_model = {}
+        project_config_patch_definition_block_model['name'] = 'testString'
+        project_config_patch_definition_block_model['description'] = 'testString'
+        project_config_patch_definition_block_model['environment'] = 'testString'
+        project_config_patch_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_patch_definition_block_model['compliance_profile'] = project_compliance_profile_model
+        project_config_patch_definition_block_model['locator_id'] = 'testString'
+        project_config_patch_definition_block_model['inputs'] = input_variable_model
+        project_config_patch_definition_block_model['settings'] = project_config_setting_model
 
         # Set up parameter values
         project_id = 'testString'
         id = 'testString'
-        definition = project_config_prototype_patch_definition_block_model
+        definition = project_config_patch_definition_block_model
 
         # Invoke method
         response = _service.update_config(
@@ -1764,7 +1734,7 @@ class TestUpdateConfig:
         assert response.status_code == 200
         # Validate body params
         req_body = json.loads(str(responses.calls[0].request.body, 'utf-8'))
-        assert req_body['definition'] == project_config_prototype_patch_definition_block_model
+        assert req_body['definition'] == project_config_patch_definition_block_model
 
     def test_update_config_all_params_with_retries(self):
         # Enable retries and run test_update_config_all_params.
@@ -1782,7 +1752,7 @@ class TestUpdateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}, "approved_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}, "deployed_version": {"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1791,15 +1761,10 @@ class TestUpdateConfig:
             status=200,
         )
 
-        # Construct a dict representation of a ProjectConfigAuthTrustedProfile model
-        project_config_auth_trusted_profile_model = {}
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {}
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -1812,7 +1777,7 @@ class TestUpdateConfig:
 
         # Construct a dict representation of a InputVariable model
         input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].input.account_id'
+        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
         input_variable_model['resource_group'] = 'stage'
         input_variable_model['access_tags'] = '["env:stage"]'
         input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
@@ -1822,22 +1787,21 @@ class TestUpdateConfig:
         project_config_setting_model = {}
         project_config_setting_model['foo'] = 'testString'
 
-        # Construct a dict representation of a ProjectConfigPrototypePatchDefinitionBlock model
-        project_config_prototype_patch_definition_block_model = {}
-        project_config_prototype_patch_definition_block_model['name'] = 'testString'
-        project_config_prototype_patch_definition_block_model['description'] = 'testString'
-        project_config_prototype_patch_definition_block_model['labels'] = ['testString']
-        project_config_prototype_patch_definition_block_model['environment'] = 'testString'
-        project_config_prototype_patch_definition_block_model['authorizations'] = project_config_auth_model
-        project_config_prototype_patch_definition_block_model['compliance_profile'] = project_compliance_profile_model
-        project_config_prototype_patch_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_patch_definition_block_model['input'] = input_variable_model
-        project_config_prototype_patch_definition_block_model['setting'] = project_config_setting_model
+        # Construct a dict representation of a ProjectConfigPatchDefinitionBlock model
+        project_config_patch_definition_block_model = {}
+        project_config_patch_definition_block_model['name'] = 'testString'
+        project_config_patch_definition_block_model['description'] = 'testString'
+        project_config_patch_definition_block_model['environment'] = 'testString'
+        project_config_patch_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_patch_definition_block_model['compliance_profile'] = project_compliance_profile_model
+        project_config_patch_definition_block_model['locator_id'] = 'testString'
+        project_config_patch_definition_block_model['inputs'] = input_variable_model
+        project_config_patch_definition_block_model['settings'] = project_config_setting_model
 
         # Set up parameter values
         project_id = 'testString'
         id = 'testString'
-        definition = project_config_prototype_patch_definition_block_model
+        definition = project_config_patch_definition_block_model
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -1957,7 +1921,7 @@ class TestForceApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/force_approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2002,7 +1966,7 @@ class TestForceApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/force_approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2048,7 +2012,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2093,7 +2057,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2133,7 +2097,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2178,7 +2142,7 @@ class TestValidateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/validate')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2190,13 +2154,11 @@ class TestValidateConfig:
         # Set up parameter values
         project_id = 'testString'
         id = 'testString'
-        x_auth_refresh_token = 'testString'
 
         # Invoke method
         response = _service.validate_config(
             project_id,
             id,
-            x_auth_refresh_token=x_auth_refresh_token,
             headers={},
         )
 
@@ -2214,53 +2176,13 @@ class TestValidateConfig:
         self.test_validate_config_all_params()
 
     @responses.activate
-    def test_validate_config_required_params(self):
-        """
-        test_validate_config_required_params()
-        """
-        # Set up mock
-        url = preprocess_url('/v1/projects/testString/configs/testString/validate')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
-        responses.add(
-            responses.POST,
-            url,
-            body=mock_response,
-            content_type='application/json',
-            status=202,
-        )
-
-        # Set up parameter values
-        project_id = 'testString'
-        id = 'testString'
-
-        # Invoke method
-        response = _service.validate_config(
-            project_id,
-            id,
-            headers={},
-        )
-
-        # Check for correct operation
-        assert len(responses.calls) == 1
-        assert response.status_code == 202
-
-    def test_validate_config_required_params_with_retries(self):
-        # Enable retries and run test_validate_config_required_params.
-        _service.enable_retries()
-        self.test_validate_config_required_params()
-
-        # Disable retries and run test_validate_config_required_params.
-        _service.disable_retries()
-        self.test_validate_config_required_params()
-
-    @responses.activate
     def test_validate_config_value_error(self):
         """
         test_validate_config_value_error()
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/validate')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2305,7 +2227,7 @@ class TestDeployConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/deploy')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2345,7 +2267,7 @@ class TestDeployConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/deploy')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.POST,
             url,
@@ -2477,7 +2399,7 @@ class TestSyncConfig:
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_id'] = 'us-south.workspace.service.e0106139'
+        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:schematics:us-south:a/38acaf4469814090a4e675dc0c317a0d:95ad49de-ab96-4e7d-a08c-45c38aa448e6:workspace:us-south.workspace.service.e0106139'
 
         # Set up parameter values
         project_id = 'testString'
@@ -2679,7 +2601,7 @@ class TestListConfigVersions:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/versions')
-        mock_response = '{"versions": [{"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}]}'
+        mock_response = '{"versions": [{"state": "approved", "version": 7, "href": "href"}]}'
         responses.add(
             responses.GET,
             url,
@@ -2719,7 +2641,7 @@ class TestListConfigVersions:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/versions')
-        mock_response = '{"versions": [{"needs_attention_state": ["anyValue"], "state": "approved", "version": 7, "href": "href"}]}'
+        mock_response = '{"versions": [{"state": "approved", "version": 7, "href": "href"}]}'
         responses.add(
             responses.GET,
             url,
@@ -2764,7 +2686,7 @@ class TestGetConfigVersion:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/versions/38')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.GET,
             url,
@@ -2806,7 +2728,7 @@ class TestGetConfigVersion:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/versions/38')
-        mock_response = '{"id": "id", "project_id": "project_id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "state": "approved", "update_available": true, "created_at": "2019-01-01T12:00:00.000Z", "user_modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"is_forced": false, "comment": "comment", "timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "last_save": "2019-01-01T12:00:00.000Z", "references": {"anyKey": "anyValue"}, "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}, "cost_estimate": {"version": "version", "currency": "currency", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "status", "summary": {"anyKey": "anyValue"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"anyKey": "anyValue"}, "apply_summary": {"anyKey": "anyValue"}, "destroy_summary": {"anyKey": "anyValue"}, "message_summary": {"anyKey": "anyValue"}, "plan_messages": {"anyKey": "anyValue"}, "apply_messages": {"anyKey": "anyValue"}, "destroy_messages": {"anyKey": "anyValue"}}}}, "schematics": {"workspace_id": "workspace_id"}, "definition": {"name": "name", "description": "description", "labels": ["labels"], "environment": "environment", "authorizations": {"trusted_profile": {"id": "id", "target_iam_id": "target_iam_id"}, "method": "method", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "input": {}, "setting": {}, "type": "terraform_template", "output": [{"name": "name", "description": "description", "value": "anyValue"}]}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn"}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment": "environment", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}, "type": "terraform_template"}}'
         responses.add(
             responses.GET,
             url,
@@ -2942,6 +2864,294 @@ class TestDeleteConfigVersion:
 # region
 
 
+class TestModel_ActionJobApplyMessagesSummary:
+    """
+    Test Class for ActionJobApplyMessagesSummary
+    """
+
+    def test_action_job_apply_messages_summary_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobApplyMessagesSummary
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        terraform_log_analyzer_success_message_model = {}  # TerraformLogAnalyzerSuccessMessage
+        terraform_log_analyzer_success_message_model['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model['id'] = 'testString'
+
+        # Construct a json representation of a ActionJobApplyMessagesSummary model
+        action_job_apply_messages_summary_model_json = {}
+        action_job_apply_messages_summary_model_json['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_apply_messages_summary_model_json['sucess_message'] = [terraform_log_analyzer_success_message_model]
+
+        # Construct a model instance of ActionJobApplyMessagesSummary by calling from_dict on the json representation
+        action_job_apply_messages_summary_model = ActionJobApplyMessagesSummary.from_dict(action_job_apply_messages_summary_model_json)
+        assert action_job_apply_messages_summary_model != False
+
+        # Construct a model instance of ActionJobApplyMessagesSummary by calling from_dict on the json representation
+        action_job_apply_messages_summary_model_dict = ActionJobApplyMessagesSummary.from_dict(action_job_apply_messages_summary_model_json).__dict__
+        action_job_apply_messages_summary_model2 = ActionJobApplyMessagesSummary(**action_job_apply_messages_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_apply_messages_summary_model == action_job_apply_messages_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_apply_messages_summary_model_json2 = action_job_apply_messages_summary_model.to_dict()
+        assert action_job_apply_messages_summary_model_json2 == action_job_apply_messages_summary_model_json
+
+
+class TestModel_ActionJobApplySummary:
+    """
+    Test Class for ActionJobApplySummary
+    """
+
+    def test_action_job_apply_summary_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobApplySummary
+        """
+
+        # Construct a json representation of a ActionJobApplySummary model
+        action_job_apply_summary_model_json = {}
+        action_job_apply_summary_model_json['success'] = 38
+        action_job_apply_summary_model_json['failed'] = 38
+        action_job_apply_summary_model_json['success_resources'] = ['testString']
+        action_job_apply_summary_model_json['failed_resources'] = ['testString']
+
+        # Construct a model instance of ActionJobApplySummary by calling from_dict on the json representation
+        action_job_apply_summary_model = ActionJobApplySummary.from_dict(action_job_apply_summary_model_json)
+        assert action_job_apply_summary_model != False
+
+        # Construct a model instance of ActionJobApplySummary by calling from_dict on the json representation
+        action_job_apply_summary_model_dict = ActionJobApplySummary.from_dict(action_job_apply_summary_model_json).__dict__
+        action_job_apply_summary_model2 = ActionJobApplySummary(**action_job_apply_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_apply_summary_model == action_job_apply_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_apply_summary_model_json2 = action_job_apply_summary_model.to_dict()
+        assert action_job_apply_summary_model_json2 == action_job_apply_summary_model_json
+
+
+class TestModel_ActionJobDestroyMessagesSummary:
+    """
+    Test Class for ActionJobDestroyMessagesSummary
+    """
+
+    def test_action_job_destroy_messages_summary_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobDestroyMessagesSummary
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        # Construct a json representation of a ActionJobDestroyMessagesSummary model
+        action_job_destroy_messages_summary_model_json = {}
+        action_job_destroy_messages_summary_model_json['error_messages'] = [terraform_log_analyzer_error_message_model]
+
+        # Construct a model instance of ActionJobDestroyMessagesSummary by calling from_dict on the json representation
+        action_job_destroy_messages_summary_model = ActionJobDestroyMessagesSummary.from_dict(action_job_destroy_messages_summary_model_json)
+        assert action_job_destroy_messages_summary_model != False
+
+        # Construct a model instance of ActionJobDestroyMessagesSummary by calling from_dict on the json representation
+        action_job_destroy_messages_summary_model_dict = ActionJobDestroyMessagesSummary.from_dict(action_job_destroy_messages_summary_model_json).__dict__
+        action_job_destroy_messages_summary_model2 = ActionJobDestroyMessagesSummary(**action_job_destroy_messages_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_destroy_messages_summary_model == action_job_destroy_messages_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_destroy_messages_summary_model_json2 = action_job_destroy_messages_summary_model.to_dict()
+        assert action_job_destroy_messages_summary_model_json2 == action_job_destroy_messages_summary_model_json
+
+
+class TestModel_ActionJobDestroySummary:
+    """
+    Test Class for ActionJobDestroySummary
+    """
+
+    def test_action_job_destroy_summary_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobDestroySummary
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        action_job_destroy_summary_resources_model = {}  # ActionJobDestroySummaryResources
+        action_job_destroy_summary_resources_model['success'] = ['testString']
+        action_job_destroy_summary_resources_model['failed'] = ['testString']
+        action_job_destroy_summary_resources_model['tainted'] = ['testString']
+
+        # Construct a json representation of a ActionJobDestroySummary model
+        action_job_destroy_summary_model_json = {}
+        action_job_destroy_summary_model_json['success'] = 38
+        action_job_destroy_summary_model_json['failed'] = 38
+        action_job_destroy_summary_model_json['tainted'] = 38
+        action_job_destroy_summary_model_json['resources'] = action_job_destroy_summary_resources_model
+
+        # Construct a model instance of ActionJobDestroySummary by calling from_dict on the json representation
+        action_job_destroy_summary_model = ActionJobDestroySummary.from_dict(action_job_destroy_summary_model_json)
+        assert action_job_destroy_summary_model != False
+
+        # Construct a model instance of ActionJobDestroySummary by calling from_dict on the json representation
+        action_job_destroy_summary_model_dict = ActionJobDestroySummary.from_dict(action_job_destroy_summary_model_json).__dict__
+        action_job_destroy_summary_model2 = ActionJobDestroySummary(**action_job_destroy_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_destroy_summary_model == action_job_destroy_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_destroy_summary_model_json2 = action_job_destroy_summary_model.to_dict()
+        assert action_job_destroy_summary_model_json2 == action_job_destroy_summary_model_json
+
+
+class TestModel_ActionJobDestroySummaryResources:
+    """
+    Test Class for ActionJobDestroySummaryResources
+    """
+
+    def test_action_job_destroy_summary_resources_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobDestroySummaryResources
+        """
+
+        # Construct a json representation of a ActionJobDestroySummaryResources model
+        action_job_destroy_summary_resources_model_json = {}
+        action_job_destroy_summary_resources_model_json['success'] = ['testString']
+        action_job_destroy_summary_resources_model_json['failed'] = ['testString']
+        action_job_destroy_summary_resources_model_json['tainted'] = ['testString']
+
+        # Construct a model instance of ActionJobDestroySummaryResources by calling from_dict on the json representation
+        action_job_destroy_summary_resources_model = ActionJobDestroySummaryResources.from_dict(action_job_destroy_summary_resources_model_json)
+        assert action_job_destroy_summary_resources_model != False
+
+        # Construct a model instance of ActionJobDestroySummaryResources by calling from_dict on the json representation
+        action_job_destroy_summary_resources_model_dict = ActionJobDestroySummaryResources.from_dict(action_job_destroy_summary_resources_model_json).__dict__
+        action_job_destroy_summary_resources_model2 = ActionJobDestroySummaryResources(**action_job_destroy_summary_resources_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_destroy_summary_resources_model == action_job_destroy_summary_resources_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_destroy_summary_resources_model_json2 = action_job_destroy_summary_resources_model.to_dict()
+        assert action_job_destroy_summary_resources_model_json2 == action_job_destroy_summary_resources_model_json
+
+
+class TestModel_ActionJobMessageSummary:
+    """
+    Test Class for ActionJobMessageSummary
+    """
+
+    def test_action_job_message_summary_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobMessageSummary
+        """
+
+        # Construct a json representation of a ActionJobMessageSummary model
+        action_job_message_summary_model_json = {}
+        action_job_message_summary_model_json['info'] = 38
+        action_job_message_summary_model_json['debug'] = 38
+        action_job_message_summary_model_json['error'] = 38
+
+        # Construct a model instance of ActionJobMessageSummary by calling from_dict on the json representation
+        action_job_message_summary_model = ActionJobMessageSummary.from_dict(action_job_message_summary_model_json)
+        assert action_job_message_summary_model != False
+
+        # Construct a model instance of ActionJobMessageSummary by calling from_dict on the json representation
+        action_job_message_summary_model_dict = ActionJobMessageSummary.from_dict(action_job_message_summary_model_json).__dict__
+        action_job_message_summary_model2 = ActionJobMessageSummary(**action_job_message_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_message_summary_model == action_job_message_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_message_summary_model_json2 = action_job_message_summary_model.to_dict()
+        assert action_job_message_summary_model_json2 == action_job_message_summary_model_json
+
+
+class TestModel_ActionJobPlanMessagesSummary:
+    """
+    Test Class for ActionJobPlanMessagesSummary
+    """
+
+    def test_action_job_plan_messages_summary_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobPlanMessagesSummary
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        # Construct a json representation of a ActionJobPlanMessagesSummary model
+        action_job_plan_messages_summary_model_json = {}
+        action_job_plan_messages_summary_model_json['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_plan_messages_summary_model_json['sucess_message'] = ['testString']
+        action_job_plan_messages_summary_model_json['update_message'] = ['testString']
+        action_job_plan_messages_summary_model_json['destroy_message'] = ['testString']
+
+        # Construct a model instance of ActionJobPlanMessagesSummary by calling from_dict on the json representation
+        action_job_plan_messages_summary_model = ActionJobPlanMessagesSummary.from_dict(action_job_plan_messages_summary_model_json)
+        assert action_job_plan_messages_summary_model != False
+
+        # Construct a model instance of ActionJobPlanMessagesSummary by calling from_dict on the json representation
+        action_job_plan_messages_summary_model_dict = ActionJobPlanMessagesSummary.from_dict(action_job_plan_messages_summary_model_json).__dict__
+        action_job_plan_messages_summary_model2 = ActionJobPlanMessagesSummary(**action_job_plan_messages_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_plan_messages_summary_model == action_job_plan_messages_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_plan_messages_summary_model_json2 = action_job_plan_messages_summary_model.to_dict()
+        assert action_job_plan_messages_summary_model_json2 == action_job_plan_messages_summary_model_json
+
+
+class TestModel_ActionJobPlanSummary:
+    """
+    Test Class for ActionJobPlanSummary
+    """
+
+    def test_action_job_plan_summary_serialization(self):
+        """
+        Test serialization/deserialization for ActionJobPlanSummary
+        """
+
+        # Construct a json representation of a ActionJobPlanSummary model
+        action_job_plan_summary_model_json = {}
+        action_job_plan_summary_model_json['add'] = 38
+        action_job_plan_summary_model_json['failed'] = 38
+        action_job_plan_summary_model_json['update'] = 38
+        action_job_plan_summary_model_json['destroy'] = 38
+        action_job_plan_summary_model_json['add_resources'] = ['testString']
+        action_job_plan_summary_model_json['failed_resources'] = ['testString']
+        action_job_plan_summary_model_json['updated_resources'] = ['testString']
+        action_job_plan_summary_model_json['destroy_resources'] = ['testString']
+
+        # Construct a model instance of ActionJobPlanSummary by calling from_dict on the json representation
+        action_job_plan_summary_model = ActionJobPlanSummary.from_dict(action_job_plan_summary_model_json)
+        assert action_job_plan_summary_model != False
+
+        # Construct a model instance of ActionJobPlanSummary by calling from_dict on the json representation
+        action_job_plan_summary_model_dict = ActionJobPlanSummary.from_dict(action_job_plan_summary_model_json).__dict__
+        action_job_plan_summary_model2 = ActionJobPlanSummary(**action_job_plan_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert action_job_plan_summary_model == action_job_plan_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        action_job_plan_summary_model_json2 = action_job_plan_summary_model.to_dict()
+        assert action_job_plan_summary_model_json2 == action_job_plan_summary_model_json
+
+
 class TestModel_ActionJobSummary:
     """
     Test Class for ActionJobSummary
@@ -2952,15 +3162,70 @@ class TestModel_ActionJobSummary:
         Test serialization/deserialization for ActionJobSummary
         """
 
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        action_job_plan_summary_model = {}  # ActionJobPlanSummary
+        action_job_plan_summary_model['add'] = 38
+        action_job_plan_summary_model['failed'] = 38
+        action_job_plan_summary_model['update'] = 38
+        action_job_plan_summary_model['destroy'] = 38
+        action_job_plan_summary_model['add_resources'] = ['testString']
+        action_job_plan_summary_model['failed_resources'] = ['testString']
+        action_job_plan_summary_model['updated_resources'] = ['testString']
+        action_job_plan_summary_model['destroy_resources'] = ['testString']
+
+        action_job_apply_summary_model = {}  # ActionJobApplySummary
+        action_job_apply_summary_model['success'] = 38
+        action_job_apply_summary_model['failed'] = 38
+        action_job_apply_summary_model['success_resources'] = ['testString']
+        action_job_apply_summary_model['failed_resources'] = ['testString']
+
+        action_job_destroy_summary_resources_model = {}  # ActionJobDestroySummaryResources
+        action_job_destroy_summary_resources_model['success'] = ['testString']
+        action_job_destroy_summary_resources_model['failed'] = ['testString']
+        action_job_destroy_summary_resources_model['tainted'] = ['testString']
+
+        action_job_destroy_summary_model = {}  # ActionJobDestroySummary
+        action_job_destroy_summary_model['success'] = 38
+        action_job_destroy_summary_model['failed'] = 38
+        action_job_destroy_summary_model['tainted'] = 38
+        action_job_destroy_summary_model['resources'] = action_job_destroy_summary_resources_model
+
+        action_job_message_summary_model = {}  # ActionJobMessageSummary
+        action_job_message_summary_model['info'] = 38
+        action_job_message_summary_model['debug'] = 38
+        action_job_message_summary_model['error'] = 38
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        action_job_plan_messages_summary_model = {}  # ActionJobPlanMessagesSummary
+        action_job_plan_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_plan_messages_summary_model['sucess_message'] = ['testString']
+        action_job_plan_messages_summary_model['update_message'] = ['testString']
+        action_job_plan_messages_summary_model['destroy_message'] = ['testString']
+
+        terraform_log_analyzer_success_message_model = {}  # TerraformLogAnalyzerSuccessMessage
+        terraform_log_analyzer_success_message_model['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model['id'] = 'testString'
+
+        action_job_apply_messages_summary_model = {}  # ActionJobApplyMessagesSummary
+        action_job_apply_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_apply_messages_summary_model['sucess_message'] = [terraform_log_analyzer_success_message_model]
+
+        action_job_destroy_messages_summary_model = {}  # ActionJobDestroyMessagesSummary
+        action_job_destroy_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+
         # Construct a json representation of a ActionJobSummary model
         action_job_summary_model_json = {}
-        action_job_summary_model_json['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model_json['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model_json['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model_json['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model_json['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model_json['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model_json['destroy_messages'] = {'anyKey': 'anyValue'}
+        action_job_summary_model_json['plan_summary'] = action_job_plan_summary_model
+        action_job_summary_model_json['apply_summary'] = action_job_apply_summary_model
+        action_job_summary_model_json['destroy_summary'] = action_job_destroy_summary_model
+        action_job_summary_model_json['message_summary'] = action_job_message_summary_model
+        action_job_summary_model_json['plan_messages'] = action_job_plan_messages_summary_model
+        action_job_summary_model_json['apply_messages'] = action_job_apply_messages_summary_model
+        action_job_summary_model_json['destroy_messages'] = action_job_destroy_messages_summary_model
 
         # Construct a model instance of ActionJobSummary by calling from_dict on the json representation
         action_job_summary_model = ActionJobSummary.from_dict(action_job_summary_model_json)
@@ -2990,14 +3255,67 @@ class TestModel_ActionJobWithIdAndSummary:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        action_job_plan_summary_model = {}  # ActionJobPlanSummary
+        action_job_plan_summary_model['add'] = 38
+        action_job_plan_summary_model['failed'] = 38
+        action_job_plan_summary_model['update'] = 38
+        action_job_plan_summary_model['destroy'] = 38
+        action_job_plan_summary_model['add_resources'] = ['testString']
+        action_job_plan_summary_model['failed_resources'] = ['testString']
+        action_job_plan_summary_model['updated_resources'] = ['testString']
+        action_job_plan_summary_model['destroy_resources'] = ['testString']
+
+        action_job_apply_summary_model = {}  # ActionJobApplySummary
+        action_job_apply_summary_model['success'] = 38
+        action_job_apply_summary_model['failed'] = 38
+        action_job_apply_summary_model['success_resources'] = ['testString']
+        action_job_apply_summary_model['failed_resources'] = ['testString']
+
+        action_job_destroy_summary_resources_model = {}  # ActionJobDestroySummaryResources
+        action_job_destroy_summary_resources_model['success'] = ['testString']
+        action_job_destroy_summary_resources_model['failed'] = ['testString']
+        action_job_destroy_summary_resources_model['tainted'] = ['testString']
+
+        action_job_destroy_summary_model = {}  # ActionJobDestroySummary
+        action_job_destroy_summary_model['success'] = 38
+        action_job_destroy_summary_model['failed'] = 38
+        action_job_destroy_summary_model['tainted'] = 38
+        action_job_destroy_summary_model['resources'] = action_job_destroy_summary_resources_model
+
+        action_job_message_summary_model = {}  # ActionJobMessageSummary
+        action_job_message_summary_model['info'] = 38
+        action_job_message_summary_model['debug'] = 38
+        action_job_message_summary_model['error'] = 38
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        action_job_plan_messages_summary_model = {}  # ActionJobPlanMessagesSummary
+        action_job_plan_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_plan_messages_summary_model['sucess_message'] = ['testString']
+        action_job_plan_messages_summary_model['update_message'] = ['testString']
+        action_job_plan_messages_summary_model['destroy_message'] = ['testString']
+
+        terraform_log_analyzer_success_message_model = {}  # TerraformLogAnalyzerSuccessMessage
+        terraform_log_analyzer_success_message_model['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model['id'] = 'testString'
+
+        action_job_apply_messages_summary_model = {}  # ActionJobApplyMessagesSummary
+        action_job_apply_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_apply_messages_summary_model['sucess_message'] = [terraform_log_analyzer_success_message_model]
+
+        action_job_destroy_messages_summary_model = {}  # ActionJobDestroyMessagesSummary
+        action_job_destroy_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+
         action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
+        action_job_summary_model['plan_summary'] = action_job_plan_summary_model
+        action_job_summary_model['apply_summary'] = action_job_apply_summary_model
+        action_job_summary_model['destroy_summary'] = action_job_destroy_summary_model
+        action_job_summary_model['message_summary'] = action_job_message_summary_model
+        action_job_summary_model['plan_messages'] = action_job_plan_messages_summary_model
+        action_job_summary_model['apply_messages'] = action_job_apply_messages_summary_model
+        action_job_summary_model['destroy_messages'] = action_job_destroy_messages_summary_model
 
         # Construct a json representation of a ActionJobWithIdAndSummary model
         action_job_with_id_and_summary_model_json = {}
@@ -3018,6 +3336,39 @@ class TestModel_ActionJobWithIdAndSummary:
         # Convert model instance back to dict and verify no loss of data
         action_job_with_id_and_summary_model_json2 = action_job_with_id_and_summary_model.to_dict()
         assert action_job_with_id_and_summary_model_json2 == action_job_with_id_and_summary_model_json
+
+
+class TestModel_CodeRiskAnalyzerLogsSummary:
+    """
+    Test Class for CodeRiskAnalyzerLogsSummary
+    """
+
+    def test_code_risk_analyzer_logs_summary_serialization(self):
+        """
+        Test serialization/deserialization for CodeRiskAnalyzerLogsSummary
+        """
+
+        # Construct a json representation of a CodeRiskAnalyzerLogsSummary model
+        code_risk_analyzer_logs_summary_model_json = {}
+        code_risk_analyzer_logs_summary_model_json['total'] = 'testString'
+        code_risk_analyzer_logs_summary_model_json['passed'] = 'testString'
+        code_risk_analyzer_logs_summary_model_json['failed'] = 'testString'
+        code_risk_analyzer_logs_summary_model_json['skipped'] = 'testString'
+
+        # Construct a model instance of CodeRiskAnalyzerLogsSummary by calling from_dict on the json representation
+        code_risk_analyzer_logs_summary_model = CodeRiskAnalyzerLogsSummary.from_dict(code_risk_analyzer_logs_summary_model_json)
+        assert code_risk_analyzer_logs_summary_model != False
+
+        # Construct a model instance of CodeRiskAnalyzerLogsSummary by calling from_dict on the json representation
+        code_risk_analyzer_logs_summary_model_dict = CodeRiskAnalyzerLogsSummary.from_dict(code_risk_analyzer_logs_summary_model_json).__dict__
+        code_risk_analyzer_logs_summary_model2 = CodeRiskAnalyzerLogsSummary(**code_risk_analyzer_logs_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert code_risk_analyzer_logs_summary_model == code_risk_analyzer_logs_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        code_risk_analyzer_logs_summary_model_json2 = code_risk_analyzer_logs_summary_model.to_dict()
+        assert code_risk_analyzer_logs_summary_model_json2 == code_risk_analyzer_logs_summary_model_json
 
 
 class TestModel_CumulativeNeedsAttention:
@@ -3065,10 +3416,19 @@ class TestModel_Environment:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        environment_auth_model = {}  # EnvironmentAuth
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'testString'
-        environment_auth_model['api_key'] = 'testString'
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
+
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
 
         input_variable_model = {}  # InputVariable
         input_variable_model['foo'] = 'testString'
@@ -3083,18 +3443,17 @@ class TestModel_Environment:
         environment_definition_required_properties_model = {}  # EnvironmentDefinitionRequiredProperties
         environment_definition_required_properties_model['name'] = 'testString'
         environment_definition_required_properties_model['description'] = 'testString'
-        environment_definition_required_properties_model['authorizations'] = environment_auth_model
+        environment_definition_required_properties_model['authorizations'] = project_config_auth_model
         environment_definition_required_properties_model['inputs'] = input_variable_model
         environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
 
         # Construct a json representation of a Environment model
         environment_model_json = {}
         environment_model_json['id'] = 'testString'
-        environment_model_json['project_id'] = 'testString'
+        environment_model_json['project'] = project_reference_model
         environment_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        environment_model_json['project_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         environment_model_json['target_account'] = 'testString'
-        environment_model_json['user_modified_at'] = '2019-01-01T12:00:00Z'
+        environment_model_json['modified_at'] = '2019-01-01T12:00:00Z'
         environment_model_json['definition'] = environment_definition_required_properties_model
 
         # Construct a model instance of Environment by calling from_dict on the json representation
@@ -3113,36 +3472,75 @@ class TestModel_Environment:
         assert environment_model_json2 == environment_model_json
 
 
-class TestModel_EnvironmentAuth:
+class TestModel_EnvironmentCollection:
     """
-    Test Class for EnvironmentAuth
+    Test Class for EnvironmentCollection
     """
 
-    def test_environment_auth_serialization(self):
+    def test_environment_collection_serialization(self):
         """
-        Test serialization/deserialization for EnvironmentAuth
+        Test serialization/deserialization for EnvironmentCollection
         """
 
-        # Construct a json representation of a EnvironmentAuth model
-        environment_auth_model_json = {}
-        environment_auth_model_json['trusted_profile_id'] = 'testString'
-        environment_auth_model_json['method'] = 'testString'
-        environment_auth_model_json['api_key'] = 'testString'
+        # Construct dict forms of any model objects needed in order to build this model.
 
-        # Construct a model instance of EnvironmentAuth by calling from_dict on the json representation
-        environment_auth_model = EnvironmentAuth.from_dict(environment_auth_model_json)
-        assert environment_auth_model != False
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
 
-        # Construct a model instance of EnvironmentAuth by calling from_dict on the json representation
-        environment_auth_model_dict = EnvironmentAuth.from_dict(environment_auth_model_json).__dict__
-        environment_auth_model2 = EnvironmentAuth(**environment_auth_model_dict)
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        input_variable_model = {}  # InputVariable
+        input_variable_model['foo'] = 'testString'
+
+        project_compliance_profile_model = {}  # ProjectComplianceProfile
+        project_compliance_profile_model['id'] = 'testString'
+        project_compliance_profile_model['instance_id'] = 'testString'
+        project_compliance_profile_model['instance_location'] = 'testString'
+        project_compliance_profile_model['attachment_id'] = 'testString'
+        project_compliance_profile_model['profile_name'] = 'testString'
+
+        environment_definition_required_properties_model = {}  # EnvironmentDefinitionRequiredProperties
+        environment_definition_required_properties_model['name'] = 'testString'
+        environment_definition_required_properties_model['description'] = 'testString'
+        environment_definition_required_properties_model['authorizations'] = project_config_auth_model
+        environment_definition_required_properties_model['inputs'] = input_variable_model
+        environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
+
+        environment_model = {}  # Environment
+        environment_model['id'] = 'testString'
+        environment_model['project'] = project_reference_model
+        environment_model['created_at'] = '2019-01-01T12:00:00Z'
+        environment_model['target_account'] = 'testString'
+        environment_model['modified_at'] = '2019-01-01T12:00:00Z'
+        environment_model['definition'] = environment_definition_required_properties_model
+
+        # Construct a json representation of a EnvironmentCollection model
+        environment_collection_model_json = {}
+        environment_collection_model_json['environments'] = [environment_model]
+
+        # Construct a model instance of EnvironmentCollection by calling from_dict on the json representation
+        environment_collection_model = EnvironmentCollection.from_dict(environment_collection_model_json)
+        assert environment_collection_model != False
+
+        # Construct a model instance of EnvironmentCollection by calling from_dict on the json representation
+        environment_collection_model_dict = EnvironmentCollection.from_dict(environment_collection_model_json).__dict__
+        environment_collection_model2 = EnvironmentCollection(**environment_collection_model_dict)
 
         # Verify the model instances are equivalent
-        assert environment_auth_model == environment_auth_model2
+        assert environment_collection_model == environment_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        environment_auth_model_json2 = environment_auth_model.to_dict()
-        assert environment_auth_model_json2 == environment_auth_model_json
+        environment_collection_model_json2 = environment_collection_model.to_dict()
+        assert environment_collection_model_json2 == environment_collection_model_json
 
 
 class TestModel_EnvironmentDefinitionNameDescription:
@@ -3188,10 +3586,10 @@ class TestModel_EnvironmentDefinitionProperties:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        environment_auth_model = {}  # EnvironmentAuth
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'testString'
-        environment_auth_model['api_key'] = 'testString'
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
 
         input_variable_model = {}  # InputVariable
         input_variable_model['foo'] = 'testString'
@@ -3207,7 +3605,7 @@ class TestModel_EnvironmentDefinitionProperties:
         environment_definition_properties_model_json = {}
         environment_definition_properties_model_json['name'] = 'testString'
         environment_definition_properties_model_json['description'] = 'testString'
-        environment_definition_properties_model_json['authorizations'] = environment_auth_model
+        environment_definition_properties_model_json['authorizations'] = project_config_auth_model
         environment_definition_properties_model_json['inputs'] = input_variable_model
         environment_definition_properties_model_json['compliance_profile'] = project_compliance_profile_model
 
@@ -3239,10 +3637,10 @@ class TestModel_EnvironmentDefinitionRequiredProperties:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        environment_auth_model = {}  # EnvironmentAuth
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'testString'
-        environment_auth_model['api_key'] = 'testString'
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
 
         input_variable_model = {}  # InputVariable
         input_variable_model['foo'] = 'testString'
@@ -3258,7 +3656,7 @@ class TestModel_EnvironmentDefinitionRequiredProperties:
         environment_definition_required_properties_model_json = {}
         environment_definition_required_properties_model_json['name'] = 'testString'
         environment_definition_required_properties_model_json['description'] = 'testString'
-        environment_definition_required_properties_model_json['authorizations'] = environment_auth_model
+        environment_definition_required_properties_model_json['authorizations'] = project_config_auth_model
         environment_definition_required_properties_model_json['inputs'] = input_variable_model
         environment_definition_required_properties_model_json['compliance_profile'] = project_compliance_profile_model
 
@@ -3306,69 +3704,6 @@ class TestModel_EnvironmentDeleteResponse:
         # Convert model instance back to dict and verify no loss of data
         environment_delete_response_model_json2 = environment_delete_response_model.to_dict()
         assert environment_delete_response_model_json2 == environment_delete_response_model_json
-
-
-class TestModel_EnvironmentListResponse:
-    """
-    Test Class for EnvironmentListResponse
-    """
-
-    def test_environment_list_response_serialization(self):
-        """
-        Test serialization/deserialization for EnvironmentListResponse
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        environment_auth_model = {}  # EnvironmentAuth
-        environment_auth_model['trusted_profile_id'] = 'testString'
-        environment_auth_model['method'] = 'testString'
-        environment_auth_model['api_key'] = 'testString'
-
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_compliance_profile_model = {}  # ProjectComplianceProfile
-        project_compliance_profile_model['id'] = 'testString'
-        project_compliance_profile_model['instance_id'] = 'testString'
-        project_compliance_profile_model['instance_location'] = 'testString'
-        project_compliance_profile_model['attachment_id'] = 'testString'
-        project_compliance_profile_model['profile_name'] = 'testString'
-
-        environment_definition_required_properties_model = {}  # EnvironmentDefinitionRequiredProperties
-        environment_definition_required_properties_model['name'] = 'testString'
-        environment_definition_required_properties_model['description'] = 'testString'
-        environment_definition_required_properties_model['authorizations'] = environment_auth_model
-        environment_definition_required_properties_model['inputs'] = input_variable_model
-        environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
-
-        environment_model = {}  # Environment
-        environment_model['id'] = 'testString'
-        environment_model['project_id'] = 'testString'
-        environment_model['created_at'] = '2019-01-01T12:00:00Z'
-        environment_model['project_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
-        environment_model['target_account'] = 'testString'
-        environment_model['user_modified_at'] = '2019-01-01T12:00:00Z'
-        environment_model['definition'] = environment_definition_required_properties_model
-
-        # Construct a json representation of a EnvironmentListResponse model
-        environment_list_response_model_json = {}
-        environment_list_response_model_json['environments'] = [environment_model]
-
-        # Construct a model instance of EnvironmentListResponse by calling from_dict on the json representation
-        environment_list_response_model = EnvironmentListResponse.from_dict(environment_list_response_model_json)
-        assert environment_list_response_model != False
-
-        # Construct a model instance of EnvironmentListResponse by calling from_dict on the json representation
-        environment_list_response_model_dict = EnvironmentListResponse.from_dict(environment_list_response_model_json).__dict__
-        environment_list_response_model2 = EnvironmentListResponse(**environment_list_response_model_dict)
-
-        # Verify the model instances are equivalent
-        assert environment_list_response_model == environment_list_response_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        environment_list_response_model_json2 = environment_list_response_model.to_dict()
-        assert environment_list_response_model_json2 == environment_list_response_model_json
 
 
 class TestModel_InputVariable:
@@ -3427,14 +3762,67 @@ class TestModel_LastActionWithSummary:
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
         pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
 
+        action_job_plan_summary_model = {}  # ActionJobPlanSummary
+        action_job_plan_summary_model['add'] = 38
+        action_job_plan_summary_model['failed'] = 38
+        action_job_plan_summary_model['update'] = 38
+        action_job_plan_summary_model['destroy'] = 38
+        action_job_plan_summary_model['add_resources'] = ['testString']
+        action_job_plan_summary_model['failed_resources'] = ['testString']
+        action_job_plan_summary_model['updated_resources'] = ['testString']
+        action_job_plan_summary_model['destroy_resources'] = ['testString']
+
+        action_job_apply_summary_model = {}  # ActionJobApplySummary
+        action_job_apply_summary_model['success'] = 38
+        action_job_apply_summary_model['failed'] = 38
+        action_job_apply_summary_model['success_resources'] = ['testString']
+        action_job_apply_summary_model['failed_resources'] = ['testString']
+
+        action_job_destroy_summary_resources_model = {}  # ActionJobDestroySummaryResources
+        action_job_destroy_summary_resources_model['success'] = ['testString']
+        action_job_destroy_summary_resources_model['failed'] = ['testString']
+        action_job_destroy_summary_resources_model['tainted'] = ['testString']
+
+        action_job_destroy_summary_model = {}  # ActionJobDestroySummary
+        action_job_destroy_summary_model['success'] = 38
+        action_job_destroy_summary_model['failed'] = 38
+        action_job_destroy_summary_model['tainted'] = 38
+        action_job_destroy_summary_model['resources'] = action_job_destroy_summary_resources_model
+
+        action_job_message_summary_model = {}  # ActionJobMessageSummary
+        action_job_message_summary_model['info'] = 38
+        action_job_message_summary_model['debug'] = 38
+        action_job_message_summary_model['error'] = 38
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        action_job_plan_messages_summary_model = {}  # ActionJobPlanMessagesSummary
+        action_job_plan_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_plan_messages_summary_model['sucess_message'] = ['testString']
+        action_job_plan_messages_summary_model['update_message'] = ['testString']
+        action_job_plan_messages_summary_model['destroy_message'] = ['testString']
+
+        terraform_log_analyzer_success_message_model = {}  # TerraformLogAnalyzerSuccessMessage
+        terraform_log_analyzer_success_message_model['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model['id'] = 'testString'
+
+        action_job_apply_messages_summary_model = {}  # ActionJobApplyMessagesSummary
+        action_job_apply_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_apply_messages_summary_model['sucess_message'] = [terraform_log_analyzer_success_message_model]
+
+        action_job_destroy_messages_summary_model = {}  # ActionJobDestroyMessagesSummary
+        action_job_destroy_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+
         action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
+        action_job_summary_model['plan_summary'] = action_job_plan_summary_model
+        action_job_summary_model['apply_summary'] = action_job_apply_summary_model
+        action_job_summary_model['destroy_summary'] = action_job_destroy_summary_model
+        action_job_summary_model['message_summary'] = action_job_message_summary_model
+        action_job_summary_model['plan_messages'] = action_job_plan_messages_summary_model
+        action_job_summary_model['apply_messages'] = action_job_apply_messages_summary_model
+        action_job_summary_model['destroy_messages'] = action_job_destroy_messages_summary_model
 
         action_job_with_id_and_summary_model = {}  # ActionJobWithIdAndSummary
         action_job_with_id_and_summary_model['id'] = 'testString'
@@ -3480,14 +3868,67 @@ class TestModel_LastValidatedActionWithSummary:
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
         pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
 
+        action_job_plan_summary_model = {}  # ActionJobPlanSummary
+        action_job_plan_summary_model['add'] = 38
+        action_job_plan_summary_model['failed'] = 38
+        action_job_plan_summary_model['update'] = 38
+        action_job_plan_summary_model['destroy'] = 38
+        action_job_plan_summary_model['add_resources'] = ['testString']
+        action_job_plan_summary_model['failed_resources'] = ['testString']
+        action_job_plan_summary_model['updated_resources'] = ['testString']
+        action_job_plan_summary_model['destroy_resources'] = ['testString']
+
+        action_job_apply_summary_model = {}  # ActionJobApplySummary
+        action_job_apply_summary_model['success'] = 38
+        action_job_apply_summary_model['failed'] = 38
+        action_job_apply_summary_model['success_resources'] = ['testString']
+        action_job_apply_summary_model['failed_resources'] = ['testString']
+
+        action_job_destroy_summary_resources_model = {}  # ActionJobDestroySummaryResources
+        action_job_destroy_summary_resources_model['success'] = ['testString']
+        action_job_destroy_summary_resources_model['failed'] = ['testString']
+        action_job_destroy_summary_resources_model['tainted'] = ['testString']
+
+        action_job_destroy_summary_model = {}  # ActionJobDestroySummary
+        action_job_destroy_summary_model['success'] = 38
+        action_job_destroy_summary_model['failed'] = 38
+        action_job_destroy_summary_model['tainted'] = 38
+        action_job_destroy_summary_model['resources'] = action_job_destroy_summary_resources_model
+
+        action_job_message_summary_model = {}  # ActionJobMessageSummary
+        action_job_message_summary_model['info'] = 38
+        action_job_message_summary_model['debug'] = 38
+        action_job_message_summary_model['error'] = 38
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        action_job_plan_messages_summary_model = {}  # ActionJobPlanMessagesSummary
+        action_job_plan_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_plan_messages_summary_model['sucess_message'] = ['testString']
+        action_job_plan_messages_summary_model['update_message'] = ['testString']
+        action_job_plan_messages_summary_model['destroy_message'] = ['testString']
+
+        terraform_log_analyzer_success_message_model = {}  # TerraformLogAnalyzerSuccessMessage
+        terraform_log_analyzer_success_message_model['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model['id'] = 'testString'
+
+        action_job_apply_messages_summary_model = {}  # ActionJobApplyMessagesSummary
+        action_job_apply_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_apply_messages_summary_model['sucess_message'] = [terraform_log_analyzer_success_message_model]
+
+        action_job_destroy_messages_summary_model = {}  # ActionJobDestroyMessagesSummary
+        action_job_destroy_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+
         action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
+        action_job_summary_model['plan_summary'] = action_job_plan_summary_model
+        action_job_summary_model['apply_summary'] = action_job_apply_summary_model
+        action_job_summary_model['destroy_summary'] = action_job_destroy_summary_model
+        action_job_summary_model['message_summary'] = action_job_message_summary_model
+        action_job_summary_model['plan_messages'] = action_job_plan_messages_summary_model
+        action_job_summary_model['apply_messages'] = action_job_apply_messages_summary_model
+        action_job_summary_model['destroy_messages'] = action_job_destroy_messages_summary_model
 
         action_job_with_id_and_summary_model = {}  # ActionJobWithIdAndSummary
         action_job_with_id_and_summary_model['id'] = 'testString'
@@ -3495,7 +3936,7 @@ class TestModel_LastValidatedActionWithSummary:
 
         project_config_metadata_cost_estimate_model = {}  # ProjectConfigMetadataCostEstimate
         project_config_metadata_cost_estimate_model['version'] = 'testString'
-        project_config_metadata_cost_estimate_model['currency'] = 'testString'
+        project_config_metadata_cost_estimate_model['currency'] = 'USD'
         project_config_metadata_cost_estimate_model['totalHourlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model['totalMonthlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model['pastTotalHourlyCost'] = 'testString'
@@ -3505,12 +3946,18 @@ class TestModel_LastValidatedActionWithSummary:
         project_config_metadata_cost_estimate_model['timeGenerated'] = '2019-01-01T12:00:00Z'
         project_config_metadata_cost_estimate_model['user_id'] = 'testString'
 
-        project_config_metadata_cra_logs_model = {}  # ProjectConfigMetadataCraLogs
-        project_config_metadata_cra_logs_model['cra_version'] = 'testString'
-        project_config_metadata_cra_logs_model['schema_version'] = 'testString'
-        project_config_metadata_cra_logs_model['status'] = 'testString'
-        project_config_metadata_cra_logs_model['summary'] = {'anyKey': 'anyValue'}
-        project_config_metadata_cra_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
+        code_risk_analyzer_logs_summary_model = {}  # CodeRiskAnalyzerLogsSummary
+        code_risk_analyzer_logs_summary_model['total'] = 'testString'
+        code_risk_analyzer_logs_summary_model['passed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['failed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['skipped'] = 'testString'
+
+        project_config_metadata_code_risk_analyzer_logs_model = {}  # ProjectConfigMetadataCodeRiskAnalyzerLogs
+        project_config_metadata_code_risk_analyzer_logs_model['cra_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model['schema_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model['status'] = 'passed'
+        project_config_metadata_code_risk_analyzer_logs_model['summary'] = code_risk_analyzer_logs_summary_model
+        project_config_metadata_code_risk_analyzer_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
 
         # Construct a json representation of a LastValidatedActionWithSummary model
         last_validated_action_with_summary_model_json = {}
@@ -3520,7 +3967,7 @@ class TestModel_LastValidatedActionWithSummary:
         last_validated_action_with_summary_model_json['post_job'] = pre_post_action_job_with_id_and_summary_model
         last_validated_action_with_summary_model_json['job'] = action_job_with_id_and_summary_model
         last_validated_action_with_summary_model_json['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model_json['cra_logs'] = project_config_metadata_cra_logs_model
+        last_validated_action_with_summary_model_json['cra_logs'] = project_config_metadata_code_risk_analyzer_logs_model
 
         # Construct a model instance of LastValidatedActionWithSummary by calling from_dict on the json representation
         last_validated_action_with_summary_model = LastValidatedActionWithSummary.from_dict(last_validated_action_with_summary_model_json)
@@ -3650,108 +4097,45 @@ class TestModel_Project:
         cumulative_needs_attention_model['config_version'] = 38
 
         project_config_version_summary_model = {}  # ProjectConfigVersionSummary
-        project_config_version_summary_model['needs_attention_state'] = ['testString']
         project_config_version_summary_model['state'] = 'approved'
         project_config_version_summary_model['version'] = 38
         project_config_version_summary_model['href'] = 'testString'
-
-        project_config_metadata_last_approved_model = {}  # ProjectConfigMetadataLastApproved
-        project_config_metadata_last_approved_model['is_forced'] = True
-        project_config_metadata_last_approved_model['comment'] = 'testString'
-        project_config_metadata_last_approved_model['timestamp'] = '2019-01-01T12:00:00Z'
-        project_config_metadata_last_approved_model['user_id'] = 'testString'
-
-        pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
-        pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
-
-        action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
-
-        action_job_with_id_and_summary_model = {}  # ActionJobWithIdAndSummary
-        action_job_with_id_and_summary_model['id'] = 'testString'
-        action_job_with_id_and_summary_model['summary'] = action_job_summary_model
-
-        project_config_metadata_cost_estimate_model = {}  # ProjectConfigMetadataCostEstimate
-        project_config_metadata_cost_estimate_model['version'] = 'testString'
-        project_config_metadata_cost_estimate_model['currency'] = 'testString'
-        project_config_metadata_cost_estimate_model['totalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['totalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['pastTotalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['pastTotalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['diffTotalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['diffTotalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['timeGenerated'] = '2019-01-01T12:00:00Z'
-        project_config_metadata_cost_estimate_model['user_id'] = 'testString'
-
-        project_config_metadata_cra_logs_model = {}  # ProjectConfigMetadataCraLogs
-        project_config_metadata_cra_logs_model['cra_version'] = 'testString'
-        project_config_metadata_cra_logs_model['schema_version'] = 'testString'
-        project_config_metadata_cra_logs_model['status'] = 'testString'
-        project_config_metadata_cra_logs_model['summary'] = {'anyKey': 'anyValue'}
-        project_config_metadata_cra_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
-
-        last_validated_action_with_summary_model = {}  # LastValidatedActionWithSummary
-        last_validated_action_with_summary_model['href'] = 'testString'
-        last_validated_action_with_summary_model['result'] = 'failed'
-        last_validated_action_with_summary_model['pre_job'] = pre_post_action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['job'] = action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model['cra_logs'] = project_config_metadata_cra_logs_model
-
-        last_action_with_summary_model = {}  # LastActionWithSummary
-        last_action_with_summary_model['href'] = 'testString'
-        last_action_with_summary_model['result'] = 'failed'
-        last_action_with_summary_model['pre_job'] = pre_post_action_job_with_id_and_summary_model
-        last_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
-        last_action_with_summary_model['job'] = action_job_with_id_and_summary_model
-
-        schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_id'] = 'testString'
 
         project_config_definition_name_description_model = {}  # ProjectConfigDefinitionNameDescription
         project_config_definition_name_description_model['name'] = 'testString'
         project_config_definition_name_description_model['description'] = 'testString'
 
-        project_config_collection_member_model = {}  # ProjectConfigCollectionMember
-        project_config_collection_member_model['approved_version'] = project_config_version_summary_model
-        project_config_collection_member_model['deployed_version'] = project_config_version_summary_model
-        project_config_collection_member_model['id'] = 'testString'
-        project_config_collection_member_model['project_id'] = 'testString'
-        project_config_collection_member_model['version'] = 38
-        project_config_collection_member_model['is_draft'] = True
-        project_config_collection_member_model['needs_attention_state'] = ['testString']
-        project_config_collection_member_model['state'] = 'approved'
-        project_config_collection_member_model['update_available'] = True
-        project_config_collection_member_model['created_at'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model['user_modified_at'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model['last_approved'] = project_config_metadata_last_approved_model
-        project_config_collection_member_model['last_save'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model['references'] = {'anyKey': 'anyValue'}
-        project_config_collection_member_model['last_validated'] = last_validated_action_with_summary_model
-        project_config_collection_member_model['last_deployed'] = last_action_with_summary_model
-        project_config_collection_member_model['last_undeployed'] = last_action_with_summary_model
-        project_config_collection_member_model['schematics'] = schematics_workspace_model
-        project_config_collection_member_model['href'] = 'testString'
-        project_config_collection_member_model['definition'] = project_config_definition_name_description_model
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
+
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
+
+        project_config_summary_model = {}  # ProjectConfigSummary
+        project_config_summary_model['approved_version'] = project_config_version_summary_model
+        project_config_summary_model['deployed_version'] = project_config_version_summary_model
+        project_config_summary_model['id'] = 'testString'
+        project_config_summary_model['version'] = 38
+        project_config_summary_model['state'] = 'approved'
+        project_config_summary_model['created_at'] = '2019-01-01T12:00:00Z'
+        project_config_summary_model['modified_at'] = '2019-01-01T12:00:00Z'
+        project_config_summary_model['href'] = 'testString'
+        project_config_summary_model['definition'] = project_config_definition_name_description_model
+        project_config_summary_model['project'] = project_reference_model
 
         environment_definition_name_description_model = {}  # EnvironmentDefinitionNameDescription
         environment_definition_name_description_model['name'] = 'testString'
         environment_definition_name_description_model['description'] = 'testString'
 
-        project_environment_collection_member_model = {}  # ProjectEnvironmentCollectionMember
-        project_environment_collection_member_model['id'] = 'testString'
-        project_environment_collection_member_model['project_id'] = 'testString'
-        project_environment_collection_member_model['created_at'] = '2019-01-01T12:00:00Z'
-        project_environment_collection_member_model['href'] = 'testString'
-        project_environment_collection_member_model['definition'] = environment_definition_name_description_model
+        project_environment_summary_model = {}  # ProjectEnvironmentSummary
+        project_environment_summary_model['id'] = 'testString'
+        project_environment_summary_model['project'] = project_reference_model
+        project_environment_summary_model['created_at'] = '2019-01-01T12:00:00Z'
+        project_environment_summary_model['href'] = 'testString'
+        project_environment_summary_model['definition'] = environment_definition_name_description_model
 
         project_definition_properties_model = {}  # ProjectDefinitionProperties
         project_definition_properties_model['name'] = 'testString'
@@ -3763,14 +4147,15 @@ class TestModel_Project:
         project_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
-        project_model_json['cumulative_needs_attention_view_error'] = True
+        project_model_json['cumulative_needs_attention_view_error'] = False
         project_model_json['id'] = 'testString'
         project_model_json['location'] = 'testString'
-        project_model_json['resource_group'] = 'testString'
+        project_model_json['resource_group_id'] = 'testString'
         project_model_json['state'] = 'ready'
+        project_model_json['resource_group'] = 'testString'
         project_model_json['event_notifications_crn'] = 'testString'
-        project_model_json['configs'] = [project_config_collection_member_model]
-        project_model_json['environments'] = [project_environment_collection_member_model]
+        project_model_json['configs'] = [project_config_summary_model]
+        project_model_json['environments'] = [project_environment_summary_model]
         project_model_json['definition'] = project_definition_properties_model
 
         # Construct a model instance of Project by calling from_dict on the json representation
@@ -3815,17 +4200,16 @@ class TestModel_ProjectCollection:
         project_definition_properties_model['description'] = 'testString'
         project_definition_properties_model['destroy_on_delete'] = True
 
-        project_collection_member_with_metadata_model = {}  # ProjectCollectionMemberWithMetadata
-        project_collection_member_with_metadata_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
-        project_collection_member_with_metadata_model['created_at'] = '2019-01-01T12:00:00Z'
-        project_collection_member_with_metadata_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
-        project_collection_member_with_metadata_model['cumulative_needs_attention_view_error'] = True
-        project_collection_member_with_metadata_model['id'] = 'testString'
-        project_collection_member_with_metadata_model['location'] = 'testString'
-        project_collection_member_with_metadata_model['resource_group'] = 'testString'
-        project_collection_member_with_metadata_model['state'] = 'ready'
-        project_collection_member_with_metadata_model['event_notifications_crn'] = 'testString'
-        project_collection_member_with_metadata_model['definition'] = project_definition_properties_model
+        project_summary_model = {}  # ProjectSummary
+        project_summary_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_summary_model['created_at'] = '2019-01-01T12:00:00Z'
+        project_summary_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
+        project_summary_model['cumulative_needs_attention_view_error'] = False
+        project_summary_model['id'] = 'testString'
+        project_summary_model['location'] = 'testString'
+        project_summary_model['resource_group_id'] = 'testString'
+        project_summary_model['state'] = 'ready'
+        project_summary_model['definition'] = project_definition_properties_model
 
         # Construct a json representation of a ProjectCollection model
         project_collection_model_json = {}
@@ -3835,7 +4219,7 @@ class TestModel_ProjectCollection:
         project_collection_model_json['last'] = pagination_link_model
         project_collection_model_json['previous'] = pagination_link_model
         project_collection_model_json['next'] = pagination_link_model
-        project_collection_model_json['projects'] = [project_collection_member_with_metadata_model]
+        project_collection_model_json['projects'] = [project_summary_model]
 
         # Construct a model instance of ProjectCollection by calling from_dict on the json representation
         project_collection_model = ProjectCollection.from_dict(project_collection_model_json)
@@ -3851,58 +4235,6 @@ class TestModel_ProjectCollection:
         # Convert model instance back to dict and verify no loss of data
         project_collection_model_json2 = project_collection_model.to_dict()
         assert project_collection_model_json2 == project_collection_model_json
-
-
-class TestModel_ProjectCollectionMemberWithMetadata:
-    """
-    Test Class for ProjectCollectionMemberWithMetadata
-    """
-
-    def test_project_collection_member_with_metadata_serialization(self):
-        """
-        Test serialization/deserialization for ProjectCollectionMemberWithMetadata
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        cumulative_needs_attention_model = {}  # CumulativeNeedsAttention
-        cumulative_needs_attention_model['event'] = 'testString'
-        cumulative_needs_attention_model['event_id'] = 'testString'
-        cumulative_needs_attention_model['config_id'] = 'testString'
-        cumulative_needs_attention_model['config_version'] = 38
-
-        project_definition_properties_model = {}  # ProjectDefinitionProperties
-        project_definition_properties_model['name'] = 'testString'
-        project_definition_properties_model['description'] = 'testString'
-        project_definition_properties_model['destroy_on_delete'] = True
-
-        # Construct a json representation of a ProjectCollectionMemberWithMetadata model
-        project_collection_member_with_metadata_model_json = {}
-        project_collection_member_with_metadata_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
-        project_collection_member_with_metadata_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        project_collection_member_with_metadata_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
-        project_collection_member_with_metadata_model_json['cumulative_needs_attention_view_error'] = True
-        project_collection_member_with_metadata_model_json['id'] = 'testString'
-        project_collection_member_with_metadata_model_json['location'] = 'testString'
-        project_collection_member_with_metadata_model_json['resource_group'] = 'testString'
-        project_collection_member_with_metadata_model_json['state'] = 'ready'
-        project_collection_member_with_metadata_model_json['event_notifications_crn'] = 'testString'
-        project_collection_member_with_metadata_model_json['definition'] = project_definition_properties_model
-
-        # Construct a model instance of ProjectCollectionMemberWithMetadata by calling from_dict on the json representation
-        project_collection_member_with_metadata_model = ProjectCollectionMemberWithMetadata.from_dict(project_collection_member_with_metadata_model_json)
-        assert project_collection_member_with_metadata_model != False
-
-        # Construct a model instance of ProjectCollectionMemberWithMetadata by calling from_dict on the json representation
-        project_collection_member_with_metadata_model_dict = ProjectCollectionMemberWithMetadata.from_dict(project_collection_member_with_metadata_model_json).__dict__
-        project_collection_member_with_metadata_model2 = ProjectCollectionMemberWithMetadata(**project_collection_member_with_metadata_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_collection_member_with_metadata_model == project_collection_member_with_metadata_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_collection_member_with_metadata_model_json2 = project_collection_member_with_metadata_model.to_dict()
-        assert project_collection_member_with_metadata_model_json2 == project_collection_member_with_metadata_model_json
 
 
 class TestModel_ProjectComplianceProfile:
@@ -3952,23 +4284,76 @@ class TestModel_ProjectConfig:
         # Construct dict forms of any model objects needed in order to build this model.
 
         project_config_metadata_last_approved_model = {}  # ProjectConfigMetadataLastApproved
-        project_config_metadata_last_approved_model['is_forced'] = True
+        project_config_metadata_last_approved_model['at'] = '2019-01-01T12:00:00Z'
         project_config_metadata_last_approved_model['comment'] = 'testString'
-        project_config_metadata_last_approved_model['timestamp'] = '2019-01-01T12:00:00Z'
+        project_config_metadata_last_approved_model['is_forced'] = True
         project_config_metadata_last_approved_model['user_id'] = 'testString'
 
         pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
         pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
 
+        action_job_plan_summary_model = {}  # ActionJobPlanSummary
+        action_job_plan_summary_model['add'] = 38
+        action_job_plan_summary_model['failed'] = 38
+        action_job_plan_summary_model['update'] = 38
+        action_job_plan_summary_model['destroy'] = 38
+        action_job_plan_summary_model['add_resources'] = ['testString']
+        action_job_plan_summary_model['failed_resources'] = ['testString']
+        action_job_plan_summary_model['updated_resources'] = ['testString']
+        action_job_plan_summary_model['destroy_resources'] = ['testString']
+
+        action_job_apply_summary_model = {}  # ActionJobApplySummary
+        action_job_apply_summary_model['success'] = 38
+        action_job_apply_summary_model['failed'] = 38
+        action_job_apply_summary_model['success_resources'] = ['testString']
+        action_job_apply_summary_model['failed_resources'] = ['testString']
+
+        action_job_destroy_summary_resources_model = {}  # ActionJobDestroySummaryResources
+        action_job_destroy_summary_resources_model['success'] = ['testString']
+        action_job_destroy_summary_resources_model['failed'] = ['testString']
+        action_job_destroy_summary_resources_model['tainted'] = ['testString']
+
+        action_job_destroy_summary_model = {}  # ActionJobDestroySummary
+        action_job_destroy_summary_model['success'] = 38
+        action_job_destroy_summary_model['failed'] = 38
+        action_job_destroy_summary_model['tainted'] = 38
+        action_job_destroy_summary_model['resources'] = action_job_destroy_summary_resources_model
+
+        action_job_message_summary_model = {}  # ActionJobMessageSummary
+        action_job_message_summary_model['info'] = 38
+        action_job_message_summary_model['debug'] = 38
+        action_job_message_summary_model['error'] = 38
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        action_job_plan_messages_summary_model = {}  # ActionJobPlanMessagesSummary
+        action_job_plan_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_plan_messages_summary_model['sucess_message'] = ['testString']
+        action_job_plan_messages_summary_model['update_message'] = ['testString']
+        action_job_plan_messages_summary_model['destroy_message'] = ['testString']
+
+        terraform_log_analyzer_success_message_model = {}  # TerraformLogAnalyzerSuccessMessage
+        terraform_log_analyzer_success_message_model['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model['id'] = 'testString'
+
+        action_job_apply_messages_summary_model = {}  # ActionJobApplyMessagesSummary
+        action_job_apply_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_apply_messages_summary_model['sucess_message'] = [terraform_log_analyzer_success_message_model]
+
+        action_job_destroy_messages_summary_model = {}  # ActionJobDestroyMessagesSummary
+        action_job_destroy_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+
         action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
+        action_job_summary_model['plan_summary'] = action_job_plan_summary_model
+        action_job_summary_model['apply_summary'] = action_job_apply_summary_model
+        action_job_summary_model['destroy_summary'] = action_job_destroy_summary_model
+        action_job_summary_model['message_summary'] = action_job_message_summary_model
+        action_job_summary_model['plan_messages'] = action_job_plan_messages_summary_model
+        action_job_summary_model['apply_messages'] = action_job_apply_messages_summary_model
+        action_job_summary_model['destroy_messages'] = action_job_destroy_messages_summary_model
 
         action_job_with_id_and_summary_model = {}  # ActionJobWithIdAndSummary
         action_job_with_id_and_summary_model['id'] = 'testString'
@@ -3976,7 +4361,7 @@ class TestModel_ProjectConfig:
 
         project_config_metadata_cost_estimate_model = {}  # ProjectConfigMetadataCostEstimate
         project_config_metadata_cost_estimate_model['version'] = 'testString'
-        project_config_metadata_cost_estimate_model['currency'] = 'testString'
+        project_config_metadata_cost_estimate_model['currency'] = 'USD'
         project_config_metadata_cost_estimate_model['totalHourlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model['totalMonthlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model['pastTotalHourlyCost'] = 'testString'
@@ -3986,12 +4371,18 @@ class TestModel_ProjectConfig:
         project_config_metadata_cost_estimate_model['timeGenerated'] = '2019-01-01T12:00:00Z'
         project_config_metadata_cost_estimate_model['user_id'] = 'testString'
 
-        project_config_metadata_cra_logs_model = {}  # ProjectConfigMetadataCraLogs
-        project_config_metadata_cra_logs_model['cra_version'] = 'testString'
-        project_config_metadata_cra_logs_model['schema_version'] = 'testString'
-        project_config_metadata_cra_logs_model['status'] = 'testString'
-        project_config_metadata_cra_logs_model['summary'] = {'anyKey': 'anyValue'}
-        project_config_metadata_cra_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
+        code_risk_analyzer_logs_summary_model = {}  # CodeRiskAnalyzerLogsSummary
+        code_risk_analyzer_logs_summary_model['total'] = 'testString'
+        code_risk_analyzer_logs_summary_model['passed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['failed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['skipped'] = 'testString'
+
+        project_config_metadata_code_risk_analyzer_logs_model = {}  # ProjectConfigMetadataCodeRiskAnalyzerLogs
+        project_config_metadata_code_risk_analyzer_logs_model['cra_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model['schema_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model['status'] = 'passed'
+        project_config_metadata_code_risk_analyzer_logs_model['summary'] = code_risk_analyzer_logs_summary_model
+        project_config_metadata_code_risk_analyzer_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
 
         last_validated_action_with_summary_model = {}  # LastValidatedActionWithSummary
         last_validated_action_with_summary_model['href'] = 'testString'
@@ -4000,7 +4391,7 @@ class TestModel_ProjectConfig:
         last_validated_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
         last_validated_action_with_summary_model['job'] = action_job_with_id_and_summary_model
         last_validated_action_with_summary_model['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model['cra_logs'] = project_config_metadata_cra_logs_model
+        last_validated_action_with_summary_model['cra_logs'] = project_config_metadata_code_risk_analyzer_logs_model
 
         last_action_with_summary_model = {}  # LastActionWithSummary
         last_action_with_summary_model['href'] = 'testString'
@@ -4009,16 +4400,26 @@ class TestModel_ProjectConfig:
         last_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
         last_action_with_summary_model['job'] = action_job_with_id_and_summary_model
 
-        schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_id'] = 'testString'
+        output_value_model = {}  # OutputValue
+        output_value_model['name'] = 'testString'
+        output_value_model['description'] = 'testString'
+        output_value_model['value'] = 'testString'
 
-        project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
+
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
+
+        schematics_workspace_model = {}  # SchematicsWorkspace
+        schematics_workspace_model['workspace_crn'] = 'testString'
 
         project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         project_compliance_profile_model = {}  # ProjectComplianceProfile
@@ -4034,26 +4435,18 @@ class TestModel_ProjectConfig:
         project_config_setting_model = {}  # ProjectConfigSetting
         project_config_setting_model['foo'] = 'testString'
 
-        output_value_model = {}  # OutputValue
-        output_value_model['name'] = 'testString'
-        output_value_model['description'] = 'testString'
-        output_value_model['value'] = 'testString'
-
         project_config_response_definition_model = {}  # ProjectConfigResponseDefinition
         project_config_response_definition_model['name'] = 'testString'
         project_config_response_definition_model['description'] = 'testString'
-        project_config_response_definition_model['labels'] = ['testString']
         project_config_response_definition_model['environment'] = 'testString'
         project_config_response_definition_model['authorizations'] = project_config_auth_model
         project_config_response_definition_model['compliance_profile'] = project_compliance_profile_model
         project_config_response_definition_model['locator_id'] = 'testString'
-        project_config_response_definition_model['input'] = input_variable_model
-        project_config_response_definition_model['setting'] = project_config_setting_model
+        project_config_response_definition_model['inputs'] = input_variable_model
+        project_config_response_definition_model['settings'] = project_config_setting_model
         project_config_response_definition_model['type'] = 'terraform_template'
-        project_config_response_definition_model['output'] = [output_value_model]
 
         project_config_version_summary_model = {}  # ProjectConfigVersionSummary
-        project_config_version_summary_model['needs_attention_state'] = ['testString']
         project_config_version_summary_model['state'] = 'approved'
         project_config_version_summary_model['version'] = 38
         project_config_version_summary_model['href'] = 'testString'
@@ -4061,21 +4454,22 @@ class TestModel_ProjectConfig:
         # Construct a json representation of a ProjectConfig model
         project_config_model_json = {}
         project_config_model_json['id'] = 'testString'
-        project_config_model_json['project_id'] = 'testString'
         project_config_model_json['version'] = 38
         project_config_model_json['is_draft'] = True
-        project_config_model_json['needs_attention_state'] = ['testString']
-        project_config_model_json['state'] = 'approved'
-        project_config_model_json['update_available'] = True
+        project_config_model_json['needs_attention_state'] = []
         project_config_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        project_config_model_json['user_modified_at'] = '2019-01-01T12:00:00Z'
+        project_config_model_json['modified_at'] = '2019-01-01T12:00:00Z'
         project_config_model_json['last_approved'] = project_config_metadata_last_approved_model
-        project_config_model_json['last_save'] = '2019-01-01T12:00:00Z'
-        project_config_model_json['references'] = {'anyKey': 'anyValue'}
+        project_config_model_json['last_saved_at'] = '2019-01-01T12:00:00Z'
         project_config_model_json['last_validated'] = last_validated_action_with_summary_model
         project_config_model_json['last_deployed'] = last_action_with_summary_model
         project_config_model_json['last_undeployed'] = last_action_with_summary_model
+        project_config_model_json['outputs'] = [output_value_model]
+        project_config_model_json['project'] = project_reference_model
+        project_config_model_json['references'] = {'anyKey': 'anyValue'}
         project_config_model_json['schematics'] = schematics_workspace_model
+        project_config_model_json['state'] = 'approved'
+        project_config_model_json['update_available'] = True
         project_config_model_json['definition'] = project_config_response_definition_model
         project_config_model_json['approved_version'] = project_config_version_summary_model
         project_config_model_json['deployed_version'] = project_config_version_summary_model
@@ -4106,16 +4500,10 @@ class TestModel_ProjectConfigAuth:
         Test serialization/deserialization for ProjectConfigAuth
         """
 
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         # Construct a json representation of a ProjectConfigAuth model
         project_config_auth_model_json = {}
-        project_config_auth_model_json['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model_json['method'] = 'testString'
+        project_config_auth_model_json['trusted_profile_id'] = 'testString'
+        project_config_auth_model_json['method'] = 'api_key'
         project_config_auth_model_json['api_key'] = 'testString'
 
         # Construct a model instance of ProjectConfigAuth by calling from_dict on the json representation
@@ -4134,37 +4522,6 @@ class TestModel_ProjectConfigAuth:
         assert project_config_auth_model_json2 == project_config_auth_model_json
 
 
-class TestModel_ProjectConfigAuthTrustedProfile:
-    """
-    Test Class for ProjectConfigAuthTrustedProfile
-    """
-
-    def test_project_config_auth_trusted_profile_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigAuthTrustedProfile
-        """
-
-        # Construct a json representation of a ProjectConfigAuthTrustedProfile model
-        project_config_auth_trusted_profile_model_json = {}
-        project_config_auth_trusted_profile_model_json['id'] = 'testString'
-        project_config_auth_trusted_profile_model_json['target_iam_id'] = 'testString'
-
-        # Construct a model instance of ProjectConfigAuthTrustedProfile by calling from_dict on the json representation
-        project_config_auth_trusted_profile_model = ProjectConfigAuthTrustedProfile.from_dict(project_config_auth_trusted_profile_model_json)
-        assert project_config_auth_trusted_profile_model != False
-
-        # Construct a model instance of ProjectConfigAuthTrustedProfile by calling from_dict on the json representation
-        project_config_auth_trusted_profile_model_dict = ProjectConfigAuthTrustedProfile.from_dict(project_config_auth_trusted_profile_model_json).__dict__
-        project_config_auth_trusted_profile_model2 = ProjectConfigAuthTrustedProfile(**project_config_auth_trusted_profile_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_auth_trusted_profile_model == project_config_auth_trusted_profile_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_auth_trusted_profile_model_json2 = project_config_auth_trusted_profile_model.to_dict()
-        assert project_config_auth_trusted_profile_model_json2 == project_config_auth_trusted_profile_model_json
-
-
 class TestModel_ProjectConfigCollection:
     """
     Test Class for ProjectConfigCollection
@@ -4178,101 +4535,38 @@ class TestModel_ProjectConfigCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         project_config_version_summary_model = {}  # ProjectConfigVersionSummary
-        project_config_version_summary_model['needs_attention_state'] = ['testString']
         project_config_version_summary_model['state'] = 'approved'
         project_config_version_summary_model['version'] = 38
         project_config_version_summary_model['href'] = 'testString'
-
-        project_config_metadata_last_approved_model = {}  # ProjectConfigMetadataLastApproved
-        project_config_metadata_last_approved_model['is_forced'] = True
-        project_config_metadata_last_approved_model['comment'] = 'testString'
-        project_config_metadata_last_approved_model['timestamp'] = '2019-01-01T12:00:00Z'
-        project_config_metadata_last_approved_model['user_id'] = 'testString'
-
-        pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
-        pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
-
-        action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
-
-        action_job_with_id_and_summary_model = {}  # ActionJobWithIdAndSummary
-        action_job_with_id_and_summary_model['id'] = 'testString'
-        action_job_with_id_and_summary_model['summary'] = action_job_summary_model
-
-        project_config_metadata_cost_estimate_model = {}  # ProjectConfigMetadataCostEstimate
-        project_config_metadata_cost_estimate_model['version'] = 'testString'
-        project_config_metadata_cost_estimate_model['currency'] = 'testString'
-        project_config_metadata_cost_estimate_model['totalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['totalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['pastTotalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['pastTotalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['diffTotalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['diffTotalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['timeGenerated'] = '2019-01-01T12:00:00Z'
-        project_config_metadata_cost_estimate_model['user_id'] = 'testString'
-
-        project_config_metadata_cra_logs_model = {}  # ProjectConfigMetadataCraLogs
-        project_config_metadata_cra_logs_model['cra_version'] = 'testString'
-        project_config_metadata_cra_logs_model['schema_version'] = 'testString'
-        project_config_metadata_cra_logs_model['status'] = 'testString'
-        project_config_metadata_cra_logs_model['summary'] = {'anyKey': 'anyValue'}
-        project_config_metadata_cra_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
-
-        last_validated_action_with_summary_model = {}  # LastValidatedActionWithSummary
-        last_validated_action_with_summary_model['href'] = 'testString'
-        last_validated_action_with_summary_model['result'] = 'failed'
-        last_validated_action_with_summary_model['pre_job'] = pre_post_action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['job'] = action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model['cra_logs'] = project_config_metadata_cra_logs_model
-
-        last_action_with_summary_model = {}  # LastActionWithSummary
-        last_action_with_summary_model['href'] = 'testString'
-        last_action_with_summary_model['result'] = 'failed'
-        last_action_with_summary_model['pre_job'] = pre_post_action_job_with_id_and_summary_model
-        last_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
-        last_action_with_summary_model['job'] = action_job_with_id_and_summary_model
-
-        schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_id'] = 'testString'
 
         project_config_definition_name_description_model = {}  # ProjectConfigDefinitionNameDescription
         project_config_definition_name_description_model['name'] = 'testString'
         project_config_definition_name_description_model['description'] = 'testString'
 
-        project_config_collection_member_model = {}  # ProjectConfigCollectionMember
-        project_config_collection_member_model['approved_version'] = project_config_version_summary_model
-        project_config_collection_member_model['deployed_version'] = project_config_version_summary_model
-        project_config_collection_member_model['id'] = 'testString'
-        project_config_collection_member_model['project_id'] = 'testString'
-        project_config_collection_member_model['version'] = 38
-        project_config_collection_member_model['is_draft'] = True
-        project_config_collection_member_model['needs_attention_state'] = ['testString']
-        project_config_collection_member_model['state'] = 'approved'
-        project_config_collection_member_model['update_available'] = True
-        project_config_collection_member_model['created_at'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model['user_modified_at'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model['last_approved'] = project_config_metadata_last_approved_model
-        project_config_collection_member_model['last_save'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model['references'] = {'anyKey': 'anyValue'}
-        project_config_collection_member_model['last_validated'] = last_validated_action_with_summary_model
-        project_config_collection_member_model['last_deployed'] = last_action_with_summary_model
-        project_config_collection_member_model['last_undeployed'] = last_action_with_summary_model
-        project_config_collection_member_model['schematics'] = schematics_workspace_model
-        project_config_collection_member_model['href'] = 'testString'
-        project_config_collection_member_model['definition'] = project_config_definition_name_description_model
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
+
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
+
+        project_config_summary_model = {}  # ProjectConfigSummary
+        project_config_summary_model['approved_version'] = project_config_version_summary_model
+        project_config_summary_model['deployed_version'] = project_config_version_summary_model
+        project_config_summary_model['id'] = 'testString'
+        project_config_summary_model['version'] = 38
+        project_config_summary_model['state'] = 'approved'
+        project_config_summary_model['created_at'] = '2019-01-01T12:00:00Z'
+        project_config_summary_model['modified_at'] = '2019-01-01T12:00:00Z'
+        project_config_summary_model['href'] = 'testString'
+        project_config_summary_model['definition'] = project_config_definition_name_description_model
+        project_config_summary_model['project'] = project_reference_model
 
         # Construct a json representation of a ProjectConfigCollection model
         project_config_collection_model_json = {}
-        project_config_collection_model_json['configs'] = [project_config_collection_member_model]
+        project_config_collection_model_json['configs'] = [project_config_summary_model]
 
         # Construct a model instance of ProjectConfigCollection by calling from_dict on the json representation
         project_config_collection_model = ProjectConfigCollection.from_dict(project_config_collection_model_json)
@@ -4288,128 +4582,6 @@ class TestModel_ProjectConfigCollection:
         # Convert model instance back to dict and verify no loss of data
         project_config_collection_model_json2 = project_config_collection_model.to_dict()
         assert project_config_collection_model_json2 == project_config_collection_model_json
-
-
-class TestModel_ProjectConfigCollectionMember:
-    """
-    Test Class for ProjectConfigCollectionMember
-    """
-
-    def test_project_config_collection_member_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigCollectionMember
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        project_config_version_summary_model = {}  # ProjectConfigVersionSummary
-        project_config_version_summary_model['needs_attention_state'] = ['testString']
-        project_config_version_summary_model['state'] = 'approved'
-        project_config_version_summary_model['version'] = 38
-        project_config_version_summary_model['href'] = 'testString'
-
-        project_config_metadata_last_approved_model = {}  # ProjectConfigMetadataLastApproved
-        project_config_metadata_last_approved_model['is_forced'] = True
-        project_config_metadata_last_approved_model['comment'] = 'testString'
-        project_config_metadata_last_approved_model['timestamp'] = '2019-01-01T12:00:00Z'
-        project_config_metadata_last_approved_model['user_id'] = 'testString'
-
-        pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
-        pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
-
-        action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
-
-        action_job_with_id_and_summary_model = {}  # ActionJobWithIdAndSummary
-        action_job_with_id_and_summary_model['id'] = 'testString'
-        action_job_with_id_and_summary_model['summary'] = action_job_summary_model
-
-        project_config_metadata_cost_estimate_model = {}  # ProjectConfigMetadataCostEstimate
-        project_config_metadata_cost_estimate_model['version'] = 'testString'
-        project_config_metadata_cost_estimate_model['currency'] = 'testString'
-        project_config_metadata_cost_estimate_model['totalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['totalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['pastTotalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['pastTotalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['diffTotalHourlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['diffTotalMonthlyCost'] = 'testString'
-        project_config_metadata_cost_estimate_model['timeGenerated'] = '2019-01-01T12:00:00Z'
-        project_config_metadata_cost_estimate_model['user_id'] = 'testString'
-
-        project_config_metadata_cra_logs_model = {}  # ProjectConfigMetadataCraLogs
-        project_config_metadata_cra_logs_model['cra_version'] = 'testString'
-        project_config_metadata_cra_logs_model['schema_version'] = 'testString'
-        project_config_metadata_cra_logs_model['status'] = 'testString'
-        project_config_metadata_cra_logs_model['summary'] = {'anyKey': 'anyValue'}
-        project_config_metadata_cra_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
-
-        last_validated_action_with_summary_model = {}  # LastValidatedActionWithSummary
-        last_validated_action_with_summary_model['href'] = 'testString'
-        last_validated_action_with_summary_model['result'] = 'failed'
-        last_validated_action_with_summary_model['pre_job'] = pre_post_action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['job'] = action_job_with_id_and_summary_model
-        last_validated_action_with_summary_model['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model['cra_logs'] = project_config_metadata_cra_logs_model
-
-        last_action_with_summary_model = {}  # LastActionWithSummary
-        last_action_with_summary_model['href'] = 'testString'
-        last_action_with_summary_model['result'] = 'failed'
-        last_action_with_summary_model['pre_job'] = pre_post_action_job_with_id_and_summary_model
-        last_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
-        last_action_with_summary_model['job'] = action_job_with_id_and_summary_model
-
-        schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_id'] = 'testString'
-
-        project_config_definition_name_description_model = {}  # ProjectConfigDefinitionNameDescription
-        project_config_definition_name_description_model['name'] = 'testString'
-        project_config_definition_name_description_model['description'] = 'testString'
-
-        # Construct a json representation of a ProjectConfigCollectionMember model
-        project_config_collection_member_model_json = {}
-        project_config_collection_member_model_json['approved_version'] = project_config_version_summary_model
-        project_config_collection_member_model_json['deployed_version'] = project_config_version_summary_model
-        project_config_collection_member_model_json['id'] = 'testString'
-        project_config_collection_member_model_json['project_id'] = 'testString'
-        project_config_collection_member_model_json['version'] = 38
-        project_config_collection_member_model_json['is_draft'] = True
-        project_config_collection_member_model_json['needs_attention_state'] = ['testString']
-        project_config_collection_member_model_json['state'] = 'approved'
-        project_config_collection_member_model_json['update_available'] = True
-        project_config_collection_member_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model_json['user_modified_at'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model_json['last_approved'] = project_config_metadata_last_approved_model
-        project_config_collection_member_model_json['last_save'] = '2019-01-01T12:00:00Z'
-        project_config_collection_member_model_json['references'] = {'anyKey': 'anyValue'}
-        project_config_collection_member_model_json['last_validated'] = last_validated_action_with_summary_model
-        project_config_collection_member_model_json['last_deployed'] = last_action_with_summary_model
-        project_config_collection_member_model_json['last_undeployed'] = last_action_with_summary_model
-        project_config_collection_member_model_json['schematics'] = schematics_workspace_model
-        project_config_collection_member_model_json['href'] = 'testString'
-        project_config_collection_member_model_json['definition'] = project_config_definition_name_description_model
-
-        # Construct a model instance of ProjectConfigCollectionMember by calling from_dict on the json representation
-        project_config_collection_member_model = ProjectConfigCollectionMember.from_dict(project_config_collection_member_model_json)
-        assert project_config_collection_member_model != False
-
-        # Construct a model instance of ProjectConfigCollectionMember by calling from_dict on the json representation
-        project_config_collection_member_model_dict = ProjectConfigCollectionMember.from_dict(project_config_collection_member_model_json).__dict__
-        project_config_collection_member_model2 = ProjectConfigCollectionMember(**project_config_collection_member_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_collection_member_model == project_config_collection_member_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_collection_member_model_json2 = project_config_collection_member_model.to_dict()
-        assert project_config_collection_member_model_json2 == project_config_collection_member_model_json
 
 
 class TestModel_ProjectConfigDefinitionNameDescription:
@@ -4473,6 +4645,48 @@ class TestModel_ProjectConfigDelete:
         assert project_config_delete_model_json2 == project_config_delete_model_json
 
 
+class TestModel_ProjectConfigMetadataCodeRiskAnalyzerLogs:
+    """
+    Test Class for ProjectConfigMetadataCodeRiskAnalyzerLogs
+    """
+
+    def test_project_config_metadata_code_risk_analyzer_logs_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigMetadataCodeRiskAnalyzerLogs
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        code_risk_analyzer_logs_summary_model = {}  # CodeRiskAnalyzerLogsSummary
+        code_risk_analyzer_logs_summary_model['total'] = 'testString'
+        code_risk_analyzer_logs_summary_model['passed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['failed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['skipped'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigMetadataCodeRiskAnalyzerLogs model
+        project_config_metadata_code_risk_analyzer_logs_model_json = {}
+        project_config_metadata_code_risk_analyzer_logs_model_json['cra_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model_json['schema_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model_json['status'] = 'passed'
+        project_config_metadata_code_risk_analyzer_logs_model_json['summary'] = code_risk_analyzer_logs_summary_model
+        project_config_metadata_code_risk_analyzer_logs_model_json['timestamp'] = '2019-01-01T12:00:00Z'
+
+        # Construct a model instance of ProjectConfigMetadataCodeRiskAnalyzerLogs by calling from_dict on the json representation
+        project_config_metadata_code_risk_analyzer_logs_model = ProjectConfigMetadataCodeRiskAnalyzerLogs.from_dict(project_config_metadata_code_risk_analyzer_logs_model_json)
+        assert project_config_metadata_code_risk_analyzer_logs_model != False
+
+        # Construct a model instance of ProjectConfigMetadataCodeRiskAnalyzerLogs by calling from_dict on the json representation
+        project_config_metadata_code_risk_analyzer_logs_model_dict = ProjectConfigMetadataCodeRiskAnalyzerLogs.from_dict(project_config_metadata_code_risk_analyzer_logs_model_json).__dict__
+        project_config_metadata_code_risk_analyzer_logs_model2 = ProjectConfigMetadataCodeRiskAnalyzerLogs(**project_config_metadata_code_risk_analyzer_logs_model_dict)
+
+        # Verify the model instances are equivalent
+        assert project_config_metadata_code_risk_analyzer_logs_model == project_config_metadata_code_risk_analyzer_logs_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_metadata_code_risk_analyzer_logs_model_json2 = project_config_metadata_code_risk_analyzer_logs_model.to_dict()
+        assert project_config_metadata_code_risk_analyzer_logs_model_json2 == project_config_metadata_code_risk_analyzer_logs_model_json
+
+
 class TestModel_ProjectConfigMetadataCostEstimate:
     """
     Test Class for ProjectConfigMetadataCostEstimate
@@ -4486,7 +4700,7 @@ class TestModel_ProjectConfigMetadataCostEstimate:
         # Construct a json representation of a ProjectConfigMetadataCostEstimate model
         project_config_metadata_cost_estimate_model_json = {}
         project_config_metadata_cost_estimate_model_json['version'] = 'testString'
-        project_config_metadata_cost_estimate_model_json['currency'] = 'testString'
+        project_config_metadata_cost_estimate_model_json['currency'] = 'USD'
         project_config_metadata_cost_estimate_model_json['totalHourlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model_json['totalMonthlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model_json['pastTotalHourlyCost'] = 'testString'
@@ -4512,40 +4726,6 @@ class TestModel_ProjectConfigMetadataCostEstimate:
         assert project_config_metadata_cost_estimate_model_json2 == project_config_metadata_cost_estimate_model_json
 
 
-class TestModel_ProjectConfigMetadataCraLogs:
-    """
-    Test Class for ProjectConfigMetadataCraLogs
-    """
-
-    def test_project_config_metadata_cra_logs_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigMetadataCraLogs
-        """
-
-        # Construct a json representation of a ProjectConfigMetadataCraLogs model
-        project_config_metadata_cra_logs_model_json = {}
-        project_config_metadata_cra_logs_model_json['cra_version'] = 'testString'
-        project_config_metadata_cra_logs_model_json['schema_version'] = 'testString'
-        project_config_metadata_cra_logs_model_json['status'] = 'testString'
-        project_config_metadata_cra_logs_model_json['summary'] = {'anyKey': 'anyValue'}
-        project_config_metadata_cra_logs_model_json['timestamp'] = '2019-01-01T12:00:00Z'
-
-        # Construct a model instance of ProjectConfigMetadataCraLogs by calling from_dict on the json representation
-        project_config_metadata_cra_logs_model = ProjectConfigMetadataCraLogs.from_dict(project_config_metadata_cra_logs_model_json)
-        assert project_config_metadata_cra_logs_model != False
-
-        # Construct a model instance of ProjectConfigMetadataCraLogs by calling from_dict on the json representation
-        project_config_metadata_cra_logs_model_dict = ProjectConfigMetadataCraLogs.from_dict(project_config_metadata_cra_logs_model_json).__dict__
-        project_config_metadata_cra_logs_model2 = ProjectConfigMetadataCraLogs(**project_config_metadata_cra_logs_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_metadata_cra_logs_model == project_config_metadata_cra_logs_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_metadata_cra_logs_model_json2 = project_config_metadata_cra_logs_model.to_dict()
-        assert project_config_metadata_cra_logs_model_json2 == project_config_metadata_cra_logs_model_json
-
-
 class TestModel_ProjectConfigMetadataLastApproved:
     """
     Test Class for ProjectConfigMetadataLastApproved
@@ -4558,9 +4738,9 @@ class TestModel_ProjectConfigMetadataLastApproved:
 
         # Construct a json representation of a ProjectConfigMetadataLastApproved model
         project_config_metadata_last_approved_model_json = {}
-        project_config_metadata_last_approved_model_json['is_forced'] = True
+        project_config_metadata_last_approved_model_json['at'] = '2019-01-01T12:00:00Z'
         project_config_metadata_last_approved_model_json['comment'] = 'testString'
-        project_config_metadata_last_approved_model_json['timestamp'] = '2019-01-01T12:00:00Z'
+        project_config_metadata_last_approved_model_json['is_forced'] = True
         project_config_metadata_last_approved_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
@@ -4579,6 +4759,63 @@ class TestModel_ProjectConfigMetadataLastApproved:
         assert project_config_metadata_last_approved_model_json2 == project_config_metadata_last_approved_model_json
 
 
+class TestModel_ProjectConfigPatchDefinitionBlock:
+    """
+    Test Class for ProjectConfigPatchDefinitionBlock
+    """
+
+    def test_project_config_patch_definition_block_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigPatchDefinitionBlock
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        project_compliance_profile_model = {}  # ProjectComplianceProfile
+        project_compliance_profile_model['id'] = 'testString'
+        project_compliance_profile_model['instance_id'] = 'testString'
+        project_compliance_profile_model['instance_location'] = 'testString'
+        project_compliance_profile_model['attachment_id'] = 'testString'
+        project_compliance_profile_model['profile_name'] = 'testString'
+
+        input_variable_model = {}  # InputVariable
+        input_variable_model['foo'] = 'testString'
+
+        project_config_setting_model = {}  # ProjectConfigSetting
+        project_config_setting_model['foo'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigPatchDefinitionBlock model
+        project_config_patch_definition_block_model_json = {}
+        project_config_patch_definition_block_model_json['name'] = 'testString'
+        project_config_patch_definition_block_model_json['description'] = 'testString'
+        project_config_patch_definition_block_model_json['environment'] = 'testString'
+        project_config_patch_definition_block_model_json['authorizations'] = project_config_auth_model
+        project_config_patch_definition_block_model_json['compliance_profile'] = project_compliance_profile_model
+        project_config_patch_definition_block_model_json['locator_id'] = 'testString'
+        project_config_patch_definition_block_model_json['inputs'] = input_variable_model
+        project_config_patch_definition_block_model_json['settings'] = project_config_setting_model
+
+        # Construct a model instance of ProjectConfigPatchDefinitionBlock by calling from_dict on the json representation
+        project_config_patch_definition_block_model = ProjectConfigPatchDefinitionBlock.from_dict(project_config_patch_definition_block_model_json)
+        assert project_config_patch_definition_block_model != False
+
+        # Construct a model instance of ProjectConfigPatchDefinitionBlock by calling from_dict on the json representation
+        project_config_patch_definition_block_model_dict = ProjectConfigPatchDefinitionBlock.from_dict(project_config_patch_definition_block_model_json).__dict__
+        project_config_patch_definition_block_model2 = ProjectConfigPatchDefinitionBlock(**project_config_patch_definition_block_model_dict)
+
+        # Verify the model instances are equivalent
+        assert project_config_patch_definition_block_model == project_config_patch_definition_block_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_patch_definition_block_model_json2 = project_config_patch_definition_block_model.to_dict()
+        assert project_config_patch_definition_block_model_json2 == project_config_patch_definition_block_model_json
+
+
 class TestModel_ProjectConfigPrototype:
     """
     Test Class for ProjectConfigPrototype
@@ -4591,13 +4828,9 @@ class TestModel_ProjectConfigPrototype:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         project_compliance_profile_model = {}  # ProjectComplianceProfile
@@ -4616,16 +4849,15 @@ class TestModel_ProjectConfigPrototype:
         project_config_prototype_definition_block_model = {}  # ProjectConfigPrototypeDefinitionBlock
         project_config_prototype_definition_block_model['name'] = 'testString'
         project_config_prototype_definition_block_model['description'] = 'testString'
-        project_config_prototype_definition_block_model['labels'] = ['testString']
         project_config_prototype_definition_block_model['environment'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model['input'] = input_variable_model
-        project_config_prototype_definition_block_model['setting'] = project_config_setting_model
+        project_config_prototype_definition_block_model['inputs'] = input_variable_model
+        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_id'] = 'testString'
+        schematics_workspace_model['workspace_crn'] = 'testString'
 
         # Construct a json representation of a ProjectConfigPrototype model
         project_config_prototype_model_json = {}
@@ -4660,13 +4892,9 @@ class TestModel_ProjectConfigPrototypeDefinitionBlock:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         project_compliance_profile_model = {}  # ProjectComplianceProfile
@@ -4686,13 +4914,12 @@ class TestModel_ProjectConfigPrototypeDefinitionBlock:
         project_config_prototype_definition_block_model_json = {}
         project_config_prototype_definition_block_model_json['name'] = 'testString'
         project_config_prototype_definition_block_model_json['description'] = 'testString'
-        project_config_prototype_definition_block_model_json['labels'] = ['testString']
         project_config_prototype_definition_block_model_json['environment'] = 'testString'
         project_config_prototype_definition_block_model_json['authorizations'] = project_config_auth_model
         project_config_prototype_definition_block_model_json['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model_json['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model_json['input'] = input_variable_model
-        project_config_prototype_definition_block_model_json['setting'] = project_config_setting_model
+        project_config_prototype_definition_block_model_json['inputs'] = input_variable_model
+        project_config_prototype_definition_block_model_json['settings'] = project_config_setting_model
 
         # Construct a model instance of ProjectConfigPrototypeDefinitionBlock by calling from_dict on the json representation
         project_config_prototype_definition_block_model = ProjectConfigPrototypeDefinitionBlock.from_dict(project_config_prototype_definition_block_model_json)
@@ -4708,68 +4935,6 @@ class TestModel_ProjectConfigPrototypeDefinitionBlock:
         # Convert model instance back to dict and verify no loss of data
         project_config_prototype_definition_block_model_json2 = project_config_prototype_definition_block_model.to_dict()
         assert project_config_prototype_definition_block_model_json2 == project_config_prototype_definition_block_model_json
-
-
-class TestModel_ProjectConfigPrototypePatchDefinitionBlock:
-    """
-    Test Class for ProjectConfigPrototypePatchDefinitionBlock
-    """
-
-    def test_project_config_prototype_patch_definition_block_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigPrototypePatchDefinitionBlock
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
-        project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
-        project_config_auth_model['api_key'] = 'testString'
-
-        project_compliance_profile_model = {}  # ProjectComplianceProfile
-        project_compliance_profile_model['id'] = 'testString'
-        project_compliance_profile_model['instance_id'] = 'testString'
-        project_compliance_profile_model['instance_location'] = 'testString'
-        project_compliance_profile_model['attachment_id'] = 'testString'
-        project_compliance_profile_model['profile_name'] = 'testString'
-
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_config_setting_model = {}  # ProjectConfigSetting
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a json representation of a ProjectConfigPrototypePatchDefinitionBlock model
-        project_config_prototype_patch_definition_block_model_json = {}
-        project_config_prototype_patch_definition_block_model_json['name'] = 'testString'
-        project_config_prototype_patch_definition_block_model_json['description'] = 'testString'
-        project_config_prototype_patch_definition_block_model_json['labels'] = ['testString']
-        project_config_prototype_patch_definition_block_model_json['environment'] = 'testString'
-        project_config_prototype_patch_definition_block_model_json['authorizations'] = project_config_auth_model
-        project_config_prototype_patch_definition_block_model_json['compliance_profile'] = project_compliance_profile_model
-        project_config_prototype_patch_definition_block_model_json['locator_id'] = 'testString'
-        project_config_prototype_patch_definition_block_model_json['input'] = input_variable_model
-        project_config_prototype_patch_definition_block_model_json['setting'] = project_config_setting_model
-
-        # Construct a model instance of ProjectConfigPrototypePatchDefinitionBlock by calling from_dict on the json representation
-        project_config_prototype_patch_definition_block_model = ProjectConfigPrototypePatchDefinitionBlock.from_dict(project_config_prototype_patch_definition_block_model_json)
-        assert project_config_prototype_patch_definition_block_model != False
-
-        # Construct a model instance of ProjectConfigPrototypePatchDefinitionBlock by calling from_dict on the json representation
-        project_config_prototype_patch_definition_block_model_dict = ProjectConfigPrototypePatchDefinitionBlock.from_dict(project_config_prototype_patch_definition_block_model_json).__dict__
-        project_config_prototype_patch_definition_block_model2 = ProjectConfigPrototypePatchDefinitionBlock(**project_config_prototype_patch_definition_block_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_prototype_patch_definition_block_model == project_config_prototype_patch_definition_block_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_prototype_patch_definition_block_model_json2 = project_config_prototype_patch_definition_block_model.to_dict()
-        assert project_config_prototype_patch_definition_block_model_json2 == project_config_prototype_patch_definition_block_model_json
 
 
 class TestModel_ProjectConfigResource:
@@ -4858,13 +5023,9 @@ class TestModel_ProjectConfigResponseDefinition:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
-        project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
-
         project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         project_compliance_profile_model = {}  # ProjectComplianceProfile
@@ -4880,24 +5041,17 @@ class TestModel_ProjectConfigResponseDefinition:
         project_config_setting_model = {}  # ProjectConfigSetting
         project_config_setting_model['foo'] = 'testString'
 
-        output_value_model = {}  # OutputValue
-        output_value_model['name'] = 'testString'
-        output_value_model['description'] = 'testString'
-        output_value_model['value'] = 'testString'
-
         # Construct a json representation of a ProjectConfigResponseDefinition model
         project_config_response_definition_model_json = {}
         project_config_response_definition_model_json['name'] = 'testString'
         project_config_response_definition_model_json['description'] = 'testString'
-        project_config_response_definition_model_json['labels'] = ['testString']
         project_config_response_definition_model_json['environment'] = 'testString'
         project_config_response_definition_model_json['authorizations'] = project_config_auth_model
         project_config_response_definition_model_json['compliance_profile'] = project_compliance_profile_model
         project_config_response_definition_model_json['locator_id'] = 'testString'
-        project_config_response_definition_model_json['input'] = input_variable_model
-        project_config_response_definition_model_json['setting'] = project_config_setting_model
+        project_config_response_definition_model_json['inputs'] = input_variable_model
+        project_config_response_definition_model_json['settings'] = project_config_setting_model
         project_config_response_definition_model_json['type'] = 'terraform_template'
-        project_config_response_definition_model_json['output'] = [output_value_model]
 
         # Construct a model instance of ProjectConfigResponseDefinition by calling from_dict on the json representation
         project_config_response_definition_model = ProjectConfigResponseDefinition.from_dict(project_config_response_definition_model_json)
@@ -4955,6 +5109,65 @@ class TestModel_ProjectConfigSetting:
         assert actual_dict == expected_dict
 
 
+class TestModel_ProjectConfigSummary:
+    """
+    Test Class for ProjectConfigSummary
+    """
+
+    def test_project_config_summary_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigSummary
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_version_summary_model = {}  # ProjectConfigVersionSummary
+        project_config_version_summary_model['state'] = 'approved'
+        project_config_version_summary_model['version'] = 38
+        project_config_version_summary_model['href'] = 'testString'
+
+        project_config_definition_name_description_model = {}  # ProjectConfigDefinitionNameDescription
+        project_config_definition_name_description_model['name'] = 'testString'
+        project_config_definition_name_description_model['description'] = 'testString'
+
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
+
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigSummary model
+        project_config_summary_model_json = {}
+        project_config_summary_model_json['approved_version'] = project_config_version_summary_model
+        project_config_summary_model_json['deployed_version'] = project_config_version_summary_model
+        project_config_summary_model_json['id'] = 'testString'
+        project_config_summary_model_json['version'] = 38
+        project_config_summary_model_json['state'] = 'approved'
+        project_config_summary_model_json['created_at'] = '2019-01-01T12:00:00Z'
+        project_config_summary_model_json['modified_at'] = '2019-01-01T12:00:00Z'
+        project_config_summary_model_json['href'] = 'testString'
+        project_config_summary_model_json['definition'] = project_config_definition_name_description_model
+        project_config_summary_model_json['project'] = project_reference_model
+
+        # Construct a model instance of ProjectConfigSummary by calling from_dict on the json representation
+        project_config_summary_model = ProjectConfigSummary.from_dict(project_config_summary_model_json)
+        assert project_config_summary_model != False
+
+        # Construct a model instance of ProjectConfigSummary by calling from_dict on the json representation
+        project_config_summary_model_dict = ProjectConfigSummary.from_dict(project_config_summary_model_json).__dict__
+        project_config_summary_model2 = ProjectConfigSummary(**project_config_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert project_config_summary_model == project_config_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_summary_model_json2 = project_config_summary_model.to_dict()
+        assert project_config_summary_model_json2 == project_config_summary_model_json
+
+
 class TestModel_ProjectConfigVersion:
     """
     Test Class for ProjectConfigVersion
@@ -4968,23 +5181,76 @@ class TestModel_ProjectConfigVersion:
         # Construct dict forms of any model objects needed in order to build this model.
 
         project_config_metadata_last_approved_model = {}  # ProjectConfigMetadataLastApproved
-        project_config_metadata_last_approved_model['is_forced'] = True
+        project_config_metadata_last_approved_model['at'] = '2019-01-01T12:00:00Z'
         project_config_metadata_last_approved_model['comment'] = 'testString'
-        project_config_metadata_last_approved_model['timestamp'] = '2019-01-01T12:00:00Z'
+        project_config_metadata_last_approved_model['is_forced'] = True
         project_config_metadata_last_approved_model['user_id'] = 'testString'
 
         pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
         pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
 
+        action_job_plan_summary_model = {}  # ActionJobPlanSummary
+        action_job_plan_summary_model['add'] = 38
+        action_job_plan_summary_model['failed'] = 38
+        action_job_plan_summary_model['update'] = 38
+        action_job_plan_summary_model['destroy'] = 38
+        action_job_plan_summary_model['add_resources'] = ['testString']
+        action_job_plan_summary_model['failed_resources'] = ['testString']
+        action_job_plan_summary_model['updated_resources'] = ['testString']
+        action_job_plan_summary_model['destroy_resources'] = ['testString']
+
+        action_job_apply_summary_model = {}  # ActionJobApplySummary
+        action_job_apply_summary_model['success'] = 38
+        action_job_apply_summary_model['failed'] = 38
+        action_job_apply_summary_model['success_resources'] = ['testString']
+        action_job_apply_summary_model['failed_resources'] = ['testString']
+
+        action_job_destroy_summary_resources_model = {}  # ActionJobDestroySummaryResources
+        action_job_destroy_summary_resources_model['success'] = ['testString']
+        action_job_destroy_summary_resources_model['failed'] = ['testString']
+        action_job_destroy_summary_resources_model['tainted'] = ['testString']
+
+        action_job_destroy_summary_model = {}  # ActionJobDestroySummary
+        action_job_destroy_summary_model['success'] = 38
+        action_job_destroy_summary_model['failed'] = 38
+        action_job_destroy_summary_model['tainted'] = 38
+        action_job_destroy_summary_model['resources'] = action_job_destroy_summary_resources_model
+
+        action_job_message_summary_model = {}  # ActionJobMessageSummary
+        action_job_message_summary_model['info'] = 38
+        action_job_message_summary_model['debug'] = 38
+        action_job_message_summary_model['error'] = 38
+
+        terraform_log_analyzer_error_message_model = {}  # TerraformLogAnalyzerErrorMessage
+        terraform_log_analyzer_error_message_model['foo'] = 'testString'
+
+        action_job_plan_messages_summary_model = {}  # ActionJobPlanMessagesSummary
+        action_job_plan_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_plan_messages_summary_model['sucess_message'] = ['testString']
+        action_job_plan_messages_summary_model['update_message'] = ['testString']
+        action_job_plan_messages_summary_model['destroy_message'] = ['testString']
+
+        terraform_log_analyzer_success_message_model = {}  # TerraformLogAnalyzerSuccessMessage
+        terraform_log_analyzer_success_message_model['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model['id'] = 'testString'
+
+        action_job_apply_messages_summary_model = {}  # ActionJobApplyMessagesSummary
+        action_job_apply_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+        action_job_apply_messages_summary_model['sucess_message'] = [terraform_log_analyzer_success_message_model]
+
+        action_job_destroy_messages_summary_model = {}  # ActionJobDestroyMessagesSummary
+        action_job_destroy_messages_summary_model['error_messages'] = [terraform_log_analyzer_error_message_model]
+
         action_job_summary_model = {}  # ActionJobSummary
-        action_job_summary_model['plan_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['message_summary'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['plan_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['apply_messages'] = {'anyKey': 'anyValue'}
-        action_job_summary_model['destroy_messages'] = {'anyKey': 'anyValue'}
+        action_job_summary_model['plan_summary'] = action_job_plan_summary_model
+        action_job_summary_model['apply_summary'] = action_job_apply_summary_model
+        action_job_summary_model['destroy_summary'] = action_job_destroy_summary_model
+        action_job_summary_model['message_summary'] = action_job_message_summary_model
+        action_job_summary_model['plan_messages'] = action_job_plan_messages_summary_model
+        action_job_summary_model['apply_messages'] = action_job_apply_messages_summary_model
+        action_job_summary_model['destroy_messages'] = action_job_destroy_messages_summary_model
 
         action_job_with_id_and_summary_model = {}  # ActionJobWithIdAndSummary
         action_job_with_id_and_summary_model['id'] = 'testString'
@@ -4992,7 +5258,7 @@ class TestModel_ProjectConfigVersion:
 
         project_config_metadata_cost_estimate_model = {}  # ProjectConfigMetadataCostEstimate
         project_config_metadata_cost_estimate_model['version'] = 'testString'
-        project_config_metadata_cost_estimate_model['currency'] = 'testString'
+        project_config_metadata_cost_estimate_model['currency'] = 'USD'
         project_config_metadata_cost_estimate_model['totalHourlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model['totalMonthlyCost'] = 'testString'
         project_config_metadata_cost_estimate_model['pastTotalHourlyCost'] = 'testString'
@@ -5002,12 +5268,18 @@ class TestModel_ProjectConfigVersion:
         project_config_metadata_cost_estimate_model['timeGenerated'] = '2019-01-01T12:00:00Z'
         project_config_metadata_cost_estimate_model['user_id'] = 'testString'
 
-        project_config_metadata_cra_logs_model = {}  # ProjectConfigMetadataCraLogs
-        project_config_metadata_cra_logs_model['cra_version'] = 'testString'
-        project_config_metadata_cra_logs_model['schema_version'] = 'testString'
-        project_config_metadata_cra_logs_model['status'] = 'testString'
-        project_config_metadata_cra_logs_model['summary'] = {'anyKey': 'anyValue'}
-        project_config_metadata_cra_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
+        code_risk_analyzer_logs_summary_model = {}  # CodeRiskAnalyzerLogsSummary
+        code_risk_analyzer_logs_summary_model['total'] = 'testString'
+        code_risk_analyzer_logs_summary_model['passed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['failed'] = 'testString'
+        code_risk_analyzer_logs_summary_model['skipped'] = 'testString'
+
+        project_config_metadata_code_risk_analyzer_logs_model = {}  # ProjectConfigMetadataCodeRiskAnalyzerLogs
+        project_config_metadata_code_risk_analyzer_logs_model['cra_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model['schema_version'] = 'testString'
+        project_config_metadata_code_risk_analyzer_logs_model['status'] = 'passed'
+        project_config_metadata_code_risk_analyzer_logs_model['summary'] = code_risk_analyzer_logs_summary_model
+        project_config_metadata_code_risk_analyzer_logs_model['timestamp'] = '2019-01-01T12:00:00Z'
 
         last_validated_action_with_summary_model = {}  # LastValidatedActionWithSummary
         last_validated_action_with_summary_model['href'] = 'testString'
@@ -5016,7 +5288,7 @@ class TestModel_ProjectConfigVersion:
         last_validated_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
         last_validated_action_with_summary_model['job'] = action_job_with_id_and_summary_model
         last_validated_action_with_summary_model['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model['cra_logs'] = project_config_metadata_cra_logs_model
+        last_validated_action_with_summary_model['cra_logs'] = project_config_metadata_code_risk_analyzer_logs_model
 
         last_action_with_summary_model = {}  # LastActionWithSummary
         last_action_with_summary_model['href'] = 'testString'
@@ -5025,16 +5297,26 @@ class TestModel_ProjectConfigVersion:
         last_action_with_summary_model['post_job'] = pre_post_action_job_with_id_and_summary_model
         last_action_with_summary_model['job'] = action_job_with_id_and_summary_model
 
-        schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_id'] = 'testString'
+        output_value_model = {}  # OutputValue
+        output_value_model['name'] = 'testString'
+        output_value_model['description'] = 'testString'
+        output_value_model['value'] = 'testString'
 
-        project_config_auth_trusted_profile_model = {}  # ProjectConfigAuthTrustedProfile
-        project_config_auth_trusted_profile_model['id'] = 'testString'
-        project_config_auth_trusted_profile_model['target_iam_id'] = 'testString'
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
+
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
+
+        schematics_workspace_model = {}  # SchematicsWorkspace
+        schematics_workspace_model['workspace_crn'] = 'testString'
 
         project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile'] = project_config_auth_trusted_profile_model
-        project_config_auth_model['method'] = 'testString'
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
         project_compliance_profile_model = {}  # ProjectComplianceProfile
@@ -5050,42 +5332,36 @@ class TestModel_ProjectConfigVersion:
         project_config_setting_model = {}  # ProjectConfigSetting
         project_config_setting_model['foo'] = 'testString'
 
-        output_value_model = {}  # OutputValue
-        output_value_model['name'] = 'testString'
-        output_value_model['description'] = 'testString'
-        output_value_model['value'] = 'testString'
-
         project_config_response_definition_model = {}  # ProjectConfigResponseDefinition
         project_config_response_definition_model['name'] = 'testString'
         project_config_response_definition_model['description'] = 'testString'
-        project_config_response_definition_model['labels'] = ['testString']
         project_config_response_definition_model['environment'] = 'testString'
         project_config_response_definition_model['authorizations'] = project_config_auth_model
         project_config_response_definition_model['compliance_profile'] = project_compliance_profile_model
         project_config_response_definition_model['locator_id'] = 'testString'
-        project_config_response_definition_model['input'] = input_variable_model
-        project_config_response_definition_model['setting'] = project_config_setting_model
+        project_config_response_definition_model['inputs'] = input_variable_model
+        project_config_response_definition_model['settings'] = project_config_setting_model
         project_config_response_definition_model['type'] = 'terraform_template'
-        project_config_response_definition_model['output'] = [output_value_model]
 
         # Construct a json representation of a ProjectConfigVersion model
         project_config_version_model_json = {}
         project_config_version_model_json['id'] = 'testString'
-        project_config_version_model_json['project_id'] = 'testString'
         project_config_version_model_json['version'] = 38
         project_config_version_model_json['is_draft'] = True
-        project_config_version_model_json['needs_attention_state'] = ['testString']
-        project_config_version_model_json['state'] = 'approved'
-        project_config_version_model_json['update_available'] = True
+        project_config_version_model_json['needs_attention_state'] = []
         project_config_version_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        project_config_version_model_json['user_modified_at'] = '2019-01-01T12:00:00Z'
+        project_config_version_model_json['modified_at'] = '2019-01-01T12:00:00Z'
         project_config_version_model_json['last_approved'] = project_config_metadata_last_approved_model
-        project_config_version_model_json['last_save'] = '2019-01-01T12:00:00Z'
-        project_config_version_model_json['references'] = {'anyKey': 'anyValue'}
+        project_config_version_model_json['last_saved_at'] = '2019-01-01T12:00:00Z'
         project_config_version_model_json['last_validated'] = last_validated_action_with_summary_model
         project_config_version_model_json['last_deployed'] = last_action_with_summary_model
         project_config_version_model_json['last_undeployed'] = last_action_with_summary_model
+        project_config_version_model_json['outputs'] = [output_value_model]
+        project_config_version_model_json['project'] = project_reference_model
+        project_config_version_model_json['references'] = {'anyKey': 'anyValue'}
         project_config_version_model_json['schematics'] = schematics_workspace_model
+        project_config_version_model_json['state'] = 'approved'
+        project_config_version_model_json['update_available'] = True
         project_config_version_model_json['definition'] = project_config_response_definition_model
 
         # Construct a model instance of ProjectConfigVersion by calling from_dict on the json representation
@@ -5116,7 +5392,6 @@ class TestModel_ProjectConfigVersionSummary:
 
         # Construct a json representation of a ProjectConfigVersionSummary model
         project_config_version_summary_model_json = {}
-        project_config_version_summary_model_json['needs_attention_state'] = ['testString']
         project_config_version_summary_model_json['state'] = 'approved'
         project_config_version_summary_model_json['version'] = 38
         project_config_version_summary_model_json['href'] = 'testString'
@@ -5150,7 +5425,6 @@ class TestModel_ProjectConfigVersionSummaryCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         project_config_version_summary_model = {}  # ProjectConfigVersionSummary
-        project_config_version_summary_model['needs_attention_state'] = ['testString']
         project_config_version_summary_model['state'] = 'approved'
         project_config_version_summary_model['version'] = 38
         project_config_version_summary_model['href'] = 'testString'
@@ -5207,44 +5481,115 @@ class TestModel_ProjectDefinitionProperties:
         assert project_definition_properties_model_json2 == project_definition_properties_model_json
 
 
-class TestModel_ProjectEnvironmentCollectionMember:
+class TestModel_ProjectDefinitionReference:
     """
-    Test Class for ProjectEnvironmentCollectionMember
+    Test Class for ProjectDefinitionReference
     """
 
-    def test_project_environment_collection_member_serialization(self):
+    def test_project_definition_reference_serialization(self):
         """
-        Test serialization/deserialization for ProjectEnvironmentCollectionMember
+        Test serialization/deserialization for ProjectDefinitionReference
+        """
+
+        # Construct a json representation of a ProjectDefinitionReference model
+        project_definition_reference_model_json = {}
+        project_definition_reference_model_json['name'] = 'testString'
+
+        # Construct a model instance of ProjectDefinitionReference by calling from_dict on the json representation
+        project_definition_reference_model = ProjectDefinitionReference.from_dict(project_definition_reference_model_json)
+        assert project_definition_reference_model != False
+
+        # Construct a model instance of ProjectDefinitionReference by calling from_dict on the json representation
+        project_definition_reference_model_dict = ProjectDefinitionReference.from_dict(project_definition_reference_model_json).__dict__
+        project_definition_reference_model2 = ProjectDefinitionReference(**project_definition_reference_model_dict)
+
+        # Verify the model instances are equivalent
+        assert project_definition_reference_model == project_definition_reference_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        project_definition_reference_model_json2 = project_definition_reference_model.to_dict()
+        assert project_definition_reference_model_json2 == project_definition_reference_model_json
+
+
+class TestModel_ProjectEnvironmentSummary:
+    """
+    Test Class for ProjectEnvironmentSummary
+    """
+
+    def test_project_environment_summary_serialization(self):
+        """
+        Test serialization/deserialization for ProjectEnvironmentSummary
         """
 
         # Construct dict forms of any model objects needed in order to build this model.
+
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
+
+        project_reference_model = {}  # ProjectReference
+        project_reference_model['id'] = 'testString'
+        project_reference_model['definition'] = project_definition_reference_model
+        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['href'] = 'testString'
 
         environment_definition_name_description_model = {}  # EnvironmentDefinitionNameDescription
         environment_definition_name_description_model['name'] = 'testString'
         environment_definition_name_description_model['description'] = 'testString'
 
-        # Construct a json representation of a ProjectEnvironmentCollectionMember model
-        project_environment_collection_member_model_json = {}
-        project_environment_collection_member_model_json['id'] = 'testString'
-        project_environment_collection_member_model_json['project_id'] = 'testString'
-        project_environment_collection_member_model_json['created_at'] = '2019-01-01T12:00:00Z'
-        project_environment_collection_member_model_json['href'] = 'testString'
-        project_environment_collection_member_model_json['definition'] = environment_definition_name_description_model
+        # Construct a json representation of a ProjectEnvironmentSummary model
+        project_environment_summary_model_json = {}
+        project_environment_summary_model_json['id'] = 'testString'
+        project_environment_summary_model_json['project'] = project_reference_model
+        project_environment_summary_model_json['created_at'] = '2019-01-01T12:00:00Z'
+        project_environment_summary_model_json['href'] = 'testString'
+        project_environment_summary_model_json['definition'] = environment_definition_name_description_model
 
-        # Construct a model instance of ProjectEnvironmentCollectionMember by calling from_dict on the json representation
-        project_environment_collection_member_model = ProjectEnvironmentCollectionMember.from_dict(project_environment_collection_member_model_json)
-        assert project_environment_collection_member_model != False
+        # Construct a model instance of ProjectEnvironmentSummary by calling from_dict on the json representation
+        project_environment_summary_model = ProjectEnvironmentSummary.from_dict(project_environment_summary_model_json)
+        assert project_environment_summary_model != False
 
-        # Construct a model instance of ProjectEnvironmentCollectionMember by calling from_dict on the json representation
-        project_environment_collection_member_model_dict = ProjectEnvironmentCollectionMember.from_dict(project_environment_collection_member_model_json).__dict__
-        project_environment_collection_member_model2 = ProjectEnvironmentCollectionMember(**project_environment_collection_member_model_dict)
+        # Construct a model instance of ProjectEnvironmentSummary by calling from_dict on the json representation
+        project_environment_summary_model_dict = ProjectEnvironmentSummary.from_dict(project_environment_summary_model_json).__dict__
+        project_environment_summary_model2 = ProjectEnvironmentSummary(**project_environment_summary_model_dict)
 
         # Verify the model instances are equivalent
-        assert project_environment_collection_member_model == project_environment_collection_member_model2
+        assert project_environment_summary_model == project_environment_summary_model2
 
         # Convert model instance back to dict and verify no loss of data
-        project_environment_collection_member_model_json2 = project_environment_collection_member_model.to_dict()
-        assert project_environment_collection_member_model_json2 == project_environment_collection_member_model_json
+        project_environment_summary_model_json2 = project_environment_summary_model.to_dict()
+        assert project_environment_summary_model_json2 == project_environment_summary_model_json
+
+
+class TestModel_ProjectPatchDefinitionBlock:
+    """
+    Test Class for ProjectPatchDefinitionBlock
+    """
+
+    def test_project_patch_definition_block_serialization(self):
+        """
+        Test serialization/deserialization for ProjectPatchDefinitionBlock
+        """
+
+        # Construct a json representation of a ProjectPatchDefinitionBlock model
+        project_patch_definition_block_model_json = {}
+        project_patch_definition_block_model_json['name'] = 'testString'
+        project_patch_definition_block_model_json['description'] = 'testString'
+        project_patch_definition_block_model_json['destroy_on_delete'] = True
+
+        # Construct a model instance of ProjectPatchDefinitionBlock by calling from_dict on the json representation
+        project_patch_definition_block_model = ProjectPatchDefinitionBlock.from_dict(project_patch_definition_block_model_json)
+        assert project_patch_definition_block_model != False
+
+        # Construct a model instance of ProjectPatchDefinitionBlock by calling from_dict on the json representation
+        project_patch_definition_block_model_dict = ProjectPatchDefinitionBlock.from_dict(project_patch_definition_block_model_json).__dict__
+        project_patch_definition_block_model2 = ProjectPatchDefinitionBlock(**project_patch_definition_block_model_dict)
+
+        # Verify the model instances are equivalent
+        assert project_patch_definition_block_model == project_patch_definition_block_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        project_patch_definition_block_model_json2 = project_patch_definition_block_model.to_dict()
+        assert project_patch_definition_block_model_json2 == project_patch_definition_block_model_json
 
 
 class TestModel_ProjectPrototypeDefinition:
@@ -5279,36 +5624,93 @@ class TestModel_ProjectPrototypeDefinition:
         assert project_prototype_definition_model_json2 == project_prototype_definition_model_json
 
 
-class TestModel_ProjectPrototypePatchDefinitionBlock:
+class TestModel_ProjectReference:
     """
-    Test Class for ProjectPrototypePatchDefinitionBlock
+    Test Class for ProjectReference
     """
 
-    def test_project_prototype_patch_definition_block_serialization(self):
+    def test_project_reference_serialization(self):
         """
-        Test serialization/deserialization for ProjectPrototypePatchDefinitionBlock
+        Test serialization/deserialization for ProjectReference
         """
 
-        # Construct a json representation of a ProjectPrototypePatchDefinitionBlock model
-        project_prototype_patch_definition_block_model_json = {}
-        project_prototype_patch_definition_block_model_json['name'] = 'testString'
-        project_prototype_patch_definition_block_model_json['description'] = 'testString'
-        project_prototype_patch_definition_block_model_json['destroy_on_delete'] = True
+        # Construct dict forms of any model objects needed in order to build this model.
 
-        # Construct a model instance of ProjectPrototypePatchDefinitionBlock by calling from_dict on the json representation
-        project_prototype_patch_definition_block_model = ProjectPrototypePatchDefinitionBlock.from_dict(project_prototype_patch_definition_block_model_json)
-        assert project_prototype_patch_definition_block_model != False
+        project_definition_reference_model = {}  # ProjectDefinitionReference
+        project_definition_reference_model['name'] = 'testString'
 
-        # Construct a model instance of ProjectPrototypePatchDefinitionBlock by calling from_dict on the json representation
-        project_prototype_patch_definition_block_model_dict = ProjectPrototypePatchDefinitionBlock.from_dict(project_prototype_patch_definition_block_model_json).__dict__
-        project_prototype_patch_definition_block_model2 = ProjectPrototypePatchDefinitionBlock(**project_prototype_patch_definition_block_model_dict)
+        # Construct a json representation of a ProjectReference model
+        project_reference_model_json = {}
+        project_reference_model_json['id'] = 'testString'
+        project_reference_model_json['definition'] = project_definition_reference_model
+        project_reference_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model_json['href'] = 'testString'
+
+        # Construct a model instance of ProjectReference by calling from_dict on the json representation
+        project_reference_model = ProjectReference.from_dict(project_reference_model_json)
+        assert project_reference_model != False
+
+        # Construct a model instance of ProjectReference by calling from_dict on the json representation
+        project_reference_model_dict = ProjectReference.from_dict(project_reference_model_json).__dict__
+        project_reference_model2 = ProjectReference(**project_reference_model_dict)
 
         # Verify the model instances are equivalent
-        assert project_prototype_patch_definition_block_model == project_prototype_patch_definition_block_model2
+        assert project_reference_model == project_reference_model2
 
         # Convert model instance back to dict and verify no loss of data
-        project_prototype_patch_definition_block_model_json2 = project_prototype_patch_definition_block_model.to_dict()
-        assert project_prototype_patch_definition_block_model_json2 == project_prototype_patch_definition_block_model_json
+        project_reference_model_json2 = project_reference_model.to_dict()
+        assert project_reference_model_json2 == project_reference_model_json
+
+
+class TestModel_ProjectSummary:
+    """
+    Test Class for ProjectSummary
+    """
+
+    def test_project_summary_serialization(self):
+        """
+        Test serialization/deserialization for ProjectSummary
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        cumulative_needs_attention_model = {}  # CumulativeNeedsAttention
+        cumulative_needs_attention_model['event'] = 'testString'
+        cumulative_needs_attention_model['event_id'] = 'testString'
+        cumulative_needs_attention_model['config_id'] = 'testString'
+        cumulative_needs_attention_model['config_version'] = 38
+
+        project_definition_properties_model = {}  # ProjectDefinitionProperties
+        project_definition_properties_model['name'] = 'testString'
+        project_definition_properties_model['description'] = 'testString'
+        project_definition_properties_model['destroy_on_delete'] = True
+
+        # Construct a json representation of a ProjectSummary model
+        project_summary_model_json = {}
+        project_summary_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_summary_model_json['created_at'] = '2019-01-01T12:00:00Z'
+        project_summary_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
+        project_summary_model_json['cumulative_needs_attention_view_error'] = False
+        project_summary_model_json['id'] = 'testString'
+        project_summary_model_json['location'] = 'testString'
+        project_summary_model_json['resource_group_id'] = 'testString'
+        project_summary_model_json['state'] = 'ready'
+        project_summary_model_json['definition'] = project_definition_properties_model
+
+        # Construct a model instance of ProjectSummary by calling from_dict on the json representation
+        project_summary_model = ProjectSummary.from_dict(project_summary_model_json)
+        assert project_summary_model != False
+
+        # Construct a model instance of ProjectSummary by calling from_dict on the json representation
+        project_summary_model_dict = ProjectSummary.from_dict(project_summary_model_json).__dict__
+        project_summary_model2 = ProjectSummary(**project_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert project_summary_model == project_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        project_summary_model_json2 = project_summary_model.to_dict()
+        assert project_summary_model_json2 == project_summary_model_json
 
 
 class TestModel_SchematicsWorkspace:
@@ -5323,7 +5725,7 @@ class TestModel_SchematicsWorkspace:
 
         # Construct a json representation of a SchematicsWorkspace model
         schematics_workspace_model_json = {}
-        schematics_workspace_model_json['workspace_id'] = 'testString'
+        schematics_workspace_model_json['workspace_crn'] = 'testString'
 
         # Construct a model instance of SchematicsWorkspace by calling from_dict on the json representation
         schematics_workspace_model = SchematicsWorkspace.from_dict(schematics_workspace_model_json)
@@ -5339,6 +5741,78 @@ class TestModel_SchematicsWorkspace:
         # Convert model instance back to dict and verify no loss of data
         schematics_workspace_model_json2 = schematics_workspace_model.to_dict()
         assert schematics_workspace_model_json2 == schematics_workspace_model_json
+
+
+class TestModel_TerraformLogAnalyzerErrorMessage:
+    """
+    Test Class for TerraformLogAnalyzerErrorMessage
+    """
+
+    def test_terraform_log_analyzer_error_message_serialization(self):
+        """
+        Test serialization/deserialization for TerraformLogAnalyzerErrorMessage
+        """
+
+        # Construct a json representation of a TerraformLogAnalyzerErrorMessage model
+        terraform_log_analyzer_error_message_model_json = {}
+        terraform_log_analyzer_error_message_model_json['foo'] = 'testString'
+
+        # Construct a model instance of TerraformLogAnalyzerErrorMessage by calling from_dict on the json representation
+        terraform_log_analyzer_error_message_model = TerraformLogAnalyzerErrorMessage.from_dict(terraform_log_analyzer_error_message_model_json)
+        assert terraform_log_analyzer_error_message_model != False
+
+        # Construct a model instance of TerraformLogAnalyzerErrorMessage by calling from_dict on the json representation
+        terraform_log_analyzer_error_message_model_dict = TerraformLogAnalyzerErrorMessage.from_dict(terraform_log_analyzer_error_message_model_json).__dict__
+        terraform_log_analyzer_error_message_model2 = TerraformLogAnalyzerErrorMessage(**terraform_log_analyzer_error_message_model_dict)
+
+        # Verify the model instances are equivalent
+        assert terraform_log_analyzer_error_message_model == terraform_log_analyzer_error_message_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        terraform_log_analyzer_error_message_model_json2 = terraform_log_analyzer_error_message_model.to_dict()
+        assert terraform_log_analyzer_error_message_model_json2 == terraform_log_analyzer_error_message_model_json
+
+        # Test get_properties and set_properties methods.
+        terraform_log_analyzer_error_message_model.set_properties({})
+        actual_dict = terraform_log_analyzer_error_message_model.get_properties()
+        assert actual_dict == {}
+
+        expected_dict = {'foo': 'testString'}
+        terraform_log_analyzer_error_message_model.set_properties(expected_dict)
+        actual_dict = terraform_log_analyzer_error_message_model.get_properties()
+        assert actual_dict == expected_dict
+
+
+class TestModel_TerraformLogAnalyzerSuccessMessage:
+    """
+    Test Class for TerraformLogAnalyzerSuccessMessage
+    """
+
+    def test_terraform_log_analyzer_success_message_serialization(self):
+        """
+        Test serialization/deserialization for TerraformLogAnalyzerSuccessMessage
+        """
+
+        # Construct a json representation of a TerraformLogAnalyzerSuccessMessage model
+        terraform_log_analyzer_success_message_model_json = {}
+        terraform_log_analyzer_success_message_model_json['resource_type'] = 'testString'
+        terraform_log_analyzer_success_message_model_json['time-taken'] = 'testString'
+        terraform_log_analyzer_success_message_model_json['id'] = 'testString'
+
+        # Construct a model instance of TerraformLogAnalyzerSuccessMessage by calling from_dict on the json representation
+        terraform_log_analyzer_success_message_model = TerraformLogAnalyzerSuccessMessage.from_dict(terraform_log_analyzer_success_message_model_json)
+        assert terraform_log_analyzer_success_message_model != False
+
+        # Construct a model instance of TerraformLogAnalyzerSuccessMessage by calling from_dict on the json representation
+        terraform_log_analyzer_success_message_model_dict = TerraformLogAnalyzerSuccessMessage.from_dict(terraform_log_analyzer_success_message_model_json).__dict__
+        terraform_log_analyzer_success_message_model2 = TerraformLogAnalyzerSuccessMessage(**terraform_log_analyzer_success_message_model_dict)
+
+        # Verify the model instances are equivalent
+        assert terraform_log_analyzer_success_message_model == terraform_log_analyzer_success_message_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        terraform_log_analyzer_success_message_model_json2 = terraform_log_analyzer_success_message_model.to_dict()
+        assert terraform_log_analyzer_success_message_model_json2 == terraform_log_analyzer_success_message_model_json
 
 
 # endregion

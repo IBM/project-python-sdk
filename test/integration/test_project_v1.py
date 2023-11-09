@@ -20,7 +20,7 @@ Integration Tests for ProjectV1
 from ibm_cloud_sdk_core import *
 import os
 import pytest
-from project.project_v1 import *
+from ibm_cloud.project_v1 import *
 
 # Config file name
 config_file = 'project_v1.env'
@@ -91,7 +91,6 @@ class TestProjectV1:
         project_config_prototype_definition_block_model = {
             'name': 'testString',
             'description': 'testString',
-            'labels': ['testString'],
             'environment': 'testString',
             'authorizations': project_config_auth_model,
             'compliance_profile': project_compliance_profile_model,
@@ -156,7 +155,6 @@ class TestProjectV1:
         project_config_prototype_definition_block_model = {
             'name': 'env-stage',
             'description': 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
-            'labels': ['env:stage', 'governance:test', 'build:0'],
             'environment': 'testString',
             'authorizations': project_config_auth_model,
             'compliance_profile': project_compliance_profile_model,
@@ -229,8 +227,8 @@ class TestProjectV1:
 
     @needscredentials
     def test_update_project(self):
-        # Construct a dict representation of a ProjectPrototypePatchDefinitionBlock model
-        project_prototype_patch_definition_block_model = {
+        # Construct a dict representation of a ProjectPatchDefinitionBlock model
+        project_patch_definition_block_model = {
             'name': 'acme-microservice',
             'description': 'A microservice to deploy on top of ACME infrastructure.',
             'destroy_on_delete': True,
@@ -238,7 +236,7 @@ class TestProjectV1:
 
         response = self.project_service.update_project(
             id=project_id_link,
-            definition=project_prototype_patch_definition_block_model,
+            definition=project_patch_definition_block_model,
         )
 
         assert response.get_status_code() == 200
@@ -291,8 +289,8 @@ class TestProjectV1:
         )
 
         assert response.get_status_code() == 200
-        environment_list_response = response.get_result()
-        assert environment_list_response is not None
+        environment_collection = response.get_result()
+        assert environment_collection is not None
 
     @needscredentials
     def test_get_project_environment(self):
@@ -394,11 +392,10 @@ class TestProjectV1:
         project_config_setting_model = {
             'foo': 'testString',
         }
-        # Construct a dict representation of a ProjectConfigPrototypePatchDefinitionBlock model
-        project_config_prototype_patch_definition_block_model = {
+        # Construct a dict representation of a ProjectConfigPatchDefinitionBlock model
+        project_config_patch_definition_block_model = {
             'name': 'testString',
             'description': 'testString',
-            'labels': ['testString'],
             'environment': 'testString',
             'authorizations': project_config_auth_model,
             'compliance_profile': project_compliance_profile_model,
@@ -410,7 +407,7 @@ class TestProjectV1:
         response = self.project_service.update_config(
             project_id=project_id_link,
             id=config_id_link,
-            definition=project_config_prototype_patch_definition_block_model,
+            definition=project_config_patch_definition_block_model,
         )
 
         assert response.get_status_code() == 200

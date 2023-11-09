@@ -208,14 +208,14 @@ class TestProjectV1Examples:
             print('\nupdate_project() result:')
             # begin-update_project
 
-            project_prototype_patch_definition_block_model = {
+            project_patch_definition_block_model = {
                 'name': 'acme-microservice',
                 'description': 'A microservice to deploy on top of ACME infrastructure.',
             }
 
             response = project_service.update_project(
                 id=project_id_link,
-                definition=project_prototype_patch_definition_block_model,
+                definition=project_patch_definition_block_model,
             )
             project = response.get_result()
 
@@ -286,9 +286,9 @@ class TestProjectV1Examples:
             response = project_service.list_project_environments(
                 project_id=project_id_link,
             )
-            environment_list_response = response.get_result()
+            environment_collection = response.get_result()
 
-            print(json.dumps(environment_list_response, indent=2))
+            print(json.dumps(environment_collection, indent=2))
 
             # end-list_project_environments
 
@@ -426,14 +426,14 @@ class TestProjectV1Examples:
                 'sysdig_name': 'Name of the SysDig stage service instance',
             }
 
-            project_config_prototype_patch_definition_block_model = {
+            project_config_patch_definition_block_model = {
                 'inputs': input_variable_model,
             }
 
             response = project_service.update_config(
                 project_id=project_id_link,
                 id=config_id_link,
-                definition=project_config_prototype_patch_definition_block_model,
+                definition=project_config_patch_definition_block_model,
             )
             project_config = response.get_result()
 
