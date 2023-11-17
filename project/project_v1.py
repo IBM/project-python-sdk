@@ -845,9 +845,7 @@ class ProjectV1(BaseService):
         """
         Delete a configuration in a project by ID.
 
-        Delete a configuration in a project. Deleting the configuration will also destroy
-        all the resources deployed by the configuration if the query parameter `destroy`
-        is specified.
+        Delete a configuration in a project.
 
         :param str project_id: The unique project ID.
         :param str id: The unique config ID.
@@ -1115,9 +1113,9 @@ class ProjectV1(BaseService):
         **kwargs,
     ) -> DetailedResponse:
         """
-        Destroy configuration resources.
+        Undeploy configuration resources.
 
-        Destroy a project's configuration resources. The operation destroys all the
+        Undeploy a project's configuration resources. The operation undeploys all the
         resources that are deployed with the specific configuration. You can track it by
         using the get project configuration API with full metadata.
 
@@ -1378,9 +1376,7 @@ class ProjectV1(BaseService):
         """
         Delete a configuration for the specified project ID and version.
 
-        Delete a configuration in a project. Deleting the configuration will also destroy
-        all the resources deployed by the configuration if the query parameter `destroy`
-        is specified.
+        Delete a configuration in a project.
 
         :param str project_id: The unique project ID.
         :param str id: The unique config ID.
@@ -2709,7 +2705,8 @@ class EnvironmentDefinitionNameDescription:
     """
     The environment definition used in the project collection.
 
-    :attr str name: (optional) The name of the environment.
+    :attr str name: (optional) The name of the environment.  It is unique within the
+          account across projects and regions.
     :attr str description: (optional) The description of the environment.
     """
 
@@ -2722,7 +2719,8 @@ class EnvironmentDefinitionNameDescription:
         """
         Initialize a EnvironmentDefinitionNameDescription object.
 
-        :param str name: (optional) The name of the environment.
+        :param str name: (optional) The name of the environment.  It is unique
+               within the account across projects and regions.
         :param str description: (optional) The description of the environment.
         """
         self.name = name
@@ -2775,7 +2773,8 @@ class EnvironmentDefinitionProperties:
     """
     The environment definition used for updates.
 
-    :attr str name: (optional) The name of the environment.
+    :attr str name: (optional) The name of the environment.  It is unique within the
+          account across projects and regions.
     :attr str description: (optional) The description of the environment.
     :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
@@ -2797,7 +2796,8 @@ class EnvironmentDefinitionProperties:
         """
         Initialize a EnvironmentDefinitionProperties object.
 
-        :param str name: (optional) The name of the environment.
+        :param str name: (optional) The name of the environment.  It is unique
+               within the account across projects and regions.
         :param str description: (optional) The description of the environment.
         :param ProjectConfigAuth authorizations: (optional) The authorization
                details. You can authorize by using a trusted profile or an API key in
@@ -2881,7 +2881,8 @@ class EnvironmentDefinitionRequiredProperties:
     """
     The environment definition.
 
-    :attr str name: The name of the environment.
+    :attr str name: The name of the environment.  It is unique within the account
+          across projects and regions.
     :attr str description: (optional) The description of the environment.
     :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
@@ -2903,7 +2904,8 @@ class EnvironmentDefinitionRequiredProperties:
         """
         Initialize a EnvironmentDefinitionRequiredProperties object.
 
-        :param str name: The name of the environment.
+        :param str name: The name of the environment.  It is unique within the
+               account across projects and regions.
         :param str description: (optional) The description of the environment.
         :param ProjectConfigAuth authorizations: (optional) The authorization
                details. You can authorize by using a trusted profile or an API key in
@@ -3589,7 +3591,7 @@ class Project:
     :attr bool cumulative_needs_attention_view_error: (optional) True indicates that
           the fetch of the needs attention items failed. It only exists if there was an
           error while retrieving the cumulative needs attention view.
-    :attr str id: The unique ID.
+    :attr str id: The unique project ID.
     :attr str location: The IBM Cloud location where a resource is deployed.
     :attr str resource_group_id: The resource group id where the project's data and
           tools are created.
@@ -3632,7 +3634,7 @@ class Project:
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
-        :param str id: The unique ID.
+        :param str id: The unique project ID.
         :param str location: The IBM Cloud location where a resource is deployed.
         :param str resource_group_id: The resource group id where the project's
                data and tools are created.
@@ -3940,10 +3942,12 @@ class ProjectComplianceProfile:
     """
     The profile required for compliance.
 
-    :attr str id: (optional) The unique ID.
-    :attr str instance_id: (optional) The unique ID.
+    :attr str id: (optional) The unique ID for that compliance profile.
+    :attr str instance_id: (optional) A unique ID for an instance of a compliance
+          profile.
     :attr str instance_location: (optional) The location of the compliance instance.
-    :attr str attachment_id: (optional) The unique ID.
+    :attr str attachment_id: (optional) A unique ID for the attachment to a
+          compliance profile.
     :attr str profile_name: (optional) The name of the compliance profile.
     """
 
@@ -3959,11 +3963,13 @@ class ProjectComplianceProfile:
         """
         Initialize a ProjectComplianceProfile object.
 
-        :param str id: (optional) The unique ID.
-        :param str instance_id: (optional) The unique ID.
+        :param str id: (optional) The unique ID for that compliance profile.
+        :param str instance_id: (optional) A unique ID for an instance of a
+               compliance profile.
         :param str instance_location: (optional) The location of the compliance
                instance.
-        :param str attachment_id: (optional) The unique ID.
+        :param str attachment_id: (optional) A unique ID for the attachment to a
+               compliance profile.
         :param str profile_name: (optional) The name of the compliance profile.
         """
         self.id = id
@@ -4065,7 +4071,7 @@ class ProjectConfig:
     :attr str state: The state of the configuration.
     :attr bool update_available: The flag that indicates whether a configuration
           update is available.
-    :attr ProjectConfigResponseDefinition definition: The type and output of a
+    :attr ProjectConfigResponseDefinition definition: The name and description of a
           project configuration.
     :attr ProjectConfigVersionSummary approved_version: (optional) The project
           configuration version.
@@ -4115,8 +4121,8 @@ class ProjectConfig:
         :param str state: The state of the configuration.
         :param bool update_available: The flag that indicates whether a
                configuration update is available.
-        :param ProjectConfigResponseDefinition definition: The type and output of a
-               project configuration.
+        :param ProjectConfigResponseDefinition definition: The name and description
+               of a project configuration.
         :param List[object] needs_attention_state: (optional) The needs attention
                state of a configuration.
         :param ProjectConfigMetadataLastApproved last_approved: (optional) The last
@@ -4509,7 +4515,8 @@ class ProjectConfigDefinitionNameDescription:
     """
     The name and description of a project configuration.
 
-    :attr str name: (optional) The configuration name.
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
     :attr str description: (optional) A project configuration description.
     """
 
@@ -4522,7 +4529,8 @@ class ProjectConfigDefinitionNameDescription:
         """
         Initialize a ProjectConfigDefinitionNameDescription object.
 
-        :param str name: (optional) The configuration name.
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
         :param str description: (optional) A project configuration description.
         """
         self.name = name
@@ -4575,7 +4583,7 @@ class ProjectConfigDelete:
     """
     Deletes the configuration response.
 
-    :attr str id: The unique ID.
+    :attr str id: The unique configuration ID.
     """
 
     def __init__(
@@ -4585,7 +4593,7 @@ class ProjectConfigDelete:
         """
         Initialize a ProjectConfigDelete object.
 
-        :param str id: The unique ID.
+        :param str id: The unique configuration ID.
         """
         self.id = id
 
@@ -4996,14 +5004,16 @@ class ProjectConfigPatchDefinitionBlock:
     """
     The name and description of a project configuration.
 
-    :attr str name: (optional) The configuration name.
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
     :attr str description: (optional) A project configuration description.
-    :attr str environment: (optional) The ID of the project environment.
+    :attr str environment_id: (optional) The ID of the project environment.
     :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
-    :attr str locator_id: (optional) A dotted value of catalogID.versionID.
+    :attr str locator_id: (optional) A unique concatenation of catalogID.versionID
+          that identifies the DA in the catalog.
     :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
     :attr ProjectConfigSetting settings: (optional) Schematics environment variables
@@ -5017,7 +5027,7 @@ class ProjectConfigPatchDefinitionBlock:
         *,
         name: str = None,
         description: str = None,
-        environment: str = None,
+        environment_id: str = None,
         authorizations: 'ProjectConfigAuth' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
         locator_id: str = None,
@@ -5027,15 +5037,17 @@ class ProjectConfigPatchDefinitionBlock:
         """
         Initialize a ProjectConfigPatchDefinitionBlock object.
 
-        :param str name: (optional) The configuration name.
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
         :param str description: (optional) A project configuration description.
-        :param str environment: (optional) The ID of the project environment.
+        :param str environment_id: (optional) The ID of the project environment.
         :param ProjectConfigAuth authorizations: (optional) The authorization
                details. You can authorize by using a trusted profile or an API key in
                Secrets Manager.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
                required for compliance.
-        :param str locator_id: (optional) A dotted value of catalogID.versionID.
+        :param str locator_id: (optional) A unique concatenation of
+               catalogID.versionID that identifies the DA in the catalog.
         :param InputVariable inputs: (optional) The input variables for
                configuration definition and environment.
         :param ProjectConfigSetting settings: (optional) Schematics environment
@@ -5045,7 +5057,7 @@ class ProjectConfigPatchDefinitionBlock:
         """
         self.name = name
         self.description = description
-        self.environment = environment
+        self.environment_id = environment_id
         self.authorizations = authorizations
         self.compliance_profile = compliance_profile
         self.locator_id = locator_id
@@ -5060,8 +5072,8 @@ class ProjectConfigPatchDefinitionBlock:
             args['name'] = _dict.get('name')
         if 'description' in _dict:
             args['description'] = _dict.get('description')
-        if 'environment' in _dict:
-            args['environment'] = _dict.get('environment')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
         if 'authorizations' in _dict:
             args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'compliance_profile' in _dict:
@@ -5086,8 +5098,8 @@ class ProjectConfigPatchDefinitionBlock:
             _dict['name'] = self.name
         if hasattr(self, 'description') and self.description is not None:
             _dict['description'] = self.description
-        if hasattr(self, 'environment') and self.environment is not None:
-            _dict['environment'] = self.environment
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
         if hasattr(self, 'authorizations') and self.authorizations is not None:
             if isinstance(self.authorizations, dict):
                 _dict['authorizations'] = self.authorizations
@@ -5213,14 +5225,16 @@ class ProjectConfigPrototypeDefinitionBlock:
     """
     The name and description of a project configuration.
 
-    :attr str name: The configuration name.
+    :attr str name: The configuration name. It is unique within the account across
+          projects and regions.
     :attr str description: (optional) A project configuration description.
-    :attr str environment: (optional) The ID of the project environment.
+    :attr str environment_id: (optional) The ID of the project environment.
     :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
-    :attr str locator_id: (optional) A dotted value of catalogID.versionID.
+    :attr str locator_id: (optional) A unique concatenation of catalogID.versionID
+          that identifies the DA in the catalog.
     :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
     :attr ProjectConfigSetting settings: (optional) Schematics environment variables
@@ -5234,7 +5248,7 @@ class ProjectConfigPrototypeDefinitionBlock:
         name: str,
         *,
         description: str = None,
-        environment: str = None,
+        environment_id: str = None,
         authorizations: 'ProjectConfigAuth' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
         locator_id: str = None,
@@ -5244,15 +5258,17 @@ class ProjectConfigPrototypeDefinitionBlock:
         """
         Initialize a ProjectConfigPrototypeDefinitionBlock object.
 
-        :param str name: The configuration name.
+        :param str name: The configuration name. It is unique within the account
+               across projects and regions.
         :param str description: (optional) A project configuration description.
-        :param str environment: (optional) The ID of the project environment.
+        :param str environment_id: (optional) The ID of the project environment.
         :param ProjectConfigAuth authorizations: (optional) The authorization
                details. You can authorize by using a trusted profile or an API key in
                Secrets Manager.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
                required for compliance.
-        :param str locator_id: (optional) A dotted value of catalogID.versionID.
+        :param str locator_id: (optional) A unique concatenation of
+               catalogID.versionID that identifies the DA in the catalog.
         :param InputVariable inputs: (optional) The input variables for
                configuration definition and environment.
         :param ProjectConfigSetting settings: (optional) Schematics environment
@@ -5262,7 +5278,7 @@ class ProjectConfigPrototypeDefinitionBlock:
         """
         self.name = name
         self.description = description
-        self.environment = environment
+        self.environment_id = environment_id
         self.authorizations = authorizations
         self.compliance_profile = compliance_profile
         self.locator_id = locator_id
@@ -5279,8 +5295,8 @@ class ProjectConfigPrototypeDefinitionBlock:
             raise ValueError('Required property \'name\' not present in ProjectConfigPrototypeDefinitionBlock JSON')
         if 'description' in _dict:
             args['description'] = _dict.get('description')
-        if 'environment' in _dict:
-            args['environment'] = _dict.get('environment')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
         if 'authorizations' in _dict:
             args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'compliance_profile' in _dict:
@@ -5305,8 +5321,8 @@ class ProjectConfigPrototypeDefinitionBlock:
             _dict['name'] = self.name
         if hasattr(self, 'description') and self.description is not None:
             _dict['description'] = self.description
-        if hasattr(self, 'environment') and self.environment is not None:
-            _dict['environment'] = self.environment
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
         if hasattr(self, 'authorizations') and self.authorizations is not None:
             if isinstance(self.authorizations, dict):
                 _dict['authorizations'] = self.authorizations
@@ -5527,23 +5543,24 @@ class ProjectConfigResourceCollection:
 
 class ProjectConfigResponseDefinition:
     """
-    The type and output of a project configuration.
+    The name and description of a project configuration.
 
-    :attr str name: The configuration name.
+    :attr str name: The configuration name. It is unique within the account across
+          projects and regions.
     :attr str description: (optional) A project configuration description.
-    :attr str environment: (optional) The ID of the project environment.
+    :attr str environment_id: (optional) The ID of the project environment.
     :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
-    :attr str locator_id: A dotted value of catalogID.versionID.
+    :attr str locator_id: A unique concatenation of catalogID.versionID that
+          identifies the DA in the catalog.
     :attr InputVariable inputs: (optional) The input variables for configuration
           definition and environment.
     :attr ProjectConfigSetting settings: (optional) Schematics environment variables
           to use to deploy the configuration.
           Settings are only available if they were specified when the configuration was
           initially created.
-    :attr str type: (optional) The type of a project configuration manual property.
     """
 
     def __init__(
@@ -5552,20 +5569,21 @@ class ProjectConfigResponseDefinition:
         locator_id: str,
         *,
         description: str = None,
-        environment: str = None,
+        environment_id: str = None,
         authorizations: 'ProjectConfigAuth' = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
         inputs: 'InputVariable' = None,
         settings: 'ProjectConfigSetting' = None,
-        type: str = None,
     ) -> None:
         """
         Initialize a ProjectConfigResponseDefinition object.
 
-        :param str name: The configuration name.
-        :param str locator_id: A dotted value of catalogID.versionID.
+        :param str name: The configuration name. It is unique within the account
+               across projects and regions.
+        :param str locator_id: A unique concatenation of catalogID.versionID that
+               identifies the DA in the catalog.
         :param str description: (optional) A project configuration description.
-        :param str environment: (optional) The ID of the project environment.
+        :param str environment_id: (optional) The ID of the project environment.
         :param ProjectConfigAuth authorizations: (optional) The authorization
                details. You can authorize by using a trusted profile or an API key in
                Secrets Manager.
@@ -5577,18 +5595,15 @@ class ProjectConfigResponseDefinition:
                variables to use to deploy the configuration.
                Settings are only available if they were specified when the configuration
                was initially created.
-        :param str type: (optional) The type of a project configuration manual
-               property.
         """
         self.name = name
         self.description = description
-        self.environment = environment
+        self.environment_id = environment_id
         self.authorizations = authorizations
         self.compliance_profile = compliance_profile
         self.locator_id = locator_id
         self.inputs = inputs
         self.settings = settings
-        self.type = type
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigResponseDefinition':
@@ -5600,8 +5615,8 @@ class ProjectConfigResponseDefinition:
             raise ValueError('Required property \'name\' not present in ProjectConfigResponseDefinition JSON')
         if 'description' in _dict:
             args['description'] = _dict.get('description')
-        if 'environment' in _dict:
-            args['environment'] = _dict.get('environment')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
         if 'authorizations' in _dict:
             args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'compliance_profile' in _dict:
@@ -5614,8 +5629,6 @@ class ProjectConfigResponseDefinition:
             args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
         if 'settings' in _dict:
             args['settings'] = ProjectConfigSetting.from_dict(_dict.get('settings'))
-        if 'type' in _dict:
-            args['type'] = _dict.get('type')
         return cls(**args)
 
     @classmethod
@@ -5630,8 +5643,8 @@ class ProjectConfigResponseDefinition:
             _dict['name'] = self.name
         if hasattr(self, 'description') and self.description is not None:
             _dict['description'] = self.description
-        if hasattr(self, 'environment') and self.environment is not None:
-            _dict['environment'] = self.environment
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
         if hasattr(self, 'authorizations') and self.authorizations is not None:
             if isinstance(self.authorizations, dict):
                 _dict['authorizations'] = self.authorizations
@@ -5654,8 +5667,6 @@ class ProjectConfigResponseDefinition:
                 _dict['settings'] = self.settings
             else:
                 _dict['settings'] = self.settings.to_dict()
-        if hasattr(self, 'type') and self.type is not None:
-            _dict['type'] = self.type
         return _dict
 
     def _to_dict(self):
@@ -5675,15 +5686,6 @@ class ProjectConfigResponseDefinition:
     def __ne__(self, other: 'ProjectConfigResponseDefinition') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
-
-    class TypeEnum(str, Enum):
-        """
-        The type of a project configuration manual property.
-        """
-
-        TERRAFORM_TEMPLATE = 'terraform_template'
-        SCHEMATICS_BLUEPRINT = 'schematics_blueprint'
-
 
 
 class ProjectConfigSetting:
@@ -5988,7 +5990,7 @@ class ProjectConfigVersion:
     :attr str state: The state of the configuration.
     :attr bool update_available: The flag that indicates whether a configuration
           update is available.
-    :attr ProjectConfigResponseDefinition definition: The type and output of a
+    :attr ProjectConfigResponseDefinition definition: The name and description of a
           project configuration.
     """
 
@@ -6032,8 +6034,8 @@ class ProjectConfigVersion:
         :param str state: The state of the configuration.
         :param bool update_available: The flag that indicates whether a
                configuration update is available.
-        :param ProjectConfigResponseDefinition definition: The type and output of a
-               project configuration.
+        :param ProjectConfigResponseDefinition definition: The name and description
+               of a project configuration.
         :param List[object] needs_attention_state: (optional) The needs attention
                state of a configuration.
         :param ProjectConfigMetadataLastApproved last_approved: (optional) The last
@@ -6420,7 +6422,8 @@ class ProjectDefinitionProperties:
     """
     The definition of the project.
 
-    :attr str name: The name of the project.
+    :attr str name: The name of the project.  It is unique within the account across
+          regions.
     :attr str description: (optional) A brief explanation of the project's use in
           the configuration of a deployable architecture. It is possible to create a
           project without providing a description.
@@ -6438,7 +6441,8 @@ class ProjectDefinitionProperties:
         """
         Initialize a ProjectDefinitionProperties object.
 
-        :param str name: The name of the project.
+        :param str name: The name of the project.  It is unique within the account
+               across regions.
         :param bool destroy_on_delete: The policy that indicates whether the
                resources are destroyed or not when a project is deleted.
         :param str description: (optional) A brief explanation of the project's use
@@ -6674,7 +6678,8 @@ class ProjectPatchDefinitionBlock:
     """
     The definition of the project.
 
-    :attr str name: (optional) The name of the project.
+    :attr str name: (optional) The name of the project.  It is unique within the
+          account across regions.
     :attr str description: (optional) A brief explanation of the project's use in
           the configuration of a deployable architecture. It is possible to create a
           project without providing a description.
@@ -6692,7 +6697,8 @@ class ProjectPatchDefinitionBlock:
         """
         Initialize a ProjectPatchDefinitionBlock object.
 
-        :param str name: (optional) The name of the project.
+        :param str name: (optional) The name of the project.  It is unique within
+               the account across regions.
         :param str description: (optional) A brief explanation of the project's use
                in the configuration of a deployable architecture. It is possible to create
                a project without providing a description.
@@ -6754,12 +6760,13 @@ class ProjectPrototypeDefinition:
     """
     The definition of the project.
 
-    :attr str name: The name of the project.
+    :attr str name: The name of the project.  It is unique within the account across
+          regions.
     :attr str description: (optional) A brief explanation of the project's use in
           the configuration of a deployable architecture. It is possible to create a
           project without providing a description.
     :attr bool destroy_on_delete: (optional) The policy that indicates whether the
-          resources are destroyed or not when a project is deleted.
+          resources are undeployed or not when a project is deleted.
     """
 
     def __init__(
@@ -6772,12 +6779,13 @@ class ProjectPrototypeDefinition:
         """
         Initialize a ProjectPrototypeDefinition object.
 
-        :param str name: The name of the project.
+        :param str name: The name of the project.  It is unique within the account
+               across regions.
         :param str description: (optional) A brief explanation of the project's use
                in the configuration of a deployable architecture. It is possible to create
                a project without providing a description.
         :param bool destroy_on_delete: (optional) The policy that indicates whether
-               the resources are destroyed or not when a project is deleted.
+               the resources are undeployed or not when a project is deleted.
         """
         self.name = name
         self.description = description
@@ -6941,7 +6949,7 @@ class ProjectSummary:
     :attr bool cumulative_needs_attention_view_error: (optional) True indicates that
           the fetch of the needs attention items failed. It only exists if there was an
           error while retrieving the cumulative needs attention view.
-    :attr str id: The unique ID.
+    :attr str id: The unique project ID.
     :attr str location: The IBM Cloud location where a resource is deployed.
     :attr str resource_group_id: The resource group id where the project's data and
           tools are created.
@@ -6970,7 +6978,7 @@ class ProjectSummary:
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
-        :param str id: The unique ID.
+        :param str id: The unique project ID.
         :param str location: The IBM Cloud location where a resource is deployed.
         :param str resource_group_id: The resource group id where the project's
                data and tools are created.
