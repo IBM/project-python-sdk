@@ -91,7 +91,7 @@ class TestProjectV1:
         project_config_prototype_definition_block_model = {
             'name': 'testString',
             'description': 'testString',
-            'environment': 'testString',
+            'environment_id': 'testString',
             'authorizations': project_config_auth_model,
             'compliance_profile': project_compliance_profile_model,
             'locator_id': 'testString',
@@ -155,7 +155,7 @@ class TestProjectV1:
         project_config_prototype_definition_block_model = {
             'name': 'env-stage',
             'description': 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
-            'environment': 'testString',
+            'environment_id': 'testString',
             'authorizations': project_config_auth_model,
             'compliance_profile': project_compliance_profile_model,
             'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
@@ -396,7 +396,7 @@ class TestProjectV1:
         project_config_patch_definition_block_model = {
             'name': 'testString',
             'description': 'testString',
-            'environment': 'testString',
+            'environment_id': 'testString',
             'authorizations': project_config_auth_model,
             'compliance_profile': project_compliance_profile_model,
             'locator_id': 'testString',
