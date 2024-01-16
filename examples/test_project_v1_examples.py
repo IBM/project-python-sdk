@@ -63,8 +63,7 @@ class TestProjectV1Examples:
 
             # begin-common
 
-            project_service = ProjectV1.new_instance(
-            )
+            project_service = ProjectV1.new_instance()
 
             # end-common
             assert project_service is not None
@@ -122,8 +121,14 @@ class TestProjectV1Examples:
             project_config_prototype_definition_block_model = {
                 'name': 'env-stage',
                 'description': 'Stage environment configuration.',
-                'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
-                'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT':'https://api.us-south.devops.dev.cloud.ibm.com'},
+                'inputs': {
+                    'account_id': 'account_id',
+                    'resource_group': 'stage',
+                    'access_tags': ['env:stage'],
+                    'logdna_name': 'LogDNA_stage_service',
+                    'sysdig_name': 'SysDig_stage_service',
+                },
+                'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
                 'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
             }
 
@@ -240,7 +245,7 @@ class TestProjectV1Examples:
                 'name': 'development',
                 'description': 'The environment \'development\'',
                 'authorizations': project_config_auth_model,
-                'inputs': {'resource_group':'stage','region':'us-south'},
+                'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
             }
 
@@ -326,7 +331,7 @@ class TestProjectV1Examples:
                 'name': 'development',
                 'description': 'The environment \'development\'',
                 'authorizations': project_config_auth_model,
-                'inputs': {'resource_group':'stage','region':'us-south'},
+                'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
             }
 
@@ -398,7 +403,13 @@ class TestProjectV1Examples:
 
             project_config_patch_definition_block_model = {
                 'name': 'env-stage',
-                'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
+                'inputs': {
+                    'account_id': 'account_id',
+                    'resource_group': 'stage',
+                    'access_tags': ['env:stage'],
+                    'logdna_name': 'LogDNA_stage_service',
+                    'sysdig_name': 'SysDig_stage_service',
+                },
             }
 
             response = project_service.update_config(

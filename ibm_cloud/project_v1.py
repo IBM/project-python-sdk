@@ -55,9 +55,7 @@ class ProjectV1(BaseService):
                and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(
-            authenticator
-            )
+        service = cls(authenticator)
         service.configure_service(service_name)
         return service
 
@@ -1466,9 +1464,13 @@ class ActionJobApplyMessagesSummary:
         """Initialize a ActionJobApplyMessagesSummary object from a json dictionary."""
         args = {}
         if 'error_messages' in _dict:
-            args['error_messages'] = [TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')]
+            args['error_messages'] = [
+                TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')
+            ]
         if 'sucess_message' in _dict:
-            args['sucess_message'] = [TerraformLogAnalyzerSuccessMessage.from_dict(v) for v in _dict.get('sucess_message')]
+            args['sucess_message'] = [
+                TerraformLogAnalyzerSuccessMessage.from_dict(v) for v in _dict.get('sucess_message')
+            ]
         return cls(**args)
 
     @classmethod
@@ -1628,7 +1630,9 @@ class ActionJobDestroyMessagesSummary:
         """Initialize a ActionJobDestroyMessagesSummary object from a json dictionary."""
         args = {}
         if 'error_messages' in _dict:
-            args['error_messages'] = [TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')]
+            args['error_messages'] = [
+                TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')
+            ]
         return cls(**args)
 
     @classmethod
@@ -1944,7 +1948,9 @@ class ActionJobPlanMessagesSummary:
         """Initialize a ActionJobPlanMessagesSummary object from a json dictionary."""
         args = {}
         if 'error_messages' in _dict:
-            args['error_messages'] = [TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')]
+            args['error_messages'] = [
+                TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')
+            ]
         if 'sucess_message' in _dict:
             args['sucess_message'] = _dict.get('sucess_message')
         if 'update_message' in _dict:
@@ -3238,7 +3244,6 @@ class LastActionWithSummary:
         PASSED = 'passed'
 
 
-
 class LastValidatedActionWithSummary:
     """
     The action job performed on the project configuration.
@@ -3379,7 +3384,6 @@ class LastValidatedActionWithSummary:
 
         FAILED = 'failed'
         PASSED = 'passed'
-
 
 
 class OutputValue:
@@ -3951,7 +3955,9 @@ class Project:
         else:
             raise ValueError('Required property \'created_at\' not present in Project JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         else:
             raise ValueError('Required property \'cumulative_needs_attention_view\' not present in Project JSON')
         if 'cumulative_needs_attention_view_error' in _dict:
@@ -4016,7 +4022,10 @@ class Project:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -4081,7 +4090,6 @@ class Project:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class ProjectCollection:
@@ -4610,7 +4618,6 @@ class ProjectConfig:
         APPLY_FAILED = 'apply_failed'
 
 
-
 class ProjectConfigAuth:
     """
     The authorization details. You can authorize by using a trusted profile or an API key
@@ -4695,7 +4702,6 @@ class ProjectConfigAuth:
 
         API_KEY = 'api_key'
         TRUSTED_PROFILE = 'trusted_profile'
-
 
 
 class ProjectConfigCollection:
@@ -5007,7 +5013,6 @@ class ProjectConfigMetadataCodeRiskAnalyzerLogs:
         FAILED = 'failed'
 
 
-
 class ProjectConfigMetadataCostEstimate:
     """
     The cost estimate of the configuration. It only exists after the first configuration
@@ -5269,7 +5274,12 @@ class ProjectConfigPatchDefinitionBlock:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties', 'ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties'])
+            ", ".join(
+                [
+                    'ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties',
+                    'ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5368,7 +5378,12 @@ class ProjectConfigPrototypeDefinitionBlock:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties', 'ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties'])
+            ", ".join(
+                [
+                    'ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties',
+                    'ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5505,7 +5520,9 @@ class ProjectConfigResourceCollection:
         if 'resources_count' in _dict:
             args['resources_count'] = _dict.get('resources_count')
         else:
-            raise ValueError('Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON')
+            raise ValueError(
+                'Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON'
+            )
         return cls(**args)
 
     @classmethod
@@ -5561,7 +5578,12 @@ class ProjectConfigResponseDefinition:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigResponseDefinitionDAConfigDefinitionProperties', 'ProjectConfigResponseDefinitionResourceConfigDefinitionProperties'])
+            ", ".join(
+                [
+                    'ProjectConfigResponseDefinitionDAConfigDefinitionProperties',
+                    'ProjectConfigResponseDefinitionResourceConfigDefinitionProperties',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5770,7 +5792,6 @@ class ProjectConfigSummary:
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
 
-
     class DeploymentModelEnum(str, Enum):
         """
         The configuration type.
@@ -5778,7 +5799,6 @@ class ProjectConfigSummary:
 
         PROJECT_DEPLOYED = 'project_deployed'
         USER_DEPLOYED = 'user_deployed'
-
 
 
 class ProjectConfigVersion:
@@ -6088,7 +6108,6 @@ class ProjectConfigVersion:
         APPLY_FAILED = 'apply_failed'
 
 
-
 class ProjectConfigVersionSummary:
     """
     The project configuration version.
@@ -6189,7 +6208,6 @@ class ProjectConfigVersionSummary:
         VALIDATING_FAILED = 'validating_failed'
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
-
 
 
 class ProjectConfigVersionSummaryCollection:
@@ -6862,7 +6880,9 @@ class ProjectSummary:
         else:
             raise ValueError('Required property \'created_at\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         else:
             raise ValueError('Required property \'cumulative_needs_attention_view\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view_error' in _dict:
@@ -6913,7 +6933,10 @@ class ProjectSummary:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -6958,7 +6981,6 @@ class ProjectSummary:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class SchematicsMetadata:
@@ -8172,6 +8194,7 @@ class ProjectConfigResponseDefinitionResourceConfigDefinitionProperties(ProjectC
     def __ne__(self, other: 'ProjectConfigResponseDefinitionResourceConfigDefinitionProperties') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
 
 ##############################################################################
 # Pagers
