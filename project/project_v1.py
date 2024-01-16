@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# (C) Copyright IBM Corp. 2023.
+# (C) Copyright IBM Corp. 2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -85,6 +85,7 @@ class ProjectV1(BaseService):
         resource_group: str,
         *,
         configs: List['ProjectConfigPrototype'] = None,
+        environments: List['EnvironmentPrototype'] = None,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -102,6 +103,10 @@ class ProjectV1(BaseService):
         :param List[ProjectConfigPrototype] configs: (optional) The project
                configurations. These configurations are only included in the response of
                creating a project if a configs array is specified in the request payload.
+        :param List[EnvironmentPrototype] environments: (optional) The project
+               environments. These environments are only included in the response of
+               creating a project if a environments array is specified in the request
+               payload.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `Project` object
@@ -116,6 +121,8 @@ class ProjectV1(BaseService):
         definition = convert_model(definition)
         if configs is not None:
             configs = [convert_model(x) for x in configs]
+        if environments is not None:
+            environments = [convert_model(x) for x in environments]
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
@@ -129,6 +136,7 @@ class ProjectV1(BaseService):
             'location': location,
             'resource_group': resource_group,
             'configs': configs,
+            'environments': environments,
         }
         data = {k: v for (k, v) in data.items() if v is not None}
         data = json.dumps(data)
@@ -631,10 +639,11 @@ class ProjectV1(BaseService):
         Add a new configuration to a project.
 
         :param str project_id: The unique project ID.
-        :param ProjectConfigPrototypeDefinitionBlock definition: The name and
-               description of a project configuration.
-        :param SchematicsWorkspace schematics: (optional) A schematics workspace
-               associated to a project configuration.
+        :param ProjectConfigPrototypeDefinitionBlock definition:
+        :param SchematicsWorkspace schematics: (optional) A Schematics workspace to
+               use for deploying this configuration.
+               Either schematics.workspace_crn, definition.locator_id, or both must be
+               specified.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `ProjectConfig` object
@@ -788,8 +797,7 @@ class ProjectV1(BaseService):
 
         :param str project_id: The unique project ID.
         :param str id: The unique config ID.
-        :param ProjectConfigPatchDefinitionBlock definition: The name and
-               description of a project configuration.
+        :param ProjectConfigPatchDefinitionBlock definition:
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `ProjectConfig` object
@@ -888,8 +896,7 @@ class ProjectV1(BaseService):
         self,
         project_id: str,
         id: str,
-        *,
-        comment: str = None,
+        comment: str,
         **kwargs,
     ) -> DetailedResponse:
         """
@@ -900,9 +907,8 @@ class ProjectV1(BaseService):
 
         :param str project_id: The unique project ID.
         :param str id: The unique config ID.
-        :param str comment: (optional) Notes on the project draft action. If this
-               is a forced approve on the draft configuration, a non-empty comment is
-               required.
+        :param str comment: Notes on the project draft action. If this is a forced
+               approve on the draft configuration, a non-empty comment is required.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse with `dict` result representing a `ProjectConfigVersion` object
@@ -912,6 +918,8 @@ class ProjectV1(BaseService):
             raise ValueError('project_id must be provided')
         if not id:
             raise ValueError('id must be provided')
+        if comment is None:
+            raise ValueError('comment must be provided')
         headers = {}
         sdk_headers = get_sdk_headers(
             service_name=self.DEFAULT_SERVICE_NAME,
@@ -1171,8 +1179,10 @@ class ProjectV1(BaseService):
 
         :param str project_id: The unique project ID.
         :param str id: The unique config ID.
-        :param SchematicsWorkspace schematics: (optional) A schematics workspace
-               associated to a project configuration.
+        :param SchematicsWorkspace schematics: (optional) A Schematics workspace to
+               use for deploying this configuration.
+               Either schematics.workspace_crn, definition.locator_id, or both must be
+               specified.
         :param dict headers: A `dict` containing the request headers
         :return: A `DetailedResponse` containing the result, headers and HTTP status code.
         :rtype: DetailedResponse
@@ -2525,6 +2535,7 @@ class Environment:
     :attr datetime modified_at: A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
+    :attr str href: A URL.
     :attr EnvironmentDefinitionRequiredProperties definition: The environment
           definition.
     """
@@ -2535,6 +2546,7 @@ class Environment:
         project: 'ProjectReference',
         created_at: datetime,
         modified_at: datetime,
+        href: str,
         definition: 'EnvironmentDefinitionRequiredProperties',
         *,
         target_account: str = None,
@@ -2550,6 +2562,7 @@ class Environment:
         :param datetime modified_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
+        :param str href: A URL.
         :param EnvironmentDefinitionRequiredProperties definition: The environment
                definition.
         :param str target_account: (optional) The target account ID derived from
@@ -2560,6 +2573,7 @@ class Environment:
         self.created_at = created_at
         self.target_account = target_account
         self.modified_at = modified_at
+        self.href = href
         self.definition = definition
 
     @classmethod
@@ -2584,6 +2598,10 @@ class Environment:
             args['modified_at'] = string_to_datetime(_dict.get('modified_at'))
         else:
             raise ValueError('Required property \'modified_at\' not present in Environment JSON')
+        if 'href' in _dict:
+            args['href'] = _dict.get('href')
+        else:
+            raise ValueError('Required property \'href\' not present in Environment JSON')
         if 'definition' in _dict:
             args['definition'] = EnvironmentDefinitionRequiredProperties.from_dict(_dict.get('definition'))
         else:
@@ -2611,6 +2629,8 @@ class Environment:
             _dict['target_account'] = self.target_account
         if hasattr(self, 'modified_at') and self.modified_at is not None:
             _dict['modified_at'] = datetime_to_string(self.modified_at)
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -2778,8 +2798,8 @@ class EnvironmentDefinitionProperties:
     :attr str description: (optional) The description of the environment.
     :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
-    :attr InputVariable inputs: (optional) The input variables for configuration
-          definition and environment.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
     """
@@ -2790,7 +2810,7 @@ class EnvironmentDefinitionProperties:
         name: str = None,
         description: str = None,
         authorizations: 'ProjectConfigAuth' = None,
-        inputs: 'InputVariable' = None,
+        inputs: dict = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
     ) -> None:
         """
@@ -2802,8 +2822,8 @@ class EnvironmentDefinitionProperties:
         :param ProjectConfigAuth authorizations: (optional) The authorization
                details. You can authorize by using a trusted profile or an API key in
                Secrets Manager.
-        :param InputVariable inputs: (optional) The input variables for
-               configuration definition and environment.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
                required for compliance.
         """
@@ -2824,7 +2844,7 @@ class EnvironmentDefinitionProperties:
         if 'authorizations' in _dict:
             args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'inputs' in _dict:
-            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
+            args['inputs'] = _dict.get('inputs')
         if 'compliance_profile' in _dict:
             args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
         return cls(**args)
@@ -2847,10 +2867,7 @@ class EnvironmentDefinitionProperties:
             else:
                 _dict['authorizations'] = self.authorizations.to_dict()
         if hasattr(self, 'inputs') and self.inputs is not None:
-            if isinstance(self.inputs, dict):
-                _dict['inputs'] = self.inputs
-            else:
-                _dict['inputs'] = self.inputs.to_dict()
+            _dict['inputs'] = self.inputs
         if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
             if isinstance(self.compliance_profile, dict):
                 _dict['compliance_profile'] = self.compliance_profile
@@ -2886,8 +2903,8 @@ class EnvironmentDefinitionRequiredProperties:
     :attr str description: (optional) The description of the environment.
     :attr ProjectConfigAuth authorizations: (optional) The authorization details.
           You can authorize by using a trusted profile or an API key in Secrets Manager.
-    :attr InputVariable inputs: (optional) The input variables for configuration
-          definition and environment.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
     :attr ProjectComplianceProfile compliance_profile: (optional) The profile
           required for compliance.
     """
@@ -2898,7 +2915,7 @@ class EnvironmentDefinitionRequiredProperties:
         *,
         description: str = None,
         authorizations: 'ProjectConfigAuth' = None,
-        inputs: 'InputVariable' = None,
+        inputs: dict = None,
         compliance_profile: 'ProjectComplianceProfile' = None,
     ) -> None:
         """
@@ -2910,8 +2927,8 @@ class EnvironmentDefinitionRequiredProperties:
         :param ProjectConfigAuth authorizations: (optional) The authorization
                details. You can authorize by using a trusted profile or an API key in
                Secrets Manager.
-        :param InputVariable inputs: (optional) The input variables for
-               configuration definition and environment.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
         :param ProjectComplianceProfile compliance_profile: (optional) The profile
                required for compliance.
         """
@@ -2934,7 +2951,7 @@ class EnvironmentDefinitionRequiredProperties:
         if 'authorizations' in _dict:
             args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'inputs' in _dict:
-            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
+            args['inputs'] = _dict.get('inputs')
         if 'compliance_profile' in _dict:
             args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
         return cls(**args)
@@ -2957,10 +2974,7 @@ class EnvironmentDefinitionRequiredProperties:
             else:
                 _dict['authorizations'] = self.authorizations.to_dict()
         if hasattr(self, 'inputs') and self.inputs is not None:
-            if isinstance(self.inputs, dict):
-                _dict['inputs'] = self.inputs
-            else:
-                _dict['inputs'] = self.inputs.to_dict()
+            _dict['inputs'] = self.inputs
         if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
             if isinstance(self.compliance_profile, dict):
                 _dict['compliance_profile'] = self.compliance_profile
@@ -3046,69 +3060,66 @@ class EnvironmentDeleteResponse:
         return not self == other
 
 
-class InputVariable:
+class EnvironmentPrototype:
     """
-    The input variables for configuration definition and environment.
+    The definition of a project environment.
 
+    :attr EnvironmentDefinitionRequiredProperties definition: The environment
+          definition.
     """
 
     def __init__(
         self,
-        **kwargs,
+        definition: 'EnvironmentDefinitionRequiredProperties',
     ) -> None:
         """
-        Initialize a InputVariable object.
+        Initialize a EnvironmentPrototype object.
 
-        :param **kwargs: (optional) Any additional properties.
+        :param EnvironmentDefinitionRequiredProperties definition: The environment
+               definition.
         """
-        for _key, _value in kwargs.items():
-            setattr(self, _key, _value)
+        self.definition = definition
 
     @classmethod
-    def from_dict(cls, _dict: Dict) -> 'InputVariable':
-        """Initialize a InputVariable object from a json dictionary."""
-        return cls(**_dict)
+    def from_dict(cls, _dict: Dict) -> 'EnvironmentPrototype':
+        """Initialize a EnvironmentPrototype object from a json dictionary."""
+        args = {}
+        if 'definition' in _dict:
+            args['definition'] = EnvironmentDefinitionRequiredProperties.from_dict(_dict.get('definition'))
+        else:
+            raise ValueError('Required property \'definition\' not present in EnvironmentPrototype JSON')
+        return cls(**args)
 
     @classmethod
     def _from_dict(cls, _dict):
-        """Initialize a InputVariable object from a json dictionary."""
+        """Initialize a EnvironmentPrototype object from a json dictionary."""
         return cls.from_dict(_dict)
 
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
-        return vars(self)
+        _dict = {}
+        if hasattr(self, 'definition') and self.definition is not None:
+            if isinstance(self.definition, dict):
+                _dict['definition'] = self.definition
+            else:
+                _dict['definition'] = self.definition.to_dict()
+        return _dict
 
     def _to_dict(self):
         """Return a json dictionary representing this model."""
         return self.to_dict()
 
-    def get_properties(self) -> Dict:
-        """Return a dictionary of arbitrary properties from this instance of InputVariable"""
-        _dict = {}
-
-        for _key in [k for k in vars(self).keys()]:
-            _dict[_key] = getattr(self, _key)
-        return _dict
-
-    def set_properties(self, _dict: dict):
-        """Set a dictionary of arbitrary properties to this instance of InputVariable"""
-        for _key in [k for k in vars(self).keys()]:
-            delattr(self, _key)
-
-        for _key, _value in _dict.items():
-            setattr(self, _key, _value)
-
     def __str__(self) -> str:
-        """Return a `str` version of this InputVariable object."""
+        """Return a `str` version of this EnvironmentPrototype object."""
         return json.dumps(self.to_dict(), indent=2)
 
-    def __eq__(self, other: 'InputVariable') -> bool:
+    def __eq__(self, other: 'EnvironmentPrototype') -> bool:
         """Return `true` when self and other are equal, false otherwise."""
         if not isinstance(other, self.__class__):
             return False
         return self.__dict__ == other.__dict__
 
-    def __ne__(self, other: 'InputVariable') -> bool:
+    def __ne__(self, other: 'EnvironmentPrototype') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -3377,7 +3388,7 @@ class OutputValue:
 
     :attr str name: The variable name.
     :attr str description: (optional) A short explanation of the output value.
-    :attr object value: (optional) Can be any value - a string, number, boolean,
+    :attr dict value: (optional) Can be any value - a string, number, boolean,
           array, or object.
     """
 
@@ -3386,15 +3397,15 @@ class OutputValue:
         name: str,
         *,
         description: str = None,
-        value: object = None,
+        value: dict = None,
     ) -> None:
         """
         Initialize a OutputValue object.
 
         :param str name: The variable name.
         :param str description: (optional) A short explanation of the output value.
-        :param object value: (optional) Can be any value - a string, number,
-               boolean, array, or object.
+        :param dict value: (optional) Can be any value - a string, number, boolean,
+               array, or object.
         """
         self.name = name
         self.description = description
@@ -3508,24 +3519,271 @@ class PaginationLink:
         return not self == other
 
 
+class PrePostActionJobSummary:
+    """
+    A brief summary of a pre/post action job.
+
+    :attr str job_id: The ID of the Schematics action job that ran as part of the
+          pre/post job.
+    :attr datetime start_time: (optional) A date and time value in the format
+          YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
+          format as specified by RFC 3339.
+    :attr datetime end_time: (optional) A date and time value in the format
+          YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
+          format as specified by RFC 3339.
+    :attr int tasks: (optional) The number of tasks run in the job.
+    :attr int ok: (optional) The number of tasks that successfully ran in the job.
+    :attr int failed: (optional) The number of tasks that failed in the job.
+    :attr int skipped: (optional) The number of tasks that were skipped in the job.
+    :attr int changed: (optional) The number of tasks that were changed in the job.
+    :attr PrePostActionJobSystemError project_error: (optional) A system-level error
+          from the pipeline that ran for this specific pre- and post-job.
+    """
+
+    def __init__(
+        self,
+        job_id: str,
+        *,
+        start_time: datetime = None,
+        end_time: datetime = None,
+        tasks: int = None,
+        ok: int = None,
+        failed: int = None,
+        skipped: int = None,
+        changed: int = None,
+        project_error: 'PrePostActionJobSystemError' = None,
+    ) -> None:
+        """
+        Initialize a PrePostActionJobSummary object.
+
+        :param str job_id: The ID of the Schematics action job that ran as part of
+               the pre/post job.
+        :param datetime start_time: (optional) A date and time value in the format
+               YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
+               time format as specified by RFC 3339.
+        :param datetime end_time: (optional) A date and time value in the format
+               YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
+               time format as specified by RFC 3339.
+        :param int tasks: (optional) The number of tasks run in the job.
+        :param int ok: (optional) The number of tasks that successfully ran in the
+               job.
+        :param int failed: (optional) The number of tasks that failed in the job.
+        :param int skipped: (optional) The number of tasks that were skipped in the
+               job.
+        :param int changed: (optional) The number of tasks that were changed in the
+               job.
+        :param PrePostActionJobSystemError project_error: (optional) A system-level
+               error from the pipeline that ran for this specific pre- and post-job.
+        """
+        self.job_id = job_id
+        self.start_time = start_time
+        self.end_time = end_time
+        self.tasks = tasks
+        self.ok = ok
+        self.failed = failed
+        self.skipped = skipped
+        self.changed = changed
+        self.project_error = project_error
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'PrePostActionJobSummary':
+        """Initialize a PrePostActionJobSummary object from a json dictionary."""
+        args = {}
+        if 'job_id' in _dict:
+            args['job_id'] = _dict.get('job_id')
+        else:
+            raise ValueError('Required property \'job_id\' not present in PrePostActionJobSummary JSON')
+        if 'start_time' in _dict:
+            args['start_time'] = string_to_datetime(_dict.get('start_time'))
+        if 'end_time' in _dict:
+            args['end_time'] = string_to_datetime(_dict.get('end_time'))
+        if 'tasks' in _dict:
+            args['tasks'] = _dict.get('tasks')
+        if 'ok' in _dict:
+            args['ok'] = _dict.get('ok')
+        if 'failed' in _dict:
+            args['failed'] = _dict.get('failed')
+        if 'skipped' in _dict:
+            args['skipped'] = _dict.get('skipped')
+        if 'changed' in _dict:
+            args['changed'] = _dict.get('changed')
+        if 'project_error' in _dict:
+            args['project_error'] = PrePostActionJobSystemError.from_dict(_dict.get('project_error'))
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a PrePostActionJobSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'job_id') and self.job_id is not None:
+            _dict['job_id'] = self.job_id
+        if hasattr(self, 'start_time') and self.start_time is not None:
+            _dict['start_time'] = datetime_to_string(self.start_time)
+        if hasattr(self, 'end_time') and self.end_time is not None:
+            _dict['end_time'] = datetime_to_string(self.end_time)
+        if hasattr(self, 'tasks') and self.tasks is not None:
+            _dict['tasks'] = self.tasks
+        if hasattr(self, 'ok') and self.ok is not None:
+            _dict['ok'] = self.ok
+        if hasattr(self, 'failed') and self.failed is not None:
+            _dict['failed'] = self.failed
+        if hasattr(self, 'skipped') and self.skipped is not None:
+            _dict['skipped'] = self.skipped
+        if hasattr(self, 'changed') and self.changed is not None:
+            _dict['changed'] = self.changed
+        if hasattr(self, 'project_error') and self.project_error is not None:
+            if isinstance(self.project_error, dict):
+                _dict['project_error'] = self.project_error
+            else:
+                _dict['project_error'] = self.project_error.to_dict()
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this PrePostActionJobSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'PrePostActionJobSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'PrePostActionJobSummary') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class PrePostActionJobSystemError:
+    """
+    System level error captured in the Projects Pipelines for pre/post job.
+
+    :attr datetime timestamp: A date and time value in the format
+          YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
+          format as specified by RFC 3339.
+    :attr str user_id: Id of user that triggered pipeline that ran pre/post job.
+    :attr str status_code: HTTP status code for the error.
+    :attr str description: Summary description of the error.
+    :attr str error_response: (optional) Detailed message from the source error.
+    """
+
+    def __init__(
+        self,
+        timestamp: datetime,
+        user_id: str,
+        status_code: str,
+        description: str,
+        *,
+        error_response: str = None,
+    ) -> None:
+        """
+        Initialize a PrePostActionJobSystemError object.
+
+        :param datetime timestamp: A date and time value in the format
+               YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
+               time format as specified by RFC 3339.
+        :param str user_id: Id of user that triggered pipeline that ran pre/post
+               job.
+        :param str status_code: HTTP status code for the error.
+        :param str description: Summary description of the error.
+        :param str error_response: (optional) Detailed message from the source
+               error.
+        """
+        self.timestamp = timestamp
+        self.user_id = user_id
+        self.status_code = status_code
+        self.description = description
+        self.error_response = error_response
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'PrePostActionJobSystemError':
+        """Initialize a PrePostActionJobSystemError object from a json dictionary."""
+        args = {}
+        if 'timestamp' in _dict:
+            args['timestamp'] = string_to_datetime(_dict.get('timestamp'))
+        else:
+            raise ValueError('Required property \'timestamp\' not present in PrePostActionJobSystemError JSON')
+        if 'user_id' in _dict:
+            args['user_id'] = _dict.get('user_id')
+        else:
+            raise ValueError('Required property \'user_id\' not present in PrePostActionJobSystemError JSON')
+        if 'status_code' in _dict:
+            args['status_code'] = _dict.get('status_code')
+        else:
+            raise ValueError('Required property \'status_code\' not present in PrePostActionJobSystemError JSON')
+        if 'description' in _dict:
+            args['description'] = _dict.get('description')
+        else:
+            raise ValueError('Required property \'description\' not present in PrePostActionJobSystemError JSON')
+        if 'error_response' in _dict:
+            args['error_response'] = _dict.get('error_response')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a PrePostActionJobSystemError object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'timestamp') and self.timestamp is not None:
+            _dict['timestamp'] = datetime_to_string(self.timestamp)
+        if hasattr(self, 'user_id') and self.user_id is not None:
+            _dict['user_id'] = self.user_id
+        if hasattr(self, 'status_code') and self.status_code is not None:
+            _dict['status_code'] = self.status_code
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'error_response') and self.error_response is not None:
+            _dict['error_response'] = self.error_response
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this PrePostActionJobSystemError object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'PrePostActionJobSystemError') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'PrePostActionJobSystemError') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
 class PrePostActionJobWithIdAndSummary:
     """
     A brief summary of a pre/post action.
 
     :attr str id: The unique ID.
-    :attr dict summary: The Summary of the pre/post job of the configuration.
+    :attr PrePostActionJobSummary summary: A brief summary of a pre/post action job.
     """
 
     def __init__(
         self,
         id: str,
-        summary: dict,
+        summary: 'PrePostActionJobSummary',
     ) -> None:
         """
         Initialize a PrePostActionJobWithIdAndSummary object.
 
         :param str id: The unique ID.
-        :param dict summary: The Summary of the pre/post job of the configuration.
+        :param PrePostActionJobSummary summary: A brief summary of a pre/post
+               action job.
         """
         self.id = id
         self.summary = summary
@@ -3539,7 +3797,7 @@ class PrePostActionJobWithIdAndSummary:
         else:
             raise ValueError('Required property \'id\' not present in PrePostActionJobWithIdAndSummary JSON')
         if 'summary' in _dict:
-            args['summary'] = _dict.get('summary')
+            args['summary'] = PrePostActionJobSummary.from_dict(_dict.get('summary'))
         else:
             raise ValueError('Required property \'summary\' not present in PrePostActionJobWithIdAndSummary JSON')
         return cls(**args)
@@ -3555,7 +3813,10 @@ class PrePostActionJobWithIdAndSummary:
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
         if hasattr(self, 'summary') and self.summary is not None:
-            _dict['summary'] = self.summary
+            if isinstance(self.summary, dict):
+                _dict['summary'] = self.summary
+            else:
+                _dict['summary'] = self.summary.to_dict()
         return _dict
 
     def _to_dict(self):
@@ -3585,8 +3846,8 @@ class Project:
     :attr datetime created_at: A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
-    :attr List[CumulativeNeedsAttention] cumulative_needs_attention_view: (optional)
-          The cumulative list of needs attention items for a project. If the view is
+    :attr List[CumulativeNeedsAttention] cumulative_needs_attention_view: The
+          cumulative list of needs attention items for a project. If the view is
           successfully retrieved, an array which could be empty is returned.
     :attr bool cumulative_needs_attention_view_error: (optional) True indicates that
           the fetch of the needs attention items failed. It only exists if there was an
@@ -3596,16 +3857,17 @@ class Project:
     :attr str resource_group_id: The resource group id where the project's data and
           tools are created.
     :attr str state: The project status value.
+    :attr str href: A URL.
     :attr str resource_group: The resource group name where the project's data and
           tools are created.
     :attr str event_notifications_crn: (optional) The CRN of the event notifications
           instance if one is connected to this project.
-    :attr List[ProjectConfigSummary] configs: (optional) The project configurations.
-          These configurations are only included in the response of creating a project if
-          a configs array is specified in the request payload.
-    :attr List[ProjectEnvironmentSummary] environments: (optional) The project
-          environments. These environments are only included in the response if project
-          environments were created on the project.
+    :attr List[ProjectConfigSummary] configs: The project configurations. These
+          configurations are only included in the response of creating a project if a
+          configs array is specified in the request payload.
+    :attr List[ProjectEnvironmentSummary] environments: The project environments.
+          These environments are only included in the response if project environments
+          were created on the project.
     :attr ProjectDefinitionProperties definition: The definition of the project.
     """
 
@@ -3613,18 +3875,19 @@ class Project:
         self,
         crn: str,
         created_at: datetime,
+        cumulative_needs_attention_view: List['CumulativeNeedsAttention'],
         id: str,
         location: str,
         resource_group_id: str,
         state: str,
+        href: str,
         resource_group: str,
+        configs: List['ProjectConfigSummary'],
+        environments: List['ProjectEnvironmentSummary'],
         definition: 'ProjectDefinitionProperties',
         *,
-        cumulative_needs_attention_view: List['CumulativeNeedsAttention'] = None,
         cumulative_needs_attention_view_error: bool = None,
         event_notifications_crn: str = None,
-        configs: List['ProjectConfigSummary'] = None,
-        environments: List['ProjectEnvironmentSummary'] = None,
     ) -> None:
         """
         Initialize a Project object.
@@ -3634,31 +3897,31 @@ class Project:
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
+        :param List[CumulativeNeedsAttention] cumulative_needs_attention_view: The
+               cumulative list of needs attention items for a project. If the view is
+               successfully retrieved, an array which could be empty is returned.
         :param str id: The unique project ID.
         :param str location: The IBM Cloud location where a resource is deployed.
         :param str resource_group_id: The resource group id where the project's
                data and tools are created.
         :param str state: The project status value.
+        :param str href: A URL.
         :param str resource_group: The resource group name where the project's data
                and tools are created.
+        :param List[ProjectConfigSummary] configs: The project configurations.
+               These configurations are only included in the response of creating a
+               project if a configs array is specified in the request payload.
+        :param List[ProjectEnvironmentSummary] environments: The project
+               environments. These environments are only included in the response if
+               project environments were created on the project.
         :param ProjectDefinitionProperties definition: The definition of the
                project.
-        :param List[CumulativeNeedsAttention] cumulative_needs_attention_view:
-               (optional) The cumulative list of needs attention items for a project. If
-               the view is successfully retrieved, an array which could be empty is
-               returned.
         :param bool cumulative_needs_attention_view_error: (optional) True
                indicates that the fetch of the needs attention items failed. It only
                exists if there was an error while retrieving the cumulative needs
                attention view.
         :param str event_notifications_crn: (optional) The CRN of the event
                notifications instance if one is connected to this project.
-        :param List[ProjectConfigSummary] configs: (optional) The project
-               configurations. These configurations are only included in the response of
-               creating a project if a configs array is specified in the request payload.
-        :param List[ProjectEnvironmentSummary] environments: (optional) The project
-               environments. These environments are only included in the response if
-               project environments were created on the project.
         """
         self.crn = crn
         self.created_at = created_at
@@ -3668,6 +3931,7 @@ class Project:
         self.location = location
         self.resource_group_id = resource_group_id
         self.state = state
+        self.href = href
         self.resource_group = resource_group
         self.event_notifications_crn = event_notifications_crn
         self.configs = configs
@@ -3688,6 +3952,8 @@ class Project:
             raise ValueError('Required property \'created_at\' not present in Project JSON')
         if 'cumulative_needs_attention_view' in _dict:
             args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+        else:
+            raise ValueError('Required property \'cumulative_needs_attention_view\' not present in Project JSON')
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -3706,6 +3972,10 @@ class Project:
             args['state'] = _dict.get('state')
         else:
             raise ValueError('Required property \'state\' not present in Project JSON')
+        if 'href' in _dict:
+            args['href'] = _dict.get('href')
+        else:
+            raise ValueError('Required property \'href\' not present in Project JSON')
         if 'resource_group' in _dict:
             args['resource_group'] = _dict.get('resource_group')
         else:
@@ -3714,8 +3984,12 @@ class Project:
             args['event_notifications_crn'] = _dict.get('event_notifications_crn')
         if 'configs' in _dict:
             args['configs'] = [ProjectConfigSummary.from_dict(v) for v in _dict.get('configs')]
+        else:
+            raise ValueError('Required property \'configs\' not present in Project JSON')
         if 'environments' in _dict:
             args['environments'] = [ProjectEnvironmentSummary.from_dict(v) for v in _dict.get('environments')]
+        else:
+            raise ValueError('Required property \'environments\' not present in Project JSON')
         if 'definition' in _dict:
             args['definition'] = ProjectDefinitionProperties.from_dict(_dict.get('definition'))
         else:
@@ -3752,6 +4026,8 @@ class Project:
             _dict['resource_group_id'] = self.resource_group_id
         if hasattr(self, 'state') and self.state is not None:
             _dict['state'] = self.state
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
         if hasattr(self, 'resource_group') and self.resource_group is not None:
             _dict['resource_group'] = self.resource_group
         if hasattr(self, 'event_notifications_crn') and self.event_notifications_crn is not None:
@@ -3813,10 +4089,7 @@ class ProjectCollection:
     Projects list.
 
     :attr int limit: A pagination limit.
-    :attr int total_count: Get the occurrencies of the total projects.
     :attr PaginationLink first: A pagination link.
-    :attr PaginationLink last: (optional) A pagination link.
-    :attr PaginationLink previous: (optional) A pagination link.
     :attr PaginationLink next: (optional) A pagination link.
     :attr List[ProjectSummary] projects: (optional) An array of projects.
     """
@@ -3824,11 +4097,8 @@ class ProjectCollection:
     def __init__(
         self,
         limit: int,
-        total_count: int,
         first: 'PaginationLink',
         *,
-        last: 'PaginationLink' = None,
-        previous: 'PaginationLink' = None,
         next: 'PaginationLink' = None,
         projects: List['ProjectSummary'] = None,
     ) -> None:
@@ -3836,18 +4106,12 @@ class ProjectCollection:
         Initialize a ProjectCollection object.
 
         :param int limit: A pagination limit.
-        :param int total_count: Get the occurrencies of the total projects.
         :param PaginationLink first: A pagination link.
-        :param PaginationLink last: (optional) A pagination link.
-        :param PaginationLink previous: (optional) A pagination link.
         :param PaginationLink next: (optional) A pagination link.
         :param List[ProjectSummary] projects: (optional) An array of projects.
         """
         self.limit = limit
-        self.total_count = total_count
         self.first = first
-        self.last = last
-        self.previous = previous
         self.next = next
         self.projects = projects
 
@@ -3859,18 +4123,10 @@ class ProjectCollection:
             args['limit'] = _dict.get('limit')
         else:
             raise ValueError('Required property \'limit\' not present in ProjectCollection JSON')
-        if 'total_count' in _dict:
-            args['total_count'] = _dict.get('total_count')
-        else:
-            raise ValueError('Required property \'total_count\' not present in ProjectCollection JSON')
         if 'first' in _dict:
             args['first'] = PaginationLink.from_dict(_dict.get('first'))
         else:
             raise ValueError('Required property \'first\' not present in ProjectCollection JSON')
-        if 'last' in _dict:
-            args['last'] = PaginationLink.from_dict(_dict.get('last'))
-        if 'previous' in _dict:
-            args['previous'] = PaginationLink.from_dict(_dict.get('previous'))
         if 'next' in _dict:
             args['next'] = PaginationLink.from_dict(_dict.get('next'))
         if 'projects' in _dict:
@@ -3887,23 +4143,11 @@ class ProjectCollection:
         _dict = {}
         if hasattr(self, 'limit') and self.limit is not None:
             _dict['limit'] = self.limit
-        if hasattr(self, 'total_count') and self.total_count is not None:
-            _dict['total_count'] = self.total_count
         if hasattr(self, 'first') and self.first is not None:
             if isinstance(self.first, dict):
                 _dict['first'] = self.first
             else:
                 _dict['first'] = self.first.to_dict()
-        if hasattr(self, 'last') and self.last is not None:
-            if isinstance(self.last, dict):
-                _dict['last'] = self.last
-            else:
-                _dict['last'] = self.last.to_dict()
-        if hasattr(self, 'previous') and self.previous is not None:
-            if isinstance(self.previous, dict):
-                _dict['previous'] = self.previous
-            else:
-                _dict['previous'] = self.previous.to_dict()
         if hasattr(self, 'next') and self.next is not None:
             if isinstance(self.next, dict):
                 _dict['next'] = self.next
@@ -4042,8 +4286,8 @@ class ProjectConfig:
     :attr int version: The version of the configuration.
     :attr bool is_draft: The flag that indicates whether the version of the
           configuration is draft, or active.
-    :attr List[object] needs_attention_state: (optional) The needs attention state
-          of a configuration.
+    :attr List[dict] needs_attention_state: The needs attention state of a
+          configuration.
     :attr datetime created_at: A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
@@ -4061,18 +4305,17 @@ class ProjectConfig:
           on the project configuration.
     :attr LastActionWithSummary last_undeployed: (optional) The action job performed
           on the project configuration.
-    :attr List[OutputValue] outputs: (optional) The outputs of a Schematics template
-          property.
+    :attr List[OutputValue] outputs: The outputs of a Schematics template property.
     :attr ProjectReference project: The project referenced by this resource.
     :attr dict references: (optional) The references used in the config to resolve
           input values.
     :attr SchematicsMetadata schematics: (optional) A schematics workspace
           associated to a project configuration, with scripts.
     :attr str state: The state of the configuration.
-    :attr bool update_available: The flag that indicates whether a configuration
-          update is available.
-    :attr ProjectConfigResponseDefinition definition: The name and description of a
-          project configuration.
+    :attr bool update_available: (optional) The flag that indicates whether a
+          configuration update is available.
+    :attr str href: A URL.
+    :attr ProjectConfigResponseDefinition definition:
     :attr ProjectConfigVersionSummary approved_version: (optional) The project
           configuration version.
     :attr ProjectConfigVersionSummary deployed_version: (optional) The project
@@ -4084,22 +4327,23 @@ class ProjectConfig:
         id: str,
         version: int,
         is_draft: bool,
+        needs_attention_state: List[dict],
         created_at: datetime,
         modified_at: datetime,
+        outputs: List['OutputValue'],
         project: 'ProjectReference',
         state: str,
-        update_available: bool,
+        href: str,
         definition: 'ProjectConfigResponseDefinition',
         *,
-        needs_attention_state: List[object] = None,
         last_approved: 'ProjectConfigMetadataLastApproved' = None,
         last_saved_at: datetime = None,
         last_validated: 'LastValidatedActionWithSummary' = None,
         last_deployed: 'LastActionWithSummary' = None,
         last_undeployed: 'LastActionWithSummary' = None,
-        outputs: List['OutputValue'] = None,
         references: dict = None,
         schematics: 'SchematicsMetadata' = None,
+        update_available: bool = None,
         approved_version: 'ProjectConfigVersionSummary' = None,
         deployed_version: 'ProjectConfigVersionSummary' = None,
     ) -> None:
@@ -4111,20 +4355,20 @@ class ProjectConfig:
         :param int version: The version of the configuration.
         :param bool is_draft: The flag that indicates whether the version of the
                configuration is draft, or active.
+        :param List[dict] needs_attention_state: The needs attention state of a
+               configuration.
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
         :param datetime modified_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
+        :param List[OutputValue] outputs: The outputs of a Schematics template
+               property.
         :param ProjectReference project: The project referenced by this resource.
         :param str state: The state of the configuration.
-        :param bool update_available: The flag that indicates whether a
-               configuration update is available.
-        :param ProjectConfigResponseDefinition definition: The name and description
-               of a project configuration.
-        :param List[object] needs_attention_state: (optional) The needs attention
-               state of a configuration.
+        :param str href: A URL.
+        :param ProjectConfigResponseDefinition definition:
         :param ProjectConfigMetadataLastApproved last_approved: (optional) The last
                approved metadata of the configuration.
         :param datetime last_saved_at: (optional) A date and time value in the
@@ -4136,12 +4380,12 @@ class ProjectConfig:
                performed on the project configuration.
         :param LastActionWithSummary last_undeployed: (optional) The action job
                performed on the project configuration.
-        :param List[OutputValue] outputs: (optional) The outputs of a Schematics
-               template property.
         :param dict references: (optional) The references used in the config to
                resolve input values.
         :param SchematicsMetadata schematics: (optional) A schematics workspace
                associated to a project configuration, with scripts.
+        :param bool update_available: (optional) The flag that indicates whether a
+               configuration update is available.
         :param ProjectConfigVersionSummary approved_version: (optional) The project
                configuration version.
         :param ProjectConfigVersionSummary deployed_version: (optional) The project
@@ -4164,6 +4408,7 @@ class ProjectConfig:
         self.schematics = schematics
         self.state = state
         self.update_available = update_available
+        self.href = href
         self.definition = definition
         self.approved_version = approved_version
         self.deployed_version = deployed_version
@@ -4186,6 +4431,8 @@ class ProjectConfig:
             raise ValueError('Required property \'is_draft\' not present in ProjectConfig JSON')
         if 'needs_attention_state' in _dict:
             args['needs_attention_state'] = _dict.get('needs_attention_state')
+        else:
+            raise ValueError('Required property \'needs_attention_state\' not present in ProjectConfig JSON')
         if 'created_at' in _dict:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
         else:
@@ -4206,6 +4453,8 @@ class ProjectConfig:
             args['last_undeployed'] = LastActionWithSummary.from_dict(_dict.get('last_undeployed'))
         if 'outputs' in _dict:
             args['outputs'] = [OutputValue.from_dict(v) for v in _dict.get('outputs')]
+        else:
+            raise ValueError('Required property \'outputs\' not present in ProjectConfig JSON')
         if 'project' in _dict:
             args['project'] = ProjectReference.from_dict(_dict.get('project'))
         else:
@@ -4220,10 +4469,12 @@ class ProjectConfig:
             raise ValueError('Required property \'state\' not present in ProjectConfig JSON')
         if 'update_available' in _dict:
             args['update_available'] = _dict.get('update_available')
+        if 'href' in _dict:
+            args['href'] = _dict.get('href')
         else:
-            raise ValueError('Required property \'update_available\' not present in ProjectConfig JSON')
+            raise ValueError('Required property \'href\' not present in ProjectConfig JSON')
         if 'definition' in _dict:
-            args['definition'] = ProjectConfigResponseDefinition.from_dict(_dict.get('definition'))
+            args['definition'] = _dict.get('definition')
         else:
             raise ValueError('Required property \'definition\' not present in ProjectConfig JSON')
         if 'approved_version' in _dict:
@@ -4298,6 +4549,8 @@ class ProjectConfig:
             _dict['state'] = self.state
         if hasattr(self, 'update_available') and self.update_available is not None:
             _dict['update_available'] = self.update_available
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -4353,6 +4606,8 @@ class ProjectConfig:
         VALIDATED = 'validated'
         VALIDATING = 'validating'
         VALIDATING_FAILED = 'validating_failed'
+        APPLIED = 'applied'
+        APPLY_FAILED = 'apply_failed'
 
 
 
@@ -5002,155 +5257,32 @@ class ProjectConfigMetadataLastApproved:
 
 class ProjectConfigPatchDefinitionBlock:
     """
-    The name and description of a project configuration.
+    ProjectConfigPatchDefinitionBlock.
 
-    :attr str name: (optional) The configuration name. It is unique within the
-          account across projects and regions.
-    :attr str description: (optional) A project configuration description.
-    :attr str environment_id: (optional) The ID of the project environment.
-    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
-          You can authorize by using a trusted profile or an API key in Secrets Manager.
-    :attr ProjectComplianceProfile compliance_profile: (optional) The profile
-          required for compliance.
-    :attr str locator_id: (optional) A unique concatenation of catalogID.versionID
-          that identifies the DA in the catalog.
-    :attr InputVariable inputs: (optional) The input variables for configuration
-          definition and environment.
-    :attr ProjectConfigSetting settings: (optional) Schematics environment variables
-          to use to deploy the configuration.
-          Settings are only available if they were specified when the configuration was
-          initially created.
     """
 
     def __init__(
         self,
-        *,
-        name: str = None,
-        description: str = None,
-        environment_id: str = None,
-        authorizations: 'ProjectConfigAuth' = None,
-        compliance_profile: 'ProjectComplianceProfile' = None,
-        locator_id: str = None,
-        inputs: 'InputVariable' = None,
-        settings: 'ProjectConfigSetting' = None,
     ) -> None:
         """
         Initialize a ProjectConfigPatchDefinitionBlock object.
 
-        :param str name: (optional) The configuration name. It is unique within the
-               account across projects and regions.
-        :param str description: (optional) A project configuration description.
-        :param str environment_id: (optional) The ID of the project environment.
-        :param ProjectConfigAuth authorizations: (optional) The authorization
-               details. You can authorize by using a trusted profile or an API key in
-               Secrets Manager.
-        :param ProjectComplianceProfile compliance_profile: (optional) The profile
-               required for compliance.
-        :param str locator_id: (optional) A unique concatenation of
-               catalogID.versionID that identifies the DA in the catalog.
-        :param InputVariable inputs: (optional) The input variables for
-               configuration definition and environment.
-        :param ProjectConfigSetting settings: (optional) Schematics environment
-               variables to use to deploy the configuration.
-               Settings are only available if they were specified when the configuration
-               was initially created.
         """
-        self.name = name
-        self.description = description
-        self.environment_id = environment_id
-        self.authorizations = authorizations
-        self.compliance_profile = compliance_profile
-        self.locator_id = locator_id
-        self.inputs = inputs
-        self.settings = settings
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ProjectConfigPatchDefinitionBlock':
-        """Initialize a ProjectConfigPatchDefinitionBlock object from a json dictionary."""
-        args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
-        if 'description' in _dict:
-            args['description'] = _dict.get('description')
-        if 'environment_id' in _dict:
-            args['environment_id'] = _dict.get('environment_id')
-        if 'authorizations' in _dict:
-            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
-        if 'compliance_profile' in _dict:
-            args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
-        if 'locator_id' in _dict:
-            args['locator_id'] = _dict.get('locator_id')
-        if 'inputs' in _dict:
-            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
-        if 'settings' in _dict:
-            args['settings'] = ProjectConfigSetting.from_dict(_dict.get('settings'))
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a ProjectConfigPatchDefinitionBlock object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'description') and self.description is not None:
-            _dict['description'] = self.description
-        if hasattr(self, 'environment_id') and self.environment_id is not None:
-            _dict['environment_id'] = self.environment_id
-        if hasattr(self, 'authorizations') and self.authorizations is not None:
-            if isinstance(self.authorizations, dict):
-                _dict['authorizations'] = self.authorizations
-            else:
-                _dict['authorizations'] = self.authorizations.to_dict()
-        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
-            if isinstance(self.compliance_profile, dict):
-                _dict['compliance_profile'] = self.compliance_profile
-            else:
-                _dict['compliance_profile'] = self.compliance_profile.to_dict()
-        if hasattr(self, 'locator_id') and self.locator_id is not None:
-            _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'inputs') and self.inputs is not None:
-            if isinstance(self.inputs, dict):
-                _dict['inputs'] = self.inputs
-            else:
-                _dict['inputs'] = self.inputs.to_dict()
-        if hasattr(self, 'settings') and self.settings is not None:
-            if isinstance(self.settings, dict):
-                _dict['settings'] = self.settings
-            else:
-                _dict['settings'] = self.settings.to_dict()
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this ProjectConfigPatchDefinitionBlock object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'ProjectConfigPatchDefinitionBlock') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'ProjectConfigPatchDefinitionBlock') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
+        msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
+            ", ".join(['ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties', 'ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties'])
+        )
+        raise Exception(msg)
 
 
 class ProjectConfigPrototype:
     """
     The input of a project configuration.
 
-    :attr ProjectConfigPrototypeDefinitionBlock definition: The name and description
-          of a project configuration.
-    :attr SchematicsWorkspace schematics: (optional) A schematics workspace
-          associated to a project configuration.
+    :attr ProjectConfigPrototypeDefinitionBlock definition:
+    :attr SchematicsWorkspace schematics: (optional) A Schematics workspace to use
+          for deploying this configuration.
+          Either schematics.workspace_crn, definition.locator_id, or both must be
+          specified.
     """
 
     def __init__(
@@ -5162,10 +5294,11 @@ class ProjectConfigPrototype:
         """
         Initialize a ProjectConfigPrototype object.
 
-        :param ProjectConfigPrototypeDefinitionBlock definition: The name and
-               description of a project configuration.
-        :param SchematicsWorkspace schematics: (optional) A schematics workspace
-               associated to a project configuration.
+        :param ProjectConfigPrototypeDefinitionBlock definition:
+        :param SchematicsWorkspace schematics: (optional) A Schematics workspace to
+               use for deploying this configuration.
+               Either schematics.workspace_crn, definition.locator_id, or both must be
+               specified.
         """
         self.definition = definition
         self.schematics = schematics
@@ -5175,7 +5308,7 @@ class ProjectConfigPrototype:
         """Initialize a ProjectConfigPrototype object from a json dictionary."""
         args = {}
         if 'definition' in _dict:
-            args['definition'] = ProjectConfigPrototypeDefinitionBlock.from_dict(_dict.get('definition'))
+            args['definition'] = _dict.get('definition')
         else:
             raise ValueError('Required property \'definition\' not present in ProjectConfigPrototype JSON')
         if 'schematics' in _dict:
@@ -5223,147 +5356,21 @@ class ProjectConfigPrototype:
 
 class ProjectConfigPrototypeDefinitionBlock:
     """
-    The name and description of a project configuration.
+    ProjectConfigPrototypeDefinitionBlock.
 
-    :attr str name: The configuration name. It is unique within the account across
-          projects and regions.
-    :attr str description: (optional) A project configuration description.
-    :attr str environment_id: (optional) The ID of the project environment.
-    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
-          You can authorize by using a trusted profile or an API key in Secrets Manager.
-    :attr ProjectComplianceProfile compliance_profile: (optional) The profile
-          required for compliance.
-    :attr str locator_id: (optional) A unique concatenation of catalogID.versionID
-          that identifies the DA in the catalog.
-    :attr InputVariable inputs: (optional) The input variables for configuration
-          definition and environment.
-    :attr ProjectConfigSetting settings: (optional) Schematics environment variables
-          to use to deploy the configuration.
-          Settings are only available if they were specified when the configuration was
-          initially created.
     """
 
     def __init__(
         self,
-        name: str,
-        *,
-        description: str = None,
-        environment_id: str = None,
-        authorizations: 'ProjectConfigAuth' = None,
-        compliance_profile: 'ProjectComplianceProfile' = None,
-        locator_id: str = None,
-        inputs: 'InputVariable' = None,
-        settings: 'ProjectConfigSetting' = None,
     ) -> None:
         """
         Initialize a ProjectConfigPrototypeDefinitionBlock object.
 
-        :param str name: The configuration name. It is unique within the account
-               across projects and regions.
-        :param str description: (optional) A project configuration description.
-        :param str environment_id: (optional) The ID of the project environment.
-        :param ProjectConfigAuth authorizations: (optional) The authorization
-               details. You can authorize by using a trusted profile or an API key in
-               Secrets Manager.
-        :param ProjectComplianceProfile compliance_profile: (optional) The profile
-               required for compliance.
-        :param str locator_id: (optional) A unique concatenation of
-               catalogID.versionID that identifies the DA in the catalog.
-        :param InputVariable inputs: (optional) The input variables for
-               configuration definition and environment.
-        :param ProjectConfigSetting settings: (optional) Schematics environment
-               variables to use to deploy the configuration.
-               Settings are only available if they were specified when the configuration
-               was initially created.
         """
-        self.name = name
-        self.description = description
-        self.environment_id = environment_id
-        self.authorizations = authorizations
-        self.compliance_profile = compliance_profile
-        self.locator_id = locator_id
-        self.inputs = inputs
-        self.settings = settings
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ProjectConfigPrototypeDefinitionBlock':
-        """Initialize a ProjectConfigPrototypeDefinitionBlock object from a json dictionary."""
-        args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
-        else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigPrototypeDefinitionBlock JSON')
-        if 'description' in _dict:
-            args['description'] = _dict.get('description')
-        if 'environment_id' in _dict:
-            args['environment_id'] = _dict.get('environment_id')
-        if 'authorizations' in _dict:
-            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
-        if 'compliance_profile' in _dict:
-            args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
-        if 'locator_id' in _dict:
-            args['locator_id'] = _dict.get('locator_id')
-        if 'inputs' in _dict:
-            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
-        if 'settings' in _dict:
-            args['settings'] = ProjectConfigSetting.from_dict(_dict.get('settings'))
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a ProjectConfigPrototypeDefinitionBlock object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'description') and self.description is not None:
-            _dict['description'] = self.description
-        if hasattr(self, 'environment_id') and self.environment_id is not None:
-            _dict['environment_id'] = self.environment_id
-        if hasattr(self, 'authorizations') and self.authorizations is not None:
-            if isinstance(self.authorizations, dict):
-                _dict['authorizations'] = self.authorizations
-            else:
-                _dict['authorizations'] = self.authorizations.to_dict()
-        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
-            if isinstance(self.compliance_profile, dict):
-                _dict['compliance_profile'] = self.compliance_profile
-            else:
-                _dict['compliance_profile'] = self.compliance_profile.to_dict()
-        if hasattr(self, 'locator_id') and self.locator_id is not None:
-            _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'inputs') and self.inputs is not None:
-            if isinstance(self.inputs, dict):
-                _dict['inputs'] = self.inputs
-            else:
-                _dict['inputs'] = self.inputs.to_dict()
-        if hasattr(self, 'settings') and self.settings is not None:
-            if isinstance(self.settings, dict):
-                _dict['settings'] = self.settings
-            else:
-                _dict['settings'] = self.settings.to_dict()
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this ProjectConfigPrototypeDefinitionBlock object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'ProjectConfigPrototypeDefinitionBlock') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'ProjectConfigPrototypeDefinitionBlock') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
+        msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
+            ", ".join(['ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties', 'ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties'])
+        )
+        raise Exception(msg)
 
 
 class ProjectConfigResource:
@@ -5465,27 +5472,24 @@ class ProjectConfigResourceCollection:
     """
     The project configuration resource list.
 
-    :attr List[ProjectConfigResource] resources: (optional) The collection list
-          operation response schema that defines the array property with the name
-          `resources`.
+    :attr List[ProjectConfigResource] resources: The collection list operation
+          response schema that defines the array property with the name `resources`.
     :attr int resources_count: The total number of resources deployed by the
           configuration.
     """
 
     def __init__(
         self,
+        resources: List['ProjectConfigResource'],
         resources_count: int,
-        *,
-        resources: List['ProjectConfigResource'] = None,
     ) -> None:
         """
         Initialize a ProjectConfigResourceCollection object.
 
+        :param List[ProjectConfigResource] resources: The collection list operation
+               response schema that defines the array property with the name `resources`.
         :param int resources_count: The total number of resources deployed by the
                configuration.
-        :param List[ProjectConfigResource] resources: (optional) The collection
-               list operation response schema that defines the array property with the
-               name `resources`.
         """
         self.resources = resources
         self.resources_count = resources_count
@@ -5496,6 +5500,8 @@ class ProjectConfigResourceCollection:
         args = {}
         if 'resources' in _dict:
             args['resources'] = [ProjectConfigResource.from_dict(v) for v in _dict.get('resources')]
+        else:
+            raise ValueError('Required property \'resources\' not present in ProjectConfigResourceCollection JSON')
         if 'resources_count' in _dict:
             args['resources_count'] = _dict.get('resources_count')
         else:
@@ -5543,217 +5549,21 @@ class ProjectConfigResourceCollection:
 
 class ProjectConfigResponseDefinition:
     """
-    The name and description of a project configuration.
+    ProjectConfigResponseDefinition.
 
-    :attr str name: The configuration name. It is unique within the account across
-          projects and regions.
-    :attr str description: (optional) A project configuration description.
-    :attr str environment_id: (optional) The ID of the project environment.
-    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
-          You can authorize by using a trusted profile or an API key in Secrets Manager.
-    :attr ProjectComplianceProfile compliance_profile: (optional) The profile
-          required for compliance.
-    :attr str locator_id: A unique concatenation of catalogID.versionID that
-          identifies the DA in the catalog.
-    :attr InputVariable inputs: (optional) The input variables for configuration
-          definition and environment.
-    :attr ProjectConfigSetting settings: (optional) Schematics environment variables
-          to use to deploy the configuration.
-          Settings are only available if they were specified when the configuration was
-          initially created.
     """
 
     def __init__(
         self,
-        name: str,
-        locator_id: str,
-        *,
-        description: str = None,
-        environment_id: str = None,
-        authorizations: 'ProjectConfigAuth' = None,
-        compliance_profile: 'ProjectComplianceProfile' = None,
-        inputs: 'InputVariable' = None,
-        settings: 'ProjectConfigSetting' = None,
     ) -> None:
         """
         Initialize a ProjectConfigResponseDefinition object.
 
-        :param str name: The configuration name. It is unique within the account
-               across projects and regions.
-        :param str locator_id: A unique concatenation of catalogID.versionID that
-               identifies the DA in the catalog.
-        :param str description: (optional) A project configuration description.
-        :param str environment_id: (optional) The ID of the project environment.
-        :param ProjectConfigAuth authorizations: (optional) The authorization
-               details. You can authorize by using a trusted profile or an API key in
-               Secrets Manager.
-        :param ProjectComplianceProfile compliance_profile: (optional) The profile
-               required for compliance.
-        :param InputVariable inputs: (optional) The input variables for
-               configuration definition and environment.
-        :param ProjectConfigSetting settings: (optional) Schematics environment
-               variables to use to deploy the configuration.
-               Settings are only available if they were specified when the configuration
-               was initially created.
         """
-        self.name = name
-        self.description = description
-        self.environment_id = environment_id
-        self.authorizations = authorizations
-        self.compliance_profile = compliance_profile
-        self.locator_id = locator_id
-        self.inputs = inputs
-        self.settings = settings
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ProjectConfigResponseDefinition':
-        """Initialize a ProjectConfigResponseDefinition object from a json dictionary."""
-        args = {}
-        if 'name' in _dict:
-            args['name'] = _dict.get('name')
-        else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigResponseDefinition JSON')
-        if 'description' in _dict:
-            args['description'] = _dict.get('description')
-        if 'environment_id' in _dict:
-            args['environment_id'] = _dict.get('environment_id')
-        if 'authorizations' in _dict:
-            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
-        if 'compliance_profile' in _dict:
-            args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
-        if 'locator_id' in _dict:
-            args['locator_id'] = _dict.get('locator_id')
-        else:
-            raise ValueError('Required property \'locator_id\' not present in ProjectConfigResponseDefinition JSON')
-        if 'inputs' in _dict:
-            args['inputs'] = InputVariable.from_dict(_dict.get('inputs'))
-        if 'settings' in _dict:
-            args['settings'] = ProjectConfigSetting.from_dict(_dict.get('settings'))
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a ProjectConfigResponseDefinition object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'description') and self.description is not None:
-            _dict['description'] = self.description
-        if hasattr(self, 'environment_id') and self.environment_id is not None:
-            _dict['environment_id'] = self.environment_id
-        if hasattr(self, 'authorizations') and self.authorizations is not None:
-            if isinstance(self.authorizations, dict):
-                _dict['authorizations'] = self.authorizations
-            else:
-                _dict['authorizations'] = self.authorizations.to_dict()
-        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
-            if isinstance(self.compliance_profile, dict):
-                _dict['compliance_profile'] = self.compliance_profile
-            else:
-                _dict['compliance_profile'] = self.compliance_profile.to_dict()
-        if hasattr(self, 'locator_id') and self.locator_id is not None:
-            _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'inputs') and self.inputs is not None:
-            if isinstance(self.inputs, dict):
-                _dict['inputs'] = self.inputs
-            else:
-                _dict['inputs'] = self.inputs.to_dict()
-        if hasattr(self, 'settings') and self.settings is not None:
-            if isinstance(self.settings, dict):
-                _dict['settings'] = self.settings
-            else:
-                _dict['settings'] = self.settings.to_dict()
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this ProjectConfigResponseDefinition object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'ProjectConfigResponseDefinition') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'ProjectConfigResponseDefinition') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
-
-
-class ProjectConfigSetting:
-    """
-    Schematics environment variables to use to deploy the configuration. Settings are only
-    available if they were specified when the configuration was initially created.
-
-    """
-
-    def __init__(
-        self,
-        **kwargs,
-    ) -> None:
-        """
-        Initialize a ProjectConfigSetting object.
-
-        :param **kwargs: (optional) Any additional properties.
-        """
-        for _key, _value in kwargs.items():
-            setattr(self, _key, _value)
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ProjectConfigSetting':
-        """Initialize a ProjectConfigSetting object from a json dictionary."""
-        return cls(**_dict)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a ProjectConfigSetting object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        return vars(self)
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def get_properties(self) -> Dict:
-        """Return a dictionary of arbitrary properties from this instance of ProjectConfigSetting"""
-        _dict = {}
-
-        for _key in [k for k in vars(self).keys()]:
-            _dict[_key] = getattr(self, _key)
-        return _dict
-
-    def set_properties(self, _dict: dict):
-        """Set a dictionary of arbitrary properties to this instance of ProjectConfigSetting"""
-        for _key in [k for k in vars(self).keys()]:
-            delattr(self, _key)
-
-        for _key, _value in _dict.items():
-            setattr(self, _key, _value)
-
-    def __str__(self) -> str:
-        """Return a `str` version of this ProjectConfigSetting object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'ProjectConfigSetting') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'ProjectConfigSetting') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
+        msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
+            ", ".join(['ProjectConfigResponseDefinitionDAConfigDefinitionProperties', 'ProjectConfigResponseDefinitionResourceConfigDefinitionProperties'])
+        )
+        raise Exception(msg)
 
 
 class ProjectConfigSummary:
@@ -5778,6 +5588,7 @@ class ProjectConfigSummary:
     :attr ProjectConfigDefinitionNameDescription definition: The name and
           description of a project configuration.
     :attr ProjectReference project: The project referenced by this resource.
+    :attr str deployment_model: (optional) The configuration type.
     """
 
     def __init__(
@@ -5793,6 +5604,7 @@ class ProjectConfigSummary:
         *,
         approved_version: 'ProjectConfigVersionSummary' = None,
         deployed_version: 'ProjectConfigVersionSummary' = None,
+        deployment_model: str = None,
     ) -> None:
         """
         Initialize a ProjectConfigSummary object.
@@ -5815,6 +5627,7 @@ class ProjectConfigSummary:
                configuration version.
         :param ProjectConfigVersionSummary deployed_version: (optional) The project
                configuration version.
+        :param str deployment_model: (optional) The configuration type.
         """
         self.approved_version = approved_version
         self.deployed_version = deployed_version
@@ -5826,6 +5639,7 @@ class ProjectConfigSummary:
         self.href = href
         self.definition = definition
         self.project = project
+        self.deployment_model = deployment_model
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigSummary':
@@ -5867,6 +5681,8 @@ class ProjectConfigSummary:
             args['project'] = ProjectReference.from_dict(_dict.get('project'))
         else:
             raise ValueError('Required property \'project\' not present in ProjectConfigSummary JSON')
+        if 'deployment_model' in _dict:
+            args['deployment_model'] = _dict.get('deployment_model')
         return cls(**args)
 
     @classmethod
@@ -5909,6 +5725,8 @@ class ProjectConfigSummary:
                 _dict['project'] = self.project
             else:
                 _dict['project'] = self.project.to_dict()
+        if hasattr(self, 'deployment_model') and self.deployment_model is not None:
+            _dict['deployment_model'] = self.deployment_model
         return _dict
 
     def _to_dict(self):
@@ -5949,6 +5767,17 @@ class ProjectConfigSummary:
         VALIDATED = 'validated'
         VALIDATING = 'validating'
         VALIDATING_FAILED = 'validating_failed'
+        APPLIED = 'applied'
+        APPLY_FAILED = 'apply_failed'
+
+
+    class DeploymentModelEnum(str, Enum):
+        """
+        The configuration type.
+        """
+
+        PROJECT_DEPLOYED = 'project_deployed'
+        USER_DEPLOYED = 'user_deployed'
 
 
 
@@ -5961,8 +5790,8 @@ class ProjectConfigVersion:
     :attr int version: The version of the configuration.
     :attr bool is_draft: The flag that indicates whether the version of the
           configuration is draft, or active.
-    :attr List[object] needs_attention_state: (optional) The needs attention state
-          of a configuration.
+    :attr List[dict] needs_attention_state: The needs attention state of a
+          configuration.
     :attr datetime created_at: A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
@@ -5980,18 +5809,17 @@ class ProjectConfigVersion:
           on the project configuration.
     :attr LastActionWithSummary last_undeployed: (optional) The action job performed
           on the project configuration.
-    :attr List[OutputValue] outputs: (optional) The outputs of a Schematics template
-          property.
+    :attr List[OutputValue] outputs: The outputs of a Schematics template property.
     :attr ProjectReference project: The project referenced by this resource.
     :attr dict references: (optional) The references used in the config to resolve
           input values.
     :attr SchematicsMetadata schematics: (optional) A schematics workspace
           associated to a project configuration, with scripts.
     :attr str state: The state of the configuration.
-    :attr bool update_available: The flag that indicates whether a configuration
-          update is available.
-    :attr ProjectConfigResponseDefinition definition: The name and description of a
-          project configuration.
+    :attr bool update_available: (optional) The flag that indicates whether a
+          configuration update is available.
+    :attr str href: A URL.
+    :attr ProjectConfigResponseDefinition definition:
     """
 
     def __init__(
@@ -5999,22 +5827,23 @@ class ProjectConfigVersion:
         id: str,
         version: int,
         is_draft: bool,
+        needs_attention_state: List[dict],
         created_at: datetime,
         modified_at: datetime,
+        outputs: List['OutputValue'],
         project: 'ProjectReference',
         state: str,
-        update_available: bool,
+        href: str,
         definition: 'ProjectConfigResponseDefinition',
         *,
-        needs_attention_state: List[object] = None,
         last_approved: 'ProjectConfigMetadataLastApproved' = None,
         last_saved_at: datetime = None,
         last_validated: 'LastValidatedActionWithSummary' = None,
         last_deployed: 'LastActionWithSummary' = None,
         last_undeployed: 'LastActionWithSummary' = None,
-        outputs: List['OutputValue'] = None,
         references: dict = None,
         schematics: 'SchematicsMetadata' = None,
+        update_available: bool = None,
     ) -> None:
         """
         Initialize a ProjectConfigVersion object.
@@ -6024,20 +5853,20 @@ class ProjectConfigVersion:
         :param int version: The version of the configuration.
         :param bool is_draft: The flag that indicates whether the version of the
                configuration is draft, or active.
+        :param List[dict] needs_attention_state: The needs attention state of a
+               configuration.
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
         :param datetime modified_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
+        :param List[OutputValue] outputs: The outputs of a Schematics template
+               property.
         :param ProjectReference project: The project referenced by this resource.
         :param str state: The state of the configuration.
-        :param bool update_available: The flag that indicates whether a
-               configuration update is available.
-        :param ProjectConfigResponseDefinition definition: The name and description
-               of a project configuration.
-        :param List[object] needs_attention_state: (optional) The needs attention
-               state of a configuration.
+        :param str href: A URL.
+        :param ProjectConfigResponseDefinition definition:
         :param ProjectConfigMetadataLastApproved last_approved: (optional) The last
                approved metadata of the configuration.
         :param datetime last_saved_at: (optional) A date and time value in the
@@ -6049,12 +5878,12 @@ class ProjectConfigVersion:
                performed on the project configuration.
         :param LastActionWithSummary last_undeployed: (optional) The action job
                performed on the project configuration.
-        :param List[OutputValue] outputs: (optional) The outputs of a Schematics
-               template property.
         :param dict references: (optional) The references used in the config to
                resolve input values.
         :param SchematicsMetadata schematics: (optional) A schematics workspace
                associated to a project configuration, with scripts.
+        :param bool update_available: (optional) The flag that indicates whether a
+               configuration update is available.
         """
         self.id = id
         self.version = version
@@ -6073,6 +5902,7 @@ class ProjectConfigVersion:
         self.schematics = schematics
         self.state = state
         self.update_available = update_available
+        self.href = href
         self.definition = definition
 
     @classmethod
@@ -6093,6 +5923,8 @@ class ProjectConfigVersion:
             raise ValueError('Required property \'is_draft\' not present in ProjectConfigVersion JSON')
         if 'needs_attention_state' in _dict:
             args['needs_attention_state'] = _dict.get('needs_attention_state')
+        else:
+            raise ValueError('Required property \'needs_attention_state\' not present in ProjectConfigVersion JSON')
         if 'created_at' in _dict:
             args['created_at'] = string_to_datetime(_dict.get('created_at'))
         else:
@@ -6113,6 +5945,8 @@ class ProjectConfigVersion:
             args['last_undeployed'] = LastActionWithSummary.from_dict(_dict.get('last_undeployed'))
         if 'outputs' in _dict:
             args['outputs'] = [OutputValue.from_dict(v) for v in _dict.get('outputs')]
+        else:
+            raise ValueError('Required property \'outputs\' not present in ProjectConfigVersion JSON')
         if 'project' in _dict:
             args['project'] = ProjectReference.from_dict(_dict.get('project'))
         else:
@@ -6127,10 +5961,12 @@ class ProjectConfigVersion:
             raise ValueError('Required property \'state\' not present in ProjectConfigVersion JSON')
         if 'update_available' in _dict:
             args['update_available'] = _dict.get('update_available')
+        if 'href' in _dict:
+            args['href'] = _dict.get('href')
         else:
-            raise ValueError('Required property \'update_available\' not present in ProjectConfigVersion JSON')
+            raise ValueError('Required property \'href\' not present in ProjectConfigVersion JSON')
         if 'definition' in _dict:
-            args['definition'] = ProjectConfigResponseDefinition.from_dict(_dict.get('definition'))
+            args['definition'] = _dict.get('definition')
         else:
             raise ValueError('Required property \'definition\' not present in ProjectConfigVersion JSON')
         return cls(**args)
@@ -6201,6 +6037,8 @@ class ProjectConfigVersion:
             _dict['state'] = self.state
         if hasattr(self, 'update_available') and self.update_available is not None:
             _dict['update_available'] = self.update_available
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -6246,6 +6084,8 @@ class ProjectConfigVersion:
         VALIDATED = 'validated'
         VALIDATING = 'validating'
         VALIDATING_FAILED = 'validating_failed'
+        APPLIED = 'applied'
+        APPLY_FAILED = 'apply_failed'
 
 
 
@@ -6347,6 +6187,8 @@ class ProjectConfigVersionSummary:
         VALIDATED = 'validated'
         VALIDATING = 'validating'
         VALIDATING_FAILED = 'validating_failed'
+        APPLIED = 'applied'
+        APPLY_FAILED = 'apply_failed'
 
 
 
@@ -6354,22 +6196,20 @@ class ProjectConfigVersionSummaryCollection:
     """
     The project configuration version list.
 
-    :attr List[ProjectConfigVersionSummary] versions: (optional) The collection list
-          operation response schema that defines the array property with the name
-          `versions`.
+    :attr List[ProjectConfigVersionSummary] versions: The collection list operation
+          response schema that defines the array property with the name `versions`.
     """
 
     def __init__(
         self,
-        *,
-        versions: List['ProjectConfigVersionSummary'] = None,
+        versions: List['ProjectConfigVersionSummary'],
     ) -> None:
         """
         Initialize a ProjectConfigVersionSummaryCollection object.
 
-        :param List[ProjectConfigVersionSummary] versions: (optional) The
-               collection list operation response schema that defines the array property
-               with the name `versions`.
+        :param List[ProjectConfigVersionSummary] versions: The collection list
+               operation response schema that defines the array property with the name
+               `versions`.
         """
         self.versions = versions
 
@@ -6379,6 +6219,8 @@ class ProjectConfigVersionSummaryCollection:
         args = {}
         if 'versions' in _dict:
             args['versions'] = [ProjectConfigVersionSummary.from_dict(v) for v in _dict.get('versions')]
+        else:
+            raise ValueError('Required property \'versions\' not present in ProjectConfigVersionSummaryCollection JSON')
         return cls(**args)
 
     @classmethod
@@ -6943,8 +6785,8 @@ class ProjectSummary:
     :attr datetime created_at: A date and time value in the format
           YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and time
           format as specified by RFC 3339.
-    :attr List[CumulativeNeedsAttention] cumulative_needs_attention_view: (optional)
-          The cumulative list of needs attention items for a project. If the view is
+    :attr List[CumulativeNeedsAttention] cumulative_needs_attention_view: The
+          cumulative list of needs attention items for a project. If the view is
           successfully retrieved, an array which could be empty is returned.
     :attr bool cumulative_needs_attention_view_error: (optional) True indicates that
           the fetch of the needs attention items failed. It only exists if there was an
@@ -6954,6 +6796,7 @@ class ProjectSummary:
     :attr str resource_group_id: The resource group id where the project's data and
           tools are created.
     :attr str state: The project status value.
+    :attr str href: A URL.
     :attr ProjectDefinitionProperties definition: The definition of the project.
     """
 
@@ -6961,13 +6804,14 @@ class ProjectSummary:
         self,
         crn: str,
         created_at: datetime,
+        cumulative_needs_attention_view: List['CumulativeNeedsAttention'],
         id: str,
         location: str,
         resource_group_id: str,
         state: str,
+        href: str,
         definition: 'ProjectDefinitionProperties',
         *,
-        cumulative_needs_attention_view: List['CumulativeNeedsAttention'] = None,
         cumulative_needs_attention_view_error: bool = None,
     ) -> None:
         """
@@ -6978,17 +6822,17 @@ class ProjectSummary:
         :param datetime created_at: A date and time value in the format
                YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ, matching the date and
                time format as specified by RFC 3339.
+        :param List[CumulativeNeedsAttention] cumulative_needs_attention_view: The
+               cumulative list of needs attention items for a project. If the view is
+               successfully retrieved, an array which could be empty is returned.
         :param str id: The unique project ID.
         :param str location: The IBM Cloud location where a resource is deployed.
         :param str resource_group_id: The resource group id where the project's
                data and tools are created.
         :param str state: The project status value.
+        :param str href: A URL.
         :param ProjectDefinitionProperties definition: The definition of the
                project.
-        :param List[CumulativeNeedsAttention] cumulative_needs_attention_view:
-               (optional) The cumulative list of needs attention items for a project. If
-               the view is successfully retrieved, an array which could be empty is
-               returned.
         :param bool cumulative_needs_attention_view_error: (optional) True
                indicates that the fetch of the needs attention items failed. It only
                exists if there was an error while retrieving the cumulative needs
@@ -7002,6 +6846,7 @@ class ProjectSummary:
         self.location = location
         self.resource_group_id = resource_group_id
         self.state = state
+        self.href = href
         self.definition = definition
 
     @classmethod
@@ -7018,6 +6863,8 @@ class ProjectSummary:
             raise ValueError('Required property \'created_at\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view' in _dict:
             args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+        else:
+            raise ValueError('Required property \'cumulative_needs_attention_view\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view_error' in _dict:
             args['cumulative_needs_attention_view_error'] = _dict.get('cumulative_needs_attention_view_error')
         if 'id' in _dict:
@@ -7036,6 +6883,10 @@ class ProjectSummary:
             args['state'] = _dict.get('state')
         else:
             raise ValueError('Required property \'state\' not present in ProjectSummary JSON')
+        if 'href' in _dict:
+            args['href'] = _dict.get('href')
+        else:
+            raise ValueError('Required property \'href\' not present in ProjectSummary JSON')
         if 'definition' in _dict:
             args['definition'] = ProjectDefinitionProperties.from_dict(_dict.get('definition'))
         else:
@@ -7072,6 +6923,8 @@ class ProjectSummary:
             _dict['resource_group_id'] = self.resource_group_id
         if hasattr(self, 'state') and self.state is not None:
             _dict['state'] = self.state
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -7112,7 +6965,8 @@ class SchematicsMetadata:
     """
     A schematics workspace associated to a project configuration, with scripts.
 
-    :attr str workspace_crn: (optional) An existing schematics workspace CRN.
+    :attr str workspace_crn: (optional) An IBM Cloud resource name, which uniquely
+          identifies a resource.
     :attr Script validate_pre_script: (optional) A script to be run as part of a
           Project configuration, for a given stage (pre, post) and action (validate,
           deploy, undeploy).
@@ -7147,7 +7001,8 @@ class SchematicsMetadata:
         """
         Initialize a SchematicsMetadata object.
 
-        :param str workspace_crn: (optional) An existing schematics workspace CRN.
+        :param str workspace_crn: (optional) An IBM Cloud resource name, which
+               uniquely identifies a resource.
         :param Script validate_pre_script: (optional) A script to be run as part of
                a Project configuration, for a given stage (pre, post) and action
                (validate, deploy, undeploy).
@@ -7258,9 +7113,11 @@ class SchematicsMetadata:
 
 class SchematicsWorkspace:
     """
-    A schematics workspace associated to a project configuration.
+    A Schematics workspace to use for deploying this configuration. Either
+    schematics.workspace_crn, definition.locator_id, or both must be specified.
 
-    :attr str workspace_crn: (optional) An existing schematics workspace CRN.
+    :attr str workspace_crn: (optional) An IBM Cloud resource name, which uniquely
+          identifies a resource.
     """
 
     def __init__(
@@ -7271,7 +7128,8 @@ class SchematicsWorkspace:
         """
         Initialize a SchematicsWorkspace object.
 
-        :param str workspace_crn: (optional) An existing schematics workspace CRN.
+        :param str workspace_crn: (optional) An IBM Cloud resource name, which
+               uniquely identifies a resource.
         """
         self.workspace_crn = workspace_crn
 
@@ -7529,6 +7387,789 @@ class TerraformLogAnalyzerSuccessMessage:
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: 'TerraformLogAnalyzerSuccessMessage') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties(ProjectConfigPatchDefinitionBlock):
+    """
+    The name and description of a project configuration.
+
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
+    :attr str description: (optional) A project configuration description.
+    :attr str environment_id: (optional) The ID of the project environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
+    :attr dict settings: (optional) Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they were specified
+          when the configuration was initially created.
+    :attr ProjectComplianceProfile compliance_profile: (optional) The profile
+          required for compliance.
+    :attr str locator_id: (optional) A unique concatenation of catalogID.versionID
+          that identifies the DA in the catalog. Either schematics.workspace_crn,
+          definition.locator_id, or both must be specified.
+    """
+
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        description: str = None,
+        environment_id: str = None,
+        authorizations: 'ProjectConfigAuth' = None,
+        inputs: dict = None,
+        settings: dict = None,
+        compliance_profile: 'ProjectComplianceProfile' = None,
+        locator_id: str = None,
+    ) -> None:
+        """
+        Initialize a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties object.
+
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
+        :param dict settings: (optional) Schematics environment variables to use to
+               deploy the configuration. Settings are only available if they were
+               specified when the configuration was initially created.
+        :param ProjectComplianceProfile compliance_profile: (optional) The profile
+               required for compliance.
+        :param str locator_id: (optional) A unique concatenation of
+               catalogID.versionID that identifies the DA in the catalog. Either
+               schematics.workspace_crn, definition.locator_id, or both must be specified.
+        """
+        # pylint: disable=super-init-not-called
+        self.name = name
+        self.description = description
+        self.environment_id = environment_id
+        self.authorizations = authorizations
+        self.inputs = inputs
+        self.settings = settings
+        self.compliance_profile = compliance_profile
+        self.locator_id = locator_id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties':
+        """Initialize a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties object from a json dictionary."""
+        args = {}
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
+        if 'description' in _dict:
+            args['description'] = _dict.get('description')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
+        if 'authorizations' in _dict:
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
+        if 'inputs' in _dict:
+            args['inputs'] = _dict.get('inputs')
+        if 'settings' in _dict:
+            args['settings'] = _dict.get('settings')
+        if 'compliance_profile' in _dict:
+            args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
+        if 'locator_id' in _dict:
+            args['locator_id'] = _dict.get('locator_id')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
+        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
+            if isinstance(self.compliance_profile, dict):
+                _dict['compliance_profile'] = self.compliance_profile
+            else:
+                _dict['compliance_profile'] = self.compliance_profile.to_dict()
+        if hasattr(self, 'locator_id') and self.locator_id is not None:
+            _dict['locator_id'] = self.locator_id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties(ProjectConfigPatchDefinitionBlock):
+    """
+    The name and description of a project configuration.
+
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
+    :attr str description: (optional) A project configuration description.
+    :attr str environment_id: (optional) The ID of the project environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
+    :attr dict settings: (optional) Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they were specified
+          when the configuration was initially created.
+    :attr List[str] resource_crns: (optional) The CRNs of resources associated with
+          this configuration.
+    """
+
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        description: str = None,
+        environment_id: str = None,
+        authorizations: 'ProjectConfigAuth' = None,
+        inputs: dict = None,
+        settings: dict = None,
+        resource_crns: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties object.
+
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
+        :param dict settings: (optional) Schematics environment variables to use to
+               deploy the configuration. Settings are only available if they were
+               specified when the configuration was initially created.
+        :param List[str] resource_crns: (optional) The CRNs of resources associated
+               with this configuration.
+        """
+        # pylint: disable=super-init-not-called
+        self.name = name
+        self.description = description
+        self.environment_id = environment_id
+        self.authorizations = authorizations
+        self.inputs = inputs
+        self.settings = settings
+        self.resource_crns = resource_crns
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties':
+        """Initialize a ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties object from a json dictionary."""
+        args = {}
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
+        if 'description' in _dict:
+            args['description'] = _dict.get('description')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
+        if 'authorizations' in _dict:
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
+        if 'inputs' in _dict:
+            args['inputs'] = _dict.get('inputs')
+        if 'settings' in _dict:
+            args['settings'] = _dict.get('settings')
+        if 'resource_crns' in _dict:
+            args['resource_crns'] = _dict.get('resource_crns')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
+        if hasattr(self, 'resource_crns') and self.resource_crns is not None:
+            _dict['resource_crns'] = self.resource_crns
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties(ProjectConfigPrototypeDefinitionBlock):
+    """
+    The name and description of a project configuration.
+
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
+    :attr str description: (optional) A project configuration description.
+    :attr str environment_id: (optional) The ID of the project environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
+    :attr dict settings: (optional) Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they were specified
+          when the configuration was initially created.
+    :attr ProjectComplianceProfile compliance_profile: (optional) The profile
+          required for compliance.
+    :attr str locator_id: (optional) A unique concatenation of catalogID.versionID
+          that identifies the DA in the catalog. Either schematics.workspace_crn,
+          definition.locator_id, or both must be specified.
+    """
+
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        description: str = None,
+        environment_id: str = None,
+        authorizations: 'ProjectConfigAuth' = None,
+        inputs: dict = None,
+        settings: dict = None,
+        compliance_profile: 'ProjectComplianceProfile' = None,
+        locator_id: str = None,
+    ) -> None:
+        """
+        Initialize a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties object.
+
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
+        :param dict settings: (optional) Schematics environment variables to use to
+               deploy the configuration. Settings are only available if they were
+               specified when the configuration was initially created.
+        :param ProjectComplianceProfile compliance_profile: (optional) The profile
+               required for compliance.
+        :param str locator_id: (optional) A unique concatenation of
+               catalogID.versionID that identifies the DA in the catalog. Either
+               schematics.workspace_crn, definition.locator_id, or both must be specified.
+        """
+        # pylint: disable=super-init-not-called
+        self.name = name
+        self.description = description
+        self.environment_id = environment_id
+        self.authorizations = authorizations
+        self.inputs = inputs
+        self.settings = settings
+        self.compliance_profile = compliance_profile
+        self.locator_id = locator_id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties':
+        """Initialize a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties object from a json dictionary."""
+        args = {}
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
+        if 'description' in _dict:
+            args['description'] = _dict.get('description')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
+        if 'authorizations' in _dict:
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
+        if 'inputs' in _dict:
+            args['inputs'] = _dict.get('inputs')
+        if 'settings' in _dict:
+            args['settings'] = _dict.get('settings')
+        if 'compliance_profile' in _dict:
+            args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
+        if 'locator_id' in _dict:
+            args['locator_id'] = _dict.get('locator_id')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
+        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
+            if isinstance(self.compliance_profile, dict):
+                _dict['compliance_profile'] = self.compliance_profile
+            else:
+                _dict['compliance_profile'] = self.compliance_profile.to_dict()
+        if hasattr(self, 'locator_id') and self.locator_id is not None:
+            _dict['locator_id'] = self.locator_id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties(ProjectConfigPrototypeDefinitionBlock):
+    """
+    The name and description of a project configuration.
+
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
+    :attr str description: (optional) A project configuration description.
+    :attr str environment_id: (optional) The ID of the project environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
+    :attr dict settings: (optional) Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they were specified
+          when the configuration was initially created.
+    :attr List[str] resource_crns: (optional) The CRNs of resources associated with
+          this configuration.
+    """
+
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        description: str = None,
+        environment_id: str = None,
+        authorizations: 'ProjectConfigAuth' = None,
+        inputs: dict = None,
+        settings: dict = None,
+        resource_crns: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties object.
+
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
+        :param dict settings: (optional) Schematics environment variables to use to
+               deploy the configuration. Settings are only available if they were
+               specified when the configuration was initially created.
+        :param List[str] resource_crns: (optional) The CRNs of resources associated
+               with this configuration.
+        """
+        # pylint: disable=super-init-not-called
+        self.name = name
+        self.description = description
+        self.environment_id = environment_id
+        self.authorizations = authorizations
+        self.inputs = inputs
+        self.settings = settings
+        self.resource_crns = resource_crns
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties':
+        """Initialize a ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties object from a json dictionary."""
+        args = {}
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
+        if 'description' in _dict:
+            args['description'] = _dict.get('description')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
+        if 'authorizations' in _dict:
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
+        if 'inputs' in _dict:
+            args['inputs'] = _dict.get('inputs')
+        if 'settings' in _dict:
+            args['settings'] = _dict.get('settings')
+        if 'resource_crns' in _dict:
+            args['resource_crns'] = _dict.get('resource_crns')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
+        if hasattr(self, 'resource_crns') and self.resource_crns is not None:
+            _dict['resource_crns'] = self.resource_crns
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ProjectConfigResponseDefinitionDAConfigDefinitionProperties(ProjectConfigResponseDefinition):
+    """
+    The name and description of a project configuration.
+
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
+    :attr str description: (optional) A project configuration description.
+    :attr str environment_id: (optional) The ID of the project environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
+    :attr dict settings: (optional) Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they were specified
+          when the configuration was initially created.
+    :attr ProjectComplianceProfile compliance_profile: (optional) The profile
+          required for compliance.
+    :attr str locator_id: (optional) A unique concatenation of catalogID.versionID
+          that identifies the DA in the catalog. Either schematics.workspace_crn,
+          definition.locator_id, or both must be specified.
+    """
+
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        description: str = None,
+        environment_id: str = None,
+        authorizations: 'ProjectConfigAuth' = None,
+        inputs: dict = None,
+        settings: dict = None,
+        compliance_profile: 'ProjectComplianceProfile' = None,
+        locator_id: str = None,
+    ) -> None:
+        """
+        Initialize a ProjectConfigResponseDefinitionDAConfigDefinitionProperties object.
+
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
+        :param dict settings: (optional) Schematics environment variables to use to
+               deploy the configuration. Settings are only available if they were
+               specified when the configuration was initially created.
+        :param ProjectComplianceProfile compliance_profile: (optional) The profile
+               required for compliance.
+        :param str locator_id: (optional) A unique concatenation of
+               catalogID.versionID that identifies the DA in the catalog. Either
+               schematics.workspace_crn, definition.locator_id, or both must be specified.
+        """
+        # pylint: disable=super-init-not-called
+        self.name = name
+        self.description = description
+        self.environment_id = environment_id
+        self.authorizations = authorizations
+        self.inputs = inputs
+        self.settings = settings
+        self.compliance_profile = compliance_profile
+        self.locator_id = locator_id
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectConfigResponseDefinitionDAConfigDefinitionProperties':
+        """Initialize a ProjectConfigResponseDefinitionDAConfigDefinitionProperties object from a json dictionary."""
+        args = {}
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
+        if 'description' in _dict:
+            args['description'] = _dict.get('description')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
+        if 'authorizations' in _dict:
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
+        if 'inputs' in _dict:
+            args['inputs'] = _dict.get('inputs')
+        if 'settings' in _dict:
+            args['settings'] = _dict.get('settings')
+        if 'compliance_profile' in _dict:
+            args['compliance_profile'] = ProjectComplianceProfile.from_dict(_dict.get('compliance_profile'))
+        if 'locator_id' in _dict:
+            args['locator_id'] = _dict.get('locator_id')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectConfigResponseDefinitionDAConfigDefinitionProperties object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
+        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
+            if isinstance(self.compliance_profile, dict):
+                _dict['compliance_profile'] = self.compliance_profile
+            else:
+                _dict['compliance_profile'] = self.compliance_profile.to_dict()
+        if hasattr(self, 'locator_id') and self.locator_id is not None:
+            _dict['locator_id'] = self.locator_id
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectConfigResponseDefinitionDAConfigDefinitionProperties object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectConfigResponseDefinitionDAConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectConfigResponseDefinitionDAConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ProjectConfigResponseDefinitionResourceConfigDefinitionProperties(ProjectConfigResponseDefinition):
+    """
+    The name and description of a project configuration.
+
+    :attr str name: (optional) The configuration name. It is unique within the
+          account across projects and regions.
+    :attr str description: (optional) A project configuration description.
+    :attr str environment_id: (optional) The ID of the project environment.
+    :attr ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :attr dict inputs: (optional) The input variables for configuration definition
+          and environment.
+    :attr dict settings: (optional) Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they were specified
+          when the configuration was initially created.
+    :attr List[str] resource_crns: (optional) The CRNs of resources associated with
+          this configuration.
+    """
+
+    def __init__(
+        self,
+        *,
+        name: str = None,
+        description: str = None,
+        environment_id: str = None,
+        authorizations: 'ProjectConfigAuth' = None,
+        inputs: dict = None,
+        settings: dict = None,
+        resource_crns: List[str] = None,
+    ) -> None:
+        """
+        Initialize a ProjectConfigResponseDefinitionResourceConfigDefinitionProperties object.
+
+        :param str name: (optional) The configuration name. It is unique within the
+               account across projects and regions.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables for configuration
+               definition and environment.
+        :param dict settings: (optional) Schematics environment variables to use to
+               deploy the configuration. Settings are only available if they were
+               specified when the configuration was initially created.
+        :param List[str] resource_crns: (optional) The CRNs of resources associated
+               with this configuration.
+        """
+        # pylint: disable=super-init-not-called
+        self.name = name
+        self.description = description
+        self.environment_id = environment_id
+        self.authorizations = authorizations
+        self.inputs = inputs
+        self.settings = settings
+        self.resource_crns = resource_crns
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectConfigResponseDefinitionResourceConfigDefinitionProperties':
+        """Initialize a ProjectConfigResponseDefinitionResourceConfigDefinitionProperties object from a json dictionary."""
+        args = {}
+        if 'name' in _dict:
+            args['name'] = _dict.get('name')
+        if 'description' in _dict:
+            args['description'] = _dict.get('description')
+        if 'environment_id' in _dict:
+            args['environment_id'] = _dict.get('environment_id')
+        if 'authorizations' in _dict:
+            args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
+        if 'inputs' in _dict:
+            args['inputs'] = _dict.get('inputs')
+        if 'settings' in _dict:
+            args['settings'] = _dict.get('settings')
+        if 'resource_crns' in _dict:
+            args['resource_crns'] = _dict.get('resource_crns')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectConfigResponseDefinitionResourceConfigDefinitionProperties object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
+        if hasattr(self, 'resource_crns') and self.resource_crns is not None:
+            _dict['resource_crns'] = self.resource_crns
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectConfigResponseDefinitionResourceConfigDefinitionProperties object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectConfigResponseDefinitionResourceConfigDefinitionProperties') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectConfigResponseDefinitionResourceConfigDefinitionProperties') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 

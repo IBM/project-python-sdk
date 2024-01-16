@@ -28,7 +28,7 @@ import re
 import requests
 import responses
 import urllib
-from ibm_cloud.project_v1 import *
+from project.project_v1 import *
 
 
 _service = ProjectV1(
