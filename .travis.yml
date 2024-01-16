@@ -18,7 +18,7 @@ install:
   - echo -e "machine github.ibm.com\n  login $GITHUB_ACCESS_TOKEN" > ~/.netrc
   - pip install setuptools=="60.8.2"
 script:
-  - make ci    
+  - make all
 before_deploy:
 - nvm install 18
 - node --version
