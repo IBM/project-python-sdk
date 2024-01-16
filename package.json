@@ -1,6 +1,6 @@
 {
   "name": "semantic-release-dependencies",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "description": "This package.json is being used to manage semantic-release and its dependencies",
   "license": "Apache-2.0",
   "devDependencies": {

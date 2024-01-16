@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2023.
+# (C) Copyright IBM Corp. 2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ Examples for ProjectV1
 from ibm_cloud_sdk_core import ApiException, read_external_sources
 import os
 import pytest
-from ibm_cloud.project_v1 import *
+from project.project_v1 import *
 
 #
 # This file provides an example of how to use the project service.
@@ -63,8 +63,7 @@ class TestProjectV1Examples:
 
             # begin-common
 
-            project_service = ProjectV1.new_instance(
-            )
+            project_service = ProjectV1.new_instance()
 
             # end-common
             assert project_service is not None
@@ -119,24 +118,18 @@ class TestProjectV1Examples:
             print('\ncreate_config() result:')
             # begin-create_config
 
-            input_variable_model = {
-                'account_id': '$configs[].name[\"account-stage\"].inputs.account_id',
-                'resource_group': 'stage',
-                'access_tags': '["env:stage"]',
-                'logdna_name': 'Name of the LogDNA stage service instance',
-                'sysdig_name': 'Name of the SysDig stage service instance',
-            }
-
-            project_config_setting_model = {
-                'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com',
-            }
-
             project_config_prototype_definition_block_model = {
                 'name': 'env-stage',
-                'description': 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
+                'description': 'Stage environment configuration.',
+                'inputs': {
+                    'account_id': 'account_id',
+                    'resource_group': 'stage',
+                    'access_tags': ['env:stage'],
+                    'logdna_name': 'LogDNA_stage_service',
+                    'sysdig_name': 'SysDig_stage_service',
+                },
+                'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
                 'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
-                'inputs': input_variable_model,
-                'settings': project_config_setting_model,
             }
 
             response = project_service.create_config(
@@ -240,11 +233,6 @@ class TestProjectV1Examples:
                 'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
             }
 
-            input_variable_model = {
-                'resource_group': 'stage',
-                'region': 'us-south',
-            }
-
             project_compliance_profile_model = {
                 'id': 'some-profile-id',
                 'instance_id': 'some-instance-id',
@@ -257,7 +245,7 @@ class TestProjectV1Examples:
                 'name': 'development',
                 'description': 'The environment \'development\'',
                 'authorizations': project_config_auth_model,
-                'inputs': input_variable_model,
+                'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
             }
 
@@ -331,11 +319,6 @@ class TestProjectV1Examples:
                 'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
             }
 
-            input_variable_model = {
-                'resource_group': 'stage',
-                'region': 'us-south',
-            }
-
             project_compliance_profile_model = {
                 'id': 'some-profile-id',
                 'instance_id': 'some-instance-id',
@@ -348,7 +331,7 @@ class TestProjectV1Examples:
                 'name': 'development',
                 'description': 'The environment \'development\'',
                 'authorizations': project_config_auth_model,
-                'inputs': input_variable_model,
+                'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
             }
 
@@ -418,16 +401,15 @@ class TestProjectV1Examples:
             print('\nupdate_config() result:')
             # begin-update_config
 
-            input_variable_model = {
-                'account_id': '$configs[].name[\"account-stage\"].inputs.account_id',
-                'resource_group': 'stage',
-                'access_tags': '["env:stage"]',
-                'logdna_name': 'Name of the LogDNA stage service instance',
-                'sysdig_name': 'Name of the SysDig stage service instance',
-            }
-
             project_config_patch_definition_block_model = {
-                'inputs': input_variable_model,
+                'name': 'env-stage',
+                'inputs': {
+                    'account_id': 'account_id',
+                    'resource_group': 'stage',
+                    'access_tags': ['env:stage'],
+                    'logdna_name': 'LogDNA_stage_service',
+                    'sysdig_name': 'SysDig_stage_service',
+                },
             }
 
             response = project_service.update_config(

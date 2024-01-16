@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2023.
+# (C) Copyright IBM Corp. 2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,12 +28,10 @@ import re
 import requests
 import responses
 import urllib
-from ibm_cloud.project_v1 import *
+from project.project_v1 import *
 
 
-_service = ProjectV1(
-    authenticator=NoAuthAuthenticator()
-)
+_service = ProjectV1(authenticator=NoAuthAuthenticator())
 
 _base_url = 'https://projects.api.cloud.ibm.com'
 _service.set_service_url(_base_url)
@@ -111,7 +109,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.POST,
             url,
@@ -140,39 +138,46 @@ class TestCreateProject:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['foo'] = 'testString'
-
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {}
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'testString'
         project_config_prototype_definition_block_model['description'] = 'testString'
         project_config_prototype_definition_block_model['environment_id'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_prototype_definition_block_model['inputs'] = {'anyKey': 'anyValue'}
+        project_config_prototype_definition_block_model['settings'] = {'anyKey': 'anyValue'}
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model['inputs'] = input_variable_model
-        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'testString'
+        schematics_workspace_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
 
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {}
         project_config_prototype_model['definition'] = project_config_prototype_definition_block_model
         project_config_prototype_model['schematics'] = schematics_workspace_model
 
+        # Construct a dict representation of a EnvironmentDefinitionRequiredProperties model
+        environment_definition_required_properties_model = {}
+        environment_definition_required_properties_model['name'] = 'testString'
+        environment_definition_required_properties_model['description'] = 'testString'
+        environment_definition_required_properties_model['authorizations'] = project_config_auth_model
+        environment_definition_required_properties_model['inputs'] = {'anyKey': 'anyValue'}
+        environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
+
+        # Construct a dict representation of a EnvironmentPrototype model
+        environment_prototype_model = {}
+        environment_prototype_model['definition'] = environment_definition_required_properties_model
+
         # Set up parameter values
         definition = project_prototype_definition_model
         location = 'us-south'
         resource_group = 'Default'
         configs = [project_config_prototype_model]
+        environments = [environment_prototype_model]
 
         # Invoke method
         response = _service.create_project(
@@ -180,6 +185,7 @@ class TestCreateProject:
             location,
             resource_group,
             configs=configs,
+            environments=environments,
             headers={},
         )
 
@@ -192,6 +198,7 @@ class TestCreateProject:
         assert req_body['location'] == 'us-south'
         assert req_body['resource_group'] == 'Default'
         assert req_body['configs'] == [project_config_prototype_model]
+        assert req_body['environments'] == [environment_prototype_model]
 
     def test_create_project_all_params_with_retries(self):
         # Enable retries and run test_create_project_all_params.
@@ -209,7 +216,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.POST,
             url,
@@ -238,39 +245,46 @@ class TestCreateProject:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['foo'] = 'testString'
-
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {}
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'testString'
         project_config_prototype_definition_block_model['description'] = 'testString'
         project_config_prototype_definition_block_model['environment_id'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_prototype_definition_block_model['inputs'] = {'anyKey': 'anyValue'}
+        project_config_prototype_definition_block_model['settings'] = {'anyKey': 'anyValue'}
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model['inputs'] = input_variable_model
-        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'testString'
+        schematics_workspace_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
 
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {}
         project_config_prototype_model['definition'] = project_config_prototype_definition_block_model
         project_config_prototype_model['schematics'] = schematics_workspace_model
 
+        # Construct a dict representation of a EnvironmentDefinitionRequiredProperties model
+        environment_definition_required_properties_model = {}
+        environment_definition_required_properties_model['name'] = 'testString'
+        environment_definition_required_properties_model['description'] = 'testString'
+        environment_definition_required_properties_model['authorizations'] = project_config_auth_model
+        environment_definition_required_properties_model['inputs'] = {'anyKey': 'anyValue'}
+        environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
+
+        # Construct a dict representation of a EnvironmentPrototype model
+        environment_prototype_model = {}
+        environment_prototype_model['definition'] = environment_definition_required_properties_model
+
         # Set up parameter values
         definition = project_prototype_definition_model
         location = 'us-south'
         resource_group = 'Default'
         configs = [project_config_prototype_model]
+        environments = [environment_prototype_model]
 
         # Pass in all but one required param and check for a ValueError
         req_param_dict = {
@@ -305,7 +319,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href"}, "last": {"href": "href"}, "previous": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
+        mock_response = '{"limit": 10, "first": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
         responses.add(
             responses.GET,
             url,
@@ -350,7 +364,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "total_count": 0, "first": {"href": "href"}, "last": {"href": "href"}, "previous": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
+        mock_response = '{"limit": 10, "first": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}]}'
         responses.add(
             responses.GET,
             url,
@@ -382,8 +396,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -418,8 +432,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?start=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","description":"description","destroy_on_delete":false}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -457,7 +471,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.GET,
             url,
@@ -495,7 +509,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.GET,
             url,
@@ -538,7 +552,7 @@ class TestUpdateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.PATCH,
             url,
@@ -587,7 +601,7 @@ class TestUpdateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}}], "definition": {"name": "name", "description": "description", "destroy_on_delete": false}}'
         responses.add(
             responses.PATCH,
             url,
@@ -752,7 +766,7 @@ class TestCreateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.POST,
             url,
@@ -767,11 +781,6 @@ class TestCreateProjectEnvironment:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['region'] = 'us-south'
-
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {}
         project_compliance_profile_model['id'] = 'some-profile-id'
@@ -785,7 +794,7 @@ class TestCreateProjectEnvironment:
         environment_definition_required_properties_model['name'] = 'development'
         environment_definition_required_properties_model['description'] = 'The environment \'development\''
         environment_definition_required_properties_model['authorizations'] = project_config_auth_model
-        environment_definition_required_properties_model['inputs'] = input_variable_model
+        environment_definition_required_properties_model['inputs'] = {'resource_group': 'stage', 'region': 'us-south'}
         environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
 
         # Set up parameter values
@@ -822,7 +831,7 @@ class TestCreateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.POST,
             url,
@@ -837,11 +846,6 @@ class TestCreateProjectEnvironment:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['region'] = 'us-south'
-
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {}
         project_compliance_profile_model['id'] = 'some-profile-id'
@@ -855,7 +859,7 @@ class TestCreateProjectEnvironment:
         environment_definition_required_properties_model['name'] = 'development'
         environment_definition_required_properties_model['description'] = 'The environment \'development\''
         environment_definition_required_properties_model['authorizations'] = project_config_auth_model
-        environment_definition_required_properties_model['inputs'] = input_variable_model
+        environment_definition_required_properties_model['inputs'] = {'resource_group': 'stage', 'region': 'us-south'}
         environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
 
         # Set up parameter values
@@ -894,7 +898,7 @@ class TestListProjectEnvironments:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
+        mock_response = '{"environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
         responses.add(
             responses.GET,
             url,
@@ -932,7 +936,7 @@ class TestListProjectEnvironments:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments')
-        mock_response = '{"environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
+        mock_response = '{"environments": [{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}]}'
         responses.add(
             responses.GET,
             url,
@@ -975,7 +979,7 @@ class TestGetProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.GET,
             url,
@@ -1015,7 +1019,7 @@ class TestGetProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.GET,
             url,
@@ -1060,7 +1064,7 @@ class TestUpdateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1075,11 +1079,6 @@ class TestUpdateProjectEnvironment:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['region'] = 'us-south'
-
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {}
         project_compliance_profile_model['id'] = 'some-profile-id'
@@ -1093,7 +1092,7 @@ class TestUpdateProjectEnvironment:
         environment_definition_properties_model['name'] = 'development'
         environment_definition_properties_model['description'] = 'The environment \'development\''
         environment_definition_properties_model['authorizations'] = project_config_auth_model
-        environment_definition_properties_model['inputs'] = input_variable_model
+        environment_definition_properties_model['inputs'] = {'resource_group': 'stage', 'region': 'us-south'}
         environment_definition_properties_model['compliance_profile'] = project_compliance_profile_model
 
         # Set up parameter values
@@ -1132,7 +1131,7 @@ class TestUpdateProjectEnvironment:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/environments/testString')
-        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
+        mock_response = '{"id": "id", "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "created_at": "2019-01-01T12:00:00.000Z", "target_account": "target_account", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1147,11 +1146,6 @@ class TestUpdateProjectEnvironment:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['region'] = 'us-south'
-
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {}
         project_compliance_profile_model['id'] = 'some-profile-id'
@@ -1165,7 +1159,7 @@ class TestUpdateProjectEnvironment:
         environment_definition_properties_model['name'] = 'development'
         environment_definition_properties_model['description'] = 'The environment \'development\''
         environment_definition_properties_model['authorizations'] = project_config_auth_model
-        environment_definition_properties_model['inputs'] = input_variable_model
+        environment_definition_properties_model['inputs'] = {'resource_group': 'stage', 'region': 'us-south'}
         environment_definition_properties_model['compliance_profile'] = project_compliance_profile_model
 
         # Set up parameter values
@@ -1330,7 +1324,7 @@ class TestCreateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.POST,
             url,
@@ -1353,32 +1347,32 @@ class TestCreateConfig:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['access_tags'] = '["env:stage"]'
-        input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
-        input_variable_model['sysdig_name'] = 'Name of the SysDig stage service instance'
-
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {}
-        project_config_setting_model['IBMCLOUD_TOOLCHAIN_ENDPOINT'] = 'https://api.us-south.devops.dev.cloud.ibm.com'
-
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'env-stage'
-        project_config_prototype_definition_block_model['description'] = 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
+        project_config_prototype_definition_block_model['description'] = 'Stage environment configuration.'
         project_config_prototype_definition_block_model['environment_id'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_prototype_definition_block_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
+        project_config_prototype_definition_block_model['settings'] = {
+            'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'
+        }
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
-        project_config_prototype_definition_block_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
-        project_config_prototype_definition_block_model['inputs'] = input_variable_model
-        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
+        project_config_prototype_definition_block_model[
+            'locator_id'
+        ] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'testString'
+        schematics_workspace_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
 
         # Set up parameter values
         project_id = 'testString'
@@ -1417,7 +1411,7 @@ class TestCreateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.POST,
             url,
@@ -1440,32 +1434,32 @@ class TestCreateConfig:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['access_tags'] = '["env:stage"]'
-        input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
-        input_variable_model['sysdig_name'] = 'Name of the SysDig stage service instance'
-
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {}
-        project_config_setting_model['IBMCLOUD_TOOLCHAIN_ENDPOINT'] = 'https://api.us-south.devops.dev.cloud.ibm.com'
-
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
         project_config_prototype_definition_block_model = {}
         project_config_prototype_definition_block_model['name'] = 'env-stage'
-        project_config_prototype_definition_block_model['description'] = 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.'
+        project_config_prototype_definition_block_model['description'] = 'Stage environment configuration.'
         project_config_prototype_definition_block_model['environment_id'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_prototype_definition_block_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
+        project_config_prototype_definition_block_model['settings'] = {
+            'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'
+        }
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
-        project_config_prototype_definition_block_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
-        project_config_prototype_definition_block_model['inputs'] = input_variable_model
-        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
+        project_config_prototype_definition_block_model[
+            'locator_id'
+        ] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'testString'
+        schematics_workspace_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
 
         # Set up parameter values
         project_id = 'testString'
@@ -1504,7 +1498,7 @@ class TestListConfigs:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}]}'
+        mock_response = '{"configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}]}'
         responses.add(
             responses.GET,
             url,
@@ -1542,7 +1536,7 @@ class TestListConfigs:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs')
-        mock_response = '{"configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}}]}'
+        mock_response = '{"configs": [{"approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"name": "name", "description": "description"}, "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "deployment_model": "project_deployed"}]}'
         responses.add(
             responses.GET,
             url,
@@ -1585,7 +1579,7 @@ class TestGetConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.GET,
             url,
@@ -1625,7 +1619,7 @@ class TestGetConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.GET,
             url,
@@ -1670,7 +1664,7 @@ class TestUpdateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1693,28 +1687,22 @@ class TestUpdateConfig:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['access_tags'] = '["env:stage"]'
-        input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
-        input_variable_model['sysdig_name'] = 'Name of the SysDig stage service instance'
-
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {}
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a dict representation of a ProjectConfigPatchDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties model
         project_config_patch_definition_block_model = {}
-        project_config_patch_definition_block_model['name'] = 'testString'
+        project_config_patch_definition_block_model['name'] = 'env-stage'
         project_config_patch_definition_block_model['description'] = 'testString'
         project_config_patch_definition_block_model['environment_id'] = 'testString'
         project_config_patch_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_patch_definition_block_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
+        project_config_patch_definition_block_model['settings'] = {'anyKey': 'anyValue'}
         project_config_patch_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_patch_definition_block_model['locator_id'] = 'testString'
-        project_config_patch_definition_block_model['inputs'] = input_variable_model
-        project_config_patch_definition_block_model['settings'] = project_config_setting_model
 
         # Set up parameter values
         project_id = 'testString'
@@ -1752,7 +1740,7 @@ class TestUpdateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}, "approved_version": {"state": "approved", "version": 7, "href": "href"}, "deployed_version": {"state": "approved", "version": 7, "href": "href"}}'
         responses.add(
             responses.PATCH,
             url,
@@ -1775,28 +1763,22 @@ class TestUpdateConfig:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {}
-        input_variable_model['account_id'] = '$configs[].name["account-stage"].inputs.account_id'
-        input_variable_model['resource_group'] = 'stage'
-        input_variable_model['access_tags'] = '["env:stage"]'
-        input_variable_model['logdna_name'] = 'Name of the LogDNA stage service instance'
-        input_variable_model['sysdig_name'] = 'Name of the SysDig stage service instance'
-
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {}
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a dict representation of a ProjectConfigPatchDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties model
         project_config_patch_definition_block_model = {}
-        project_config_patch_definition_block_model['name'] = 'testString'
+        project_config_patch_definition_block_model['name'] = 'env-stage'
         project_config_patch_definition_block_model['description'] = 'testString'
         project_config_patch_definition_block_model['environment_id'] = 'testString'
         project_config_patch_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_patch_definition_block_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
+        project_config_patch_definition_block_model['settings'] = {'anyKey': 'anyValue'}
         project_config_patch_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_patch_definition_block_model['locator_id'] = 'testString'
-        project_config_patch_definition_block_model['inputs'] = input_variable_model
-        project_config_patch_definition_block_model['settings'] = project_config_setting_model
 
         # Set up parameter values
         project_id = 'testString'
@@ -1921,7 +1903,7 @@ class TestForceApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/force_approve')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -1939,7 +1921,7 @@ class TestForceApprove:
         response = _service.force_approve(
             project_id,
             id,
-            comment=comment,
+            comment,
             headers={},
         )
 
@@ -1966,7 +1948,7 @@ class TestForceApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/force_approve')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -1984,6 +1966,7 @@ class TestForceApprove:
         req_param_dict = {
             "project_id": project_id,
             "id": id,
+            "comment": comment,
         }
         for param in req_param_dict.keys():
             req_copy = {key: val if key is not param else None for (key, val) in req_param_dict.items()}
@@ -2012,7 +1995,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -2057,7 +2040,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -2097,7 +2080,7 @@ class TestApprove:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/approve')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -2142,7 +2125,7 @@ class TestValidateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/validate')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -2182,7 +2165,7 @@ class TestValidateConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/validate')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -2227,7 +2210,7 @@ class TestDeployConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/deploy')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -2267,7 +2250,7 @@ class TestDeployConfig:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/deploy')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.POST,
             url,
@@ -2399,7 +2382,9 @@ class TestSyncConfig:
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:schematics:us-south:a/38acaf4469814090a4e675dc0c317a0d:95ad49de-ab96-4e7d-a08c-45c38aa448e6:workspace:us-south.workspace.service.e0106139'
+        schematics_workspace_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:schematics:us-south:a/38acaf4469814090a4e675dc0c317a0d:95ad49de-ab96-4e7d-a08c-45c38aa448e6:workspace:us-south.workspace.service.e0106139'
 
         # Set up parameter values
         project_id = 'testString'
@@ -2686,7 +2671,7 @@ class TestGetConfigVersion:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/versions/38')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.GET,
             url,
@@ -2728,7 +2713,7 @@ class TestGetConfigVersion:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString/configs/testString/versions/38')
-        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": ["anyValue"], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "post_job": {"id": "id", "summary": {"anyKey": "anyValue"}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": "anyValue"}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "workspace_crn", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id", "inputs": {}, "settings": {}}}'
+        mock_response = '{"id": "id", "version": 7, "is_draft": true, "needs_attention_state": [{"anyKey": "anyValue"}], "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "last_approved": {"at": "2019-01-01T12:00:00.000Z", "comment": "comment", "is_forced": false, "user_id": "user_id"}, "last_saved_at": "2019-01-01T12:00:00.000Z", "last_validated": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}, "cost_estimate": {"version": "version", "currency": "USD", "totalHourlyCost": "total_hourly_cost", "totalMonthlyCost": "total_monthly_cost", "pastTotalHourlyCost": "past_total_hourly_cost", "pastTotalMonthlyCost": "past_total_monthly_cost", "diffTotalHourlyCost": "diff_total_hourly_cost", "diffTotalMonthlyCost": "diff_total_monthly_cost", "timeGenerated": "2019-01-01T12:00:00.000Z", "user_id": "user_id"}, "cra_logs": {"cra_version": "cra_version", "schema_version": "schema_version", "status": "passed", "summary": {"total": "total", "passed": "passed", "failed": "failed", "skipped": "skipped"}, "timestamp": "2019-01-01T12:00:00.000Z"}}, "last_deployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "last_undeployed": {"href": "href", "result": "failed", "pre_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "post_job": {"id": "id", "summary": {"job_id": "job_id", "start_time": "2019-01-01T12:00:00.000Z", "end_time": "2019-01-01T12:00:00.000Z", "tasks": 5, "ok": 2, "failed": 6, "skipped": 7, "changed": 7, "project_error": {"timestamp": "2019-01-01T12:00:00.000Z", "user_id": "user_id", "status_code": "status_code", "description": "description", "error_response": "error_response"}}}, "job": {"id": "id", "summary": {"plan_summary": {"add": 3, "failed": 6, "update": 6, "destroy": 7, "add_resources": ["add_resources"], "failed_resources": ["failed_resources"], "updated_resources": ["updated_resources"], "destroy_resources": ["destroy_resources"]}, "apply_summary": {"success": 7, "failed": 6, "success_resources": ["success_resources"], "failed_resources": ["failed_resources"]}, "destroy_summary": {"success": 7, "failed": 6, "tainted": 7, "resources": {"success": ["success"], "failed": ["failed"], "tainted": ["tainted"]}}, "message_summary": {"info": 4, "debug": 5, "error": 5}, "plan_messages": {"error_messages": [{}], "sucess_message": ["sucess_message"], "update_message": ["update_message"], "destroy_message": ["destroy_message"]}, "apply_messages": {"error_messages": [{}], "sucess_message": [{"resource_type": "resource_type", "time-taken": "time_taken", "id": "id"}]}, "destroy_messages": {"error_messages": [{}]}}}}, "outputs": [{"name": "name", "description": "description", "value": {"anyKey": "anyValue"}}], "project": {"id": "id", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "href": "href"}, "references": {"anyKey": "anyValue"}, "schematics": {"workspace_crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "validate_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "validate_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "deploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_pre_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}, "undeploy_post_script": {"type": "ansible", "path": "scripts/validate-post-ansible-playbook.yaml", "short_description": "short_description"}}, "state": "approved", "update_available": true, "href": "href", "definition": {"name": "name", "description": "description", "environment_id": "environment_id", "authorizations": {"trusted_profile_id": "trusted_profile_id", "method": "api_key", "api_key": "api_key"}, "inputs": {"anyKey": "anyValue"}, "settings": {"anyKey": "anyValue"}, "compliance_profile": {"id": "id", "instance_id": "instance_id", "instance_location": "instance_location", "attachment_id": "attachment_id", "profile_name": "profile_name"}, "locator_id": "locator_id"}}'
         responses.add(
             responses.GET,
             url,
@@ -2890,12 +2875,18 @@ class TestModel_ActionJobApplyMessagesSummary:
         action_job_apply_messages_summary_model_json['sucess_message'] = [terraform_log_analyzer_success_message_model]
 
         # Construct a model instance of ActionJobApplyMessagesSummary by calling from_dict on the json representation
-        action_job_apply_messages_summary_model = ActionJobApplyMessagesSummary.from_dict(action_job_apply_messages_summary_model_json)
+        action_job_apply_messages_summary_model = ActionJobApplyMessagesSummary.from_dict(
+            action_job_apply_messages_summary_model_json
+        )
         assert action_job_apply_messages_summary_model != False
 
         # Construct a model instance of ActionJobApplyMessagesSummary by calling from_dict on the json representation
-        action_job_apply_messages_summary_model_dict = ActionJobApplyMessagesSummary.from_dict(action_job_apply_messages_summary_model_json).__dict__
-        action_job_apply_messages_summary_model2 = ActionJobApplyMessagesSummary(**action_job_apply_messages_summary_model_dict)
+        action_job_apply_messages_summary_model_dict = ActionJobApplyMessagesSummary.from_dict(
+            action_job_apply_messages_summary_model_json
+        ).__dict__
+        action_job_apply_messages_summary_model2 = ActionJobApplyMessagesSummary(
+            **action_job_apply_messages_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_apply_messages_summary_model == action_job_apply_messages_summary_model2
@@ -2927,7 +2918,9 @@ class TestModel_ActionJobApplySummary:
         assert action_job_apply_summary_model != False
 
         # Construct a model instance of ActionJobApplySummary by calling from_dict on the json representation
-        action_job_apply_summary_model_dict = ActionJobApplySummary.from_dict(action_job_apply_summary_model_json).__dict__
+        action_job_apply_summary_model_dict = ActionJobApplySummary.from_dict(
+            action_job_apply_summary_model_json
+        ).__dict__
         action_job_apply_summary_model2 = ActionJobApplySummary(**action_job_apply_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -2958,12 +2951,18 @@ class TestModel_ActionJobDestroyMessagesSummary:
         action_job_destroy_messages_summary_model_json['error_messages'] = [terraform_log_analyzer_error_message_model]
 
         # Construct a model instance of ActionJobDestroyMessagesSummary by calling from_dict on the json representation
-        action_job_destroy_messages_summary_model = ActionJobDestroyMessagesSummary.from_dict(action_job_destroy_messages_summary_model_json)
+        action_job_destroy_messages_summary_model = ActionJobDestroyMessagesSummary.from_dict(
+            action_job_destroy_messages_summary_model_json
+        )
         assert action_job_destroy_messages_summary_model != False
 
         # Construct a model instance of ActionJobDestroyMessagesSummary by calling from_dict on the json representation
-        action_job_destroy_messages_summary_model_dict = ActionJobDestroyMessagesSummary.from_dict(action_job_destroy_messages_summary_model_json).__dict__
-        action_job_destroy_messages_summary_model2 = ActionJobDestroyMessagesSummary(**action_job_destroy_messages_summary_model_dict)
+        action_job_destroy_messages_summary_model_dict = ActionJobDestroyMessagesSummary.from_dict(
+            action_job_destroy_messages_summary_model_json
+        ).__dict__
+        action_job_destroy_messages_summary_model2 = ActionJobDestroyMessagesSummary(
+            **action_job_destroy_messages_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_destroy_messages_summary_model == action_job_destroy_messages_summary_model2
@@ -3002,7 +3001,9 @@ class TestModel_ActionJobDestroySummary:
         assert action_job_destroy_summary_model != False
 
         # Construct a model instance of ActionJobDestroySummary by calling from_dict on the json representation
-        action_job_destroy_summary_model_dict = ActionJobDestroySummary.from_dict(action_job_destroy_summary_model_json).__dict__
+        action_job_destroy_summary_model_dict = ActionJobDestroySummary.from_dict(
+            action_job_destroy_summary_model_json
+        ).__dict__
         action_job_destroy_summary_model2 = ActionJobDestroySummary(**action_job_destroy_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -3030,12 +3031,18 @@ class TestModel_ActionJobDestroySummaryResources:
         action_job_destroy_summary_resources_model_json['tainted'] = ['testString']
 
         # Construct a model instance of ActionJobDestroySummaryResources by calling from_dict on the json representation
-        action_job_destroy_summary_resources_model = ActionJobDestroySummaryResources.from_dict(action_job_destroy_summary_resources_model_json)
+        action_job_destroy_summary_resources_model = ActionJobDestroySummaryResources.from_dict(
+            action_job_destroy_summary_resources_model_json
+        )
         assert action_job_destroy_summary_resources_model != False
 
         # Construct a model instance of ActionJobDestroySummaryResources by calling from_dict on the json representation
-        action_job_destroy_summary_resources_model_dict = ActionJobDestroySummaryResources.from_dict(action_job_destroy_summary_resources_model_json).__dict__
-        action_job_destroy_summary_resources_model2 = ActionJobDestroySummaryResources(**action_job_destroy_summary_resources_model_dict)
+        action_job_destroy_summary_resources_model_dict = ActionJobDestroySummaryResources.from_dict(
+            action_job_destroy_summary_resources_model_json
+        ).__dict__
+        action_job_destroy_summary_resources_model2 = ActionJobDestroySummaryResources(
+            **action_job_destroy_summary_resources_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_destroy_summary_resources_model == action_job_destroy_summary_resources_model2
@@ -3066,7 +3073,9 @@ class TestModel_ActionJobMessageSummary:
         assert action_job_message_summary_model != False
 
         # Construct a model instance of ActionJobMessageSummary by calling from_dict on the json representation
-        action_job_message_summary_model_dict = ActionJobMessageSummary.from_dict(action_job_message_summary_model_json).__dict__
+        action_job_message_summary_model_dict = ActionJobMessageSummary.from_dict(
+            action_job_message_summary_model_json
+        ).__dict__
         action_job_message_summary_model2 = ActionJobMessageSummary(**action_job_message_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -3100,12 +3109,18 @@ class TestModel_ActionJobPlanMessagesSummary:
         action_job_plan_messages_summary_model_json['destroy_message'] = ['testString']
 
         # Construct a model instance of ActionJobPlanMessagesSummary by calling from_dict on the json representation
-        action_job_plan_messages_summary_model = ActionJobPlanMessagesSummary.from_dict(action_job_plan_messages_summary_model_json)
+        action_job_plan_messages_summary_model = ActionJobPlanMessagesSummary.from_dict(
+            action_job_plan_messages_summary_model_json
+        )
         assert action_job_plan_messages_summary_model != False
 
         # Construct a model instance of ActionJobPlanMessagesSummary by calling from_dict on the json representation
-        action_job_plan_messages_summary_model_dict = ActionJobPlanMessagesSummary.from_dict(action_job_plan_messages_summary_model_json).__dict__
-        action_job_plan_messages_summary_model2 = ActionJobPlanMessagesSummary(**action_job_plan_messages_summary_model_dict)
+        action_job_plan_messages_summary_model_dict = ActionJobPlanMessagesSummary.from_dict(
+            action_job_plan_messages_summary_model_json
+        ).__dict__
+        action_job_plan_messages_summary_model2 = ActionJobPlanMessagesSummary(
+            **action_job_plan_messages_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_plan_messages_summary_model == action_job_plan_messages_summary_model2
@@ -3323,11 +3338,15 @@ class TestModel_ActionJobWithIdAndSummary:
         action_job_with_id_and_summary_model_json['summary'] = action_job_summary_model
 
         # Construct a model instance of ActionJobWithIdAndSummary by calling from_dict on the json representation
-        action_job_with_id_and_summary_model = ActionJobWithIdAndSummary.from_dict(action_job_with_id_and_summary_model_json)
+        action_job_with_id_and_summary_model = ActionJobWithIdAndSummary.from_dict(
+            action_job_with_id_and_summary_model_json
+        )
         assert action_job_with_id_and_summary_model != False
 
         # Construct a model instance of ActionJobWithIdAndSummary by calling from_dict on the json representation
-        action_job_with_id_and_summary_model_dict = ActionJobWithIdAndSummary.from_dict(action_job_with_id_and_summary_model_json).__dict__
+        action_job_with_id_and_summary_model_dict = ActionJobWithIdAndSummary.from_dict(
+            action_job_with_id_and_summary_model_json
+        ).__dict__
         action_job_with_id_and_summary_model2 = ActionJobWithIdAndSummary(**action_job_with_id_and_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -3356,12 +3375,18 @@ class TestModel_CodeRiskAnalyzerLogsSummary:
         code_risk_analyzer_logs_summary_model_json['skipped'] = 'testString'
 
         # Construct a model instance of CodeRiskAnalyzerLogsSummary by calling from_dict on the json representation
-        code_risk_analyzer_logs_summary_model = CodeRiskAnalyzerLogsSummary.from_dict(code_risk_analyzer_logs_summary_model_json)
+        code_risk_analyzer_logs_summary_model = CodeRiskAnalyzerLogsSummary.from_dict(
+            code_risk_analyzer_logs_summary_model_json
+        )
         assert code_risk_analyzer_logs_summary_model != False
 
         # Construct a model instance of CodeRiskAnalyzerLogsSummary by calling from_dict on the json representation
-        code_risk_analyzer_logs_summary_model_dict = CodeRiskAnalyzerLogsSummary.from_dict(code_risk_analyzer_logs_summary_model_json).__dict__
-        code_risk_analyzer_logs_summary_model2 = CodeRiskAnalyzerLogsSummary(**code_risk_analyzer_logs_summary_model_dict)
+        code_risk_analyzer_logs_summary_model_dict = CodeRiskAnalyzerLogsSummary.from_dict(
+            code_risk_analyzer_logs_summary_model_json
+        ).__dict__
+        code_risk_analyzer_logs_summary_model2 = CodeRiskAnalyzerLogsSummary(
+            **code_risk_analyzer_logs_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert code_risk_analyzer_logs_summary_model == code_risk_analyzer_logs_summary_model2
@@ -3393,7 +3418,9 @@ class TestModel_CumulativeNeedsAttention:
         assert cumulative_needs_attention_model != False
 
         # Construct a model instance of CumulativeNeedsAttention by calling from_dict on the json representation
-        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(cumulative_needs_attention_model_json).__dict__
+        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(
+            cumulative_needs_attention_model_json
+        ).__dict__
         cumulative_needs_attention_model2 = CumulativeNeedsAttention(**cumulative_needs_attention_model_dict)
 
         # Verify the model instances are equivalent
@@ -3422,16 +3449,15 @@ class TestModel_Environment:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         project_config_auth_model = {}  # ProjectConfigAuth
         project_config_auth_model['trusted_profile_id'] = 'testString'
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
-
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
 
         project_compliance_profile_model = {}  # ProjectComplianceProfile
         project_compliance_profile_model['id'] = 'testString'
@@ -3444,7 +3470,7 @@ class TestModel_Environment:
         environment_definition_required_properties_model['name'] = 'testString'
         environment_definition_required_properties_model['description'] = 'testString'
         environment_definition_required_properties_model['authorizations'] = project_config_auth_model
-        environment_definition_required_properties_model['inputs'] = input_variable_model
+        environment_definition_required_properties_model['inputs'] = {'anyKey': 'anyValue'}
         environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
 
         # Construct a json representation of a Environment model
@@ -3454,6 +3480,7 @@ class TestModel_Environment:
         environment_model_json['created_at'] = '2019-01-01T12:00:00Z'
         environment_model_json['target_account'] = 'testString'
         environment_model_json['modified_at'] = '2019-01-01T12:00:00Z'
+        environment_model_json['href'] = 'testString'
         environment_model_json['definition'] = environment_definition_required_properties_model
 
         # Construct a model instance of Environment by calling from_dict on the json representation
@@ -3490,16 +3517,15 @@ class TestModel_EnvironmentCollection:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         project_config_auth_model = {}  # ProjectConfigAuth
         project_config_auth_model['trusted_profile_id'] = 'testString'
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
-
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
 
         project_compliance_profile_model = {}  # ProjectComplianceProfile
         project_compliance_profile_model['id'] = 'testString'
@@ -3512,7 +3538,7 @@ class TestModel_EnvironmentCollection:
         environment_definition_required_properties_model['name'] = 'testString'
         environment_definition_required_properties_model['description'] = 'testString'
         environment_definition_required_properties_model['authorizations'] = project_config_auth_model
-        environment_definition_required_properties_model['inputs'] = input_variable_model
+        environment_definition_required_properties_model['inputs'] = {'anyKey': 'anyValue'}
         environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
 
         environment_model = {}  # Environment
@@ -3521,6 +3547,7 @@ class TestModel_EnvironmentCollection:
         environment_model['created_at'] = '2019-01-01T12:00:00Z'
         environment_model['target_account'] = 'testString'
         environment_model['modified_at'] = '2019-01-01T12:00:00Z'
+        environment_model['href'] = 'testString'
         environment_model['definition'] = environment_definition_required_properties_model
 
         # Construct a json representation of a EnvironmentCollection model
@@ -3559,12 +3586,18 @@ class TestModel_EnvironmentDefinitionNameDescription:
         environment_definition_name_description_model_json['description'] = 'testString'
 
         # Construct a model instance of EnvironmentDefinitionNameDescription by calling from_dict on the json representation
-        environment_definition_name_description_model = EnvironmentDefinitionNameDescription.from_dict(environment_definition_name_description_model_json)
+        environment_definition_name_description_model = EnvironmentDefinitionNameDescription.from_dict(
+            environment_definition_name_description_model_json
+        )
         assert environment_definition_name_description_model != False
 
         # Construct a model instance of EnvironmentDefinitionNameDescription by calling from_dict on the json representation
-        environment_definition_name_description_model_dict = EnvironmentDefinitionNameDescription.from_dict(environment_definition_name_description_model_json).__dict__
-        environment_definition_name_description_model2 = EnvironmentDefinitionNameDescription(**environment_definition_name_description_model_dict)
+        environment_definition_name_description_model_dict = EnvironmentDefinitionNameDescription.from_dict(
+            environment_definition_name_description_model_json
+        ).__dict__
+        environment_definition_name_description_model2 = EnvironmentDefinitionNameDescription(
+            **environment_definition_name_description_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert environment_definition_name_description_model == environment_definition_name_description_model2
@@ -3591,9 +3624,6 @@ class TestModel_EnvironmentDefinitionProperties:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
         project_compliance_profile_model = {}  # ProjectComplianceProfile
         project_compliance_profile_model['id'] = 'testString'
         project_compliance_profile_model['instance_id'] = 'testString'
@@ -3606,16 +3636,22 @@ class TestModel_EnvironmentDefinitionProperties:
         environment_definition_properties_model_json['name'] = 'testString'
         environment_definition_properties_model_json['description'] = 'testString'
         environment_definition_properties_model_json['authorizations'] = project_config_auth_model
-        environment_definition_properties_model_json['inputs'] = input_variable_model
+        environment_definition_properties_model_json['inputs'] = {'anyKey': 'anyValue'}
         environment_definition_properties_model_json['compliance_profile'] = project_compliance_profile_model
 
         # Construct a model instance of EnvironmentDefinitionProperties by calling from_dict on the json representation
-        environment_definition_properties_model = EnvironmentDefinitionProperties.from_dict(environment_definition_properties_model_json)
+        environment_definition_properties_model = EnvironmentDefinitionProperties.from_dict(
+            environment_definition_properties_model_json
+        )
         assert environment_definition_properties_model != False
 
         # Construct a model instance of EnvironmentDefinitionProperties by calling from_dict on the json representation
-        environment_definition_properties_model_dict = EnvironmentDefinitionProperties.from_dict(environment_definition_properties_model_json).__dict__
-        environment_definition_properties_model2 = EnvironmentDefinitionProperties(**environment_definition_properties_model_dict)
+        environment_definition_properties_model_dict = EnvironmentDefinitionProperties.from_dict(
+            environment_definition_properties_model_json
+        ).__dict__
+        environment_definition_properties_model2 = EnvironmentDefinitionProperties(
+            **environment_definition_properties_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert environment_definition_properties_model == environment_definition_properties_model2
@@ -3642,9 +3678,6 @@ class TestModel_EnvironmentDefinitionRequiredProperties:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
         project_compliance_profile_model = {}  # ProjectComplianceProfile
         project_compliance_profile_model['id'] = 'testString'
         project_compliance_profile_model['instance_id'] = 'testString'
@@ -3657,23 +3690,34 @@ class TestModel_EnvironmentDefinitionRequiredProperties:
         environment_definition_required_properties_model_json['name'] = 'testString'
         environment_definition_required_properties_model_json['description'] = 'testString'
         environment_definition_required_properties_model_json['authorizations'] = project_config_auth_model
-        environment_definition_required_properties_model_json['inputs'] = input_variable_model
+        environment_definition_required_properties_model_json['inputs'] = {'anyKey': 'anyValue'}
         environment_definition_required_properties_model_json['compliance_profile'] = project_compliance_profile_model
 
         # Construct a model instance of EnvironmentDefinitionRequiredProperties by calling from_dict on the json representation
-        environment_definition_required_properties_model = EnvironmentDefinitionRequiredProperties.from_dict(environment_definition_required_properties_model_json)
+        environment_definition_required_properties_model = EnvironmentDefinitionRequiredProperties.from_dict(
+            environment_definition_required_properties_model_json
+        )
         assert environment_definition_required_properties_model != False
 
         # Construct a model instance of EnvironmentDefinitionRequiredProperties by calling from_dict on the json representation
-        environment_definition_required_properties_model_dict = EnvironmentDefinitionRequiredProperties.from_dict(environment_definition_required_properties_model_json).__dict__
-        environment_definition_required_properties_model2 = EnvironmentDefinitionRequiredProperties(**environment_definition_required_properties_model_dict)
+        environment_definition_required_properties_model_dict = EnvironmentDefinitionRequiredProperties.from_dict(
+            environment_definition_required_properties_model_json
+        ).__dict__
+        environment_definition_required_properties_model2 = EnvironmentDefinitionRequiredProperties(
+            **environment_definition_required_properties_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert environment_definition_required_properties_model == environment_definition_required_properties_model2
 
         # Convert model instance back to dict and verify no loss of data
-        environment_definition_required_properties_model_json2 = environment_definition_required_properties_model.to_dict()
-        assert environment_definition_required_properties_model_json2 == environment_definition_required_properties_model_json
+        environment_definition_required_properties_model_json2 = (
+            environment_definition_required_properties_model.to_dict()
+        )
+        assert (
+            environment_definition_required_properties_model_json2
+            == environment_definition_required_properties_model_json
+        )
 
 
 class TestModel_EnvironmentDeleteResponse:
@@ -3695,7 +3739,9 @@ class TestModel_EnvironmentDeleteResponse:
         assert environment_delete_response_model != False
 
         # Construct a model instance of EnvironmentDeleteResponse by calling from_dict on the json representation
-        environment_delete_response_model_dict = EnvironmentDeleteResponse.from_dict(environment_delete_response_model_json).__dict__
+        environment_delete_response_model_dict = EnvironmentDeleteResponse.from_dict(
+            environment_delete_response_model_json
+        ).__dict__
         environment_delete_response_model2 = EnvironmentDeleteResponse(**environment_delete_response_model_dict)
 
         # Verify the model instances are equivalent
@@ -3706,44 +3752,55 @@ class TestModel_EnvironmentDeleteResponse:
         assert environment_delete_response_model_json2 == environment_delete_response_model_json
 
 
-class TestModel_InputVariable:
+class TestModel_EnvironmentPrototype:
     """
-    Test Class for InputVariable
+    Test Class for EnvironmentPrototype
     """
 
-    def test_input_variable_serialization(self):
+    def test_environment_prototype_serialization(self):
         """
-        Test serialization/deserialization for InputVariable
+        Test serialization/deserialization for EnvironmentPrototype
         """
 
-        # Construct a json representation of a InputVariable model
-        input_variable_model_json = {}
-        input_variable_model_json['foo'] = 'testString'
+        # Construct dict forms of any model objects needed in order to build this model.
 
-        # Construct a model instance of InputVariable by calling from_dict on the json representation
-        input_variable_model = InputVariable.from_dict(input_variable_model_json)
-        assert input_variable_model != False
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
 
-        # Construct a model instance of InputVariable by calling from_dict on the json representation
-        input_variable_model_dict = InputVariable.from_dict(input_variable_model_json).__dict__
-        input_variable_model2 = InputVariable(**input_variable_model_dict)
+        project_compliance_profile_model = {}  # ProjectComplianceProfile
+        project_compliance_profile_model['id'] = 'testString'
+        project_compliance_profile_model['instance_id'] = 'testString'
+        project_compliance_profile_model['instance_location'] = 'testString'
+        project_compliance_profile_model['attachment_id'] = 'testString'
+        project_compliance_profile_model['profile_name'] = 'testString'
+
+        environment_definition_required_properties_model = {}  # EnvironmentDefinitionRequiredProperties
+        environment_definition_required_properties_model['name'] = 'testString'
+        environment_definition_required_properties_model['description'] = 'testString'
+        environment_definition_required_properties_model['authorizations'] = project_config_auth_model
+        environment_definition_required_properties_model['inputs'] = {'anyKey': 'anyValue'}
+        environment_definition_required_properties_model['compliance_profile'] = project_compliance_profile_model
+
+        # Construct a json representation of a EnvironmentPrototype model
+        environment_prototype_model_json = {}
+        environment_prototype_model_json['definition'] = environment_definition_required_properties_model
+
+        # Construct a model instance of EnvironmentPrototype by calling from_dict on the json representation
+        environment_prototype_model = EnvironmentPrototype.from_dict(environment_prototype_model_json)
+        assert environment_prototype_model != False
+
+        # Construct a model instance of EnvironmentPrototype by calling from_dict on the json representation
+        environment_prototype_model_dict = EnvironmentPrototype.from_dict(environment_prototype_model_json).__dict__
+        environment_prototype_model2 = EnvironmentPrototype(**environment_prototype_model_dict)
 
         # Verify the model instances are equivalent
-        assert input_variable_model == input_variable_model2
+        assert environment_prototype_model == environment_prototype_model2
 
         # Convert model instance back to dict and verify no loss of data
-        input_variable_model_json2 = input_variable_model.to_dict()
-        assert input_variable_model_json2 == input_variable_model_json
-
-        # Test get_properties and set_properties methods.
-        input_variable_model.set_properties({})
-        actual_dict = input_variable_model.get_properties()
-        assert actual_dict == {}
-
-        expected_dict = {'foo': 'testString'}
-        input_variable_model.set_properties(expected_dict)
-        actual_dict = input_variable_model.get_properties()
-        assert actual_dict == expected_dict
+        environment_prototype_model_json2 = environment_prototype_model.to_dict()
+        assert environment_prototype_model_json2 == environment_prototype_model_json
 
 
 class TestModel_LastActionWithSummary:
@@ -3758,9 +3815,27 @@ class TestModel_LastActionWithSummary:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        pre_post_action_job_system_error_model = {}  # PrePostActionJobSystemError
+        pre_post_action_job_system_error_model['timestamp'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_system_error_model['user_id'] = 'testString'
+        pre_post_action_job_system_error_model['status_code'] = 'testString'
+        pre_post_action_job_system_error_model['description'] = 'testString'
+        pre_post_action_job_system_error_model['error_response'] = 'testString'
+
+        pre_post_action_job_summary_model = {}  # PrePostActionJobSummary
+        pre_post_action_job_summary_model['job_id'] = 'testString'
+        pre_post_action_job_summary_model['start_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['end_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['tasks'] = 38
+        pre_post_action_job_summary_model['ok'] = 38
+        pre_post_action_job_summary_model['failed'] = 38
+        pre_post_action_job_summary_model['skipped'] = 38
+        pre_post_action_job_summary_model['changed'] = 38
+        pre_post_action_job_summary_model['project_error'] = pre_post_action_job_system_error_model
+
         pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
+        pre_post_action_job_with_id_and_summary_model['summary'] = pre_post_action_job_summary_model
 
         action_job_plan_summary_model = {}  # ActionJobPlanSummary
         action_job_plan_summary_model['add'] = 38
@@ -3841,7 +3916,9 @@ class TestModel_LastActionWithSummary:
         assert last_action_with_summary_model != False
 
         # Construct a model instance of LastActionWithSummary by calling from_dict on the json representation
-        last_action_with_summary_model_dict = LastActionWithSummary.from_dict(last_action_with_summary_model_json).__dict__
+        last_action_with_summary_model_dict = LastActionWithSummary.from_dict(
+            last_action_with_summary_model_json
+        ).__dict__
         last_action_with_summary_model2 = LastActionWithSummary(**last_action_with_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -3864,9 +3941,27 @@ class TestModel_LastValidatedActionWithSummary:
 
         # Construct dict forms of any model objects needed in order to build this model.
 
+        pre_post_action_job_system_error_model = {}  # PrePostActionJobSystemError
+        pre_post_action_job_system_error_model['timestamp'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_system_error_model['user_id'] = 'testString'
+        pre_post_action_job_system_error_model['status_code'] = 'testString'
+        pre_post_action_job_system_error_model['description'] = 'testString'
+        pre_post_action_job_system_error_model['error_response'] = 'testString'
+
+        pre_post_action_job_summary_model = {}  # PrePostActionJobSummary
+        pre_post_action_job_summary_model['job_id'] = 'testString'
+        pre_post_action_job_summary_model['start_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['end_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['tasks'] = 38
+        pre_post_action_job_summary_model['ok'] = 38
+        pre_post_action_job_summary_model['failed'] = 38
+        pre_post_action_job_summary_model['skipped'] = 38
+        pre_post_action_job_summary_model['changed'] = 38
+        pre_post_action_job_summary_model['project_error'] = pre_post_action_job_system_error_model
+
         pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
+        pre_post_action_job_with_id_and_summary_model['summary'] = pre_post_action_job_summary_model
 
         action_job_plan_summary_model = {}  # ActionJobPlanSummary
         action_job_plan_summary_model['add'] = 38
@@ -3967,15 +4062,23 @@ class TestModel_LastValidatedActionWithSummary:
         last_validated_action_with_summary_model_json['post_job'] = pre_post_action_job_with_id_and_summary_model
         last_validated_action_with_summary_model_json['job'] = action_job_with_id_and_summary_model
         last_validated_action_with_summary_model_json['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model_json['cra_logs'] = project_config_metadata_code_risk_analyzer_logs_model
+        last_validated_action_with_summary_model_json[
+            'cra_logs'
+        ] = project_config_metadata_code_risk_analyzer_logs_model
 
         # Construct a model instance of LastValidatedActionWithSummary by calling from_dict on the json representation
-        last_validated_action_with_summary_model = LastValidatedActionWithSummary.from_dict(last_validated_action_with_summary_model_json)
+        last_validated_action_with_summary_model = LastValidatedActionWithSummary.from_dict(
+            last_validated_action_with_summary_model_json
+        )
         assert last_validated_action_with_summary_model != False
 
         # Construct a model instance of LastValidatedActionWithSummary by calling from_dict on the json representation
-        last_validated_action_with_summary_model_dict = LastValidatedActionWithSummary.from_dict(last_validated_action_with_summary_model_json).__dict__
-        last_validated_action_with_summary_model2 = LastValidatedActionWithSummary(**last_validated_action_with_summary_model_dict)
+        last_validated_action_with_summary_model_dict = LastValidatedActionWithSummary.from_dict(
+            last_validated_action_with_summary_model_json
+        ).__dict__
+        last_validated_action_with_summary_model2 = LastValidatedActionWithSummary(
+            **last_validated_action_with_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert last_validated_action_with_summary_model == last_validated_action_with_summary_model2
@@ -3999,7 +4102,7 @@ class TestModel_OutputValue:
         output_value_model_json = {}
         output_value_model_json['name'] = 'testString'
         output_value_model_json['description'] = 'testString'
-        output_value_model_json['value'] = 'testString'
+        output_value_model_json['value'] = {'anyKey': 'anyValue'}
 
         # Construct a model instance of OutputValue by calling from_dict on the json representation
         output_value_model = OutputValue.from_dict(output_value_model_json)
@@ -4047,6 +4150,95 @@ class TestModel_PaginationLink:
         assert pagination_link_model_json2 == pagination_link_model_json
 
 
+class TestModel_PrePostActionJobSummary:
+    """
+    Test Class for PrePostActionJobSummary
+    """
+
+    def test_pre_post_action_job_summary_serialization(self):
+        """
+        Test serialization/deserialization for PrePostActionJobSummary
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        pre_post_action_job_system_error_model = {}  # PrePostActionJobSystemError
+        pre_post_action_job_system_error_model['timestamp'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_system_error_model['user_id'] = 'testString'
+        pre_post_action_job_system_error_model['status_code'] = 'testString'
+        pre_post_action_job_system_error_model['description'] = 'testString'
+        pre_post_action_job_system_error_model['error_response'] = 'testString'
+
+        # Construct a json representation of a PrePostActionJobSummary model
+        pre_post_action_job_summary_model_json = {}
+        pre_post_action_job_summary_model_json['job_id'] = 'testString'
+        pre_post_action_job_summary_model_json['start_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model_json['end_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model_json['tasks'] = 38
+        pre_post_action_job_summary_model_json['ok'] = 38
+        pre_post_action_job_summary_model_json['failed'] = 38
+        pre_post_action_job_summary_model_json['skipped'] = 38
+        pre_post_action_job_summary_model_json['changed'] = 38
+        pre_post_action_job_summary_model_json['project_error'] = pre_post_action_job_system_error_model
+
+        # Construct a model instance of PrePostActionJobSummary by calling from_dict on the json representation
+        pre_post_action_job_summary_model = PrePostActionJobSummary.from_dict(pre_post_action_job_summary_model_json)
+        assert pre_post_action_job_summary_model != False
+
+        # Construct a model instance of PrePostActionJobSummary by calling from_dict on the json representation
+        pre_post_action_job_summary_model_dict = PrePostActionJobSummary.from_dict(
+            pre_post_action_job_summary_model_json
+        ).__dict__
+        pre_post_action_job_summary_model2 = PrePostActionJobSummary(**pre_post_action_job_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert pre_post_action_job_summary_model == pre_post_action_job_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        pre_post_action_job_summary_model_json2 = pre_post_action_job_summary_model.to_dict()
+        assert pre_post_action_job_summary_model_json2 == pre_post_action_job_summary_model_json
+
+
+class TestModel_PrePostActionJobSystemError:
+    """
+    Test Class for PrePostActionJobSystemError
+    """
+
+    def test_pre_post_action_job_system_error_serialization(self):
+        """
+        Test serialization/deserialization for PrePostActionJobSystemError
+        """
+
+        # Construct a json representation of a PrePostActionJobSystemError model
+        pre_post_action_job_system_error_model_json = {}
+        pre_post_action_job_system_error_model_json['timestamp'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_system_error_model_json['user_id'] = 'testString'
+        pre_post_action_job_system_error_model_json['status_code'] = 'testString'
+        pre_post_action_job_system_error_model_json['description'] = 'testString'
+        pre_post_action_job_system_error_model_json['error_response'] = 'testString'
+
+        # Construct a model instance of PrePostActionJobSystemError by calling from_dict on the json representation
+        pre_post_action_job_system_error_model = PrePostActionJobSystemError.from_dict(
+            pre_post_action_job_system_error_model_json
+        )
+        assert pre_post_action_job_system_error_model != False
+
+        # Construct a model instance of PrePostActionJobSystemError by calling from_dict on the json representation
+        pre_post_action_job_system_error_model_dict = PrePostActionJobSystemError.from_dict(
+            pre_post_action_job_system_error_model_json
+        ).__dict__
+        pre_post_action_job_system_error_model2 = PrePostActionJobSystemError(
+            **pre_post_action_job_system_error_model_dict
+        )
+
+        # Verify the model instances are equivalent
+        assert pre_post_action_job_system_error_model == pre_post_action_job_system_error_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        pre_post_action_job_system_error_model_json2 = pre_post_action_job_system_error_model.to_dict()
+        assert pre_post_action_job_system_error_model_json2 == pre_post_action_job_system_error_model_json
+
+
 class TestModel_PrePostActionJobWithIdAndSummary:
     """
     Test Class for PrePostActionJobWithIdAndSummary
@@ -4057,18 +4249,44 @@ class TestModel_PrePostActionJobWithIdAndSummary:
         Test serialization/deserialization for PrePostActionJobWithIdAndSummary
         """
 
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        pre_post_action_job_system_error_model = {}  # PrePostActionJobSystemError
+        pre_post_action_job_system_error_model['timestamp'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_system_error_model['user_id'] = 'testString'
+        pre_post_action_job_system_error_model['status_code'] = 'testString'
+        pre_post_action_job_system_error_model['description'] = 'testString'
+        pre_post_action_job_system_error_model['error_response'] = 'testString'
+
+        pre_post_action_job_summary_model = {}  # PrePostActionJobSummary
+        pre_post_action_job_summary_model['job_id'] = 'testString'
+        pre_post_action_job_summary_model['start_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['end_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['tasks'] = 38
+        pre_post_action_job_summary_model['ok'] = 38
+        pre_post_action_job_summary_model['failed'] = 38
+        pre_post_action_job_summary_model['skipped'] = 38
+        pre_post_action_job_summary_model['changed'] = 38
+        pre_post_action_job_summary_model['project_error'] = pre_post_action_job_system_error_model
+
         # Construct a json representation of a PrePostActionJobWithIdAndSummary model
         pre_post_action_job_with_id_and_summary_model_json = {}
         pre_post_action_job_with_id_and_summary_model_json['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model_json['summary'] = {'anyKey': 'anyValue'}
+        pre_post_action_job_with_id_and_summary_model_json['summary'] = pre_post_action_job_summary_model
 
         # Construct a model instance of PrePostActionJobWithIdAndSummary by calling from_dict on the json representation
-        pre_post_action_job_with_id_and_summary_model = PrePostActionJobWithIdAndSummary.from_dict(pre_post_action_job_with_id_and_summary_model_json)
+        pre_post_action_job_with_id_and_summary_model = PrePostActionJobWithIdAndSummary.from_dict(
+            pre_post_action_job_with_id_and_summary_model_json
+        )
         assert pre_post_action_job_with_id_and_summary_model != False
 
         # Construct a model instance of PrePostActionJobWithIdAndSummary by calling from_dict on the json representation
-        pre_post_action_job_with_id_and_summary_model_dict = PrePostActionJobWithIdAndSummary.from_dict(pre_post_action_job_with_id_and_summary_model_json).__dict__
-        pre_post_action_job_with_id_and_summary_model2 = PrePostActionJobWithIdAndSummary(**pre_post_action_job_with_id_and_summary_model_dict)
+        pre_post_action_job_with_id_and_summary_model_dict = PrePostActionJobWithIdAndSummary.from_dict(
+            pre_post_action_job_with_id_and_summary_model_json
+        ).__dict__
+        pre_post_action_job_with_id_and_summary_model2 = PrePostActionJobWithIdAndSummary(
+            **pre_post_action_job_with_id_and_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert pre_post_action_job_with_id_and_summary_model == pre_post_action_job_with_id_and_summary_model2
@@ -4111,7 +4329,9 @@ class TestModel_Project:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         project_config_summary_model = {}  # ProjectConfigSummary
@@ -4125,6 +4345,7 @@ class TestModel_Project:
         project_config_summary_model['href'] = 'testString'
         project_config_summary_model['definition'] = project_config_definition_name_description_model
         project_config_summary_model['project'] = project_reference_model
+        project_config_summary_model['deployment_model'] = 'project_deployed'
 
         environment_definition_name_description_model = {}  # EnvironmentDefinitionNameDescription
         environment_definition_name_description_model['name'] = 'testString'
@@ -4144,7 +4365,9 @@ class TestModel_Project:
 
         # Construct a json representation of a Project model
         project_model_json = {}
-        project_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_model_json[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_model_json['cumulative_needs_attention_view_error'] = False
@@ -4152,6 +4375,7 @@ class TestModel_Project:
         project_model_json['location'] = 'testString'
         project_model_json['resource_group_id'] = 'testString'
         project_model_json['state'] = 'ready'
+        project_model_json['href'] = 'testString'
         project_model_json['resource_group'] = 'testString'
         project_model_json['event_notifications_crn'] = 'testString'
         project_model_json['configs'] = [project_config_summary_model]
@@ -4201,7 +4425,9 @@ class TestModel_ProjectCollection:
         project_definition_properties_model['destroy_on_delete'] = True
 
         project_summary_model = {}  # ProjectSummary
-        project_summary_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_summary_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_summary_model['created_at'] = '2019-01-01T12:00:00Z'
         project_summary_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_summary_model['cumulative_needs_attention_view_error'] = False
@@ -4209,15 +4435,13 @@ class TestModel_ProjectCollection:
         project_summary_model['location'] = 'testString'
         project_summary_model['resource_group_id'] = 'testString'
         project_summary_model['state'] = 'ready'
+        project_summary_model['href'] = 'testString'
         project_summary_model['definition'] = project_definition_properties_model
 
         # Construct a json representation of a ProjectCollection model
         project_collection_model_json = {}
         project_collection_model_json['limit'] = 10
-        project_collection_model_json['total_count'] = 0
         project_collection_model_json['first'] = pagination_link_model
-        project_collection_model_json['last'] = pagination_link_model
-        project_collection_model_json['previous'] = pagination_link_model
         project_collection_model_json['next'] = pagination_link_model
         project_collection_model_json['projects'] = [project_summary_model]
 
@@ -4260,7 +4484,9 @@ class TestModel_ProjectComplianceProfile:
         assert project_compliance_profile_model != False
 
         # Construct a model instance of ProjectComplianceProfile by calling from_dict on the json representation
-        project_compliance_profile_model_dict = ProjectComplianceProfile.from_dict(project_compliance_profile_model_json).__dict__
+        project_compliance_profile_model_dict = ProjectComplianceProfile.from_dict(
+            project_compliance_profile_model_json
+        ).__dict__
         project_compliance_profile_model2 = ProjectComplianceProfile(**project_compliance_profile_model_dict)
 
         # Verify the model instances are equivalent
@@ -4289,9 +4515,27 @@ class TestModel_ProjectConfig:
         project_config_metadata_last_approved_model['is_forced'] = True
         project_config_metadata_last_approved_model['user_id'] = 'testString'
 
+        pre_post_action_job_system_error_model = {}  # PrePostActionJobSystemError
+        pre_post_action_job_system_error_model['timestamp'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_system_error_model['user_id'] = 'testString'
+        pre_post_action_job_system_error_model['status_code'] = 'testString'
+        pre_post_action_job_system_error_model['description'] = 'testString'
+        pre_post_action_job_system_error_model['error_response'] = 'testString'
+
+        pre_post_action_job_summary_model = {}  # PrePostActionJobSummary
+        pre_post_action_job_summary_model['job_id'] = 'testString'
+        pre_post_action_job_summary_model['start_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['end_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['tasks'] = 38
+        pre_post_action_job_summary_model['ok'] = 38
+        pre_post_action_job_summary_model['failed'] = 38
+        pre_post_action_job_summary_model['skipped'] = 38
+        pre_post_action_job_summary_model['changed'] = 38
+        pre_post_action_job_summary_model['project_error'] = pre_post_action_job_system_error_model
+
         pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
+        pre_post_action_job_with_id_and_summary_model['summary'] = pre_post_action_job_summary_model
 
         action_job_plan_summary_model = {}  # ActionJobPlanSummary
         action_job_plan_summary_model['add'] = 38
@@ -4403,7 +4647,7 @@ class TestModel_ProjectConfig:
         output_value_model = {}  # OutputValue
         output_value_model['name'] = 'testString'
         output_value_model['description'] = 'testString'
-        output_value_model['value'] = 'testString'
+        output_value_model['value'] = {'anyKey': 'anyValue'}
 
         project_definition_reference_model = {}  # ProjectDefinitionReference
         project_definition_reference_model['name'] = 'testString'
@@ -4411,7 +4655,9 @@ class TestModel_ProjectConfig:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         script_model = {}  # Script
@@ -4420,7 +4666,9 @@ class TestModel_ProjectConfig:
         script_model['short_description'] = 'testString'
 
         schematics_metadata_model = {}  # SchematicsMetadata
-        schematics_metadata_model['workspace_crn'] = 'testString'
+        schematics_metadata_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         schematics_metadata_model['validate_pre_script'] = script_model
         schematics_metadata_model['validate_post_script'] = script_model
         schematics_metadata_model['deploy_pre_script'] = script_model
@@ -4440,21 +4688,15 @@ class TestModel_ProjectConfig:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_config_setting_model = {}  # ProjectConfigSetting
-        project_config_setting_model['foo'] = 'testString'
-
-        project_config_response_definition_model = {}  # ProjectConfigResponseDefinition
+        project_config_response_definition_model = {}  # ProjectConfigResponseDefinitionDAConfigDefinitionProperties
         project_config_response_definition_model['name'] = 'testString'
         project_config_response_definition_model['description'] = 'testString'
         project_config_response_definition_model['environment_id'] = 'testString'
         project_config_response_definition_model['authorizations'] = project_config_auth_model
+        project_config_response_definition_model['inputs'] = {'anyKey': 'anyValue'}
+        project_config_response_definition_model['settings'] = {'anyKey': 'anyValue'}
         project_config_response_definition_model['compliance_profile'] = project_compliance_profile_model
         project_config_response_definition_model['locator_id'] = 'testString'
-        project_config_response_definition_model['inputs'] = input_variable_model
-        project_config_response_definition_model['settings'] = project_config_setting_model
 
         project_config_version_summary_model = {}  # ProjectConfigVersionSummary
         project_config_version_summary_model['state'] = 'approved'
@@ -4480,6 +4722,7 @@ class TestModel_ProjectConfig:
         project_config_model_json['schematics'] = schematics_metadata_model
         project_config_model_json['state'] = 'approved'
         project_config_model_json['update_available'] = True
+        project_config_model_json['href'] = 'testString'
         project_config_model_json['definition'] = project_config_response_definition_model
         project_config_model_json['approved_version'] = project_config_version_summary_model
         project_config_model_json['deployed_version'] = project_config_version_summary_model
@@ -4559,7 +4802,9 @@ class TestModel_ProjectConfigCollection:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         project_config_summary_model = {}  # ProjectConfigSummary
@@ -4573,6 +4818,7 @@ class TestModel_ProjectConfigCollection:
         project_config_summary_model['href'] = 'testString'
         project_config_summary_model['definition'] = project_config_definition_name_description_model
         project_config_summary_model['project'] = project_reference_model
+        project_config_summary_model['deployment_model'] = 'project_deployed'
 
         # Construct a json representation of a ProjectConfigCollection model
         project_config_collection_model_json = {}
@@ -4583,7 +4829,9 @@ class TestModel_ProjectConfigCollection:
         assert project_config_collection_model != False
 
         # Construct a model instance of ProjectConfigCollection by calling from_dict on the json representation
-        project_config_collection_model_dict = ProjectConfigCollection.from_dict(project_config_collection_model_json).__dict__
+        project_config_collection_model_dict = ProjectConfigCollection.from_dict(
+            project_config_collection_model_json
+        ).__dict__
         project_config_collection_model2 = ProjectConfigCollection(**project_config_collection_model_dict)
 
         # Verify the model instances are equivalent
@@ -4610,19 +4858,30 @@ class TestModel_ProjectConfigDefinitionNameDescription:
         project_config_definition_name_description_model_json['description'] = 'testString'
 
         # Construct a model instance of ProjectConfigDefinitionNameDescription by calling from_dict on the json representation
-        project_config_definition_name_description_model = ProjectConfigDefinitionNameDescription.from_dict(project_config_definition_name_description_model_json)
+        project_config_definition_name_description_model = ProjectConfigDefinitionNameDescription.from_dict(
+            project_config_definition_name_description_model_json
+        )
         assert project_config_definition_name_description_model != False
 
         # Construct a model instance of ProjectConfigDefinitionNameDescription by calling from_dict on the json representation
-        project_config_definition_name_description_model_dict = ProjectConfigDefinitionNameDescription.from_dict(project_config_definition_name_description_model_json).__dict__
-        project_config_definition_name_description_model2 = ProjectConfigDefinitionNameDescription(**project_config_definition_name_description_model_dict)
+        project_config_definition_name_description_model_dict = ProjectConfigDefinitionNameDescription.from_dict(
+            project_config_definition_name_description_model_json
+        ).__dict__
+        project_config_definition_name_description_model2 = ProjectConfigDefinitionNameDescription(
+            **project_config_definition_name_description_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_definition_name_description_model == project_config_definition_name_description_model2
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_name_description_model_json2 = project_config_definition_name_description_model.to_dict()
-        assert project_config_definition_name_description_model_json2 == project_config_definition_name_description_model_json
+        project_config_definition_name_description_model_json2 = (
+            project_config_definition_name_description_model.to_dict()
+        )
+        assert (
+            project_config_definition_name_description_model_json2
+            == project_config_definition_name_description_model_json
+        )
 
 
 class TestModel_ProjectConfigDelete:
@@ -4682,19 +4941,35 @@ class TestModel_ProjectConfigMetadataCodeRiskAnalyzerLogs:
         project_config_metadata_code_risk_analyzer_logs_model_json['timestamp'] = '2019-01-01T12:00:00Z'
 
         # Construct a model instance of ProjectConfigMetadataCodeRiskAnalyzerLogs by calling from_dict on the json representation
-        project_config_metadata_code_risk_analyzer_logs_model = ProjectConfigMetadataCodeRiskAnalyzerLogs.from_dict(project_config_metadata_code_risk_analyzer_logs_model_json)
+        project_config_metadata_code_risk_analyzer_logs_model = ProjectConfigMetadataCodeRiskAnalyzerLogs.from_dict(
+            project_config_metadata_code_risk_analyzer_logs_model_json
+        )
         assert project_config_metadata_code_risk_analyzer_logs_model != False
 
         # Construct a model instance of ProjectConfigMetadataCodeRiskAnalyzerLogs by calling from_dict on the json representation
-        project_config_metadata_code_risk_analyzer_logs_model_dict = ProjectConfigMetadataCodeRiskAnalyzerLogs.from_dict(project_config_metadata_code_risk_analyzer_logs_model_json).__dict__
-        project_config_metadata_code_risk_analyzer_logs_model2 = ProjectConfigMetadataCodeRiskAnalyzerLogs(**project_config_metadata_code_risk_analyzer_logs_model_dict)
+        project_config_metadata_code_risk_analyzer_logs_model_dict = (
+            ProjectConfigMetadataCodeRiskAnalyzerLogs.from_dict(
+                project_config_metadata_code_risk_analyzer_logs_model_json
+            ).__dict__
+        )
+        project_config_metadata_code_risk_analyzer_logs_model2 = ProjectConfigMetadataCodeRiskAnalyzerLogs(
+            **project_config_metadata_code_risk_analyzer_logs_model_dict
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_metadata_code_risk_analyzer_logs_model == project_config_metadata_code_risk_analyzer_logs_model2
+        assert (
+            project_config_metadata_code_risk_analyzer_logs_model
+            == project_config_metadata_code_risk_analyzer_logs_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_metadata_code_risk_analyzer_logs_model_json2 = project_config_metadata_code_risk_analyzer_logs_model.to_dict()
-        assert project_config_metadata_code_risk_analyzer_logs_model_json2 == project_config_metadata_code_risk_analyzer_logs_model_json
+        project_config_metadata_code_risk_analyzer_logs_model_json2 = (
+            project_config_metadata_code_risk_analyzer_logs_model.to_dict()
+        )
+        assert (
+            project_config_metadata_code_risk_analyzer_logs_model_json2
+            == project_config_metadata_code_risk_analyzer_logs_model_json
+        )
 
 
 class TestModel_ProjectConfigMetadataCostEstimate:
@@ -4721,12 +4996,18 @@ class TestModel_ProjectConfigMetadataCostEstimate:
         project_config_metadata_cost_estimate_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json)
+        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(
+            project_config_metadata_cost_estimate_model_json
+        )
         assert project_config_metadata_cost_estimate_model != False
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json).__dict__
-        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(**project_config_metadata_cost_estimate_model_dict)
+        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(
+            project_config_metadata_cost_estimate_model_json
+        ).__dict__
+        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(
+            **project_config_metadata_cost_estimate_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_cost_estimate_model == project_config_metadata_cost_estimate_model2
@@ -4754,12 +5035,18 @@ class TestModel_ProjectConfigMetadataLastApproved:
         project_config_metadata_last_approved_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json)
+        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(
+            project_config_metadata_last_approved_model_json
+        )
         assert project_config_metadata_last_approved_model != False
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json).__dict__
-        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(**project_config_metadata_last_approved_model_dict)
+        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(
+            project_config_metadata_last_approved_model_json
+        ).__dict__
+        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(
+            **project_config_metadata_last_approved_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_last_approved_model == project_config_metadata_last_approved_model2
@@ -4767,63 +5054,6 @@ class TestModel_ProjectConfigMetadataLastApproved:
         # Convert model instance back to dict and verify no loss of data
         project_config_metadata_last_approved_model_json2 = project_config_metadata_last_approved_model.to_dict()
         assert project_config_metadata_last_approved_model_json2 == project_config_metadata_last_approved_model_json
-
-
-class TestModel_ProjectConfigPatchDefinitionBlock:
-    """
-    Test Class for ProjectConfigPatchDefinitionBlock
-    """
-
-    def test_project_config_patch_definition_block_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigPatchDefinitionBlock
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile_id'] = 'testString'
-        project_config_auth_model['method'] = 'api_key'
-        project_config_auth_model['api_key'] = 'testString'
-
-        project_compliance_profile_model = {}  # ProjectComplianceProfile
-        project_compliance_profile_model['id'] = 'testString'
-        project_compliance_profile_model['instance_id'] = 'testString'
-        project_compliance_profile_model['instance_location'] = 'testString'
-        project_compliance_profile_model['attachment_id'] = 'testString'
-        project_compliance_profile_model['profile_name'] = 'testString'
-
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_config_setting_model = {}  # ProjectConfigSetting
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a json representation of a ProjectConfigPatchDefinitionBlock model
-        project_config_patch_definition_block_model_json = {}
-        project_config_patch_definition_block_model_json['name'] = 'testString'
-        project_config_patch_definition_block_model_json['description'] = 'testString'
-        project_config_patch_definition_block_model_json['environment_id'] = 'testString'
-        project_config_patch_definition_block_model_json['authorizations'] = project_config_auth_model
-        project_config_patch_definition_block_model_json['compliance_profile'] = project_compliance_profile_model
-        project_config_patch_definition_block_model_json['locator_id'] = 'testString'
-        project_config_patch_definition_block_model_json['inputs'] = input_variable_model
-        project_config_patch_definition_block_model_json['settings'] = project_config_setting_model
-
-        # Construct a model instance of ProjectConfigPatchDefinitionBlock by calling from_dict on the json representation
-        project_config_patch_definition_block_model = ProjectConfigPatchDefinitionBlock.from_dict(project_config_patch_definition_block_model_json)
-        assert project_config_patch_definition_block_model != False
-
-        # Construct a model instance of ProjectConfigPatchDefinitionBlock by calling from_dict on the json representation
-        project_config_patch_definition_block_model_dict = ProjectConfigPatchDefinitionBlock.from_dict(project_config_patch_definition_block_model_json).__dict__
-        project_config_patch_definition_block_model2 = ProjectConfigPatchDefinitionBlock(**project_config_patch_definition_block_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_patch_definition_block_model == project_config_patch_definition_block_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_patch_definition_block_model_json2 = project_config_patch_definition_block_model.to_dict()
-        assert project_config_patch_definition_block_model_json2 == project_config_patch_definition_block_model_json
 
 
 class TestModel_ProjectConfigPrototype:
@@ -4850,24 +5080,22 @@ class TestModel_ProjectConfigPrototype:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_config_setting_model = {}  # ProjectConfigSetting
-        project_config_setting_model['foo'] = 'testString'
-
-        project_config_prototype_definition_block_model = {}  # ProjectConfigPrototypeDefinitionBlock
+        project_config_prototype_definition_block_model = (
+            {}
+        )  # ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties
         project_config_prototype_definition_block_model['name'] = 'testString'
         project_config_prototype_definition_block_model['description'] = 'testString'
         project_config_prototype_definition_block_model['environment_id'] = 'testString'
         project_config_prototype_definition_block_model['authorizations'] = project_config_auth_model
+        project_config_prototype_definition_block_model['inputs'] = {'anyKey': 'anyValue'}
+        project_config_prototype_definition_block_model['settings'] = {'anyKey': 'anyValue'}
         project_config_prototype_definition_block_model['compliance_profile'] = project_compliance_profile_model
         project_config_prototype_definition_block_model['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model['inputs'] = input_variable_model
-        project_config_prototype_definition_block_model['settings'] = project_config_setting_model
 
         schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_crn'] = 'testString'
+        schematics_workspace_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
 
         # Construct a json representation of a ProjectConfigPrototype model
         project_config_prototype_model_json = {}
@@ -4879,7 +5107,9 @@ class TestModel_ProjectConfigPrototype:
         assert project_config_prototype_model != False
 
         # Construct a model instance of ProjectConfigPrototype by calling from_dict on the json representation
-        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(project_config_prototype_model_json).__dict__
+        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(
+            project_config_prototype_model_json
+        ).__dict__
         project_config_prototype_model2 = ProjectConfigPrototype(**project_config_prototype_model_dict)
 
         # Verify the model instances are equivalent
@@ -4888,63 +5118,6 @@ class TestModel_ProjectConfigPrototype:
         # Convert model instance back to dict and verify no loss of data
         project_config_prototype_model_json2 = project_config_prototype_model.to_dict()
         assert project_config_prototype_model_json2 == project_config_prototype_model_json
-
-
-class TestModel_ProjectConfigPrototypeDefinitionBlock:
-    """
-    Test Class for ProjectConfigPrototypeDefinitionBlock
-    """
-
-    def test_project_config_prototype_definition_block_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigPrototypeDefinitionBlock
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile_id'] = 'testString'
-        project_config_auth_model['method'] = 'api_key'
-        project_config_auth_model['api_key'] = 'testString'
-
-        project_compliance_profile_model = {}  # ProjectComplianceProfile
-        project_compliance_profile_model['id'] = 'testString'
-        project_compliance_profile_model['instance_id'] = 'testString'
-        project_compliance_profile_model['instance_location'] = 'testString'
-        project_compliance_profile_model['attachment_id'] = 'testString'
-        project_compliance_profile_model['profile_name'] = 'testString'
-
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_config_setting_model = {}  # ProjectConfigSetting
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a json representation of a ProjectConfigPrototypeDefinitionBlock model
-        project_config_prototype_definition_block_model_json = {}
-        project_config_prototype_definition_block_model_json['name'] = 'testString'
-        project_config_prototype_definition_block_model_json['description'] = 'testString'
-        project_config_prototype_definition_block_model_json['environment_id'] = 'testString'
-        project_config_prototype_definition_block_model_json['authorizations'] = project_config_auth_model
-        project_config_prototype_definition_block_model_json['compliance_profile'] = project_compliance_profile_model
-        project_config_prototype_definition_block_model_json['locator_id'] = 'testString'
-        project_config_prototype_definition_block_model_json['inputs'] = input_variable_model
-        project_config_prototype_definition_block_model_json['settings'] = project_config_setting_model
-
-        # Construct a model instance of ProjectConfigPrototypeDefinitionBlock by calling from_dict on the json representation
-        project_config_prototype_definition_block_model = ProjectConfigPrototypeDefinitionBlock.from_dict(project_config_prototype_definition_block_model_json)
-        assert project_config_prototype_definition_block_model != False
-
-        # Construct a model instance of ProjectConfigPrototypeDefinitionBlock by calling from_dict on the json representation
-        project_config_prototype_definition_block_model_dict = ProjectConfigPrototypeDefinitionBlock.from_dict(project_config_prototype_definition_block_model_json).__dict__
-        project_config_prototype_definition_block_model2 = ProjectConfigPrototypeDefinitionBlock(**project_config_prototype_definition_block_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_prototype_definition_block_model == project_config_prototype_definition_block_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_prototype_definition_block_model_json2 = project_config_prototype_definition_block_model.to_dict()
-        assert project_config_prototype_definition_block_model_json2 == project_config_prototype_definition_block_model_json
 
 
 class TestModel_ProjectConfigResource:
@@ -4959,7 +5132,9 @@ class TestModel_ProjectConfigResource:
 
         # Construct a json representation of a ProjectConfigResource model
         project_config_resource_model_json = {}
-        project_config_resource_model_json['resource_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_config_resource_model_json[
+            'resource_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_config_resource_model_json['resource_name'] = 'testString'
         project_config_resource_model_json['resource_type'] = 'testString'
         project_config_resource_model_json['resource_tainted'] = True
@@ -4970,7 +5145,9 @@ class TestModel_ProjectConfigResource:
         assert project_config_resource_model != False
 
         # Construct a model instance of ProjectConfigResource by calling from_dict on the json representation
-        project_config_resource_model_dict = ProjectConfigResource.from_dict(project_config_resource_model_json).__dict__
+        project_config_resource_model_dict = ProjectConfigResource.from_dict(
+            project_config_resource_model_json
+        ).__dict__
         project_config_resource_model2 = ProjectConfigResource(**project_config_resource_model_dict)
 
         # Verify the model instances are equivalent
@@ -4994,7 +5171,9 @@ class TestModel_ProjectConfigResourceCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         project_config_resource_model = {}  # ProjectConfigResource
-        project_config_resource_model['resource_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_config_resource_model[
+            'resource_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_config_resource_model['resource_name'] = 'testString'
         project_config_resource_model['resource_type'] = 'testString'
         project_config_resource_model['resource_tainted'] = True
@@ -5006,12 +5185,18 @@ class TestModel_ProjectConfigResourceCollection:
         project_config_resource_collection_model_json['resources_count'] = 38
 
         # Construct a model instance of ProjectConfigResourceCollection by calling from_dict on the json representation
-        project_config_resource_collection_model = ProjectConfigResourceCollection.from_dict(project_config_resource_collection_model_json)
+        project_config_resource_collection_model = ProjectConfigResourceCollection.from_dict(
+            project_config_resource_collection_model_json
+        )
         assert project_config_resource_collection_model != False
 
         # Construct a model instance of ProjectConfigResourceCollection by calling from_dict on the json representation
-        project_config_resource_collection_model_dict = ProjectConfigResourceCollection.from_dict(project_config_resource_collection_model_json).__dict__
-        project_config_resource_collection_model2 = ProjectConfigResourceCollection(**project_config_resource_collection_model_dict)
+        project_config_resource_collection_model_dict = ProjectConfigResourceCollection.from_dict(
+            project_config_resource_collection_model_json
+        ).__dict__
+        project_config_resource_collection_model2 = ProjectConfigResourceCollection(
+            **project_config_resource_collection_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_resource_collection_model == project_config_resource_collection_model2
@@ -5019,103 +5204,6 @@ class TestModel_ProjectConfigResourceCollection:
         # Convert model instance back to dict and verify no loss of data
         project_config_resource_collection_model_json2 = project_config_resource_collection_model.to_dict()
         assert project_config_resource_collection_model_json2 == project_config_resource_collection_model_json
-
-
-class TestModel_ProjectConfigResponseDefinition:
-    """
-    Test Class for ProjectConfigResponseDefinition
-    """
-
-    def test_project_config_response_definition_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigResponseDefinition
-        """
-
-        # Construct dict forms of any model objects needed in order to build this model.
-
-        project_config_auth_model = {}  # ProjectConfigAuth
-        project_config_auth_model['trusted_profile_id'] = 'testString'
-        project_config_auth_model['method'] = 'api_key'
-        project_config_auth_model['api_key'] = 'testString'
-
-        project_compliance_profile_model = {}  # ProjectComplianceProfile
-        project_compliance_profile_model['id'] = 'testString'
-        project_compliance_profile_model['instance_id'] = 'testString'
-        project_compliance_profile_model['instance_location'] = 'testString'
-        project_compliance_profile_model['attachment_id'] = 'testString'
-        project_compliance_profile_model['profile_name'] = 'testString'
-
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_config_setting_model = {}  # ProjectConfigSetting
-        project_config_setting_model['foo'] = 'testString'
-
-        # Construct a json representation of a ProjectConfigResponseDefinition model
-        project_config_response_definition_model_json = {}
-        project_config_response_definition_model_json['name'] = 'testString'
-        project_config_response_definition_model_json['description'] = 'testString'
-        project_config_response_definition_model_json['environment_id'] = 'testString'
-        project_config_response_definition_model_json['authorizations'] = project_config_auth_model
-        project_config_response_definition_model_json['compliance_profile'] = project_compliance_profile_model
-        project_config_response_definition_model_json['locator_id'] = 'testString'
-        project_config_response_definition_model_json['inputs'] = input_variable_model
-        project_config_response_definition_model_json['settings'] = project_config_setting_model
-
-        # Construct a model instance of ProjectConfigResponseDefinition by calling from_dict on the json representation
-        project_config_response_definition_model = ProjectConfigResponseDefinition.from_dict(project_config_response_definition_model_json)
-        assert project_config_response_definition_model != False
-
-        # Construct a model instance of ProjectConfigResponseDefinition by calling from_dict on the json representation
-        project_config_response_definition_model_dict = ProjectConfigResponseDefinition.from_dict(project_config_response_definition_model_json).__dict__
-        project_config_response_definition_model2 = ProjectConfigResponseDefinition(**project_config_response_definition_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_response_definition_model == project_config_response_definition_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_response_definition_model_json2 = project_config_response_definition_model.to_dict()
-        assert project_config_response_definition_model_json2 == project_config_response_definition_model_json
-
-
-class TestModel_ProjectConfigSetting:
-    """
-    Test Class for ProjectConfigSetting
-    """
-
-    def test_project_config_setting_serialization(self):
-        """
-        Test serialization/deserialization for ProjectConfigSetting
-        """
-
-        # Construct a json representation of a ProjectConfigSetting model
-        project_config_setting_model_json = {}
-        project_config_setting_model_json['foo'] = 'testString'
-
-        # Construct a model instance of ProjectConfigSetting by calling from_dict on the json representation
-        project_config_setting_model = ProjectConfigSetting.from_dict(project_config_setting_model_json)
-        assert project_config_setting_model != False
-
-        # Construct a model instance of ProjectConfigSetting by calling from_dict on the json representation
-        project_config_setting_model_dict = ProjectConfigSetting.from_dict(project_config_setting_model_json).__dict__
-        project_config_setting_model2 = ProjectConfigSetting(**project_config_setting_model_dict)
-
-        # Verify the model instances are equivalent
-        assert project_config_setting_model == project_config_setting_model2
-
-        # Convert model instance back to dict and verify no loss of data
-        project_config_setting_model_json2 = project_config_setting_model.to_dict()
-        assert project_config_setting_model_json2 == project_config_setting_model_json
-
-        # Test get_properties and set_properties methods.
-        project_config_setting_model.set_properties({})
-        actual_dict = project_config_setting_model.get_properties()
-        assert actual_dict == {}
-
-        expected_dict = {'foo': 'testString'}
-        project_config_setting_model.set_properties(expected_dict)
-        actual_dict = project_config_setting_model.get_properties()
-        assert actual_dict == expected_dict
 
 
 class TestModel_ProjectConfigSummary:
@@ -5145,7 +5233,9 @@ class TestModel_ProjectConfigSummary:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         # Construct a json representation of a ProjectConfigSummary model
@@ -5160,6 +5250,7 @@ class TestModel_ProjectConfigSummary:
         project_config_summary_model_json['href'] = 'testString'
         project_config_summary_model_json['definition'] = project_config_definition_name_description_model
         project_config_summary_model_json['project'] = project_reference_model
+        project_config_summary_model_json['deployment_model'] = 'project_deployed'
 
         # Construct a model instance of ProjectConfigSummary by calling from_dict on the json representation
         project_config_summary_model = ProjectConfigSummary.from_dict(project_config_summary_model_json)
@@ -5195,9 +5286,27 @@ class TestModel_ProjectConfigVersion:
         project_config_metadata_last_approved_model['is_forced'] = True
         project_config_metadata_last_approved_model['user_id'] = 'testString'
 
+        pre_post_action_job_system_error_model = {}  # PrePostActionJobSystemError
+        pre_post_action_job_system_error_model['timestamp'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_system_error_model['user_id'] = 'testString'
+        pre_post_action_job_system_error_model['status_code'] = 'testString'
+        pre_post_action_job_system_error_model['description'] = 'testString'
+        pre_post_action_job_system_error_model['error_response'] = 'testString'
+
+        pre_post_action_job_summary_model = {}  # PrePostActionJobSummary
+        pre_post_action_job_summary_model['job_id'] = 'testString'
+        pre_post_action_job_summary_model['start_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['end_time'] = '2019-01-01T12:00:00Z'
+        pre_post_action_job_summary_model['tasks'] = 38
+        pre_post_action_job_summary_model['ok'] = 38
+        pre_post_action_job_summary_model['failed'] = 38
+        pre_post_action_job_summary_model['skipped'] = 38
+        pre_post_action_job_summary_model['changed'] = 38
+        pre_post_action_job_summary_model['project_error'] = pre_post_action_job_system_error_model
+
         pre_post_action_job_with_id_and_summary_model = {}  # PrePostActionJobWithIdAndSummary
         pre_post_action_job_with_id_and_summary_model['id'] = 'testString'
-        pre_post_action_job_with_id_and_summary_model['summary'] = {'anyKey': 'anyValue'}
+        pre_post_action_job_with_id_and_summary_model['summary'] = pre_post_action_job_summary_model
 
         action_job_plan_summary_model = {}  # ActionJobPlanSummary
         action_job_plan_summary_model['add'] = 38
@@ -5309,7 +5418,7 @@ class TestModel_ProjectConfigVersion:
         output_value_model = {}  # OutputValue
         output_value_model['name'] = 'testString'
         output_value_model['description'] = 'testString'
-        output_value_model['value'] = 'testString'
+        output_value_model['value'] = {'anyKey': 'anyValue'}
 
         project_definition_reference_model = {}  # ProjectDefinitionReference
         project_definition_reference_model['name'] = 'testString'
@@ -5317,7 +5426,9 @@ class TestModel_ProjectConfigVersion:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         script_model = {}  # Script
@@ -5326,7 +5437,9 @@ class TestModel_ProjectConfigVersion:
         script_model['short_description'] = 'testString'
 
         schematics_metadata_model = {}  # SchematicsMetadata
-        schematics_metadata_model['workspace_crn'] = 'testString'
+        schematics_metadata_model[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         schematics_metadata_model['validate_pre_script'] = script_model
         schematics_metadata_model['validate_post_script'] = script_model
         schematics_metadata_model['deploy_pre_script'] = script_model
@@ -5346,21 +5459,15 @@ class TestModel_ProjectConfigVersion:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        input_variable_model = {}  # InputVariable
-        input_variable_model['foo'] = 'testString'
-
-        project_config_setting_model = {}  # ProjectConfigSetting
-        project_config_setting_model['foo'] = 'testString'
-
-        project_config_response_definition_model = {}  # ProjectConfigResponseDefinition
+        project_config_response_definition_model = {}  # ProjectConfigResponseDefinitionDAConfigDefinitionProperties
         project_config_response_definition_model['name'] = 'testString'
         project_config_response_definition_model['description'] = 'testString'
         project_config_response_definition_model['environment_id'] = 'testString'
         project_config_response_definition_model['authorizations'] = project_config_auth_model
+        project_config_response_definition_model['inputs'] = {'anyKey': 'anyValue'}
+        project_config_response_definition_model['settings'] = {'anyKey': 'anyValue'}
         project_config_response_definition_model['compliance_profile'] = project_compliance_profile_model
         project_config_response_definition_model['locator_id'] = 'testString'
-        project_config_response_definition_model['inputs'] = input_variable_model
-        project_config_response_definition_model['settings'] = project_config_setting_model
 
         # Construct a json representation of a ProjectConfigVersion model
         project_config_version_model_json = {}
@@ -5381,6 +5488,7 @@ class TestModel_ProjectConfigVersion:
         project_config_version_model_json['schematics'] = schematics_metadata_model
         project_config_version_model_json['state'] = 'approved'
         project_config_version_model_json['update_available'] = True
+        project_config_version_model_json['href'] = 'testString'
         project_config_version_model_json['definition'] = project_config_response_definition_model
 
         # Construct a model instance of ProjectConfigVersion by calling from_dict on the json representation
@@ -5416,11 +5524,15 @@ class TestModel_ProjectConfigVersionSummary:
         project_config_version_summary_model_json['href'] = 'testString'
 
         # Construct a model instance of ProjectConfigVersionSummary by calling from_dict on the json representation
-        project_config_version_summary_model = ProjectConfigVersionSummary.from_dict(project_config_version_summary_model_json)
+        project_config_version_summary_model = ProjectConfigVersionSummary.from_dict(
+            project_config_version_summary_model_json
+        )
         assert project_config_version_summary_model != False
 
         # Construct a model instance of ProjectConfigVersionSummary by calling from_dict on the json representation
-        project_config_version_summary_model_dict = ProjectConfigVersionSummary.from_dict(project_config_version_summary_model_json).__dict__
+        project_config_version_summary_model_dict = ProjectConfigVersionSummary.from_dict(
+            project_config_version_summary_model_json
+        ).__dict__
         project_config_version_summary_model2 = ProjectConfigVersionSummary(**project_config_version_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -5453,19 +5565,30 @@ class TestModel_ProjectConfigVersionSummaryCollection:
         project_config_version_summary_collection_model_json['versions'] = [project_config_version_summary_model]
 
         # Construct a model instance of ProjectConfigVersionSummaryCollection by calling from_dict on the json representation
-        project_config_version_summary_collection_model = ProjectConfigVersionSummaryCollection.from_dict(project_config_version_summary_collection_model_json)
+        project_config_version_summary_collection_model = ProjectConfigVersionSummaryCollection.from_dict(
+            project_config_version_summary_collection_model_json
+        )
         assert project_config_version_summary_collection_model != False
 
         # Construct a model instance of ProjectConfigVersionSummaryCollection by calling from_dict on the json representation
-        project_config_version_summary_collection_model_dict = ProjectConfigVersionSummaryCollection.from_dict(project_config_version_summary_collection_model_json).__dict__
-        project_config_version_summary_collection_model2 = ProjectConfigVersionSummaryCollection(**project_config_version_summary_collection_model_dict)
+        project_config_version_summary_collection_model_dict = ProjectConfigVersionSummaryCollection.from_dict(
+            project_config_version_summary_collection_model_json
+        ).__dict__
+        project_config_version_summary_collection_model2 = ProjectConfigVersionSummaryCollection(
+            **project_config_version_summary_collection_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_version_summary_collection_model == project_config_version_summary_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_version_summary_collection_model_json2 = project_config_version_summary_collection_model.to_dict()
-        assert project_config_version_summary_collection_model_json2 == project_config_version_summary_collection_model_json
+        project_config_version_summary_collection_model_json2 = (
+            project_config_version_summary_collection_model.to_dict()
+        )
+        assert (
+            project_config_version_summary_collection_model_json2
+            == project_config_version_summary_collection_model_json
+        )
 
 
 class TestModel_ProjectDefinitionProperties:
@@ -5485,11 +5608,15 @@ class TestModel_ProjectDefinitionProperties:
         project_definition_properties_model_json['destroy_on_delete'] = True
 
         # Construct a model instance of ProjectDefinitionProperties by calling from_dict on the json representation
-        project_definition_properties_model = ProjectDefinitionProperties.from_dict(project_definition_properties_model_json)
+        project_definition_properties_model = ProjectDefinitionProperties.from_dict(
+            project_definition_properties_model_json
+        )
         assert project_definition_properties_model != False
 
         # Construct a model instance of ProjectDefinitionProperties by calling from_dict on the json representation
-        project_definition_properties_model_dict = ProjectDefinitionProperties.from_dict(project_definition_properties_model_json).__dict__
+        project_definition_properties_model_dict = ProjectDefinitionProperties.from_dict(
+            project_definition_properties_model_json
+        ).__dict__
         project_definition_properties_model2 = ProjectDefinitionProperties(**project_definition_properties_model_dict)
 
         # Verify the model instances are equivalent
@@ -5515,11 +5642,15 @@ class TestModel_ProjectDefinitionReference:
         project_definition_reference_model_json['name'] = 'testString'
 
         # Construct a model instance of ProjectDefinitionReference by calling from_dict on the json representation
-        project_definition_reference_model = ProjectDefinitionReference.from_dict(project_definition_reference_model_json)
+        project_definition_reference_model = ProjectDefinitionReference.from_dict(
+            project_definition_reference_model_json
+        )
         assert project_definition_reference_model != False
 
         # Construct a model instance of ProjectDefinitionReference by calling from_dict on the json representation
-        project_definition_reference_model_dict = ProjectDefinitionReference.from_dict(project_definition_reference_model_json).__dict__
+        project_definition_reference_model_dict = ProjectDefinitionReference.from_dict(
+            project_definition_reference_model_json
+        ).__dict__
         project_definition_reference_model2 = ProjectDefinitionReference(**project_definition_reference_model_dict)
 
         # Verify the model instances are equivalent
@@ -5548,7 +5679,9 @@ class TestModel_ProjectEnvironmentSummary:
         project_reference_model = {}  # ProjectReference
         project_reference_model['id'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model['href'] = 'testString'
 
         environment_definition_name_description_model = {}  # EnvironmentDefinitionNameDescription
@@ -5568,7 +5701,9 @@ class TestModel_ProjectEnvironmentSummary:
         assert project_environment_summary_model != False
 
         # Construct a model instance of ProjectEnvironmentSummary by calling from_dict on the json representation
-        project_environment_summary_model_dict = ProjectEnvironmentSummary.from_dict(project_environment_summary_model_json).__dict__
+        project_environment_summary_model_dict = ProjectEnvironmentSummary.from_dict(
+            project_environment_summary_model_json
+        ).__dict__
         project_environment_summary_model2 = ProjectEnvironmentSummary(**project_environment_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -5596,11 +5731,15 @@ class TestModel_ProjectPatchDefinitionBlock:
         project_patch_definition_block_model_json['destroy_on_delete'] = True
 
         # Construct a model instance of ProjectPatchDefinitionBlock by calling from_dict on the json representation
-        project_patch_definition_block_model = ProjectPatchDefinitionBlock.from_dict(project_patch_definition_block_model_json)
+        project_patch_definition_block_model = ProjectPatchDefinitionBlock.from_dict(
+            project_patch_definition_block_model_json
+        )
         assert project_patch_definition_block_model != False
 
         # Construct a model instance of ProjectPatchDefinitionBlock by calling from_dict on the json representation
-        project_patch_definition_block_model_dict = ProjectPatchDefinitionBlock.from_dict(project_patch_definition_block_model_json).__dict__
+        project_patch_definition_block_model_dict = ProjectPatchDefinitionBlock.from_dict(
+            project_patch_definition_block_model_json
+        ).__dict__
         project_patch_definition_block_model2 = ProjectPatchDefinitionBlock(**project_patch_definition_block_model_dict)
 
         # Verify the model instances are equivalent
@@ -5628,11 +5767,15 @@ class TestModel_ProjectPrototypeDefinition:
         project_prototype_definition_model_json['destroy_on_delete'] = True
 
         # Construct a model instance of ProjectPrototypeDefinition by calling from_dict on the json representation
-        project_prototype_definition_model = ProjectPrototypeDefinition.from_dict(project_prototype_definition_model_json)
+        project_prototype_definition_model = ProjectPrototypeDefinition.from_dict(
+            project_prototype_definition_model_json
+        )
         assert project_prototype_definition_model != False
 
         # Construct a model instance of ProjectPrototypeDefinition by calling from_dict on the json representation
-        project_prototype_definition_model_dict = ProjectPrototypeDefinition.from_dict(project_prototype_definition_model_json).__dict__
+        project_prototype_definition_model_dict = ProjectPrototypeDefinition.from_dict(
+            project_prototype_definition_model_json
+        ).__dict__
         project_prototype_definition_model2 = ProjectPrototypeDefinition(**project_prototype_definition_model_dict)
 
         # Verify the model instances are equivalent
@@ -5662,7 +5805,9 @@ class TestModel_ProjectReference:
         project_reference_model_json = {}
         project_reference_model_json['id'] = 'testString'
         project_reference_model_json['definition'] = project_definition_reference_model
-        project_reference_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model_json[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_reference_model_json['href'] = 'testString'
 
         # Construct a model instance of ProjectReference by calling from_dict on the json representation
@@ -5706,7 +5851,9 @@ class TestModel_ProjectSummary:
 
         # Construct a json representation of a ProjectSummary model
         project_summary_model_json = {}
-        project_summary_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_summary_model_json[
+            'crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         project_summary_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_summary_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_summary_model_json['cumulative_needs_attention_view_error'] = False
@@ -5714,6 +5861,7 @@ class TestModel_ProjectSummary:
         project_summary_model_json['location'] = 'testString'
         project_summary_model_json['resource_group_id'] = 'testString'
         project_summary_model_json['state'] = 'ready'
+        project_summary_model_json['href'] = 'testString'
         project_summary_model_json['definition'] = project_definition_properties_model
 
         # Construct a model instance of ProjectSummary by calling from_dict on the json representation
@@ -5751,7 +5899,9 @@ class TestModel_SchematicsMetadata:
 
         # Construct a json representation of a SchematicsMetadata model
         schematics_metadata_model_json = {}
-        schematics_metadata_model_json['workspace_crn'] = 'testString'
+        schematics_metadata_model_json[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
         schematics_metadata_model_json['validate_pre_script'] = script_model
         schematics_metadata_model_json['validate_post_script'] = script_model
         schematics_metadata_model_json['deploy_pre_script'] = script_model
@@ -5787,7 +5937,9 @@ class TestModel_SchematicsWorkspace:
 
         # Construct a json representation of a SchematicsWorkspace model
         schematics_workspace_model_json = {}
-        schematics_workspace_model_json['workspace_crn'] = 'testString'
+        schematics_workspace_model_json[
+            'workspace_crn'
+        ] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
 
         # Construct a model instance of SchematicsWorkspace by calling from_dict on the json representation
         schematics_workspace_model = SchematicsWorkspace.from_dict(schematics_workspace_model_json)
@@ -5852,12 +6004,18 @@ class TestModel_TerraformLogAnalyzerErrorMessage:
         terraform_log_analyzer_error_message_model_json['foo'] = 'testString'
 
         # Construct a model instance of TerraformLogAnalyzerErrorMessage by calling from_dict on the json representation
-        terraform_log_analyzer_error_message_model = TerraformLogAnalyzerErrorMessage.from_dict(terraform_log_analyzer_error_message_model_json)
+        terraform_log_analyzer_error_message_model = TerraformLogAnalyzerErrorMessage.from_dict(
+            terraform_log_analyzer_error_message_model_json
+        )
         assert terraform_log_analyzer_error_message_model != False
 
         # Construct a model instance of TerraformLogAnalyzerErrorMessage by calling from_dict on the json representation
-        terraform_log_analyzer_error_message_model_dict = TerraformLogAnalyzerErrorMessage.from_dict(terraform_log_analyzer_error_message_model_json).__dict__
-        terraform_log_analyzer_error_message_model2 = TerraformLogAnalyzerErrorMessage(**terraform_log_analyzer_error_message_model_dict)
+        terraform_log_analyzer_error_message_model_dict = TerraformLogAnalyzerErrorMessage.from_dict(
+            terraform_log_analyzer_error_message_model_json
+        ).__dict__
+        terraform_log_analyzer_error_message_model2 = TerraformLogAnalyzerErrorMessage(
+            **terraform_log_analyzer_error_message_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert terraform_log_analyzer_error_message_model == terraform_log_analyzer_error_message_model2
@@ -5894,12 +6052,18 @@ class TestModel_TerraformLogAnalyzerSuccessMessage:
         terraform_log_analyzer_success_message_model_json['id'] = 'testString'
 
         # Construct a model instance of TerraformLogAnalyzerSuccessMessage by calling from_dict on the json representation
-        terraform_log_analyzer_success_message_model = TerraformLogAnalyzerSuccessMessage.from_dict(terraform_log_analyzer_success_message_model_json)
+        terraform_log_analyzer_success_message_model = TerraformLogAnalyzerSuccessMessage.from_dict(
+            terraform_log_analyzer_success_message_model_json
+        )
         assert terraform_log_analyzer_success_message_model != False
 
         # Construct a model instance of TerraformLogAnalyzerSuccessMessage by calling from_dict on the json representation
-        terraform_log_analyzer_success_message_model_dict = TerraformLogAnalyzerSuccessMessage.from_dict(terraform_log_analyzer_success_message_model_json).__dict__
-        terraform_log_analyzer_success_message_model2 = TerraformLogAnalyzerSuccessMessage(**terraform_log_analyzer_success_message_model_dict)
+        terraform_log_analyzer_success_message_model_dict = TerraformLogAnalyzerSuccessMessage.from_dict(
+            terraform_log_analyzer_success_message_model_json
+        ).__dict__
+        terraform_log_analyzer_success_message_model2 = TerraformLogAnalyzerSuccessMessage(
+            **terraform_log_analyzer_success_message_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert terraform_log_analyzer_success_message_model == terraform_log_analyzer_success_message_model2
@@ -5907,6 +6071,476 @@ class TestModel_TerraformLogAnalyzerSuccessMessage:
         # Convert model instance back to dict and verify no loss of data
         terraform_log_analyzer_success_message_model_json2 = terraform_log_analyzer_success_message_model.to_dict()
         assert terraform_log_analyzer_success_message_model_json2 == terraform_log_analyzer_success_message_model_json
+
+
+class TestModel_ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties:
+    """
+    Test Class for ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties
+    """
+
+    def test_project_config_patch_definition_block_da_config_definition_properties_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        project_compliance_profile_model = {}  # ProjectComplianceProfile
+        project_compliance_profile_model['id'] = 'testString'
+        project_compliance_profile_model['instance_id'] = 'testString'
+        project_compliance_profile_model['instance_location'] = 'testString'
+        project_compliance_profile_model['attachment_id'] = 'testString'
+        project_compliance_profile_model['profile_name'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties model
+        project_config_patch_definition_block_da_config_definition_properties_model_json = {}
+        project_config_patch_definition_block_da_config_definition_properties_model_json['name'] = 'testString'
+        project_config_patch_definition_block_da_config_definition_properties_model_json['description'] = 'testString'
+        project_config_patch_definition_block_da_config_definition_properties_model_json[
+            'environment_id'
+        ] = 'testString'
+        project_config_patch_definition_block_da_config_definition_properties_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_patch_definition_block_da_config_definition_properties_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_patch_definition_block_da_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_patch_definition_block_da_config_definition_properties_model_json[
+            'compliance_profile'
+        ] = project_compliance_profile_model
+        project_config_patch_definition_block_da_config_definition_properties_model_json['locator_id'] = 'testString'
+
+        # Construct a model instance of ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_patch_definition_block_da_config_definition_properties_model = (
+            ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties.from_dict(
+                project_config_patch_definition_block_da_config_definition_properties_model_json
+            )
+        )
+        assert project_config_patch_definition_block_da_config_definition_properties_model != False
+
+        # Construct a model instance of ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_patch_definition_block_da_config_definition_properties_model_dict = (
+            ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties.from_dict(
+                project_config_patch_definition_block_da_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_patch_definition_block_da_config_definition_properties_model2 = (
+            ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties(
+                **project_config_patch_definition_block_da_config_definition_properties_model_dict
+            )
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            project_config_patch_definition_block_da_config_definition_properties_model
+            == project_config_patch_definition_block_da_config_definition_properties_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_patch_definition_block_da_config_definition_properties_model_json2 = (
+            project_config_patch_definition_block_da_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_patch_definition_block_da_config_definition_properties_model_json2
+            == project_config_patch_definition_block_da_config_definition_properties_model_json
+        )
+
+
+class TestModel_ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties:
+    """
+    Test Class for ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties
+    """
+
+    def test_project_config_patch_definition_block_resource_config_definition_properties_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties model
+        project_config_patch_definition_block_resource_config_definition_properties_model_json = {}
+        project_config_patch_definition_block_resource_config_definition_properties_model_json['name'] = 'testString'
+        project_config_patch_definition_block_resource_config_definition_properties_model_json[
+            'description'
+        ] = 'testString'
+        project_config_patch_definition_block_resource_config_definition_properties_model_json[
+            'environment_id'
+        ] = 'testString'
+        project_config_patch_definition_block_resource_config_definition_properties_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_patch_definition_block_resource_config_definition_properties_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_patch_definition_block_resource_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_patch_definition_block_resource_config_definition_properties_model_json['resource_crns'] = [
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        ]
+
+        # Construct a model instance of ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_patch_definition_block_resource_config_definition_properties_model = (
+            ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties.from_dict(
+                project_config_patch_definition_block_resource_config_definition_properties_model_json
+            )
+        )
+        assert project_config_patch_definition_block_resource_config_definition_properties_model != False
+
+        # Construct a model instance of ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_patch_definition_block_resource_config_definition_properties_model_dict = (
+            ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties.from_dict(
+                project_config_patch_definition_block_resource_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_patch_definition_block_resource_config_definition_properties_model2 = (
+            ProjectConfigPatchDefinitionBlockResourceConfigDefinitionProperties(
+                **project_config_patch_definition_block_resource_config_definition_properties_model_dict
+            )
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            project_config_patch_definition_block_resource_config_definition_properties_model
+            == project_config_patch_definition_block_resource_config_definition_properties_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_patch_definition_block_resource_config_definition_properties_model_json2 = (
+            project_config_patch_definition_block_resource_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_patch_definition_block_resource_config_definition_properties_model_json2
+            == project_config_patch_definition_block_resource_config_definition_properties_model_json
+        )
+
+
+class TestModel_ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties:
+    """
+    Test Class for ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties
+    """
+
+    def test_project_config_prototype_definition_block_da_config_definition_properties_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        project_compliance_profile_model = {}  # ProjectComplianceProfile
+        project_compliance_profile_model['id'] = 'testString'
+        project_compliance_profile_model['instance_id'] = 'testString'
+        project_compliance_profile_model['instance_location'] = 'testString'
+        project_compliance_profile_model['attachment_id'] = 'testString'
+        project_compliance_profile_model['profile_name'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
+        project_config_prototype_definition_block_da_config_definition_properties_model_json = {}
+        project_config_prototype_definition_block_da_config_definition_properties_model_json['name'] = 'testString'
+        project_config_prototype_definition_block_da_config_definition_properties_model_json[
+            'description'
+        ] = 'testString'
+        project_config_prototype_definition_block_da_config_definition_properties_model_json[
+            'environment_id'
+        ] = 'testString'
+        project_config_prototype_definition_block_da_config_definition_properties_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_prototype_definition_block_da_config_definition_properties_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_prototype_definition_block_da_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_prototype_definition_block_da_config_definition_properties_model_json[
+            'compliance_profile'
+        ] = project_compliance_profile_model
+        project_config_prototype_definition_block_da_config_definition_properties_model_json[
+            'locator_id'
+        ] = 'testString'
+
+        # Construct a model instance of ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_prototype_definition_block_da_config_definition_properties_model = (
+            ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties.from_dict(
+                project_config_prototype_definition_block_da_config_definition_properties_model_json
+            )
+        )
+        assert project_config_prototype_definition_block_da_config_definition_properties_model != False
+
+        # Construct a model instance of ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_prototype_definition_block_da_config_definition_properties_model_dict = (
+            ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties.from_dict(
+                project_config_prototype_definition_block_da_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_prototype_definition_block_da_config_definition_properties_model2 = (
+            ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties(
+                **project_config_prototype_definition_block_da_config_definition_properties_model_dict
+            )
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            project_config_prototype_definition_block_da_config_definition_properties_model
+            == project_config_prototype_definition_block_da_config_definition_properties_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_prototype_definition_block_da_config_definition_properties_model_json2 = (
+            project_config_prototype_definition_block_da_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_prototype_definition_block_da_config_definition_properties_model_json2
+            == project_config_prototype_definition_block_da_config_definition_properties_model_json
+        )
+
+
+class TestModel_ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties:
+    """
+    Test Class for ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties
+    """
+
+    def test_project_config_prototype_definition_block_resource_config_definition_properties_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties model
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json = {}
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json[
+            'name'
+        ] = 'testString'
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json[
+            'description'
+        ] = 'testString'
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json[
+            'environment_id'
+        ] = 'testString'
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json['resource_crns'] = [
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        ]
+
+        # Construct a model instance of ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_prototype_definition_block_resource_config_definition_properties_model = (
+            ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties.from_dict(
+                project_config_prototype_definition_block_resource_config_definition_properties_model_json
+            )
+        )
+        assert project_config_prototype_definition_block_resource_config_definition_properties_model != False
+
+        # Construct a model instance of ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_prototype_definition_block_resource_config_definition_properties_model_dict = (
+            ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties.from_dict(
+                project_config_prototype_definition_block_resource_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_prototype_definition_block_resource_config_definition_properties_model2 = (
+            ProjectConfigPrototypeDefinitionBlockResourceConfigDefinitionProperties(
+                **project_config_prototype_definition_block_resource_config_definition_properties_model_dict
+            )
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            project_config_prototype_definition_block_resource_config_definition_properties_model
+            == project_config_prototype_definition_block_resource_config_definition_properties_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_prototype_definition_block_resource_config_definition_properties_model_json2 = (
+            project_config_prototype_definition_block_resource_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_prototype_definition_block_resource_config_definition_properties_model_json2
+            == project_config_prototype_definition_block_resource_config_definition_properties_model_json
+        )
+
+
+class TestModel_ProjectConfigResponseDefinitionDAConfigDefinitionProperties:
+    """
+    Test Class for ProjectConfigResponseDefinitionDAConfigDefinitionProperties
+    """
+
+    def test_project_config_response_definition_da_config_definition_properties_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigResponseDefinitionDAConfigDefinitionProperties
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        project_compliance_profile_model = {}  # ProjectComplianceProfile
+        project_compliance_profile_model['id'] = 'testString'
+        project_compliance_profile_model['instance_id'] = 'testString'
+        project_compliance_profile_model['instance_location'] = 'testString'
+        project_compliance_profile_model['attachment_id'] = 'testString'
+        project_compliance_profile_model['profile_name'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigResponseDefinitionDAConfigDefinitionProperties model
+        project_config_response_definition_da_config_definition_properties_model_json = {}
+        project_config_response_definition_da_config_definition_properties_model_json['name'] = 'testString'
+        project_config_response_definition_da_config_definition_properties_model_json['description'] = 'testString'
+        project_config_response_definition_da_config_definition_properties_model_json['environment_id'] = 'testString'
+        project_config_response_definition_da_config_definition_properties_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_response_definition_da_config_definition_properties_model_json['inputs'] = {'anyKey': 'anyValue'}
+        project_config_response_definition_da_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_response_definition_da_config_definition_properties_model_json[
+            'compliance_profile'
+        ] = project_compliance_profile_model
+        project_config_response_definition_da_config_definition_properties_model_json['locator_id'] = 'testString'
+
+        # Construct a model instance of ProjectConfigResponseDefinitionDAConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_response_definition_da_config_definition_properties_model = (
+            ProjectConfigResponseDefinitionDAConfigDefinitionProperties.from_dict(
+                project_config_response_definition_da_config_definition_properties_model_json
+            )
+        )
+        assert project_config_response_definition_da_config_definition_properties_model != False
+
+        # Construct a model instance of ProjectConfigResponseDefinitionDAConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_response_definition_da_config_definition_properties_model_dict = (
+            ProjectConfigResponseDefinitionDAConfigDefinitionProperties.from_dict(
+                project_config_response_definition_da_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_response_definition_da_config_definition_properties_model2 = (
+            ProjectConfigResponseDefinitionDAConfigDefinitionProperties(
+                **project_config_response_definition_da_config_definition_properties_model_dict
+            )
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            project_config_response_definition_da_config_definition_properties_model
+            == project_config_response_definition_da_config_definition_properties_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_response_definition_da_config_definition_properties_model_json2 = (
+            project_config_response_definition_da_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_response_definition_da_config_definition_properties_model_json2
+            == project_config_response_definition_da_config_definition_properties_model_json
+        )
+
+
+class TestModel_ProjectConfigResponseDefinitionResourceConfigDefinitionProperties:
+    """
+    Test Class for ProjectConfigResponseDefinitionResourceConfigDefinitionProperties
+    """
+
+    def test_project_config_response_definition_resource_config_definition_properties_serialization(self):
+        """
+        Test serialization/deserialization for ProjectConfigResponseDefinitionResourceConfigDefinitionProperties
+        """
+
+        # Construct dict forms of any model objects needed in order to build this model.
+
+        project_config_auth_model = {}  # ProjectConfigAuth
+        project_config_auth_model['trusted_profile_id'] = 'testString'
+        project_config_auth_model['method'] = 'api_key'
+        project_config_auth_model['api_key'] = 'testString'
+
+        # Construct a json representation of a ProjectConfigResponseDefinitionResourceConfigDefinitionProperties model
+        project_config_response_definition_resource_config_definition_properties_model_json = {}
+        project_config_response_definition_resource_config_definition_properties_model_json['name'] = 'testString'
+        project_config_response_definition_resource_config_definition_properties_model_json[
+            'description'
+        ] = 'testString'
+        project_config_response_definition_resource_config_definition_properties_model_json[
+            'environment_id'
+        ] = 'testString'
+        project_config_response_definition_resource_config_definition_properties_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_response_definition_resource_config_definition_properties_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_response_definition_resource_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_response_definition_resource_config_definition_properties_model_json['resource_crns'] = [
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        ]
+
+        # Construct a model instance of ProjectConfigResponseDefinitionResourceConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_response_definition_resource_config_definition_properties_model = (
+            ProjectConfigResponseDefinitionResourceConfigDefinitionProperties.from_dict(
+                project_config_response_definition_resource_config_definition_properties_model_json
+            )
+        )
+        assert project_config_response_definition_resource_config_definition_properties_model != False
+
+        # Construct a model instance of ProjectConfigResponseDefinitionResourceConfigDefinitionProperties by calling from_dict on the json representation
+        project_config_response_definition_resource_config_definition_properties_model_dict = (
+            ProjectConfigResponseDefinitionResourceConfigDefinitionProperties.from_dict(
+                project_config_response_definition_resource_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_response_definition_resource_config_definition_properties_model2 = (
+            ProjectConfigResponseDefinitionResourceConfigDefinitionProperties(
+                **project_config_response_definition_resource_config_definition_properties_model_dict
+            )
+        )
+
+        # Verify the model instances are equivalent
+        assert (
+            project_config_response_definition_resource_config_definition_properties_model
+            == project_config_response_definition_resource_config_definition_properties_model2
+        )
+
+        # Convert model instance back to dict and verify no loss of data
+        project_config_response_definition_resource_config_definition_properties_model_json2 = (
+            project_config_response_definition_resource_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_response_definition_resource_config_definition_properties_model_json2
+            == project_config_response_definition_resource_config_definition_properties_model_json
+        )
 
 
 # endregion

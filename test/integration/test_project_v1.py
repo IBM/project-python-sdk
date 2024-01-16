@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) Copyright IBM Corp. 2023.
+# (C) Copyright IBM Corp. 2024.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ Integration Tests for ProjectV1
 from ibm_cloud_sdk_core import *
 import os
 import pytest
-from ibm_cloud.project_v1 import *
+from project.project_v1 import *
 
 # Config file name
 config_file = 'project_v1.env'
@@ -40,8 +40,7 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance(
-            )
+            cls.project_service = ProjectV1.new_instance()
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)
@@ -79,33 +78,37 @@ class TestProjectV1:
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {
-            'foo': 'testString',
-        }
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {
-            'foo': 'testString',
-        }
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
         project_config_prototype_definition_block_model = {
             'name': 'testString',
             'description': 'testString',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
+            'inputs': {'anyKey': 'anyValue'},
+            'settings': {'anyKey': 'anyValue'},
             'compliance_profile': project_compliance_profile_model,
             'locator_id': 'testString',
-            'inputs': input_variable_model,
-            'settings': project_config_setting_model,
         }
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {
-            'workspace_crn': 'testString',
+            'workspace_crn': 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::',
         }
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {
             'definition': project_config_prototype_definition_block_model,
             'schematics': schematics_workspace_model,
+        }
+        # Construct a dict representation of a EnvironmentDefinitionRequiredProperties model
+        environment_definition_required_properties_model = {
+            'name': 'testString',
+            'description': 'testString',
+            'authorizations': project_config_auth_model,
+            'inputs': {'anyKey': 'anyValue'},
+            'compliance_profile': project_compliance_profile_model,
+        }
+        # Construct a dict representation of a EnvironmentPrototype model
+        environment_prototype_model = {
+            'definition': environment_definition_required_properties_model,
         }
 
         response = self.project_service.create_project(
@@ -113,6 +116,7 @@ class TestProjectV1:
             location='us-south',
             resource_group='Default',
             configs=[project_config_prototype_model],
+            environments=[environment_prototype_model],
         )
 
         assert response.get_status_code() == 201
@@ -139,32 +143,26 @@ class TestProjectV1:
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {
-            'account_id': '$configs[].name[\"account-stage\"].inputs.account_id',
-            'resource_group': 'stage',
-            'access_tags': '["env:stage"]',
-            'logdna_name': 'Name of the LogDNA stage service instance',
-            'sysdig_name': 'Name of the SysDig stage service instance',
-        }
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {
-            'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com',
-        }
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
         project_config_prototype_definition_block_model = {
             'name': 'env-stage',
-            'description': 'Stage environment configuration, which includes services common to all the environment regions. There must be a blueprint configuring all the services common to the stage regions. It is a terraform_template type of configuration that points to a Github repo hosting the terraform modules that can be deployed by a Schematics Workspace.',
+            'description': 'Stage environment configuration.',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
+            'inputs': {
+                'account_id': 'account_id',
+                'resource_group': 'stage',
+                'access_tags': ['env:stage'],
+                'logdna_name': 'LogDNA_stage_service',
+                'sysdig_name': 'SysDig_stage_service',
+            },
+            'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
             'compliance_profile': project_compliance_profile_model,
             'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
-            'inputs': input_variable_model,
-            'settings': project_config_setting_model,
         }
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {
-            'workspace_crn': 'testString',
+            'workspace_crn': 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::',
         }
 
         response = self.project_service.create_config(
@@ -251,11 +249,6 @@ class TestProjectV1:
             'method': 'api_key',
             'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
         }
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {
-            'resource_group': 'stage',
-            'region': 'us-south',
-        }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
             'id': 'some-profile-id',
@@ -269,7 +262,7 @@ class TestProjectV1:
             'name': 'development',
             'description': 'The environment \'development\'',
             'authorizations': project_config_auth_model,
-            'inputs': input_variable_model,
+            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -311,11 +304,6 @@ class TestProjectV1:
             'method': 'api_key',
             'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
         }
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {
-            'resource_group': 'stage',
-            'region': 'us-south',
-        }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
             'id': 'some-profile-id',
@@ -329,7 +317,7 @@ class TestProjectV1:
             'name': 'development',
             'description': 'The environment \'development\'',
             'authorizations': project_config_auth_model,
-            'inputs': input_variable_model,
+            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -380,28 +368,22 @@ class TestProjectV1:
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
-        # Construct a dict representation of a InputVariable model
-        input_variable_model = {
-            'account_id': '$configs[].name[\"account-stage\"].inputs.account_id',
-            'resource_group': 'stage',
-            'access_tags': '["env:stage"]',
-            'logdna_name': 'Name of the LogDNA stage service instance',
-            'sysdig_name': 'Name of the SysDig stage service instance',
-        }
-        # Construct a dict representation of a ProjectConfigSetting model
-        project_config_setting_model = {
-            'foo': 'testString',
-        }
-        # Construct a dict representation of a ProjectConfigPatchDefinitionBlock model
+        # Construct a dict representation of a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties model
         project_config_patch_definition_block_model = {
-            'name': 'testString',
+            'name': 'env-stage',
             'description': 'testString',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
+            'inputs': {
+                'account_id': 'account_id',
+                'resource_group': 'stage',
+                'access_tags': ['env:stage'],
+                'logdna_name': 'LogDNA_stage_service',
+                'sysdig_name': 'SysDig_stage_service',
+            },
+            'settings': {'anyKey': 'anyValue'},
             'compliance_profile': project_compliance_profile_model,
             'locator_id': 'testString',
-            'inputs': input_variable_model,
-            'settings': project_config_setting_model,
         }
 
         response = self.project_service.update_config(
