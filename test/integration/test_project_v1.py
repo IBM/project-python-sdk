@@ -20,7 +20,7 @@ Integration Tests for ProjectV1
 from ibm_cloud_sdk_core import *
 import os
 import pytest
-from project.project_v1 import *
+from ibm_project_sdk.project_v1 import *
 
 # Config file name
 config_file = 'project_v1.env'

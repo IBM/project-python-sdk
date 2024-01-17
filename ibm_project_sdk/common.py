@@ -19,7 +19,7 @@ This module provides common methods for use across all service modules.
 """
 
 import platform
-from project.version import __version__
+from ibm_project_sdk.version import __version__
 
 HEADER_NAME_USER_AGENT = 'User-Agent'
 SDK_NAME = 'project-python-sdk'
