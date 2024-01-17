@@ -20,7 +20,7 @@ import sys
 import pkg_resources
 
 __version__ = '0.0.6'
-PACKAGE_NAME = 'project'
+PACKAGE_NAME = 'ibm-project-sdk'
 PACKAGE_DESC = 'Project Services Python SDK'
 
 with open('requirements.txt') as f:
