@@ -2,6 +2,9 @@
 # to be ready for development work in the local sandbox.
 # example: "make setup"
 
+PYTHON=python3
+LINT_DIRS=ibm_project_sdk test/unit test/integration examples
+
 setup: deps dev_deps install_project
 
 all: upgrade_pip setup test-unit lint
@@ -9,30 +12,31 @@ all: upgrade_pip setup test-unit lint
 ci: setup test-unit lint
 
 upgrade_pip:
-	python -m pip install --upgrade pip
+	${PYTHON} -m pip install --upgrade pip
 
 deps:
-	python3 -m pip install -r requirements.txt
+	${PYTHON} -m pip install -r requirements.txt
 
 dev_deps:
-	python3 -m pip install -r requirements-dev.txt
+	${PYTHON} -m pip install -r requirements-dev.txt
 
 install_project:
-	python3 -m pip install -e .
+	${PYTHON} -m pip install -e .
 
 test: test-unit test-int
 
 test-unit:
-	python3 -m pytest --cov=project test/unit
+	${PYTHON} -m pytest --cov=ibm_project_sdk test/unit
 
 test-int:
-	python3 -m pytest test/integration
+	${PYTHON} -m pytest test/integration
 
 test-examples:
-	python3 -m pytest examples
+	${PYTHON} -m pytest examples
 
 lint:
-	./pylint.sh && black --check .
+	${PYTHON} -m pylint ${LINT_DIRS} --exit-zero
+	black --check ${LINT_DIRS}
 
 lint-fix:
-	black .
+	black ${LINT_DIRS}
