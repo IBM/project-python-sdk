@@ -20,7 +20,7 @@ Examples for ProjectV1
 from ibm_cloud_sdk_core import ApiException, read_external_sources
 import os
 import pytest
-from ibm_project_sdk.project_v1 import *
+from project.project_v1 import *
 
 #
 # This file provides an example of how to use the project service.
@@ -118,9 +118,10 @@ class TestProjectV1Examples:
             print('\ncreate_config() result:')
             # begin-create_config
 
-            project_config_prototype_definition_block_model = {
-                'name': 'env-stage',
+            project_config_definition_block_prototype_model = {
+                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
                 'description': 'Stage environment configuration.',
+                'name': 'env-stage',
                 'inputs': {
                     'account_id': 'account_id',
                     'resource_group': 'stage',
@@ -129,12 +130,11 @@ class TestProjectV1Examples:
                     'sysdig_name': 'SysDig_stage_service',
                 },
                 'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
-                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
             }
 
             response = project_service.create_config(
                 project_id=project_id_link,
-                definition=project_config_prototype_definition_block_model,
+                definition=project_config_definition_block_prototype_model,
             )
             project_config = response.get_result()
 
@@ -242,8 +242,8 @@ class TestProjectV1Examples:
             }
 
             environment_definition_required_properties_model = {
-                'name': 'development',
                 'description': 'The environment \'development\'',
+                'name': 'development',
                 'authorizations': project_config_auth_model,
                 'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
@@ -327,9 +327,9 @@ class TestProjectV1Examples:
                 'profile_name': 'some-profile-name',
             }
 
-            environment_definition_properties_model = {
-                'name': 'development',
+            environment_definition_properties_patch_model = {
                 'description': 'The environment \'development\'',
+                'name': 'development',
                 'authorizations': project_config_auth_model,
                 'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
@@ -338,7 +338,7 @@ class TestProjectV1Examples:
             response = project_service.update_project_environment(
                 project_id=project_id_link,
                 id=project_id_link,
-                definition=environment_definition_properties_model,
+                definition=environment_definition_properties_patch_model,
             )
             environment = response.get_result()
 
@@ -401,7 +401,7 @@ class TestProjectV1Examples:
             print('\nupdate_config() result:')
             # begin-update_config
 
-            project_config_patch_definition_block_model = {
+            project_config_definition_block_patch_model = {
                 'name': 'env-stage',
                 'inputs': {
                     'account_id': 'account_id',
@@ -415,7 +415,7 @@ class TestProjectV1Examples:
             response = project_service.update_config(
                 project_id=project_id_link,
                 id=config_id_link,
-                definition=project_config_patch_definition_block_model,
+                definition=project_config_definition_block_patch_model,
             )
             project_config = response.get_result()
 
@@ -522,15 +522,18 @@ class TestProjectV1Examples:
         undeploy_config request example
         """
         try:
+            print('\nundeploy_config() result:')
             # begin-undeploy_config
 
             response = project_service.undeploy_config(
                 project_id=project_id_link,
                 id=config_id_link,
             )
+            project_config_version = response.get_result()
+
+            print(json.dumps(project_config_version, indent=2))
 
             # end-undeploy_config
-            print('\nundeploy_config() response status code: ', response.get_status_code())
 
         except ApiException as e:
             pytest.fail(str(e))
@@ -699,14 +702,17 @@ class TestProjectV1Examples:
         delete_project request example
         """
         try:
+            print('\ndelete_project() result:')
             # begin-delete_project
 
             response = project_service.delete_project(
                 id=project_id_link,
             )
+            project_delete_response = response.get_result()
+
+            print(json.dumps(project_delete_response, indent=2))
 
             # end-delete_project
-            print('\ndelete_project() response status code: ', response.get_status_code())
 
         except ApiException as e:
             pytest.fail(str(e))
