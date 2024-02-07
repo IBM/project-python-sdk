@@ -61,14 +61,9 @@ class TestProjectV1:
         # Construct a dict representation of a ProjectPrototypeDefinition model
         project_prototype_definition_model = {
             'name': 'acme-microservice',
-            'description': 'A microservice to deploy on top of ACME infrastructure.',
             'destroy_on_delete': True,
-        }
-        # Construct a dict representation of a ProjectConfigAuth model
-        project_config_auth_model = {
-            'trusted_profile_id': 'testString',
-            'method': 'api_key',
-            'api_key': 'testString',
+            'description': 'A microservice to deploy on top of ACME infrastructure.',
+            'monitoring_enabled': True,
         }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
@@ -78,16 +73,22 @@ class TestProjectV1:
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
-        project_config_prototype_definition_block_model = {
-            'name': 'testString',
+        # Construct a dict representation of a ProjectConfigAuth model
+        project_config_auth_model = {
+            'trusted_profile_id': 'testString',
+            'method': 'api_key',
+            'api_key': 'testString',
+        }
+        # Construct a dict representation of a ProjectConfigDefinitionBlockPrototypeDAConfigDefinitionProperties model
+        project_config_definition_block_prototype_model = {
+            'compliance_profile': project_compliance_profile_model,
+            'locator_id': 'testString',
             'description': 'testString',
+            'name': 'testString',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
             'inputs': {'anyKey': 'anyValue'},
             'settings': {'anyKey': 'anyValue'},
-            'compliance_profile': project_compliance_profile_model,
-            'locator_id': 'testString',
         }
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {
@@ -95,13 +96,13 @@ class TestProjectV1:
         }
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {
-            'definition': project_config_prototype_definition_block_model,
+            'definition': project_config_definition_block_prototype_model,
             'schematics': schematics_workspace_model,
         }
         # Construct a dict representation of a EnvironmentDefinitionRequiredProperties model
         environment_definition_required_properties_model = {
-            'name': 'testString',
             'description': 'testString',
+            'name': 'testString',
             'authorizations': project_config_auth_model,
             'inputs': {'anyKey': 'anyValue'},
             'compliance_profile': project_compliance_profile_model,
@@ -129,12 +130,6 @@ class TestProjectV1:
     def test_create_config(self):
         global config_id_link
 
-        # Construct a dict representation of a ProjectConfigAuth model
-        project_config_auth_model = {
-            'trusted_profile_id': 'testString',
-            'method': 'api_key',
-            'api_key': 'testString',
-        }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
             'id': 'testString',
@@ -143,10 +138,18 @@ class TestProjectV1:
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
-        # Construct a dict representation of a ProjectConfigPrototypeDefinitionBlockDAConfigDefinitionProperties model
-        project_config_prototype_definition_block_model = {
-            'name': 'env-stage',
+        # Construct a dict representation of a ProjectConfigAuth model
+        project_config_auth_model = {
+            'trusted_profile_id': 'testString',
+            'method': 'api_key',
+            'api_key': 'testString',
+        }
+        # Construct a dict representation of a ProjectConfigDefinitionBlockPrototypeDAConfigDefinitionProperties model
+        project_config_definition_block_prototype_model = {
+            'compliance_profile': project_compliance_profile_model,
+            'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
             'description': 'Stage environment configuration.',
+            'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
             'inputs': {
@@ -157,8 +160,6 @@ class TestProjectV1:
                 'sysdig_name': 'SysDig_stage_service',
             },
             'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
-            'compliance_profile': project_compliance_profile_model,
-            'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
         }
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {
@@ -167,7 +168,7 @@ class TestProjectV1:
 
         response = self.project_service.create_config(
             project_id=project_id_link,
-            definition=project_config_prototype_definition_block_model,
+            definition=project_config_definition_block_prototype_model,
             schematics=schematics_workspace_model,
         )
 
@@ -228,8 +229,9 @@ class TestProjectV1:
         # Construct a dict representation of a ProjectPatchDefinitionBlock model
         project_patch_definition_block_model = {
             'name': 'acme-microservice',
-            'description': 'A microservice to deploy on top of ACME infrastructure.',
             'destroy_on_delete': True,
+            'description': 'A microservice to deploy on top of ACME infrastructure.',
+            'monitoring_enabled': True,
         }
 
         response = self.project_service.update_project(
@@ -259,8 +261,8 @@ class TestProjectV1:
         }
         # Construct a dict representation of a EnvironmentDefinitionRequiredProperties model
         environment_definition_required_properties_model = {
-            'name': 'development',
             'description': 'The environment \'development\'',
+            'name': 'development',
             'authorizations': project_config_auth_model,
             'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
@@ -312,10 +314,10 @@ class TestProjectV1:
             'attachment_id': 'some-attachment-id',
             'profile_name': 'some-profile-name',
         }
-        # Construct a dict representation of a EnvironmentDefinitionProperties model
-        environment_definition_properties_model = {
-            'name': 'development',
+        # Construct a dict representation of a EnvironmentDefinitionPropertiesPatch model
+        environment_definition_properties_patch_model = {
             'description': 'The environment \'development\'',
+            'name': 'development',
             'authorizations': project_config_auth_model,
             'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
@@ -324,7 +326,7 @@ class TestProjectV1:
         response = self.project_service.update_project_environment(
             project_id=project_id_link,
             id=project_id_link,
-            definition=environment_definition_properties_model,
+            definition=environment_definition_properties_patch_model,
         )
 
         assert response.get_status_code() == 200
@@ -354,12 +356,6 @@ class TestProjectV1:
 
     @needscredentials
     def test_update_config(self):
-        # Construct a dict representation of a ProjectConfigAuth model
-        project_config_auth_model = {
-            'trusted_profile_id': 'testString',
-            'method': 'api_key',
-            'api_key': 'testString',
-        }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
             'id': 'testString',
@@ -368,10 +364,18 @@ class TestProjectV1:
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
-        # Construct a dict representation of a ProjectConfigPatchDefinitionBlockDAConfigDefinitionProperties model
-        project_config_patch_definition_block_model = {
-            'name': 'env-stage',
+        # Construct a dict representation of a ProjectConfigAuth model
+        project_config_auth_model = {
+            'trusted_profile_id': 'testString',
+            'method': 'api_key',
+            'api_key': 'testString',
+        }
+        # Construct a dict representation of a ProjectConfigDefinitionBlockPatchDAConfigDefinitionPropertiesPatch model
+        project_config_definition_block_patch_model = {
+            'compliance_profile': project_compliance_profile_model,
+            'locator_id': 'testString',
             'description': 'testString',
+            'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
             'inputs': {
@@ -382,14 +386,12 @@ class TestProjectV1:
                 'sysdig_name': 'SysDig_stage_service',
             },
             'settings': {'anyKey': 'anyValue'},
-            'compliance_profile': project_compliance_profile_model,
-            'locator_id': 'testString',
         }
 
         response = self.project_service.update_config(
             project_id=project_id_link,
             id=config_id_link,
-            definition=project_config_patch_definition_block_model,
+            definition=project_config_definition_block_patch_model,
         )
 
         assert response.get_status_code() == 200
@@ -404,7 +406,7 @@ class TestProjectV1:
             comment='Approving the changes',
         )
 
-        assert response.get_status_code() == 201
+        assert response.get_status_code() == 200
         project_config_version = response.get_result()
         assert project_config_version is not None
 
@@ -416,7 +418,7 @@ class TestProjectV1:
             comment='Approving the changes',
         )
 
-        assert response.get_status_code() == 201
+        assert response.get_status_code() == 200
         project_config_version = response.get_result()
         assert project_config_version is not None
 
@@ -449,7 +451,9 @@ class TestProjectV1:
             id=config_id_link,
         )
 
-        assert response.get_status_code() == 204
+        assert response.get_status_code() == 202
+        project_config_version = response.get_result()
+        assert project_config_version is not None
 
     @needscredentials
     def test_sync_config(self):
@@ -540,4 +544,6 @@ class TestProjectV1:
             id=project_id_link,
         )
 
-        assert response.get_status_code() == 204
+        assert response.get_status_code() == 202
+        project_delete_response = response.get_result()
+        assert project_delete_response is not None
