@@ -40,8 +40,7 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance(
-            )
+            cls.project_service = ProjectV1.new_instance()
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)
@@ -153,8 +152,14 @@ class TestProjectV1:
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
-            'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT':'https://api.us-south.devops.dev.cloud.ibm.com'},
+            'inputs': {
+                'account_id': 'account_id',
+                'resource_group': 'stage',
+                'access_tags': ['env:stage'],
+                'logdna_name': 'LogDNA_stage_service',
+                'sysdig_name': 'SysDig_stage_service',
+            },
+            'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
         }
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {
@@ -259,7 +264,7 @@ class TestProjectV1:
             'description': 'The environment \'development\'',
             'name': 'development',
             'authorizations': project_config_auth_model,
-            'inputs': {'resource_group':'stage','region':'us-south'},
+            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -314,7 +319,7 @@ class TestProjectV1:
             'description': 'The environment \'development\'',
             'name': 'development',
             'authorizations': project_config_auth_model,
-            'inputs': {'resource_group':'stage','region':'us-south'},
+            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -373,7 +378,13 @@ class TestProjectV1:
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
+            'inputs': {
+                'account_id': 'account_id',
+                'resource_group': 'stage',
+                'access_tags': ['env:stage'],
+                'logdna_name': 'LogDNA_stage_service',
+                'sysdig_name': 'SysDig_stage_service',
+            },
             'settings': {'anyKey': 'anyValue'},
         }
 
