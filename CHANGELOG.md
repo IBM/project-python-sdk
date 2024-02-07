@@ -1,3 +1,12 @@
+## [0.0.3](https://github.com/IBM/project-python-sdk/compare/v0.0.2...v0.0.3) (2024-02-07)
+
+
+### Bug Fixes
+
+* new code February release ([53beb78](https://github.com/IBM/project-python-sdk/commit/53beb783e3c29faa77b7ae2dcf3dd76e7aa952b8))
+* new code for February release ([a7aac97](https://github.com/IBM/project-python-sdk/commit/a7aac97fb5a4526b5e05c5a3d92b379473d8befc))
+* new code updates ([0fed040](https://github.com/IBM/project-python-sdk/commit/0fed040ea53d583dd44aaf4c9fd6c2554dcbeb9a))
+
 ## [0.0.2](https://github.com/IBM/project-python-sdk/compare/v0.0.1...v0.0.2) (2024-01-18)
 
 
