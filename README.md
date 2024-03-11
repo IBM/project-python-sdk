@@ -60,7 +60,7 @@ pip install --upgrade git+https://github.com/IBM/project-python-sdk@v0.0.3
 
 Then in your code, you can import the appropriate service like this:
 ```
-from project.<service-module-name> import *
+from ibm_project_sdk.project_v1 import *
 ```
 where `<service-module-name>` is the service's module name from the table above
 
