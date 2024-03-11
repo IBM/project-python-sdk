@@ -55,7 +55,7 @@ Service Name | Module Name | Imported Class Name
 To install, use `pip`:
 
 ```bash
-pip install --upgrade project
+pip install --upgrade git+https://github.com/IBM/project-python-sdk@v0.0.3
 ```
 
 Then in your code, you can import the appropriate service like this:
