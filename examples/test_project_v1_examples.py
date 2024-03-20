@@ -93,10 +93,21 @@ class TestProjectV1Examples:
                 'description': 'A microservice to deploy on top of ACME infrastructure.',
             }
 
+            project_config_definition_prototype_model = {
+                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
+                'description': 'The stage account configuration.',
+                'name': 'account-stage',
+            }
+
+            project_config_prototype_model = {
+                'definition': project_config_definition_prototype_model,
+            }
+
             response = project_service.create_project(
                 definition=project_prototype_definition_model,
                 location='us-south',
                 resource_group='Default',
+                configs=[project_config_prototype_model],
             )
             project = response.get_result()
 
@@ -118,9 +129,9 @@ class TestProjectV1Examples:
             print('\ncreate_config() result:')
             # begin-create_config
 
-            project_config_definition_block_prototype_model = {
+            project_config_definition_prototype_model = {
                 'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
-                'description': 'Stage environment configuration.',
+                'description': 'The stage environment configuration.',
                 'name': 'env-stage',
                 'inputs': {
                     'account_id': 'account_id',
@@ -129,12 +140,11 @@ class TestProjectV1Examples:
                     'logdna_name': 'LogDNA_stage_service',
                     'sysdig_name': 'SysDig_stage_service',
                 },
-                'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
             }
 
             response = project_service.create_config(
                 project_id=project_id_link,
-                definition=project_config_definition_block_prototype_model,
+                definition=project_config_definition_prototype_model,
             )
             project_config = response.get_result()
 
@@ -220,6 +230,32 @@ class TestProjectV1Examples:
             pytest.fail(str(e))
 
     @needscredentials
+    def test_list_project_resources_example(self):
+        """
+        list_project_resources request example
+        """
+        try:
+            print('\nlist_project_resources() result:')
+            # begin-list_project_resources
+
+            all_results = []
+            pager = ProjectResourcesPager(
+                client=project_service,
+                id=project_id_link,
+                limit=10,
+            )
+            while pager.has_next():
+                next_page = pager.get_next()
+                assert next_page is not None
+                all_results.extend(next_page)
+
+            print(json.dumps(all_results, indent=2))
+
+            # end-list_project_resources
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
     def test_create_project_environment_example(self):
         """
         create_project_environment request example
@@ -229,8 +265,8 @@ class TestProjectV1Examples:
             # begin-create_project_environment
 
             project_config_auth_model = {
-                'method': 'api_key',
-                'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
+                'trusted_profile_id': 'Profile-9ac10c5c-195c-41ef-b465-68a6b6dg5f12',
+                'method': 'trusted_profile',
             }
 
             project_compliance_profile_model = {
@@ -242,7 +278,7 @@ class TestProjectV1Examples:
             }
 
             environment_definition_required_properties_model = {
-                'description': 'The environment \'development\'',
+                'description': 'The environment development.',
                 'name': 'development',
                 'authorizations': project_config_auth_model,
                 'inputs': {'resource_group': 'stage', 'region': 'us-south'},
@@ -271,15 +307,20 @@ class TestProjectV1Examples:
             print('\nlist_project_environments() result:')
             # begin-list_project_environments
 
-            response = project_service.list_project_environments(
+            all_results = []
+            pager = ProjectEnvironmentsPager(
+                client=project_service,
                 project_id=project_id_link,
+                limit=10,
             )
-            environment_collection = response.get_result()
+            while pager.has_next():
+                next_page = pager.get_next()
+                assert next_page is not None
+                all_results.extend(next_page)
 
-            print(json.dumps(environment_collection, indent=2))
+            print(json.dumps(all_results, indent=2))
 
             # end-list_project_environments
-
         except ApiException as e:
             pytest.fail(str(e))
 
@@ -315,8 +356,8 @@ class TestProjectV1Examples:
             # begin-update_project_environment
 
             project_config_auth_model = {
-                'method': 'api_key',
-                'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
+                'trusted_profile_id': 'Profile-9ac10c5c-195c-41ef-b465-68a6b6dg5f12',
+                'method': 'trusted_profile',
             }
 
             project_compliance_profile_model = {
@@ -328,7 +369,7 @@ class TestProjectV1Examples:
             }
 
             environment_definition_properties_patch_model = {
-                'description': 'The environment \'development\'',
+                'description': 'The environment development.',
                 'name': 'development',
                 'authorizations': project_config_auth_model,
                 'inputs': {'resource_group': 'stage', 'region': 'us-south'},
@@ -358,15 +399,20 @@ class TestProjectV1Examples:
             print('\nlist_configs() result:')
             # begin-list_configs
 
-            response = project_service.list_configs(
+            all_results = []
+            pager = ConfigsPager(
+                client=project_service,
                 project_id=project_id_link,
+                limit=10,
             )
-            project_config_collection = response.get_result()
+            while pager.has_next():
+                next_page = pager.get_next()
+                assert next_page is not None
+                all_results.extend(next_page)
 
-            print(json.dumps(project_config_collection, indent=2))
+            print(json.dumps(all_results, indent=2))
 
             # end-list_configs
-
         except ApiException as e:
             pytest.fail(str(e))
 
@@ -401,7 +447,7 @@ class TestProjectV1Examples:
             print('\nupdate_config() result:')
             # begin-update_config
 
-            project_config_definition_block_patch_model = {
+            project_config_definition_patch_model = {
                 'name': 'env-stage',
                 'inputs': {
                     'account_id': 'account_id',
@@ -415,7 +461,7 @@ class TestProjectV1Examples:
             response = project_service.update_config(
                 project_id=project_id_link,
                 id=config_id_link,
-                definition=project_config_definition_block_patch_model,
+                definition=project_config_definition_patch_model,
             )
             project_config = response.get_result()
 
