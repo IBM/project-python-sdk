@@ -55,9 +55,7 @@ class ProjectV1(BaseService):
                and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(
-            authenticator
-            )
+        service = cls(authenticator)
         service.configure_service(service_name)
         return service
 
@@ -1601,9 +1599,13 @@ class ActionJobApplyMessagesSummary:
         """Initialize a ActionJobApplyMessagesSummary object from a json dictionary."""
         args = {}
         if 'error_messages' in _dict:
-            args['error_messages'] = [TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')]
+            args['error_messages'] = [
+                TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')
+            ]
         if 'success_messages' in _dict:
-            args['success_messages'] = [TerraformLogAnalyzerSuccessMessage.from_dict(v) for v in _dict.get('success_messages')]
+            args['success_messages'] = [
+                TerraformLogAnalyzerSuccessMessage.from_dict(v) for v in _dict.get('success_messages')
+            ]
         return cls(**args)
 
     @classmethod
@@ -1773,7 +1775,9 @@ class ActionJobDestroyMessagesSummary:
         """Initialize a ActionJobDestroyMessagesSummary object from a json dictionary."""
         args = {}
         if 'error_messages' in _dict:
-            args['error_messages'] = [TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')]
+            args['error_messages'] = [
+                TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')
+            ]
         return cls(**args)
 
     @classmethod
@@ -2121,7 +2125,9 @@ class ActionJobPlanMessagesSummary:
         """Initialize a ActionJobPlanMessagesSummary object from a json dictionary."""
         args = {}
         if 'error_messages' in _dict:
-            args['error_messages'] = [TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')]
+            args['error_messages'] = [
+                TerraformLogAnalyzerErrorMessage.from_dict(v) for v in _dict.get('error_messages')
+            ]
         if 'success_messages' in _dict:
             args['success_messages'] = _dict.get('success_messages')
         if 'update_messages' in _dict:
@@ -3225,11 +3231,15 @@ class EnvironmentDefinitionRequiredPropertiesResponse:
         if 'description' in _dict:
             args['description'] = _dict.get('description')
         else:
-            raise ValueError('Required property \'description\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'description\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON'
+            )
         if 'name' in _dict:
             args['name'] = _dict.get('name')
         else:
-            raise ValueError('Required property \'name\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'name\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON'
+            )
         if 'authorizations' in _dict:
             args['authorizations'] = ProjectConfigAuth.from_dict(_dict.get('authorizations'))
         if 'inputs' in _dict:
@@ -3521,7 +3531,6 @@ class LastActionWithSummary:
         PASSED = 'passed'
 
 
-
 class LastDriftDetectionJobSummary:
     """
     The summary for drift detection jobs that are performed as part of the last monitoring
@@ -3676,7 +3685,6 @@ class LastMonitoringActionWithSummary:
         PASSED = 'passed'
 
 
-
 class LastValidatedActionWithSummary:
     """
     The href and results from the last action job that is performed on the project
@@ -3822,7 +3830,6 @@ class LastValidatedActionWithSummary:
 
         FAILED = 'failed'
         PASSED = 'passed'
-
 
 
 class OutputValue:
@@ -4401,7 +4408,9 @@ class Project:
         else:
             raise ValueError('Required property \'created_at\' not present in Project JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         else:
             raise ValueError('Required property \'cumulative_needs_attention_view\' not present in Project JSON')
         if 'cumulative_needs_attention_view_error' in _dict:
@@ -4466,7 +4475,10 @@ class Project:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -4531,7 +4543,6 @@ class Project:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class ProjectCollection:
@@ -5078,7 +5089,6 @@ class ProjectConfig:
         APPLY_FAILED = 'apply_failed'
 
 
-
 class ProjectConfigAuth:
     """
     The authorization details. You can authorize by using a trusted profile or an API key
@@ -5165,7 +5175,6 @@ class ProjectConfigAuth:
 
         API_KEY = 'api_key'
         TRUSTED_PROFILE = 'trusted_profile'
-
 
 
 class ProjectConfigCollection:
@@ -5284,7 +5293,12 @@ class ProjectConfigDefinitionPatch:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch', 'ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch'])
+            ", ".join(
+                [
+                    'ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch',
+                    'ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5303,7 +5317,12 @@ class ProjectConfigDefinitionPrototype:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype', 'ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype'])
+            ", ".join(
+                [
+                    'ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype',
+                    'ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5322,7 +5341,12 @@ class ProjectConfigDefinitionResponse:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse', 'ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse'])
+            ", ".join(
+                [
+                    'ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse',
+                    'ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5894,7 +5918,9 @@ class ProjectConfigResourceCollection:
         if 'resources_count' in _dict:
             args['resources_count'] = _dict.get('resources_count')
         else:
-            raise ValueError('Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON')
+            raise ValueError(
+                'Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON'
+            )
         return cls(**args)
 
     @classmethod
@@ -6141,7 +6167,6 @@ class ProjectConfigSummary:
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
 
-
     class DeploymentModelEnum(str, Enum):
         """
         The configuration type.
@@ -6149,7 +6174,6 @@ class ProjectConfigSummary:
 
         PROJECT_DEPLOYED = 'project_deployed'
         USER_DEPLOYED = 'user_deployed'
-
 
 
 class ProjectConfigSummaryDefinition:
@@ -6589,7 +6613,6 @@ class ProjectConfigVersion:
         APPLY_FAILED = 'apply_failed'
 
 
-
 class ProjectConfigVersionDefinitionSummary:
     """
     A summary of the definition in a project configuration version.
@@ -6803,7 +6826,6 @@ class ProjectConfigVersionSummary:
         VALIDATING_FAILED = 'validating_failed'
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
-
 
 
 class ProjectConfigVersionSummaryCollection:
@@ -7235,7 +7257,9 @@ class ProjectEnvironmentSummaryDefinition:
         if 'description' in _dict:
             args['description'] = _dict.get('description')
         else:
-            raise ValueError('Required property \'description\' not present in ProjectEnvironmentSummaryDefinition JSON')
+            raise ValueError(
+                'Required property \'description\' not present in ProjectEnvironmentSummaryDefinition JSON'
+            )
         if 'name' in _dict:
             args['name'] = _dict.get('name')
         else:
@@ -7793,7 +7817,6 @@ class ProjectResourceSummary:
         USER_DEPLOYED = 'user_deployed'
 
 
-
 class ProjectSummary:
     """
     ProjectSummary.
@@ -7880,7 +7903,9 @@ class ProjectSummary:
         else:
             raise ValueError('Required property \'created_at\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view' in _dict:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in _dict.get('cumulative_needs_attention_view')
+            ]
         else:
             raise ValueError('Required property \'cumulative_needs_attention_view\' not present in ProjectSummary JSON')
         if 'cumulative_needs_attention_view_error' in _dict:
@@ -7931,7 +7956,10 @@ class ProjectSummary:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -7976,7 +8004,6 @@ class ProjectSummary:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class SchematicsMetadata:
@@ -8817,7 +8844,9 @@ class ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype(Proj
         if 'name' in _dict:
             args['name'] = _dict.get('name')
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype JSON'
+            )
         if 'environment_id' in _dict:
             args['environment_id'] = _dict.get('environment_id')
         if 'authorizations' in _dict:
@@ -8947,7 +8976,9 @@ class ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototyp
         if 'name' in _dict:
             args['name'] = _dict.get('name')
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype JSON'
+            )
         if 'environment_id' in _dict:
             args['environment_id'] = _dict.get('environment_id')
         if 'authorizations' in _dict:
@@ -9108,11 +9139,15 @@ class ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse(Projec
         if 'description' in _dict:
             args['description'] = _dict.get('description')
         else:
-            raise ValueError('Required property \'description\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'description\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON'
+            )
         if 'name' in _dict:
             args['name'] = _dict.get('name')
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON'
+            )
         if 'environment_id' in _dict:
             args['environment_id'] = _dict.get('environment_id')
         if 'authorizations' in _dict:
@@ -9240,11 +9275,15 @@ class ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse(
         if 'description' in _dict:
             args['description'] = _dict.get('description')
         else:
-            raise ValueError('Required property \'description\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'description\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON'
+            )
         if 'name' in _dict:
             args['name'] = _dict.get('name')
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON'
+            )
         if 'environment_id' in _dict:
             args['environment_id'] = _dict.get('environment_id')
         if 'authorizations' in _dict:

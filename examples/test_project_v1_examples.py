@@ -63,8 +63,7 @@ class TestProjectV1Examples:
 
             # begin-common
 
-            project_service = ProjectV1.new_instance(
-            )
+            project_service = ProjectV1.new_instance()
 
             # end-common
             assert project_service is not None
@@ -134,7 +133,13 @@ class TestProjectV1Examples:
                 'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
                 'description': 'The stage environment configuration.',
                 'name': 'env-stage',
-                'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
+                'inputs': {
+                    'account_id': 'account_id',
+                    'resource_group': 'stage',
+                    'access_tags': ['env:stage'],
+                    'logdna_name': 'LogDNA_stage_service',
+                    'sysdig_name': 'SysDig_stage_service',
+                },
             }
 
             response = project_service.create_config(
@@ -276,7 +281,7 @@ class TestProjectV1Examples:
                 'description': 'The environment development.',
                 'name': 'development',
                 'authorizations': project_config_auth_model,
-                'inputs': {'resource_group':'stage','region':'us-south'},
+                'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
             }
 
@@ -367,7 +372,7 @@ class TestProjectV1Examples:
                 'description': 'The environment development.',
                 'name': 'development',
                 'authorizations': project_config_auth_model,
-                'inputs': {'resource_group':'stage','region':'us-south'},
+                'inputs': {'resource_group': 'stage', 'region': 'us-south'},
                 'compliance_profile': project_compliance_profile_model,
             }
 
@@ -444,7 +449,13 @@ class TestProjectV1Examples:
 
             project_config_definition_patch_model = {
                 'name': 'env-stage',
-                'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
+                'inputs': {
+                    'account_id': 'account_id',
+                    'resource_group': 'stage',
+                    'access_tags': ['env:stage'],
+                    'logdna_name': 'LogDNA_stage_service',
+                    'sysdig_name': 'SysDig_stage_service',
+                },
             }
 
             response = project_service.update_config(

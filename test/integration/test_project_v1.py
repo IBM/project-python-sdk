@@ -40,8 +40,7 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance(
-            )
+            cls.project_service = ProjectV1.new_instance()
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)
@@ -153,7 +152,13 @@ class TestProjectV1:
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
+            'inputs': {
+                'account_id': 'account_id',
+                'resource_group': 'stage',
+                'access_tags': ['env:stage'],
+                'logdna_name': 'LogDNA_stage_service',
+                'sysdig_name': 'SysDig_stage_service',
+            },
             'settings': {'anyKey': 'anyValue'},
         }
         # Construct a dict representation of a SchematicsWorkspace model
@@ -275,7 +280,9 @@ class TestProjectV1:
         assert all_items is not None
 
         assert len(all_results) == len(all_items)
-        print(f'\nlist_project_resources() returned a total of {len(all_results)} items(s) using ProjectResourcesPager.')
+        print(
+            f'\nlist_project_resources() returned a total of {len(all_results)} items(s) using ProjectResourcesPager.'
+        )
 
     @needscredentials
     def test_create_project_environment(self):
@@ -298,7 +305,7 @@ class TestProjectV1:
             'description': 'The environment development.',
             'name': 'development',
             'authorizations': project_config_auth_model,
-            'inputs': {'resource_group':'stage','region':'us-south'},
+            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -348,7 +355,9 @@ class TestProjectV1:
         assert all_items is not None
 
         assert len(all_results) == len(all_items)
-        print(f'\nlist_project_environments() returned a total of {len(all_results)} items(s) using ProjectEnvironmentsPager.')
+        print(
+            f'\nlist_project_environments() returned a total of {len(all_results)} items(s) using ProjectEnvironmentsPager.'
+        )
 
     @needscredentials
     def test_get_project_environment(self):
@@ -382,7 +391,7 @@ class TestProjectV1:
             'description': 'The environment development.',
             'name': 'development',
             'authorizations': project_config_auth_model,
-            'inputs': {'resource_group':'stage','region':'us-south'},
+            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -470,7 +479,13 @@ class TestProjectV1:
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
+            'inputs': {
+                'account_id': 'account_id',
+                'resource_group': 'stage',
+                'access_tags': ['env:stage'],
+                'logdna_name': 'LogDNA_stage_service',
+                'sysdig_name': 'SysDig_stage_service',
+            },
             'settings': {'anyKey': 'anyValue'},
         }
 
