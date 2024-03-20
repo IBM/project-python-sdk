@@ -20,7 +20,7 @@ Integration Tests for ProjectV1
 from ibm_cloud_sdk_core import *
 import os
 import pytest
-from ibm_project_sdk.project_v1 import *
+from project.project_v1 import *
 
 # Config file name
 config_file = 'project_v1.env'
@@ -40,7 +40,8 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance()
+            cls.project_service = ProjectV1.new_instance(
+            )
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)
@@ -63,7 +64,7 @@ class TestProjectV1:
             'name': 'acme-microservice',
             'destroy_on_delete': True,
             'description': 'A microservice to deploy on top of ACME infrastructure.',
-            'monitoring_enabled': True,
+            'monitoring_enabled': False,
         }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
@@ -79,12 +80,12 @@ class TestProjectV1:
             'method': 'api_key',
             'api_key': 'testString',
         }
-        # Construct a dict representation of a ProjectConfigDefinitionBlockPrototypeDAConfigDefinitionProperties model
-        project_config_definition_block_prototype_model = {
+        # Construct a dict representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
+        project_config_definition_prototype_model = {
             'compliance_profile': project_compliance_profile_model,
-            'locator_id': 'testString',
-            'description': 'testString',
-            'name': 'testString',
+            'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
+            'description': 'The stage account configuration.',
+            'name': 'account-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
             'inputs': {'anyKey': 'anyValue'},
@@ -96,7 +97,7 @@ class TestProjectV1:
         }
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {
-            'definition': project_config_definition_block_prototype_model,
+            'definition': project_config_definition_prototype_model,
             'schematics': schematics_workspace_model,
         }
         # Construct a dict representation of a EnvironmentDefinitionRequiredProperties model
@@ -144,22 +145,16 @@ class TestProjectV1:
             'method': 'api_key',
             'api_key': 'testString',
         }
-        # Construct a dict representation of a ProjectConfigDefinitionBlockPrototypeDAConfigDefinitionProperties model
-        project_config_definition_block_prototype_model = {
+        # Construct a dict representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
+        project_config_definition_prototype_model = {
             'compliance_profile': project_compliance_profile_model,
             'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
-            'description': 'Stage environment configuration.',
+            'description': 'The stage environment configuration.',
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {
-                'account_id': 'account_id',
-                'resource_group': 'stage',
-                'access_tags': ['env:stage'],
-                'logdna_name': 'LogDNA_stage_service',
-                'sysdig_name': 'SysDig_stage_service',
-            },
-            'settings': {'IBMCLOUD_TOOLCHAIN_ENDPOINT': 'https://api.us-south.devops.dev.cloud.ibm.com'},
+            'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
+            'settings': {'anyKey': 'anyValue'},
         }
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {
@@ -168,7 +163,7 @@ class TestProjectV1:
 
         response = self.project_service.create_config(
             project_id=project_id_link,
-            definition=project_config_definition_block_prototype_model,
+            definition=project_config_definition_prototype_model,
             schematics=schematics_workspace_model,
         )
 
@@ -181,7 +176,7 @@ class TestProjectV1:
     @needscredentials
     def test_list_projects(self):
         response = self.project_service.list_projects(
-            start='testString',
+            token='testString',
             limit=10,
         )
 
@@ -244,12 +239,51 @@ class TestProjectV1:
         assert project is not None
 
     @needscredentials
+    def test_list_project_resources(self):
+        response = self.project_service.list_project_resources(
+            id=project_id_link,
+            start='testString',
+            limit=10,
+        )
+
+        assert response.get_status_code() == 200
+        project_resource_collection = response.get_result()
+        assert project_resource_collection is not None
+
+    @needscredentials
+    def test_list_project_resources_with_pager(self):
+        all_results = []
+
+        # Test get_next().
+        pager = ProjectResourcesPager(
+            client=self.project_service,
+            id=project_id_link,
+            limit=10,
+        )
+        while pager.has_next():
+            next_page = pager.get_next()
+            assert next_page is not None
+            all_results.extend(next_page)
+
+        # Test get_all().
+        pager = ProjectResourcesPager(
+            client=self.project_service,
+            id=project_id_link,
+            limit=10,
+        )
+        all_items = pager.get_all()
+        assert all_items is not None
+
+        assert len(all_results) == len(all_items)
+        print(f'\nlist_project_resources() returned a total of {len(all_results)} items(s) using ProjectResourcesPager.')
+
+    @needscredentials
     def test_create_project_environment(self):
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {
-            'trusted_profile_id': 'testString',
-            'method': 'api_key',
-            'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
+            'trusted_profile_id': 'Profile-9ac10c5c-195c-41ef-b465-68a6b6dg5f12',
+            'method': 'trusted_profile',
+            'api_key': 'testString',
         }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
@@ -261,10 +295,10 @@ class TestProjectV1:
         }
         # Construct a dict representation of a EnvironmentDefinitionRequiredProperties model
         environment_definition_required_properties_model = {
-            'description': 'The environment \'development\'',
+            'description': 'The environment development.',
             'name': 'development',
             'authorizations': project_config_auth_model,
-            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
+            'inputs': {'resource_group':'stage','region':'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -281,11 +315,40 @@ class TestProjectV1:
     def test_list_project_environments(self):
         response = self.project_service.list_project_environments(
             project_id=project_id_link,
+            token='testString',
+            limit=10,
         )
 
         assert response.get_status_code() == 200
         environment_collection = response.get_result()
         assert environment_collection is not None
+
+    @needscredentials
+    def test_list_project_environments_with_pager(self):
+        all_results = []
+
+        # Test get_next().
+        pager = ProjectEnvironmentsPager(
+            client=self.project_service,
+            project_id=project_id_link,
+            limit=10,
+        )
+        while pager.has_next():
+            next_page = pager.get_next()
+            assert next_page is not None
+            all_results.extend(next_page)
+
+        # Test get_all().
+        pager = ProjectEnvironmentsPager(
+            client=self.project_service,
+            project_id=project_id_link,
+            limit=10,
+        )
+        all_items = pager.get_all()
+        assert all_items is not None
+
+        assert len(all_results) == len(all_items)
+        print(f'\nlist_project_environments() returned a total of {len(all_results)} items(s) using ProjectEnvironmentsPager.')
 
     @needscredentials
     def test_get_project_environment(self):
@@ -302,9 +365,9 @@ class TestProjectV1:
     def test_update_project_environment(self):
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {
-            'trusted_profile_id': 'testString',
-            'method': 'api_key',
-            'api_key': 'TbcdlprpFODhkpns9e0daOWnAwd2tXwSYtPn8rpEd8d9',
+            'trusted_profile_id': 'Profile-9ac10c5c-195c-41ef-b465-68a6b6dg5f12',
+            'method': 'trusted_profile',
+            'api_key': 'testString',
         }
         # Construct a dict representation of a ProjectComplianceProfile model
         project_compliance_profile_model = {
@@ -316,10 +379,10 @@ class TestProjectV1:
         }
         # Construct a dict representation of a EnvironmentDefinitionPropertiesPatch model
         environment_definition_properties_patch_model = {
-            'description': 'The environment \'development\'',
+            'description': 'The environment development.',
             'name': 'development',
             'authorizations': project_config_auth_model,
-            'inputs': {'resource_group': 'stage', 'region': 'us-south'},
+            'inputs': {'resource_group':'stage','region':'us-south'},
             'compliance_profile': project_compliance_profile_model,
         }
 
@@ -337,11 +400,40 @@ class TestProjectV1:
     def test_list_configs(self):
         response = self.project_service.list_configs(
             project_id=project_id_link,
+            token='testString',
+            limit=10,
         )
 
         assert response.get_status_code() == 200
         project_config_collection = response.get_result()
         assert project_config_collection is not None
+
+    @needscredentials
+    def test_list_configs_with_pager(self):
+        all_results = []
+
+        # Test get_next().
+        pager = ConfigsPager(
+            client=self.project_service,
+            project_id=project_id_link,
+            limit=10,
+        )
+        while pager.has_next():
+            next_page = pager.get_next()
+            assert next_page is not None
+            all_results.extend(next_page)
+
+        # Test get_all().
+        pager = ConfigsPager(
+            client=self.project_service,
+            project_id=project_id_link,
+            limit=10,
+        )
+        all_items = pager.get_all()
+        assert all_items is not None
+
+        assert len(all_results) == len(all_items)
+        print(f'\nlist_configs() returned a total of {len(all_results)} items(s) using ConfigsPager.')
 
     @needscredentials
     def test_get_config(self):
@@ -370,28 +462,22 @@ class TestProjectV1:
             'method': 'api_key',
             'api_key': 'testString',
         }
-        # Construct a dict representation of a ProjectConfigDefinitionBlockPatchDAConfigDefinitionPropertiesPatch model
-        project_config_definition_block_patch_model = {
+        # Construct a dict representation of a ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch model
+        project_config_definition_patch_model = {
             'compliance_profile': project_compliance_profile_model,
             'locator_id': 'testString',
             'description': 'testString',
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {
-                'account_id': 'account_id',
-                'resource_group': 'stage',
-                'access_tags': ['env:stage'],
-                'logdna_name': 'LogDNA_stage_service',
-                'sysdig_name': 'SysDig_stage_service',
-            },
+            'inputs': {'account_id':'account_id','resource_group':'stage','access_tags':['env:stage'],'logdna_name':'LogDNA_stage_service','sysdig_name':'SysDig_stage_service'},
             'settings': {'anyKey': 'anyValue'},
         }
 
         response = self.project_service.update_config(
             project_id=project_id_link,
             id=config_id_link,
-            definition=project_config_definition_block_patch_model,
+            definition=project_config_definition_patch_model,
         )
 
         assert response.get_status_code() == 200
