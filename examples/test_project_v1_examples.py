@@ -20,7 +20,7 @@ Examples for ProjectV1
 from ibm_cloud_sdk_core import ApiException, read_external_sources
 import os
 import pytest
-from project.project_v1 import *
+from ibm_project_sdk.project_v1 import *
 
 #
 # This file provides an example of how to use the project service.

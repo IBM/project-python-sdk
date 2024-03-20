@@ -28,7 +28,7 @@ import re
 import requests
 import responses
 import urllib
-from project.project_v1 import *
+from ibm_project_sdk.project_v1 import *
 
 
 _service = ProjectV1(authenticator=NoAuthAuthenticator())
