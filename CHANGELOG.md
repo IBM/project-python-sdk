@@ -1,3 +1,10 @@
+## [0.0.4](https://github.com/IBM/project-python-sdk/compare/v0.0.3...v0.0.4) (2024-03-20)
+
+
+### Bug Fixes
+
+* new code to generate ([340dd65](https://github.com/IBM/project-python-sdk/commit/340dd655fa75f8d6925fbf66817bc2edf860401c))
+
 ## [0.0.3](https://github.com/IBM/project-python-sdk/compare/v0.0.2...v0.0.3) (2024-02-07)
 
 
