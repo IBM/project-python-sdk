@@ -1,3 +1,10 @@
+## [0.0.5](https://github.com/IBM/project-python-sdk/compare/v0.0.4...v0.0.5) (2024-04-03)
+
+
+### Bug Fixes
+
+* new release April ([84c4a2f](https://github.com/IBM/project-python-sdk/commit/84c4a2f5bac7cd485fc57aa0ceb2ed2a90140f41))
+
 ## [0.0.4](https://github.com/IBM/project-python-sdk/compare/v0.0.3...v0.0.4) (2024-03-20)
 
 
