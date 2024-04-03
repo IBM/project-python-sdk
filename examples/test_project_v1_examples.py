@@ -85,7 +85,9 @@ class TestProjectV1Examples:
         """
         try:
             global project_id_link
+
             print('\ncreate_project() result:')
+
             # begin-create_project
 
             project_prototype_definition_model = {
@@ -126,7 +128,9 @@ class TestProjectV1Examples:
         """
         try:
             global config_id_link
+
             print('\ncreate_config() result:')
+
             # begin-create_config
 
             project_config_definition_prototype_model = {
@@ -163,6 +167,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nlist_projects() result:')
+
             # begin-list_projects
 
             all_results = []
@@ -188,6 +193,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nget_project() result:')
+
             # begin-get_project
 
             response = project_service.get_project(
@@ -209,6 +215,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nupdate_project() result:')
+
             # begin-update_project
 
             project_patch_definition_block_model = {
@@ -230,38 +237,13 @@ class TestProjectV1Examples:
             pytest.fail(str(e))
 
     @needscredentials
-    def test_list_project_resources_example(self):
-        """
-        list_project_resources request example
-        """
-        try:
-            print('\nlist_project_resources() result:')
-            # begin-list_project_resources
-
-            all_results = []
-            pager = ProjectResourcesPager(
-                client=project_service,
-                id=project_id_link,
-                limit=10,
-            )
-            while pager.has_next():
-                next_page = pager.get_next()
-                assert next_page is not None
-                all_results.extend(next_page)
-
-            print(json.dumps(all_results, indent=2))
-
-            # end-list_project_resources
-        except ApiException as e:
-            pytest.fail(str(e))
-
-    @needscredentials
     def test_create_project_environment_example(self):
         """
         create_project_environment request example
         """
         try:
             print('\ncreate_project_environment() result:')
+
             # begin-create_project_environment
 
             project_config_auth_model = {
@@ -305,6 +287,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nlist_project_environments() result:')
+
             # begin-list_project_environments
 
             all_results = []
@@ -331,6 +314,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nget_project_environment() result:')
+
             # begin-get_project_environment
 
             response = project_service.get_project_environment(
@@ -353,6 +337,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nupdate_project_environment() result:')
+
             # begin-update_project_environment
 
             project_config_auth_model = {
@@ -397,6 +382,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nlist_configs() result:')
+
             # begin-list_configs
 
             all_results = []
@@ -423,6 +409,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nget_config() result:')
+
             # begin-get_config
 
             response = project_service.get_config(
@@ -445,6 +432,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nupdate_config() result:')
+
             # begin-update_config
 
             project_config_definition_patch_model = {
@@ -479,6 +467,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nforce_approve() result:')
+
             # begin-force_approve
 
             response = project_service.force_approve(
@@ -502,6 +491,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\napprove() result:')
+
             # begin-approve
 
             response = project_service.approve(
@@ -525,6 +515,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nvalidate_config() result:')
+
             # begin-validate_config
 
             response = project_service.validate_config(
@@ -547,6 +538,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\ndeploy_config() result:')
+
             # begin-deploy_config
 
             response = project_service.deploy_config(
@@ -569,6 +561,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nundeploy_config() result:')
+
             # begin-undeploy_config
 
             response = project_service.undeploy_config(
@@ -615,6 +608,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nlist_config_resources() result:')
+
             # begin-list_config_resources
 
             response = project_service.list_config_resources(
@@ -631,12 +625,163 @@ class TestProjectV1Examples:
             pytest.fail(str(e))
 
     @needscredentials
+    def test_create_stack_definition_example(self):
+        """
+        create_stack_definition request example
+        """
+        try:
+            print('\ncreate_stack_definition() result:')
+
+            # begin-create_stack_definition
+
+            stack_definition_input_variable_model = {
+                'name': 'region',
+                'type': 'string',
+                'default': 'us-south',
+                'required': True,
+                'hidden': False,
+            }
+
+            stack_definition_output_variable_model = {
+                'name': 'vpc_cluster_id',
+                'value': 'cluster_id',
+            }
+
+            stack_definition_member_input_prototype_model = {
+                'name': 'region',
+            }
+
+            stack_definition_member_prototype_model = {
+                'name': 'foundation-deployable-architecture',
+                'inputs': [stack_definition_member_input_prototype_model],
+            }
+
+            stack_definition_block_prototype_model = {
+                'inputs': [stack_definition_input_variable_model],
+                'outputs': [stack_definition_output_variable_model],
+                'members': [stack_definition_member_prototype_model],
+            }
+
+            response = project_service.create_stack_definition(
+                project_id=project_id_link,
+                id=config_id_link,
+                stack_definition=stack_definition_block_prototype_model,
+            )
+            stack_definition = response.get_result()
+
+            print(json.dumps(stack_definition, indent=2))
+
+            # end-create_stack_definition
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_get_stack_definition_example(self):
+        """
+        get_stack_definition request example
+        """
+        try:
+            print('\nget_stack_definition() result:')
+
+            # begin-get_stack_definition
+
+            response = project_service.get_stack_definition(
+                project_id=project_id_link,
+                id=config_id_link,
+            )
+            stack_definition = response.get_result()
+
+            print(json.dumps(stack_definition, indent=2))
+
+            # end-get_stack_definition
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_update_stack_definition_example(self):
+        """
+        update_stack_definition request example
+        """
+        try:
+            print('\nupdate_stack_definition() result:')
+
+            # begin-update_stack_definition
+
+            stack_definition_input_variable_model = {
+                'name': 'region',
+                'type': 'string',
+                'default': 'eu-gb',
+                'required': True,
+                'hidden': False,
+            }
+
+            stack_definition_member_input_prototype_model = {
+                'name': 'cluster_name',
+            }
+
+            stack_definition_member_prototype_model = {
+                'name': 'foundation-deployable-architecture',
+                'inputs': [stack_definition_member_input_prototype_model],
+            }
+
+            stack_definition_block_prototype_model = {
+                'inputs': [stack_definition_input_variable_model],
+                'members': [stack_definition_member_prototype_model],
+            }
+
+            response = project_service.update_stack_definition(
+                project_id=project_id_link,
+                id=config_id_link,
+                stack_definition=stack_definition_block_prototype_model,
+            )
+            stack_definition = response.get_result()
+
+            print(json.dumps(stack_definition, indent=2))
+
+            # end-update_stack_definition
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
+    def test_export_stack_definition_example(self):
+        """
+        export_stack_definition request example
+        """
+        try:
+            print('\nexport_stack_definition() result:')
+
+            # begin-export_stack_definition
+
+            stack_definition_export_request_model = {
+                'catalog_id': '01e1a9ad-534b-4ab9-996a-b8f2a8653d5c',
+                'label': 'Stack Deployable Architecture',
+            }
+
+            response = project_service.export_stack_definition(
+                project_id=project_id_link,
+                id=config_id_link,
+                settings=stack_definition_export_request_model,
+            )
+            stack_definition_export_response = response.get_result()
+
+            print(json.dumps(stack_definition_export_response, indent=2))
+
+            # end-export_stack_definition
+
+        except ApiException as e:
+            pytest.fail(str(e))
+
+    @needscredentials
     def test_list_config_versions_example(self):
         """
         list_config_versions request example
         """
         try:
             print('\nlist_config_versions() result:')
+
             # begin-list_config_versions
 
             response = project_service.list_config_versions(
@@ -659,6 +804,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\nget_config_version() result:')
+
             # begin-get_config_version
 
             response = project_service.get_config_version(
@@ -682,6 +828,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\ndelete_project_environment() result:')
+
             # begin-delete_project_environment
 
             response = project_service.delete_project_environment(
@@ -704,6 +851,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\ndelete_config() result:')
+
             # begin-delete_config
 
             response = project_service.delete_config(
@@ -726,6 +874,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\ndelete_config_version() result:')
+
             # begin-delete_config_version
 
             response = project_service.delete_config_version(
@@ -749,6 +898,7 @@ class TestProjectV1Examples:
         """
         try:
             print('\ndelete_project() result:')
+
             # begin-delete_project
 
             response = project_service.delete_project(

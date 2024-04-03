@@ -244,47 +244,6 @@ class TestProjectV1:
         assert project is not None
 
     @needscredentials
-    def test_list_project_resources(self):
-        response = self.project_service.list_project_resources(
-            id=project_id_link,
-            start='testString',
-            limit=10,
-        )
-
-        assert response.get_status_code() == 200
-        project_resource_collection = response.get_result()
-        assert project_resource_collection is not None
-
-    @needscredentials
-    def test_list_project_resources_with_pager(self):
-        all_results = []
-
-        # Test get_next().
-        pager = ProjectResourcesPager(
-            client=self.project_service,
-            id=project_id_link,
-            limit=10,
-        )
-        while pager.has_next():
-            next_page = pager.get_next()
-            assert next_page is not None
-            all_results.extend(next_page)
-
-        # Test get_all().
-        pager = ProjectResourcesPager(
-            client=self.project_service,
-            id=project_id_link,
-            limit=10,
-        )
-        all_items = pager.get_all()
-        assert all_items is not None
-
-        assert len(all_results) == len(all_items)
-        print(
-            f'\nlist_project_resources() returned a total of {len(all_results)} items(s) using ProjectResourcesPager.'
-        )
-
-    @needscredentials
     def test_create_project_environment(self):
         # Construct a dict representation of a ProjectConfigAuth model
         project_config_auth_model = {
@@ -581,6 +540,122 @@ class TestProjectV1:
         assert response.get_status_code() == 200
         project_config_resource_collection = response.get_result()
         assert project_config_resource_collection is not None
+
+    @needscredentials
+    def test_create_stack_definition(self):
+        # Construct a dict representation of a StackDefinitionInputVariable model
+        stack_definition_input_variable_model = {
+            'name': 'region',
+            'type': 'string',
+            'description': 'testString',
+            'default': 'us-south',
+            'required': True,
+            'hidden': False,
+        }
+        # Construct a dict representation of a StackDefinitionOutputVariable model
+        stack_definition_output_variable_model = {
+            'name': 'vpc_cluster_id',
+            'value': 'cluster_id',
+        }
+        # Construct a dict representation of a StackDefinitionMemberInputPrototype model
+        stack_definition_member_input_prototype_model = {
+            'name': 'region',
+        }
+        # Construct a dict representation of a StackDefinitionMemberPrototype model
+        stack_definition_member_prototype_model = {
+            'name': 'foundation-deployable-architecture',
+            'inputs': [stack_definition_member_input_prototype_model],
+        }
+        # Construct a dict representation of a StackDefinitionBlockPrototype model
+        stack_definition_block_prototype_model = {
+            'inputs': [stack_definition_input_variable_model],
+            'outputs': [stack_definition_output_variable_model],
+            'members': [stack_definition_member_prototype_model],
+        }
+
+        response = self.project_service.create_stack_definition(
+            project_id=project_id_link,
+            id=config_id_link,
+            stack_definition=stack_definition_block_prototype_model,
+        )
+
+        assert response.get_status_code() == 201
+        stack_definition = response.get_result()
+        assert stack_definition is not None
+
+    @needscredentials
+    def test_get_stack_definition(self):
+        response = self.project_service.get_stack_definition(
+            project_id=project_id_link,
+            id=config_id_link,
+        )
+
+        assert response.get_status_code() == 200
+        stack_definition = response.get_result()
+        assert stack_definition is not None
+
+    @needscredentials
+    def test_update_stack_definition(self):
+        # Construct a dict representation of a StackDefinitionInputVariable model
+        stack_definition_input_variable_model = {
+            'name': 'region',
+            'type': 'string',
+            'description': 'testString',
+            'default': 'eu-gb',
+            'required': True,
+            'hidden': False,
+        }
+        # Construct a dict representation of a StackDefinitionOutputVariable model
+        stack_definition_output_variable_model = {
+            'name': 'testString',
+            'value': 'testString',
+        }
+        # Construct a dict representation of a StackDefinitionMemberInputPrototype model
+        stack_definition_member_input_prototype_model = {
+            'name': 'cluster_name',
+        }
+        # Construct a dict representation of a StackDefinitionMemberPrototype model
+        stack_definition_member_prototype_model = {
+            'name': 'foundation-deployable-architecture',
+            'inputs': [stack_definition_member_input_prototype_model],
+        }
+        # Construct a dict representation of a StackDefinitionBlockPrototype model
+        stack_definition_block_prototype_model = {
+            'inputs': [stack_definition_input_variable_model],
+            'outputs': [stack_definition_output_variable_model],
+            'members': [stack_definition_member_prototype_model],
+        }
+
+        response = self.project_service.update_stack_definition(
+            project_id=project_id_link,
+            id=config_id_link,
+            stack_definition=stack_definition_block_prototype_model,
+        )
+
+        assert response.get_status_code() == 200
+        stack_definition = response.get_result()
+        assert stack_definition is not None
+
+    @needscredentials
+    def test_export_stack_definition(self):
+        # Construct a dict representation of a StackDefinitionExportRequestStackDefinitionExportCatalogRequest model
+        stack_definition_export_request_model = {
+            'catalog_id': '01e1a9ad-534b-4ab9-996a-b8f2a8653d5c',
+            'target_version': 'testString',
+            'variation': 'testString',
+            'label': 'Stack Deployable Architecture',
+            'tags': ['testString'],
+        }
+
+        response = self.project_service.export_stack_definition(
+            project_id=project_id_link,
+            id=config_id_link,
+            settings=stack_definition_export_request_model,
+        )
+
+        assert response.get_status_code() == 200
+        stack_definition_export_response = response.get_result()
+        assert stack_definition_export_response is not None
 
     @needscredentials
     def test_list_config_versions(self):
