@@ -4065,6 +4065,100 @@ class LastValidatedActionWithSummary:
         PASSED = 'passed'
 
 
+class MemberOfDefinition:
+    """
+    The stack config parent of which this configuration is a member of.
+
+    :param str id: The unique ID.
+    :param StackConfigDefinitionSummary definition: The definition summary of the
+          stack configuration.
+    :param int version: The version of the stack configuration.
+    :param str href: A URL.
+    """
+
+    def __init__(
+        self,
+        id: str,
+        definition: 'StackConfigDefinitionSummary',
+        version: int,
+        href: str,
+    ) -> None:
+        """
+        Initialize a MemberOfDefinition object.
+
+        :param str id: The unique ID.
+        :param StackConfigDefinitionSummary definition: The definition summary of
+               the stack configuration.
+        :param int version: The version of the stack configuration.
+        :param str href: A URL.
+        """
+        self.id = id
+        self.definition = definition
+        self.version = version
+        self.href = href
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'MemberOfDefinition':
+        """Initialize a MemberOfDefinition object from a json dictionary."""
+        args = {}
+        if (id := _dict.get('id')) is not None:
+            args['id'] = id
+        else:
+            raise ValueError('Required property \'id\' not present in MemberOfDefinition JSON')
+        if (definition := _dict.get('definition')) is not None:
+            args['definition'] = StackConfigDefinitionSummary.from_dict(definition)
+        else:
+            raise ValueError('Required property \'definition\' not present in MemberOfDefinition JSON')
+        if (version := _dict.get('version')) is not None:
+            args['version'] = version
+        else:
+            raise ValueError('Required property \'version\' not present in MemberOfDefinition JSON')
+        if (href := _dict.get('href')) is not None:
+            args['href'] = href
+        else:
+            raise ValueError('Required property \'href\' not present in MemberOfDefinition JSON')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a MemberOfDefinition object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'id') and self.id is not None:
+            _dict['id'] = self.id
+        if hasattr(self, 'definition') and self.definition is not None:
+            if isinstance(self.definition, dict):
+                _dict['definition'] = self.definition
+            else:
+                _dict['definition'] = self.definition.to_dict()
+        if hasattr(self, 'version') and self.version is not None:
+            _dict['version'] = self.version
+        if hasattr(self, 'href') and self.href is not None:
+            _dict['href'] = self.href
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this MemberOfDefinition object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'MemberOfDefinition') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'MemberOfDefinition') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
 class OutputValue:
     """
     OutputValue.
@@ -5014,8 +5108,13 @@ class ProjectConfig:
     :param str state: The state of the configuration.
     :param bool update_available: (optional) The flag that indicates whether a
           configuration update is available.
-    :param ProjectObjectReference template: (optional) The template reference.
+    :param str template_id: (optional) The stack definition identifier.
+    :param MemberOfDefinition member_of: (optional) The stack config parent of which
+          this configuration is a member of.
     :param str href: A URL.
+    :param str deployment_model: (optional) The configuration type.
+    :param str state_code: (optional) Computed state code clarifying the
+          prerequisites for validation for the configuration.
     :param ProjectConfigDefinitionResponse definition:
     :param ProjectConfigVersionSummary approved_version: (optional) A summary of a
           project configuration version.
@@ -5046,7 +5145,10 @@ class ProjectConfig:
         references: Optional[dict] = None,
         schematics: Optional['SchematicsMetadata'] = None,
         update_available: Optional[bool] = None,
-        template: Optional['ProjectObjectReference'] = None,
+        template_id: Optional[str] = None,
+        member_of: Optional['MemberOfDefinition'] = None,
+        deployment_model: Optional[str] = None,
+        state_code: Optional[str] = None,
         approved_version: Optional['ProjectConfigVersionSummary'] = None,
         deployed_version: Optional['ProjectConfigVersionSummary'] = None,
     ) -> None:
@@ -5095,7 +5197,12 @@ class ProjectConfig:
                that is associated to a project configuration, with scripts.
         :param bool update_available: (optional) The flag that indicates whether a
                configuration update is available.
-        :param ProjectObjectReference template: (optional) The template reference.
+        :param str template_id: (optional) The stack definition identifier.
+        :param MemberOfDefinition member_of: (optional) The stack config parent of
+               which this configuration is a member of.
+        :param str deployment_model: (optional) The configuration type.
+        :param str state_code: (optional) Computed state code clarifying the
+               prerequisites for validation for the configuration.
         :param ProjectConfigVersionSummary approved_version: (optional) A summary
                of a project configuration version.
         :param ProjectConfigVersionSummary deployed_version: (optional) A summary
@@ -5119,8 +5226,11 @@ class ProjectConfig:
         self.schematics = schematics
         self.state = state
         self.update_available = update_available
-        self.template = template
+        self.template_id = template_id
+        self.member_of = member_of
         self.href = href
+        self.deployment_model = deployment_model
+        self.state_code = state_code
         self.definition = definition
         self.approved_version = approved_version
         self.deployed_version = deployed_version
@@ -5185,12 +5295,18 @@ class ProjectConfig:
             raise ValueError('Required property \'state\' not present in ProjectConfig JSON')
         if (update_available := _dict.get('update_available')) is not None:
             args['update_available'] = update_available
-        if (template := _dict.get('template')) is not None:
-            args['template'] = ProjectObjectReference.from_dict(template)
+        if (template_id := _dict.get('template_id')) is not None:
+            args['template_id'] = template_id
+        if (member_of := _dict.get('member_of')) is not None:
+            args['member_of'] = MemberOfDefinition.from_dict(member_of)
         if (href := _dict.get('href')) is not None:
             args['href'] = href
         else:
             raise ValueError('Required property \'href\' not present in ProjectConfig JSON')
+        if (deployment_model := _dict.get('deployment_model')) is not None:
+            args['deployment_model'] = deployment_model
+        if (state_code := _dict.get('state_code')) is not None:
+            args['state_code'] = state_code
         if (definition := _dict.get('definition')) is not None:
             args['definition'] = definition
         else:
@@ -5278,13 +5394,19 @@ class ProjectConfig:
             _dict['state'] = self.state
         if hasattr(self, 'update_available') and self.update_available is not None:
             _dict['update_available'] = self.update_available
-        if hasattr(self, 'template') and self.template is not None:
-            if isinstance(self.template, dict):
-                _dict['template'] = self.template
+        if hasattr(self, 'template_id') and self.template_id is not None:
+            _dict['template_id'] = self.template_id
+        if hasattr(self, 'member_of') and self.member_of is not None:
+            if isinstance(self.member_of, dict):
+                _dict['member_of'] = self.member_of
             else:
-                _dict['template'] = self.template.to_dict()
+                _dict['member_of'] = self.member_of.to_dict()
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
+        if hasattr(self, 'deployment_model') and self.deployment_model is not None:
+            _dict['deployment_model'] = self.deployment_model
+        if hasattr(self, 'state_code') and self.state_code is not None:
+            _dict['state_code'] = self.state_code
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -5342,6 +5464,26 @@ class ProjectConfig:
         VALIDATING_FAILED = 'validating_failed'
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
+
+    class DeploymentModelEnum(str, Enum):
+        """
+        The configuration type.
+        """
+
+        PROJECT_DEPLOYED = 'project_deployed'
+        USER_DEPLOYED = 'user_deployed'
+        STACK = 'stack'
+
+    class StateCodeEnum(str, Enum):
+        """
+        Computed state code clarifying the prerequisites for validation for the
+        configuration.
+        """
+
+        AWAITING_INPUT = 'awaiting_input'
+        AWAITING_PREREQUISITE = 'awaiting_prerequisite'
+        AWAITING_VALIDATION = 'awaiting_validation'
+        AWAITING_MEMBER_DEPLOYMENT = 'awaiting_member_deployment'
 
 
 class ProjectConfigAuth:
@@ -5552,6 +5694,7 @@ class ProjectConfigDefinitionPatch:
                 [
                     'ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch',
                     'ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch',
+                    'ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch',
                 ]
             )
         )
@@ -6725,8 +6868,13 @@ class ProjectConfigVersion:
     :param str state: The state of the configuration.
     :param bool update_available: (optional) The flag that indicates whether a
           configuration update is available.
-    :param ProjectObjectReference template: (optional) The template reference.
+    :param str template_id: (optional) The stack definition identifier.
+    :param MemberOfDefinition member_of: (optional) The stack config parent of which
+          this configuration is a member of.
     :param str href: A URL.
+    :param str deployment_model: (optional) The configuration type.
+    :param str state_code: (optional) Computed state code clarifying the
+          prerequisites for validation for the configuration.
     :param ProjectConfigDefinitionResponse definition:
     """
 
@@ -6753,7 +6901,10 @@ class ProjectConfigVersion:
         references: Optional[dict] = None,
         schematics: Optional['SchematicsMetadata'] = None,
         update_available: Optional[bool] = None,
-        template: Optional['ProjectObjectReference'] = None,
+        template_id: Optional[str] = None,
+        member_of: Optional['MemberOfDefinition'] = None,
+        deployment_model: Optional[str] = None,
+        state_code: Optional[str] = None,
     ) -> None:
         """
         Initialize a ProjectConfigVersion object.
@@ -6800,7 +6951,12 @@ class ProjectConfigVersion:
                that is associated to a project configuration, with scripts.
         :param bool update_available: (optional) The flag that indicates whether a
                configuration update is available.
-        :param ProjectObjectReference template: (optional) The template reference.
+        :param str template_id: (optional) The stack definition identifier.
+        :param MemberOfDefinition member_of: (optional) The stack config parent of
+               which this configuration is a member of.
+        :param str deployment_model: (optional) The configuration type.
+        :param str state_code: (optional) Computed state code clarifying the
+               prerequisites for validation for the configuration.
         """
         self.id = id
         self.version = version
@@ -6820,8 +6976,11 @@ class ProjectConfigVersion:
         self.schematics = schematics
         self.state = state
         self.update_available = update_available
-        self.template = template
+        self.template_id = template_id
+        self.member_of = member_of
         self.href = href
+        self.deployment_model = deployment_model
+        self.state_code = state_code
         self.definition = definition
 
     @classmethod
@@ -6884,12 +7043,18 @@ class ProjectConfigVersion:
             raise ValueError('Required property \'state\' not present in ProjectConfigVersion JSON')
         if (update_available := _dict.get('update_available')) is not None:
             args['update_available'] = update_available
-        if (template := _dict.get('template')) is not None:
-            args['template'] = ProjectObjectReference.from_dict(template)
+        if (template_id := _dict.get('template_id')) is not None:
+            args['template_id'] = template_id
+        if (member_of := _dict.get('member_of')) is not None:
+            args['member_of'] = MemberOfDefinition.from_dict(member_of)
         if (href := _dict.get('href')) is not None:
             args['href'] = href
         else:
             raise ValueError('Required property \'href\' not present in ProjectConfigVersion JSON')
+        if (deployment_model := _dict.get('deployment_model')) is not None:
+            args['deployment_model'] = deployment_model
+        if (state_code := _dict.get('state_code')) is not None:
+            args['state_code'] = state_code
         if (definition := _dict.get('definition')) is not None:
             args['definition'] = definition
         else:
@@ -6973,13 +7138,19 @@ class ProjectConfigVersion:
             _dict['state'] = self.state
         if hasattr(self, 'update_available') and self.update_available is not None:
             _dict['update_available'] = self.update_available
-        if hasattr(self, 'template') and self.template is not None:
-            if isinstance(self.template, dict):
-                _dict['template'] = self.template
+        if hasattr(self, 'template_id') and self.template_id is not None:
+            _dict['template_id'] = self.template_id
+        if hasattr(self, 'member_of') and self.member_of is not None:
+            if isinstance(self.member_of, dict):
+                _dict['member_of'] = self.member_of
             else:
-                _dict['template'] = self.template.to_dict()
+                _dict['member_of'] = self.member_of.to_dict()
         if hasattr(self, 'href') and self.href is not None:
             _dict['href'] = self.href
+        if hasattr(self, 'deployment_model') and self.deployment_model is not None:
+            _dict['deployment_model'] = self.deployment_model
+        if hasattr(self, 'state_code') and self.state_code is not None:
+            _dict['state_code'] = self.state_code
         if hasattr(self, 'definition') and self.definition is not None:
             if isinstance(self.definition, dict):
                 _dict['definition'] = self.definition
@@ -7027,6 +7198,26 @@ class ProjectConfigVersion:
         VALIDATING_FAILED = 'validating_failed'
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
+
+    class DeploymentModelEnum(str, Enum):
+        """
+        The configuration type.
+        """
+
+        PROJECT_DEPLOYED = 'project_deployed'
+        USER_DEPLOYED = 'user_deployed'
+        STACK = 'stack'
+
+    class StateCodeEnum(str, Enum):
+        """
+        Computed state code clarifying the prerequisites for validation for the
+        configuration.
+        """
+
+        AWAITING_INPUT = 'awaiting_input'
+        AWAITING_PREREQUISITE = 'awaiting_prerequisite'
+        AWAITING_VALIDATION = 'awaiting_validation'
+        AWAITING_MEMBER_DEPLOYMENT = 'awaiting_member_deployment'
 
 
 class ProjectConfigVersionDefinitionSummary:
@@ -7712,75 +7903,6 @@ class ProjectEnvironmentSummaryDefinition:
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: 'ProjectEnvironmentSummaryDefinition') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
-
-
-class ProjectObjectReference:
-    """
-    ProjectObjectReference.
-
-    :param str id: The unique ID.
-    :param str href: A URL.
-    """
-
-    def __init__(
-        self,
-        id: str,
-        href: str,
-    ) -> None:
-        """
-        Initialize a ProjectObjectReference object.
-
-        :param str id: The unique ID.
-        :param str href: A URL.
-        """
-        self.id = id
-        self.href = href
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'ProjectObjectReference':
-        """Initialize a ProjectObjectReference object from a json dictionary."""
-        args = {}
-        if (id := _dict.get('id')) is not None:
-            args['id'] = id
-        else:
-            raise ValueError('Required property \'id\' not present in ProjectObjectReference JSON')
-        if (href := _dict.get('href')) is not None:
-            args['href'] = href
-        else:
-            raise ValueError('Required property \'href\' not present in ProjectObjectReference JSON')
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a ProjectObjectReference object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'id') and self.id is not None:
-            _dict['id'] = self.id
-        if hasattr(self, 'href') and self.href is not None:
-            _dict['href'] = self.href
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this ProjectObjectReference object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'ProjectObjectReference') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'ProjectObjectReference') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -8557,6 +8679,85 @@ class Script:
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: 'Script') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class StackConfigDefinitionSummary:
+    """
+    The definition summary of the stack configuration.
+
+    :param str name: The configuration name. It's unique within the account across
+          projects and regions.
+    :param List[StackConfigMember] members: The member deployabe architectures that
+          are included in your stack.
+    """
+
+    def __init__(
+        self,
+        name: str,
+        members: List['StackConfigMember'],
+    ) -> None:
+        """
+        Initialize a StackConfigDefinitionSummary object.
+
+        :param str name: The configuration name. It's unique within the account
+               across projects and regions.
+        :param List[StackConfigMember] members: The member deployabe architectures
+               that are included in your stack.
+        """
+        self.name = name
+        self.members = members
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'StackConfigDefinitionSummary':
+        """Initialize a StackConfigDefinitionSummary object from a json dictionary."""
+        args = {}
+        if (name := _dict.get('name')) is not None:
+            args['name'] = name
+        else:
+            raise ValueError('Required property \'name\' not present in StackConfigDefinitionSummary JSON')
+        if (members := _dict.get('members')) is not None:
+            args['members'] = [StackConfigMember.from_dict(v) for v in members]
+        else:
+            raise ValueError('Required property \'members\' not present in StackConfigDefinitionSummary JSON')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a StackConfigDefinitionSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'members') and self.members is not None:
+            members_list = []
+            for v in self.members:
+                if isinstance(v, dict):
+                    members_list.append(v)
+                else:
+                    members_list.append(v.to_dict())
+            _dict['members'] = members_list
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this StackConfigDefinitionSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'StackConfigDefinitionSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'StackConfigDefinitionSummary') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -10097,6 +10298,188 @@ class ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch(Projec
         return not self == other
 
 
+class ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch(ProjectConfigDefinitionPatch):
+    """
+    The name and description of a project configuration.
+
+    :param ProjectComplianceProfile compliance_profile: (optional) The profile that
+          is required for compliance.
+    :param str locator_id: (optional) A unique concatenation of the catalog ID and
+          the version ID that identify the deployable architecture in the catalog. I
+          you're importing from an existing Schematics workspace that is not backed by
+          cart, a `locator_id` is required. If you're using a Schematics workspace that is
+          backed by cart, a `locator_id` is not necessary because the Schematics workspace
+          has one.
+          > There are 3 scenarios:
+          > 1. If only a `locator_id` is specified, a new Schematics workspace is
+          instantiated with that `locator_id`.
+          > 2. If only a schematics `workspace_crn` is specified, a `400` is returned if a
+          `locator_id` is not found in the existing schematics workspace.
+          > 3. If both a Schematics `workspace_crn` and a `locator_id` are specified, a
+          `400` message is returned if the specified `locator_id` does not agree with the
+          `locator_id` in the existing Schematics workspace.
+          > For more information of creating a Schematics workspace, see [Creating
+          workspaces and importing your Terraform
+          template](/docs/schematics?topic=schematics-sch-create-wks).
+    :param List[StackConfigMember] members: (optional) The member deployabe
+          architectures that are included in your stack.
+    :param str description: (optional) A project configuration description.
+    :param str name: (optional) The configuration name. It's unique within the
+          account across projects and regions.
+    :param str environment_id: (optional) The ID of the project environment.
+    :param ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :param dict inputs: (optional) The input variables that are used for
+          configuration definition and environment.
+    :param dict settings: (optional) The Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they are specified when
+          the configuration is initially created.
+    """
+
+    def __init__(
+        self,
+        *,
+        compliance_profile: Optional['ProjectComplianceProfile'] = None,
+        locator_id: Optional[str] = None,
+        members: Optional[List['StackConfigMember']] = None,
+        description: Optional[str] = None,
+        name: Optional[str] = None,
+        environment_id: Optional[str] = None,
+        authorizations: Optional['ProjectConfigAuth'] = None,
+        inputs: Optional[dict] = None,
+        settings: Optional[dict] = None,
+    ) -> None:
+        """
+        Initialize a ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch object.
+
+        :param ProjectComplianceProfile compliance_profile: (optional) The profile
+               that is required for compliance.
+        :param str locator_id: (optional) A unique concatenation of the catalog ID
+               and the version ID that identify the deployable architecture in the
+               catalog. I you're importing from an existing Schematics workspace that is
+               not backed by cart, a `locator_id` is required. If you're using a
+               Schematics workspace that is backed by cart, a `locator_id` is not
+               necessary because the Schematics workspace has one.
+               > There are 3 scenarios:
+               > 1. If only a `locator_id` is specified, a new Schematics workspace is
+               instantiated with that `locator_id`.
+               > 2. If only a schematics `workspace_crn` is specified, a `400` is returned
+               if a `locator_id` is not found in the existing schematics workspace.
+               > 3. If both a Schematics `workspace_crn` and a `locator_id` are specified,
+               a `400` message is returned if the specified `locator_id` does not agree
+               with the `locator_id` in the existing Schematics workspace.
+               > For more information of creating a Schematics workspace, see [Creating
+               workspaces and importing your Terraform
+               template](/docs/schematics?topic=schematics-sch-create-wks).
+        :param List[StackConfigMember] members: (optional) The member deployabe
+               architectures that are included in your stack.
+        :param str description: (optional) A project configuration description.
+        :param str name: (optional) The configuration name. It's unique within the
+               account across projects and regions.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables that are used for
+               configuration definition and environment.
+        :param dict settings: (optional) The Schematics environment variables to
+               use to deploy the configuration. Settings are only available if they are
+               specified when the configuration is initially created.
+        """
+        # pylint: disable=super-init-not-called
+        self.compliance_profile = compliance_profile
+        self.locator_id = locator_id
+        self.members = members
+        self.description = description
+        self.name = name
+        self.environment_id = environment_id
+        self.authorizations = authorizations
+        self.inputs = inputs
+        self.settings = settings
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch':
+        """Initialize a ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch object from a json dictionary."""
+        args = {}
+        if (compliance_profile := _dict.get('compliance_profile')) is not None:
+            args['compliance_profile'] = ProjectComplianceProfile.from_dict(compliance_profile)
+        if (locator_id := _dict.get('locator_id')) is not None:
+            args['locator_id'] = locator_id
+        if (members := _dict.get('members')) is not None:
+            args['members'] = [StackConfigMember.from_dict(v) for v in members]
+        if (description := _dict.get('description')) is not None:
+            args['description'] = description
+        if (name := _dict.get('name')) is not None:
+            args['name'] = name
+        if (environment_id := _dict.get('environment_id')) is not None:
+            args['environment_id'] = environment_id
+        if (authorizations := _dict.get('authorizations')) is not None:
+            args['authorizations'] = ProjectConfigAuth.from_dict(authorizations)
+        if (inputs := _dict.get('inputs')) is not None:
+            args['inputs'] = inputs
+        if (settings := _dict.get('settings')) is not None:
+            args['settings'] = settings
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
+            if isinstance(self.compliance_profile, dict):
+                _dict['compliance_profile'] = self.compliance_profile
+            else:
+                _dict['compliance_profile'] = self.compliance_profile.to_dict()
+        if hasattr(self, 'locator_id') and self.locator_id is not None:
+            _dict['locator_id'] = self.locator_id
+        if hasattr(self, 'members') and self.members is not None:
+            members_list = []
+            for v in self.members:
+                if isinstance(v, dict):
+                    members_list.append(v)
+                else:
+                    members_list.append(v.to_dict())
+            _dict['members'] = members_list
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
 class ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype(ProjectConfigDefinitionPrototype):
     """
     The description of a project configuration.
@@ -10398,9 +10781,8 @@ class ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(ProjectCon
     """
     The description of a project configuration.
 
-    :param str description: (optional) A project configuration description.
-    :param str name: (optional) The configuration name. It's unique within the
-          account across projects and regions.
+    :param ProjectComplianceProfile compliance_profile: (optional) The profile that
+          is required for compliance.
     :param str locator_id: (optional) A unique concatenation of the catalog ID and
           the version ID that identify the deployable architecture in the catalog. I
           you're importing from an existing Schematics workspace that is not backed by
@@ -10418,29 +10800,41 @@ class ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(ProjectCon
           > For more information of creating a Schematics workspace, see [Creating
           workspaces and importing your Terraform
           template](/docs/schematics?topic=schematics-sch-create-wks).
-    :param str environment_id: (optional) The ID of the project environment.
-    :param dict inputs: (optional) The input variables that are used for
-          configuration definition and environment.
     :param List[StackConfigMember] members: (optional) The member deployabe
           architectures that are included in your stack.
+    :param str description: (optional) A project configuration description.
+    :param str name: The configuration name. It's unique within the account across
+          projects and regions.
+    :param str environment_id: (optional) The ID of the project environment.
+    :param ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :param dict inputs: (optional) The input variables that are used for
+          configuration definition and environment.
+    :param dict settings: (optional) The Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they are specified when
+          the configuration is initially created.
     """
 
     def __init__(
         self,
+        name: str,
         *,
-        description: Optional[str] = None,
-        name: Optional[str] = None,
+        compliance_profile: Optional['ProjectComplianceProfile'] = None,
         locator_id: Optional[str] = None,
-        environment_id: Optional[str] = None,
-        inputs: Optional[dict] = None,
         members: Optional[List['StackConfigMember']] = None,
+        description: Optional[str] = None,
+        environment_id: Optional[str] = None,
+        authorizations: Optional['ProjectConfigAuth'] = None,
+        inputs: Optional[dict] = None,
+        settings: Optional[dict] = None,
     ) -> None:
         """
         Initialize a ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties object.
 
-        :param str description: (optional) A project configuration description.
-        :param str name: (optional) The configuration name. It's unique within the
-               account across projects and regions.
+        :param str name: The configuration name. It's unique within the account
+               across projects and regions.
+        :param ProjectComplianceProfile compliance_profile: (optional) The profile
+               that is required for compliance.
         :param str locator_id: (optional) A unique concatenation of the catalog ID
                and the version ID that identify the deployable architecture in the
                catalog. I you're importing from an existing Schematics workspace that is
@@ -10458,36 +10852,56 @@ class ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(ProjectCon
                > For more information of creating a Schematics workspace, see [Creating
                workspaces and importing your Terraform
                template](/docs/schematics?topic=schematics-sch-create-wks).
-        :param str environment_id: (optional) The ID of the project environment.
-        :param dict inputs: (optional) The input variables that are used for
-               configuration definition and environment.
         :param List[StackConfigMember] members: (optional) The member deployabe
                architectures that are included in your stack.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables that are used for
+               configuration definition and environment.
+        :param dict settings: (optional) The Schematics environment variables to
+               use to deploy the configuration. Settings are only available if they are
+               specified when the configuration is initially created.
         """
         # pylint: disable=super-init-not-called
+        self.compliance_profile = compliance_profile
+        self.locator_id = locator_id
+        self.members = members
         self.description = description
         self.name = name
-        self.locator_id = locator_id
         self.environment_id = environment_id
+        self.authorizations = authorizations
         self.inputs = inputs
-        self.members = members
+        self.settings = settings
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties':
         """Initialize a ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties object from a json dictionary."""
         args = {}
+        if (compliance_profile := _dict.get('compliance_profile')) is not None:
+            args['compliance_profile'] = ProjectComplianceProfile.from_dict(compliance_profile)
+        if (locator_id := _dict.get('locator_id')) is not None:
+            args['locator_id'] = locator_id
+        if (members := _dict.get('members')) is not None:
+            args['members'] = [StackConfigMember.from_dict(v) for v in members]
         if (description := _dict.get('description')) is not None:
             args['description'] = description
         if (name := _dict.get('name')) is not None:
             args['name'] = name
-        if (locator_id := _dict.get('locator_id')) is not None:
-            args['locator_id'] = locator_id
+        else:
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
+        if (authorizations := _dict.get('authorizations')) is not None:
+            args['authorizations'] = ProjectConfigAuth.from_dict(authorizations)
         if (inputs := _dict.get('inputs')) is not None:
             args['inputs'] = inputs
-        if (members := _dict.get('members')) is not None:
-            args['members'] = [StackConfigMember.from_dict(v) for v in members]
+        if (settings := _dict.get('settings')) is not None:
+            args['settings'] = settings
         return cls(**args)
 
     @classmethod
@@ -10498,16 +10912,13 @@ class ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(ProjectCon
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'description') and self.description is not None:
-            _dict['description'] = self.description
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
+        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
+            if isinstance(self.compliance_profile, dict):
+                _dict['compliance_profile'] = self.compliance_profile
+            else:
+                _dict['compliance_profile'] = self.compliance_profile.to_dict()
         if hasattr(self, 'locator_id') and self.locator_id is not None:
             _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'environment_id') and self.environment_id is not None:
-            _dict['environment_id'] = self.environment_id
-        if hasattr(self, 'inputs') and self.inputs is not None:
-            _dict['inputs'] = self.inputs
         if hasattr(self, 'members') and self.members is not None:
             members_list = []
             for v in self.members:
@@ -10516,6 +10927,21 @@ class ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(ProjectCon
                 else:
                     members_list.append(v.to_dict())
             _dict['members'] = members_list
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
         return _dict
 
     def _to_dict(self):
@@ -10846,9 +11272,8 @@ class ProjectConfigDefinitionResponseStackConfigDefinitionProperties(ProjectConf
     """
     The description of a project configuration.
 
-    :param str description: (optional) A project configuration description.
-    :param str name: (optional) The configuration name. It's unique within the
-          account across projects and regions.
+    :param ProjectComplianceProfile compliance_profile: (optional) The profile that
+          is required for compliance.
     :param str locator_id: (optional) A unique concatenation of the catalog ID and
           the version ID that identify the deployable architecture in the catalog. I
           you're importing from an existing Schematics workspace that is not backed by
@@ -10866,29 +11291,41 @@ class ProjectConfigDefinitionResponseStackConfigDefinitionProperties(ProjectConf
           > For more information of creating a Schematics workspace, see [Creating
           workspaces and importing your Terraform
           template](/docs/schematics?topic=schematics-sch-create-wks).
-    :param str environment_id: (optional) The ID of the project environment.
-    :param dict inputs: (optional) The input variables that are used for
-          configuration definition and environment.
     :param List[StackConfigMember] members: (optional) The member deployabe
           architectures that are included in your stack.
+    :param str description: (optional) A project configuration description.
+    :param str name: The configuration name. It's unique within the account across
+          projects and regions.
+    :param str environment_id: (optional) The ID of the project environment.
+    :param ProjectConfigAuth authorizations: (optional) The authorization details.
+          You can authorize by using a trusted profile or an API key in Secrets Manager.
+    :param dict inputs: (optional) The input variables that are used for
+          configuration definition and environment.
+    :param dict settings: (optional) The Schematics environment variables to use to
+          deploy the configuration. Settings are only available if they are specified when
+          the configuration is initially created.
     """
 
     def __init__(
         self,
+        name: str,
         *,
-        description: Optional[str] = None,
-        name: Optional[str] = None,
+        compliance_profile: Optional['ProjectComplianceProfile'] = None,
         locator_id: Optional[str] = None,
-        environment_id: Optional[str] = None,
-        inputs: Optional[dict] = None,
         members: Optional[List['StackConfigMember']] = None,
+        description: Optional[str] = None,
+        environment_id: Optional[str] = None,
+        authorizations: Optional['ProjectConfigAuth'] = None,
+        inputs: Optional[dict] = None,
+        settings: Optional[dict] = None,
     ) -> None:
         """
         Initialize a ProjectConfigDefinitionResponseStackConfigDefinitionProperties object.
 
-        :param str description: (optional) A project configuration description.
-        :param str name: (optional) The configuration name. It's unique within the
-               account across projects and regions.
+        :param str name: The configuration name. It's unique within the account
+               across projects and regions.
+        :param ProjectComplianceProfile compliance_profile: (optional) The profile
+               that is required for compliance.
         :param str locator_id: (optional) A unique concatenation of the catalog ID
                and the version ID that identify the deployable architecture in the
                catalog. I you're importing from an existing Schematics workspace that is
@@ -10906,36 +11343,56 @@ class ProjectConfigDefinitionResponseStackConfigDefinitionProperties(ProjectConf
                > For more information of creating a Schematics workspace, see [Creating
                workspaces and importing your Terraform
                template](/docs/schematics?topic=schematics-sch-create-wks).
-        :param str environment_id: (optional) The ID of the project environment.
-        :param dict inputs: (optional) The input variables that are used for
-               configuration definition and environment.
         :param List[StackConfigMember] members: (optional) The member deployabe
                architectures that are included in your stack.
+        :param str description: (optional) A project configuration description.
+        :param str environment_id: (optional) The ID of the project environment.
+        :param ProjectConfigAuth authorizations: (optional) The authorization
+               details. You can authorize by using a trusted profile or an API key in
+               Secrets Manager.
+        :param dict inputs: (optional) The input variables that are used for
+               configuration definition and environment.
+        :param dict settings: (optional) The Schematics environment variables to
+               use to deploy the configuration. Settings are only available if they are
+               specified when the configuration is initially created.
         """
         # pylint: disable=super-init-not-called
+        self.compliance_profile = compliance_profile
+        self.locator_id = locator_id
+        self.members = members
         self.description = description
         self.name = name
-        self.locator_id = locator_id
         self.environment_id = environment_id
+        self.authorizations = authorizations
         self.inputs = inputs
-        self.members = members
+        self.settings = settings
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'ProjectConfigDefinitionResponseStackConfigDefinitionProperties':
         """Initialize a ProjectConfigDefinitionResponseStackConfigDefinitionProperties object from a json dictionary."""
         args = {}
+        if (compliance_profile := _dict.get('compliance_profile')) is not None:
+            args['compliance_profile'] = ProjectComplianceProfile.from_dict(compliance_profile)
+        if (locator_id := _dict.get('locator_id')) is not None:
+            args['locator_id'] = locator_id
+        if (members := _dict.get('members')) is not None:
+            args['members'] = [StackConfigMember.from_dict(v) for v in members]
         if (description := _dict.get('description')) is not None:
             args['description'] = description
         if (name := _dict.get('name')) is not None:
             args['name'] = name
-        if (locator_id := _dict.get('locator_id')) is not None:
-            args['locator_id'] = locator_id
+        else:
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionResponseStackConfigDefinitionProperties JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
+        if (authorizations := _dict.get('authorizations')) is not None:
+            args['authorizations'] = ProjectConfigAuth.from_dict(authorizations)
         if (inputs := _dict.get('inputs')) is not None:
             args['inputs'] = inputs
-        if (members := _dict.get('members')) is not None:
-            args['members'] = [StackConfigMember.from_dict(v) for v in members]
+        if (settings := _dict.get('settings')) is not None:
+            args['settings'] = settings
         return cls(**args)
 
     @classmethod
@@ -10946,16 +11403,13 @@ class ProjectConfigDefinitionResponseStackConfigDefinitionProperties(ProjectConf
     def to_dict(self) -> Dict:
         """Return a json dictionary representing this model."""
         _dict = {}
-        if hasattr(self, 'description') and self.description is not None:
-            _dict['description'] = self.description
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
+        if hasattr(self, 'compliance_profile') and self.compliance_profile is not None:
+            if isinstance(self.compliance_profile, dict):
+                _dict['compliance_profile'] = self.compliance_profile
+            else:
+                _dict['compliance_profile'] = self.compliance_profile.to_dict()
         if hasattr(self, 'locator_id') and self.locator_id is not None:
             _dict['locator_id'] = self.locator_id
-        if hasattr(self, 'environment_id') and self.environment_id is not None:
-            _dict['environment_id'] = self.environment_id
-        if hasattr(self, 'inputs') and self.inputs is not None:
-            _dict['inputs'] = self.inputs
         if hasattr(self, 'members') and self.members is not None:
             members_list = []
             for v in self.members:
@@ -10964,6 +11418,21 @@ class ProjectConfigDefinitionResponseStackConfigDefinitionProperties(ProjectConf
                 else:
                     members_list.append(v.to_dict())
             _dict['members'] = members_list
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'environment_id') and self.environment_id is not None:
+            _dict['environment_id'] = self.environment_id
+        if hasattr(self, 'authorizations') and self.authorizations is not None:
+            if isinstance(self.authorizations, dict):
+                _dict['authorizations'] = self.authorizations
+            else:
+                _dict['authorizations'] = self.authorizations.to_dict()
+        if hasattr(self, 'inputs') and self.inputs is not None:
+            _dict['inputs'] = self.inputs
+        if hasattr(self, 'settings') and self.settings is not None:
+            _dict['settings'] = self.settings
         return _dict
 
     def _to_dict(self):
