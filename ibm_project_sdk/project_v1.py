@@ -55,9 +55,7 @@ class ProjectV1(BaseService):
                and external configuration.
         """
         authenticator = get_authenticator_from_environment(service_name)
-        service = cls(
-            authenticator
-            )
+        service = cls(authenticator)
         service.configure_service(service_name)
         return service
 
@@ -3466,11 +3464,15 @@ class EnvironmentDefinitionRequiredPropertiesResponse:
         if (description := _dict.get('description')) is not None:
             args['description'] = description
         else:
-            raise ValueError('Required property \'description\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'description\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON'
+            )
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
-            raise ValueError('Required property \'name\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'name\' not present in EnvironmentDefinitionRequiredPropertiesResponse JSON'
+            )
         if (authorizations := _dict.get('authorizations')) is not None:
             args['authorizations'] = ProjectConfigAuth.from_dict(authorizations)
         if (inputs := _dict.get('inputs')) is not None:
@@ -3762,7 +3764,6 @@ class LastActionWithSummary:
         PASSED = 'passed'
 
 
-
 class LastDriftDetectionJobSummary:
     """
     The summary for drift detection jobs that are performed as part of the last monitoring
@@ -3917,7 +3918,6 @@ class LastMonitoringActionWithSummary:
         PASSED = 'passed'
 
 
-
 class LastValidatedActionWithSummary:
     """
     The href and results from the last action job that is performed on the project
@@ -4063,7 +4063,6 @@ class LastValidatedActionWithSummary:
 
         FAILED = 'failed'
         PASSED = 'passed'
-
 
 
 class MemberOfDefinition:
@@ -4737,7 +4736,9 @@ class Project:
         else:
             raise ValueError('Required property \'created_at\' not present in Project JSON')
         if (cumulative_needs_attention_view := _dict.get('cumulative_needs_attention_view')) is not None:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in cumulative_needs_attention_view]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in cumulative_needs_attention_view
+            ]
         else:
             raise ValueError('Required property \'cumulative_needs_attention_view\' not present in Project JSON')
         if (cumulative_needs_attention_view_error := _dict.get('cumulative_needs_attention_view_error')) is not None:
@@ -4802,7 +4803,10 @@ class Project:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -4867,7 +4871,6 @@ class Project:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class ProjectCollection:
@@ -5249,7 +5252,9 @@ class ProjectConfig:
         else:
             raise ValueError('Required property \'is_draft\' not present in ProjectConfig JSON')
         if (needs_attention_state := _dict.get('needs_attention_state')) is not None:
-            args['needs_attention_state'] = [ProjectConfigNeedsAttentionState.from_dict(v) for v in needs_attention_state]
+            args['needs_attention_state'] = [
+                ProjectConfigNeedsAttentionState.from_dict(v) for v in needs_attention_state
+            ]
         else:
             raise ValueError('Required property \'needs_attention_state\' not present in ProjectConfig JSON')
         if (created_at := _dict.get('created_at')) is not None:
@@ -5460,7 +5465,6 @@ class ProjectConfig:
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
 
-
     class DeploymentModelEnum(str, Enum):
         """
         The configuration type.
@@ -5469,7 +5473,6 @@ class ProjectConfig:
         PROJECT_DEPLOYED = 'project_deployed'
         USER_DEPLOYED = 'user_deployed'
         STACK = 'stack'
-
 
     class StateCodeEnum(str, Enum):
         """
@@ -5482,7 +5485,6 @@ class ProjectConfig:
         AWAITING_VALIDATION = 'awaiting_validation'
         AWAITING_MEMBER_DEPLOYMENT = 'awaiting_member_deployment'
         AWAITING_STACK_SETUP = 'awaiting_stack_setup'
-
 
 
 class ProjectConfigAuth:
@@ -5571,7 +5573,6 @@ class ProjectConfigAuth:
 
         API_KEY = 'api_key'
         TRUSTED_PROFILE = 'trusted_profile'
-
 
 
 class ProjectConfigCollection:
@@ -5690,7 +5691,13 @@ class ProjectConfigDefinitionPatch:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch', 'ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch', 'ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch'])
+            ", ".join(
+                [
+                    'ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch',
+                    'ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch',
+                    'ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5709,7 +5716,13 @@ class ProjectConfigDefinitionPrototype:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype', 'ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties', 'ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype'])
+            ", ".join(
+                [
+                    'ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype',
+                    'ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties',
+                    'ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -5728,7 +5741,13 @@ class ProjectConfigDefinitionResponse:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse', 'ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse', 'ProjectConfigDefinitionResponseStackConfigDefinitionProperties'])
+            ", ".join(
+                [
+                    'ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse',
+                    'ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse',
+                    'ProjectConfigDefinitionResponseStackConfigDefinitionProperties',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -6197,7 +6216,6 @@ class ProjectConfigNeedsAttentionState:
         ERROR = 'ERROR'
 
 
-
 class ProjectConfigPrototype:
     """
     The input of a project configuration.
@@ -6438,7 +6456,9 @@ class ProjectConfigResourceCollection:
         if (resources_count := _dict.get('resources_count')) is not None:
             args['resources_count'] = resources_count
         else:
-            raise ValueError('Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON')
+            raise ValueError(
+                'Required property \'resources_count\' not present in ProjectConfigResourceCollection JSON'
+            )
         return cls(**args)
 
     @classmethod
@@ -6686,7 +6706,6 @@ class ProjectConfigSummary:
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
 
-
     class DeploymentModelEnum(str, Enum):
         """
         The configuration type.
@@ -6695,7 +6714,6 @@ class ProjectConfigSummary:
         PROJECT_DEPLOYED = 'project_deployed'
         USER_DEPLOYED = 'user_deployed'
         STACK = 'stack'
-
 
 
 class ProjectConfigSummaryDefinition:
@@ -6983,7 +7001,9 @@ class ProjectConfigVersion:
         else:
             raise ValueError('Required property \'is_draft\' not present in ProjectConfigVersion JSON')
         if (needs_attention_state := _dict.get('needs_attention_state')) is not None:
-            args['needs_attention_state'] = [ProjectConfigNeedsAttentionState.from_dict(v) for v in needs_attention_state]
+            args['needs_attention_state'] = [
+                ProjectConfigNeedsAttentionState.from_dict(v) for v in needs_attention_state
+            ]
         else:
             raise ValueError('Required property \'needs_attention_state\' not present in ProjectConfigVersion JSON')
         if (created_at := _dict.get('created_at')) is not None:
@@ -7180,7 +7200,6 @@ class ProjectConfigVersion:
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
 
-
     class DeploymentModelEnum(str, Enum):
         """
         The configuration type.
@@ -7189,7 +7208,6 @@ class ProjectConfigVersion:
         PROJECT_DEPLOYED = 'project_deployed'
         USER_DEPLOYED = 'user_deployed'
         STACK = 'stack'
-
 
     class StateCodeEnum(str, Enum):
         """
@@ -7202,7 +7220,6 @@ class ProjectConfigVersion:
         AWAITING_VALIDATION = 'awaiting_validation'
         AWAITING_MEMBER_DEPLOYMENT = 'awaiting_member_deployment'
         AWAITING_STACK_SETUP = 'awaiting_stack_setup'
-
 
 
 class ProjectConfigVersionDefinitionSummary:
@@ -7430,7 +7447,6 @@ class ProjectConfigVersionSummary:
         APPLIED = 'applied'
         APPLY_FAILED = 'apply_failed'
 
-
     class StateCodeEnum(str, Enum):
         """
         Computed state code clarifying the prerequisites for validation for the
@@ -7442,7 +7458,6 @@ class ProjectConfigVersionSummary:
         AWAITING_VALIDATION = 'awaiting_validation'
         AWAITING_MEMBER_DEPLOYMENT = 'awaiting_member_deployment'
         AWAITING_STACK_SETUP = 'awaiting_stack_setup'
-
 
 
 class ProjectConfigVersionSummaryCollection:
@@ -7875,7 +7890,9 @@ class ProjectEnvironmentSummaryDefinition:
         if (description := _dict.get('description')) is not None:
             args['description'] = description
         else:
-            raise ValueError('Required property \'description\' not present in ProjectEnvironmentSummaryDefinition JSON')
+            raise ValueError(
+                'Required property \'description\' not present in ProjectEnvironmentSummaryDefinition JSON'
+            )
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
@@ -8286,7 +8303,9 @@ class ProjectSummary:
         else:
             raise ValueError('Required property \'created_at\' not present in ProjectSummary JSON')
         if (cumulative_needs_attention_view := _dict.get('cumulative_needs_attention_view')) is not None:
-            args['cumulative_needs_attention_view'] = [CumulativeNeedsAttention.from_dict(v) for v in cumulative_needs_attention_view]
+            args['cumulative_needs_attention_view'] = [
+                CumulativeNeedsAttention.from_dict(v) for v in cumulative_needs_attention_view
+            ]
         else:
             raise ValueError('Required property \'cumulative_needs_attention_view\' not present in ProjectSummary JSON')
         if (cumulative_needs_attention_view_error := _dict.get('cumulative_needs_attention_view_error')) is not None:
@@ -8337,7 +8356,10 @@ class ProjectSummary:
                 else:
                     cumulative_needs_attention_view_list.append(v.to_dict())
             _dict['cumulative_needs_attention_view'] = cumulative_needs_attention_view_list
-        if hasattr(self, 'cumulative_needs_attention_view_error') and self.cumulative_needs_attention_view_error is not None:
+        if (
+            hasattr(self, 'cumulative_needs_attention_view_error')
+            and self.cumulative_needs_attention_view_error is not None
+        ):
             _dict['cumulative_needs_attention_view_error'] = self.cumulative_needs_attention_view_error
         if hasattr(self, 'id') and self.id is not None:
             _dict['id'] = self.id
@@ -8382,7 +8404,6 @@ class ProjectSummary:
         READY = 'ready'
         DELETING = 'deleting'
         DELETING_FAILED = 'deleting_failed'
-
 
 
 class SchematicsMetadata:
@@ -8980,7 +9001,6 @@ class StackDefinition:
         PUBLISHED = 'published'
 
 
-
 class StackDefinitionBlock:
     """
     The definition block for a stack definition.
@@ -9199,7 +9219,12 @@ class StackDefinitionExportRequest:
 
         """
         msg = "Cannot instantiate base class. Instead, instantiate one of the defined subclasses: {0}".format(
-            ", ".join(['StackDefinitionExportRequestStackDefinitionExportCatalogRequest', 'StackDefinitionExportRequestStackDefinitionExportProductRequest'])
+            ", ".join(
+                [
+                    'StackDefinitionExportRequestStackDefinitionExportCatalogRequest',
+                    'StackDefinitionExportRequestStackDefinitionExportProductRequest',
+                ]
+            )
         )
         raise Exception(msg)
 
@@ -9418,7 +9443,6 @@ class StackDefinitionInputVariable:
         PASSWORD = 'password'
         STRING = 'string'
         OBJECT = 'object'
-
 
 
 class StackDefinitionMember:
@@ -9757,7 +9781,9 @@ class StackDefinitionMetadataConfiguration:
         if (definition := _dict.get('definition')) is not None:
             args['definition'] = ConfigDefinitionReference.from_dict(definition)
         else:
-            raise ValueError('Required property \'definition\' not present in StackDefinitionMetadataConfiguration JSON')
+            raise ValueError(
+                'Required property \'definition\' not present in StackDefinitionMetadataConfiguration JSON'
+            )
         return cls(**args)
 
     @classmethod
@@ -10585,7 +10611,9 @@ class ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype(Proj
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
         if (authorizations := _dict.get('authorizations')) is not None:
@@ -10715,7 +10743,9 @@ class ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototyp
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
         if (authorizations := _dict.get('authorizations')) is not None:
@@ -10886,7 +10916,9 @@ class ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(ProjectCon
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
         if (authorizations := _dict.get('authorizations')) is not None:
@@ -11060,11 +11092,15 @@ class ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse(Projec
         if (description := _dict.get('description')) is not None:
             args['description'] = description
         else:
-            raise ValueError('Required property \'description\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'description\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON'
+            )
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
         if (authorizations := _dict.get('authorizations')) is not None:
@@ -11192,11 +11228,15 @@ class ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse(
         if (description := _dict.get('description')) is not None:
             args['description'] = description
         else:
-            raise ValueError('Required property \'description\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'description\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON'
+            )
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
         if (authorizations := _dict.get('authorizations')) is not None:
@@ -11367,7 +11407,9 @@ class ProjectConfigDefinitionResponseStackConfigDefinitionProperties(ProjectConf
         if (name := _dict.get('name')) is not None:
             args['name'] = name
         else:
-            raise ValueError('Required property \'name\' not present in ProjectConfigDefinitionResponseStackConfigDefinitionProperties JSON')
+            raise ValueError(
+                'Required property \'name\' not present in ProjectConfigDefinitionResponseStackConfigDefinitionProperties JSON'
+            )
         if (environment_id := _dict.get('environment_id')) is not None:
             args['environment_id'] = environment_id
         if (authorizations := _dict.get('authorizations')) is not None:
@@ -11554,7 +11596,6 @@ class ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204(ProjectConfigMetadataC
         FAILED = 'failed'
 
 
-
 class StackDefinitionExportRequestStackDefinitionExportCatalogRequest(StackDefinitionExportRequest):
     """
     The payload for the stack definition export request to create a product.
@@ -11602,7 +11643,9 @@ class StackDefinitionExportRequestStackDefinitionExportCatalogRequest(StackDefin
         if (catalog_id := _dict.get('catalog_id')) is not None:
             args['catalog_id'] = catalog_id
         else:
-            raise ValueError('Required property \'catalog_id\' not present in StackDefinitionExportRequestStackDefinitionExportCatalogRequest JSON')
+            raise ValueError(
+                'Required property \'catalog_id\' not present in StackDefinitionExportRequestStackDefinitionExportCatalogRequest JSON'
+            )
         if (target_version := _dict.get('target_version')) is not None:
             args['target_version'] = target_version
         if (variation := _dict.get('variation')) is not None:
@@ -11610,7 +11653,9 @@ class StackDefinitionExportRequestStackDefinitionExportCatalogRequest(StackDefin
         if (label := _dict.get('label')) is not None:
             args['label'] = label
         else:
-            raise ValueError('Required property \'label\' not present in StackDefinitionExportRequestStackDefinitionExportCatalogRequest JSON')
+            raise ValueError(
+                'Required property \'label\' not present in StackDefinitionExportRequestStackDefinitionExportCatalogRequest JSON'
+            )
         if (tags := _dict.get('tags')) is not None:
             args['tags'] = tags
         return cls(**args)
@@ -11696,17 +11741,23 @@ class StackDefinitionExportRequestStackDefinitionExportProductRequest(StackDefin
         if (catalog_id := _dict.get('catalog_id')) is not None:
             args['catalog_id'] = catalog_id
         else:
-            raise ValueError('Required property \'catalog_id\' not present in StackDefinitionExportRequestStackDefinitionExportProductRequest JSON')
+            raise ValueError(
+                'Required property \'catalog_id\' not present in StackDefinitionExportRequestStackDefinitionExportProductRequest JSON'
+            )
         if (target_version := _dict.get('target_version')) is not None:
             args['target_version'] = target_version
         else:
-            raise ValueError('Required property \'target_version\' not present in StackDefinitionExportRequestStackDefinitionExportProductRequest JSON')
+            raise ValueError(
+                'Required property \'target_version\' not present in StackDefinitionExportRequestStackDefinitionExportProductRequest JSON'
+            )
         if (variation := _dict.get('variation')) is not None:
             args['variation'] = variation
         if (product_id := _dict.get('product_id')) is not None:
             args['product_id'] = product_id
         else:
-            raise ValueError('Required property \'product_id\' not present in StackDefinitionExportRequestStackDefinitionExportProductRequest JSON')
+            raise ValueError(
+                'Required property \'product_id\' not present in StackDefinitionExportRequestStackDefinitionExportProductRequest JSON'
+            )
         return cls(**args)
 
     @classmethod
@@ -11744,6 +11795,7 @@ class StackDefinitionExportRequestStackDefinitionExportProductRequest(StackDefin
     def __ne__(self, other: 'StackDefinitionExportRequestStackDefinitionExportProductRequest') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
+
 
 ##############################################################################
 # Pagers

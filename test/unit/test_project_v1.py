@@ -31,9 +31,7 @@ import urllib
 from ibm_project_sdk.project_v1 import *
 
 
-_service = ProjectV1(
-    authenticator=NoAuthAuthenticator()
-)
+_service = ProjectV1(authenticator=NoAuthAuthenticator())
 
 _base_url = 'https://projects.api.cloud.ibm.com'
 _service.set_service_url(_base_url)
@@ -143,7 +141,9 @@ class TestCreateProject:
         # Construct a dict representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
         project_config_definition_prototype_model = {}
         project_config_definition_prototype_model['compliance_profile'] = project_compliance_profile_model
-        project_config_definition_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_definition_prototype_model['locator_id'] = (
+            '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        )
         project_config_definition_prototype_model['description'] = 'The stage account configuration.'
         project_config_definition_prototype_model['name'] = 'account-stage'
         project_config_definition_prototype_model['environment_id'] = 'testString'
@@ -153,7 +153,9 @@ class TestCreateProject:
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_workspace_model['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {}
@@ -249,7 +251,9 @@ class TestCreateProject:
         # Construct a dict representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
         project_config_definition_prototype_model = {}
         project_config_definition_prototype_model['compliance_profile'] = project_compliance_profile_model
-        project_config_definition_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_definition_prototype_model['locator_id'] = (
+            '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        )
         project_config_definition_prototype_model['description'] = 'The stage account configuration.'
         project_config_definition_prototype_model['name'] = 'account-stage'
         project_config_definition_prototype_model['environment_id'] = 'testString'
@@ -259,7 +263,9 @@ class TestCreateProject:
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_workspace_model['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Construct a dict representation of a ProjectConfigPrototype model
         project_config_prototype_model = {}
@@ -1475,17 +1481,27 @@ class TestCreateConfig:
         # Construct a dict representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
         project_config_definition_prototype_model = {}
         project_config_definition_prototype_model['compliance_profile'] = project_compliance_profile_model
-        project_config_definition_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_definition_prototype_model['locator_id'] = (
+            '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        )
         project_config_definition_prototype_model['description'] = 'The stage environment configuration.'
         project_config_definition_prototype_model['name'] = 'env-stage'
         project_config_definition_prototype_model['environment_id'] = 'testString'
         project_config_definition_prototype_model['authorizations'] = project_config_auth_model
-        project_config_definition_prototype_model['inputs'] = {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'}
+        project_config_definition_prototype_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
         project_config_definition_prototype_model['settings'] = {'anyKey': 'anyValue'}
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_workspace_model['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Set up parameter values
         project_id = 'testString'
@@ -1550,17 +1566,27 @@ class TestCreateConfig:
         # Construct a dict representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
         project_config_definition_prototype_model = {}
         project_config_definition_prototype_model['compliance_profile'] = project_compliance_profile_model
-        project_config_definition_prototype_model['locator_id'] = '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        project_config_definition_prototype_model['locator_id'] = (
+            '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global'
+        )
         project_config_definition_prototype_model['description'] = 'The stage environment configuration.'
         project_config_definition_prototype_model['name'] = 'env-stage'
         project_config_definition_prototype_model['environment_id'] = 'testString'
         project_config_definition_prototype_model['authorizations'] = project_config_auth_model
-        project_config_definition_prototype_model['inputs'] = {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'}
+        project_config_definition_prototype_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
         project_config_definition_prototype_model['settings'] = {'anyKey': 'anyValue'}
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_workspace_model['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Set up parameter values
         project_id = 'testString'
@@ -1914,7 +1940,13 @@ class TestUpdateConfig:
         project_config_definition_patch_model['name'] = 'env-stage'
         project_config_definition_patch_model['environment_id'] = 'testString'
         project_config_definition_patch_model['authorizations'] = project_config_auth_model
-        project_config_definition_patch_model['inputs'] = {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'}
+        project_config_definition_patch_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
         project_config_definition_patch_model['settings'] = {'anyKey': 'anyValue'}
 
         # Set up parameter values
@@ -1984,7 +2016,13 @@ class TestUpdateConfig:
         project_config_definition_patch_model['name'] = 'env-stage'
         project_config_definition_patch_model['environment_id'] = 'testString'
         project_config_definition_patch_model['authorizations'] = project_config_auth_model
-        project_config_definition_patch_model['inputs'] = {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'}
+        project_config_definition_patch_model['inputs'] = {
+            'account_id': 'account_id',
+            'resource_group': 'stage',
+            'access_tags': ['env:stage'],
+            'logdna_name': 'LogDNA_stage_service',
+            'sysdig_name': 'SysDig_stage_service',
+        }
         project_config_definition_patch_model['settings'] = {'anyKey': 'anyValue'}
 
         # Set up parameter values
@@ -2595,7 +2633,9 @@ class TestSyncConfig:
 
         # Construct a dict representation of a SchematicsWorkspace model
         schematics_workspace_model = {}
-        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:schematics:us-south:a/38acaf4469814090a4e675dc0c317a0d:95ad49de-ab96-4e7d-a08c-45c38aa448e6:workspace:us-south.workspace.service.e0106139'
+        schematics_workspace_model['workspace_crn'] = (
+            'crn:v1:staging:public:schematics:us-south:a/38acaf4469814090a4e675dc0c317a0d:95ad49de-ab96-4e7d-a08c-45c38aa448e6:workspace:us-south.workspace.service.e0106139'
+        )
 
         # Set up parameter values
         project_id = 'testString'
@@ -3576,15 +3616,23 @@ class TestModel_ActionJobApplyMessagesSummary:
         # Construct a json representation of a ActionJobApplyMessagesSummary model
         action_job_apply_messages_summary_model_json = {}
         action_job_apply_messages_summary_model_json['error_messages'] = [terraform_log_analyzer_error_message_model]
-        action_job_apply_messages_summary_model_json['success_messages'] = [terraform_log_analyzer_success_message_model]
+        action_job_apply_messages_summary_model_json['success_messages'] = [
+            terraform_log_analyzer_success_message_model
+        ]
 
         # Construct a model instance of ActionJobApplyMessagesSummary by calling from_dict on the json representation
-        action_job_apply_messages_summary_model = ActionJobApplyMessagesSummary.from_dict(action_job_apply_messages_summary_model_json)
+        action_job_apply_messages_summary_model = ActionJobApplyMessagesSummary.from_dict(
+            action_job_apply_messages_summary_model_json
+        )
         assert action_job_apply_messages_summary_model != False
 
         # Construct a model instance of ActionJobApplyMessagesSummary by calling from_dict on the json representation
-        action_job_apply_messages_summary_model_dict = ActionJobApplyMessagesSummary.from_dict(action_job_apply_messages_summary_model_json).__dict__
-        action_job_apply_messages_summary_model2 = ActionJobApplyMessagesSummary(**action_job_apply_messages_summary_model_dict)
+        action_job_apply_messages_summary_model_dict = ActionJobApplyMessagesSummary.from_dict(
+            action_job_apply_messages_summary_model_json
+        ).__dict__
+        action_job_apply_messages_summary_model2 = ActionJobApplyMessagesSummary(
+            **action_job_apply_messages_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_apply_messages_summary_model == action_job_apply_messages_summary_model2
@@ -3616,7 +3664,9 @@ class TestModel_ActionJobApplySummary:
         assert action_job_apply_summary_model != False
 
         # Construct a model instance of ActionJobApplySummary by calling from_dict on the json representation
-        action_job_apply_summary_model_dict = ActionJobApplySummary.from_dict(action_job_apply_summary_model_json).__dict__
+        action_job_apply_summary_model_dict = ActionJobApplySummary.from_dict(
+            action_job_apply_summary_model_json
+        ).__dict__
         action_job_apply_summary_model2 = ActionJobApplySummary(**action_job_apply_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -3647,12 +3697,18 @@ class TestModel_ActionJobDestroyMessagesSummary:
         action_job_destroy_messages_summary_model_json['error_messages'] = [terraform_log_analyzer_error_message_model]
 
         # Construct a model instance of ActionJobDestroyMessagesSummary by calling from_dict on the json representation
-        action_job_destroy_messages_summary_model = ActionJobDestroyMessagesSummary.from_dict(action_job_destroy_messages_summary_model_json)
+        action_job_destroy_messages_summary_model = ActionJobDestroyMessagesSummary.from_dict(
+            action_job_destroy_messages_summary_model_json
+        )
         assert action_job_destroy_messages_summary_model != False
 
         # Construct a model instance of ActionJobDestroyMessagesSummary by calling from_dict on the json representation
-        action_job_destroy_messages_summary_model_dict = ActionJobDestroyMessagesSummary.from_dict(action_job_destroy_messages_summary_model_json).__dict__
-        action_job_destroy_messages_summary_model2 = ActionJobDestroyMessagesSummary(**action_job_destroy_messages_summary_model_dict)
+        action_job_destroy_messages_summary_model_dict = ActionJobDestroyMessagesSummary.from_dict(
+            action_job_destroy_messages_summary_model_json
+        ).__dict__
+        action_job_destroy_messages_summary_model2 = ActionJobDestroyMessagesSummary(
+            **action_job_destroy_messages_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_destroy_messages_summary_model == action_job_destroy_messages_summary_model2
@@ -3691,7 +3747,9 @@ class TestModel_ActionJobDestroySummary:
         assert action_job_destroy_summary_model != False
 
         # Construct a model instance of ActionJobDestroySummary by calling from_dict on the json representation
-        action_job_destroy_summary_model_dict = ActionJobDestroySummary.from_dict(action_job_destroy_summary_model_json).__dict__
+        action_job_destroy_summary_model_dict = ActionJobDestroySummary.from_dict(
+            action_job_destroy_summary_model_json
+        ).__dict__
         action_job_destroy_summary_model2 = ActionJobDestroySummary(**action_job_destroy_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -3719,12 +3777,18 @@ class TestModel_ActionJobDestroySummaryResources:
         action_job_destroy_summary_resources_model_json['tainted'] = ['testString']
 
         # Construct a model instance of ActionJobDestroySummaryResources by calling from_dict on the json representation
-        action_job_destroy_summary_resources_model = ActionJobDestroySummaryResources.from_dict(action_job_destroy_summary_resources_model_json)
+        action_job_destroy_summary_resources_model = ActionJobDestroySummaryResources.from_dict(
+            action_job_destroy_summary_resources_model_json
+        )
         assert action_job_destroy_summary_resources_model != False
 
         # Construct a model instance of ActionJobDestroySummaryResources by calling from_dict on the json representation
-        action_job_destroy_summary_resources_model_dict = ActionJobDestroySummaryResources.from_dict(action_job_destroy_summary_resources_model_json).__dict__
-        action_job_destroy_summary_resources_model2 = ActionJobDestroySummaryResources(**action_job_destroy_summary_resources_model_dict)
+        action_job_destroy_summary_resources_model_dict = ActionJobDestroySummaryResources.from_dict(
+            action_job_destroy_summary_resources_model_json
+        ).__dict__
+        action_job_destroy_summary_resources_model2 = ActionJobDestroySummaryResources(
+            **action_job_destroy_summary_resources_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_destroy_summary_resources_model == action_job_destroy_summary_resources_model2
@@ -3755,7 +3819,9 @@ class TestModel_ActionJobMessageSummary:
         assert action_job_message_summary_model != False
 
         # Construct a model instance of ActionJobMessageSummary by calling from_dict on the json representation
-        action_job_message_summary_model_dict = ActionJobMessageSummary.from_dict(action_job_message_summary_model_json).__dict__
+        action_job_message_summary_model_dict = ActionJobMessageSummary.from_dict(
+            action_job_message_summary_model_json
+        ).__dict__
         action_job_message_summary_model2 = ActionJobMessageSummary(**action_job_message_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -3789,12 +3855,18 @@ class TestModel_ActionJobPlanMessagesSummary:
         action_job_plan_messages_summary_model_json['destroy_messages'] = ['testString']
 
         # Construct a model instance of ActionJobPlanMessagesSummary by calling from_dict on the json representation
-        action_job_plan_messages_summary_model = ActionJobPlanMessagesSummary.from_dict(action_job_plan_messages_summary_model_json)
+        action_job_plan_messages_summary_model = ActionJobPlanMessagesSummary.from_dict(
+            action_job_plan_messages_summary_model_json
+        )
         assert action_job_plan_messages_summary_model != False
 
         # Construct a model instance of ActionJobPlanMessagesSummary by calling from_dict on the json representation
-        action_job_plan_messages_summary_model_dict = ActionJobPlanMessagesSummary.from_dict(action_job_plan_messages_summary_model_json).__dict__
-        action_job_plan_messages_summary_model2 = ActionJobPlanMessagesSummary(**action_job_plan_messages_summary_model_dict)
+        action_job_plan_messages_summary_model_dict = ActionJobPlanMessagesSummary.from_dict(
+            action_job_plan_messages_summary_model_json
+        ).__dict__
+        action_job_plan_messages_summary_model2 = ActionJobPlanMessagesSummary(
+            **action_job_plan_messages_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert action_job_plan_messages_summary_model == action_job_plan_messages_summary_model2
@@ -4014,11 +4086,15 @@ class TestModel_ActionJobWithIdAndSummary:
         action_job_with_id_and_summary_model_json['summary'] = action_job_summary_model
 
         # Construct a model instance of ActionJobWithIdAndSummary by calling from_dict on the json representation
-        action_job_with_id_and_summary_model = ActionJobWithIdAndSummary.from_dict(action_job_with_id_and_summary_model_json)
+        action_job_with_id_and_summary_model = ActionJobWithIdAndSummary.from_dict(
+            action_job_with_id_and_summary_model_json
+        )
         assert action_job_with_id_and_summary_model != False
 
         # Construct a model instance of ActionJobWithIdAndSummary by calling from_dict on the json representation
-        action_job_with_id_and_summary_model_dict = ActionJobWithIdAndSummary.from_dict(action_job_with_id_and_summary_model_json).__dict__
+        action_job_with_id_and_summary_model_dict = ActionJobWithIdAndSummary.from_dict(
+            action_job_with_id_and_summary_model_json
+        ).__dict__
         action_job_with_id_and_summary_model2 = ActionJobWithIdAndSummary(**action_job_with_id_and_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -4047,12 +4123,18 @@ class TestModel_CodeRiskAnalyzerLogsSummary:
         code_risk_analyzer_logs_summary_model_json['skipped'] = 'testString'
 
         # Construct a model instance of CodeRiskAnalyzerLogsSummary by calling from_dict on the json representation
-        code_risk_analyzer_logs_summary_model = CodeRiskAnalyzerLogsSummary.from_dict(code_risk_analyzer_logs_summary_model_json)
+        code_risk_analyzer_logs_summary_model = CodeRiskAnalyzerLogsSummary.from_dict(
+            code_risk_analyzer_logs_summary_model_json
+        )
         assert code_risk_analyzer_logs_summary_model != False
 
         # Construct a model instance of CodeRiskAnalyzerLogsSummary by calling from_dict on the json representation
-        code_risk_analyzer_logs_summary_model_dict = CodeRiskAnalyzerLogsSummary.from_dict(code_risk_analyzer_logs_summary_model_json).__dict__
-        code_risk_analyzer_logs_summary_model2 = CodeRiskAnalyzerLogsSummary(**code_risk_analyzer_logs_summary_model_dict)
+        code_risk_analyzer_logs_summary_model_dict = CodeRiskAnalyzerLogsSummary.from_dict(
+            code_risk_analyzer_logs_summary_model_json
+        ).__dict__
+        code_risk_analyzer_logs_summary_model2 = CodeRiskAnalyzerLogsSummary(
+            **code_risk_analyzer_logs_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert code_risk_analyzer_logs_summary_model == code_risk_analyzer_logs_summary_model2
@@ -4081,7 +4163,9 @@ class TestModel_ConfigDefinitionReference:
         assert config_definition_reference_model != False
 
         # Construct a model instance of ConfigDefinitionReference by calling from_dict on the json representation
-        config_definition_reference_model_dict = ConfigDefinitionReference.from_dict(config_definition_reference_model_json).__dict__
+        config_definition_reference_model_dict = ConfigDefinitionReference.from_dict(
+            config_definition_reference_model_json
+        ).__dict__
         config_definition_reference_model2 = ConfigDefinitionReference(**config_definition_reference_model_dict)
 
         # Verify the model instances are equivalent
@@ -4114,7 +4198,9 @@ class TestModel_CumulativeNeedsAttention:
         assert cumulative_needs_attention_model != False
 
         # Construct a model instance of CumulativeNeedsAttention by calling from_dict on the json representation
-        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(cumulative_needs_attention_model_json).__dict__
+        cumulative_needs_attention_model_dict = CumulativeNeedsAttention.from_dict(
+            cumulative_needs_attention_model_json
+        ).__dict__
         cumulative_needs_attention_model2 = CumulativeNeedsAttention(**cumulative_needs_attention_model_dict)
 
         # Verify the model instances are equivalent
@@ -4144,7 +4230,9 @@ class TestModel_Environment:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         project_config_auth_model = {}  # ProjectConfigAuth
         project_config_auth_model['trusted_profile_id'] = 'testString'
@@ -4158,12 +4246,16 @@ class TestModel_Environment:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        environment_definition_required_properties_response_model = {}  # EnvironmentDefinitionRequiredPropertiesResponse
+        environment_definition_required_properties_response_model = (
+            {}
+        )  # EnvironmentDefinitionRequiredPropertiesResponse
         environment_definition_required_properties_response_model['description'] = 'testString'
         environment_definition_required_properties_response_model['name'] = 'testString'
         environment_definition_required_properties_response_model['authorizations'] = project_config_auth_model
         environment_definition_required_properties_response_model['inputs'] = {'anyKey': 'anyValue'}
-        environment_definition_required_properties_response_model['compliance_profile'] = project_compliance_profile_model
+        environment_definition_required_properties_response_model['compliance_profile'] = (
+            project_compliance_profile_model
+        )
 
         # Construct a json representation of a Environment model
         environment_model_json = {}
@@ -4213,7 +4305,9 @@ class TestModel_EnvironmentCollection:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         project_config_auth_model = {}  # ProjectConfigAuth
         project_config_auth_model['trusted_profile_id'] = 'testString'
@@ -4227,12 +4321,16 @@ class TestModel_EnvironmentCollection:
         project_compliance_profile_model['attachment_id'] = 'testString'
         project_compliance_profile_model['profile_name'] = 'testString'
 
-        environment_definition_required_properties_response_model = {}  # EnvironmentDefinitionRequiredPropertiesResponse
+        environment_definition_required_properties_response_model = (
+            {}
+        )  # EnvironmentDefinitionRequiredPropertiesResponse
         environment_definition_required_properties_response_model['description'] = 'testString'
         environment_definition_required_properties_response_model['name'] = 'testString'
         environment_definition_required_properties_response_model['authorizations'] = project_config_auth_model
         environment_definition_required_properties_response_model['inputs'] = {'anyKey': 'anyValue'}
-        environment_definition_required_properties_response_model['compliance_profile'] = project_compliance_profile_model
+        environment_definition_required_properties_response_model['compliance_profile'] = (
+            project_compliance_profile_model
+        )
 
         environment_model = {}  # Environment
         environment_model['id'] = 'testString'
@@ -4299,12 +4397,18 @@ class TestModel_EnvironmentDefinitionPropertiesPatch:
         environment_definition_properties_patch_model_json['compliance_profile'] = project_compliance_profile_model
 
         # Construct a model instance of EnvironmentDefinitionPropertiesPatch by calling from_dict on the json representation
-        environment_definition_properties_patch_model = EnvironmentDefinitionPropertiesPatch.from_dict(environment_definition_properties_patch_model_json)
+        environment_definition_properties_patch_model = EnvironmentDefinitionPropertiesPatch.from_dict(
+            environment_definition_properties_patch_model_json
+        )
         assert environment_definition_properties_patch_model != False
 
         # Construct a model instance of EnvironmentDefinitionPropertiesPatch by calling from_dict on the json representation
-        environment_definition_properties_patch_model_dict = EnvironmentDefinitionPropertiesPatch.from_dict(environment_definition_properties_patch_model_json).__dict__
-        environment_definition_properties_patch_model2 = EnvironmentDefinitionPropertiesPatch(**environment_definition_properties_patch_model_dict)
+        environment_definition_properties_patch_model_dict = EnvironmentDefinitionPropertiesPatch.from_dict(
+            environment_definition_properties_patch_model_json
+        ).__dict__
+        environment_definition_properties_patch_model2 = EnvironmentDefinitionPropertiesPatch(
+            **environment_definition_properties_patch_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert environment_definition_properties_patch_model == environment_definition_properties_patch_model2
@@ -4347,19 +4451,30 @@ class TestModel_EnvironmentDefinitionRequiredProperties:
         environment_definition_required_properties_model_json['compliance_profile'] = project_compliance_profile_model
 
         # Construct a model instance of EnvironmentDefinitionRequiredProperties by calling from_dict on the json representation
-        environment_definition_required_properties_model = EnvironmentDefinitionRequiredProperties.from_dict(environment_definition_required_properties_model_json)
+        environment_definition_required_properties_model = EnvironmentDefinitionRequiredProperties.from_dict(
+            environment_definition_required_properties_model_json
+        )
         assert environment_definition_required_properties_model != False
 
         # Construct a model instance of EnvironmentDefinitionRequiredProperties by calling from_dict on the json representation
-        environment_definition_required_properties_model_dict = EnvironmentDefinitionRequiredProperties.from_dict(environment_definition_required_properties_model_json).__dict__
-        environment_definition_required_properties_model2 = EnvironmentDefinitionRequiredProperties(**environment_definition_required_properties_model_dict)
+        environment_definition_required_properties_model_dict = EnvironmentDefinitionRequiredProperties.from_dict(
+            environment_definition_required_properties_model_json
+        ).__dict__
+        environment_definition_required_properties_model2 = EnvironmentDefinitionRequiredProperties(
+            **environment_definition_required_properties_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert environment_definition_required_properties_model == environment_definition_required_properties_model2
 
         # Convert model instance back to dict and verify no loss of data
-        environment_definition_required_properties_model_json2 = environment_definition_required_properties_model.to_dict()
-        assert environment_definition_required_properties_model_json2 == environment_definition_required_properties_model_json
+        environment_definition_required_properties_model_json2 = (
+            environment_definition_required_properties_model.to_dict()
+        )
+        assert (
+            environment_definition_required_properties_model_json2
+            == environment_definition_required_properties_model_json
+        )
 
 
 class TestModel_EnvironmentDefinitionRequiredPropertiesResponse:
@@ -4392,22 +4507,42 @@ class TestModel_EnvironmentDefinitionRequiredPropertiesResponse:
         environment_definition_required_properties_response_model_json['name'] = 'testString'
         environment_definition_required_properties_response_model_json['authorizations'] = project_config_auth_model
         environment_definition_required_properties_response_model_json['inputs'] = {'anyKey': 'anyValue'}
-        environment_definition_required_properties_response_model_json['compliance_profile'] = project_compliance_profile_model
+        environment_definition_required_properties_response_model_json['compliance_profile'] = (
+            project_compliance_profile_model
+        )
 
         # Construct a model instance of EnvironmentDefinitionRequiredPropertiesResponse by calling from_dict on the json representation
-        environment_definition_required_properties_response_model = EnvironmentDefinitionRequiredPropertiesResponse.from_dict(environment_definition_required_properties_response_model_json)
+        environment_definition_required_properties_response_model = (
+            EnvironmentDefinitionRequiredPropertiesResponse.from_dict(
+                environment_definition_required_properties_response_model_json
+            )
+        )
         assert environment_definition_required_properties_response_model != False
 
         # Construct a model instance of EnvironmentDefinitionRequiredPropertiesResponse by calling from_dict on the json representation
-        environment_definition_required_properties_response_model_dict = EnvironmentDefinitionRequiredPropertiesResponse.from_dict(environment_definition_required_properties_response_model_json).__dict__
-        environment_definition_required_properties_response_model2 = EnvironmentDefinitionRequiredPropertiesResponse(**environment_definition_required_properties_response_model_dict)
+        environment_definition_required_properties_response_model_dict = (
+            EnvironmentDefinitionRequiredPropertiesResponse.from_dict(
+                environment_definition_required_properties_response_model_json
+            ).__dict__
+        )
+        environment_definition_required_properties_response_model2 = EnvironmentDefinitionRequiredPropertiesResponse(
+            **environment_definition_required_properties_response_model_dict
+        )
 
         # Verify the model instances are equivalent
-        assert environment_definition_required_properties_response_model == environment_definition_required_properties_response_model2
+        assert (
+            environment_definition_required_properties_response_model
+            == environment_definition_required_properties_response_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        environment_definition_required_properties_response_model_json2 = environment_definition_required_properties_response_model.to_dict()
-        assert environment_definition_required_properties_response_model_json2 == environment_definition_required_properties_response_model_json
+        environment_definition_required_properties_response_model_json2 = (
+            environment_definition_required_properties_response_model.to_dict()
+        )
+        assert (
+            environment_definition_required_properties_response_model_json2
+            == environment_definition_required_properties_response_model_json
+        )
 
 
 class TestModel_EnvironmentDeleteResponse:
@@ -4429,7 +4564,9 @@ class TestModel_EnvironmentDeleteResponse:
         assert environment_delete_response_model != False
 
         # Construct a model instance of EnvironmentDeleteResponse by calling from_dict on the json representation
-        environment_delete_response_model_dict = EnvironmentDeleteResponse.from_dict(environment_delete_response_model_json).__dict__
+        environment_delete_response_model_dict = EnvironmentDeleteResponse.from_dict(
+            environment_delete_response_model_json
+        ).__dict__
         environment_delete_response_model2 = EnvironmentDeleteResponse(**environment_delete_response_model_dict)
 
         # Verify the model instances are equivalent
@@ -4605,7 +4742,9 @@ class TestModel_LastActionWithSummary:
         assert last_action_with_summary_model != False
 
         # Construct a model instance of LastActionWithSummary by calling from_dict on the json representation
-        last_action_with_summary_model_dict = LastActionWithSummary.from_dict(last_action_with_summary_model_json).__dict__
+        last_action_with_summary_model_dict = LastActionWithSummary.from_dict(
+            last_action_with_summary_model_json
+        ).__dict__
         last_action_with_summary_model2 = LastActionWithSummary(**last_action_with_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -4700,12 +4839,18 @@ class TestModel_LastDriftDetectionJobSummary:
         last_drift_detection_job_summary_model_json['job'] = action_job_with_id_and_summary_model
 
         # Construct a model instance of LastDriftDetectionJobSummary by calling from_dict on the json representation
-        last_drift_detection_job_summary_model = LastDriftDetectionJobSummary.from_dict(last_drift_detection_job_summary_model_json)
+        last_drift_detection_job_summary_model = LastDriftDetectionJobSummary.from_dict(
+            last_drift_detection_job_summary_model_json
+        )
         assert last_drift_detection_job_summary_model != False
 
         # Construct a model instance of LastDriftDetectionJobSummary by calling from_dict on the json representation
-        last_drift_detection_job_summary_model_dict = LastDriftDetectionJobSummary.from_dict(last_drift_detection_job_summary_model_json).__dict__
-        last_drift_detection_job_summary_model2 = LastDriftDetectionJobSummary(**last_drift_detection_job_summary_model_dict)
+        last_drift_detection_job_summary_model_dict = LastDriftDetectionJobSummary.from_dict(
+            last_drift_detection_job_summary_model_json
+        ).__dict__
+        last_drift_detection_job_summary_model2 = LastDriftDetectionJobSummary(
+            **last_drift_detection_job_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert last_drift_detection_job_summary_model == last_drift_detection_job_summary_model2
@@ -4804,12 +4949,18 @@ class TestModel_LastMonitoringActionWithSummary:
         last_monitoring_action_with_summary_model_json['drift_detection'] = last_drift_detection_job_summary_model
 
         # Construct a model instance of LastMonitoringActionWithSummary by calling from_dict on the json representation
-        last_monitoring_action_with_summary_model = LastMonitoringActionWithSummary.from_dict(last_monitoring_action_with_summary_model_json)
+        last_monitoring_action_with_summary_model = LastMonitoringActionWithSummary.from_dict(
+            last_monitoring_action_with_summary_model_json
+        )
         assert last_monitoring_action_with_summary_model != False
 
         # Construct a model instance of LastMonitoringActionWithSummary by calling from_dict on the json representation
-        last_monitoring_action_with_summary_model_dict = LastMonitoringActionWithSummary.from_dict(last_monitoring_action_with_summary_model_json).__dict__
-        last_monitoring_action_with_summary_model2 = LastMonitoringActionWithSummary(**last_monitoring_action_with_summary_model_dict)
+        last_monitoring_action_with_summary_model_dict = LastMonitoringActionWithSummary.from_dict(
+            last_monitoring_action_with_summary_model_json
+        ).__dict__
+        last_monitoring_action_with_summary_model2 = LastMonitoringActionWithSummary(
+            **last_monitoring_action_with_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert last_monitoring_action_with_summary_model == last_monitoring_action_with_summary_model2
@@ -4938,7 +5089,9 @@ class TestModel_LastValidatedActionWithSummary:
         code_risk_analyzer_logs_summary_model['failed'] = 'testString'
         code_risk_analyzer_logs_summary_model['skipped'] = 'testString'
 
-        project_config_metadata_code_risk_analyzer_logs_model = {}  # ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204
+        project_config_metadata_code_risk_analyzer_logs_model = (
+            {}
+        )  # ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204
         project_config_metadata_code_risk_analyzer_logs_model['cra_version'] = '2.0.4'
         project_config_metadata_code_risk_analyzer_logs_model['schema_version'] = 'testString'
         project_config_metadata_code_risk_analyzer_logs_model['status'] = 'passed'
@@ -4953,15 +5106,23 @@ class TestModel_LastValidatedActionWithSummary:
         last_validated_action_with_summary_model_json['pre_job'] = pre_post_action_job_with_id_and_summary_model
         last_validated_action_with_summary_model_json['post_job'] = pre_post_action_job_with_id_and_summary_model
         last_validated_action_with_summary_model_json['cost_estimate'] = project_config_metadata_cost_estimate_model
-        last_validated_action_with_summary_model_json['cra_logs'] = project_config_metadata_code_risk_analyzer_logs_model
+        last_validated_action_with_summary_model_json['cra_logs'] = (
+            project_config_metadata_code_risk_analyzer_logs_model
+        )
 
         # Construct a model instance of LastValidatedActionWithSummary by calling from_dict on the json representation
-        last_validated_action_with_summary_model = LastValidatedActionWithSummary.from_dict(last_validated_action_with_summary_model_json)
+        last_validated_action_with_summary_model = LastValidatedActionWithSummary.from_dict(
+            last_validated_action_with_summary_model_json
+        )
         assert last_validated_action_with_summary_model != False
 
         # Construct a model instance of LastValidatedActionWithSummary by calling from_dict on the json representation
-        last_validated_action_with_summary_model_dict = LastValidatedActionWithSummary.from_dict(last_validated_action_with_summary_model_json).__dict__
-        last_validated_action_with_summary_model2 = LastValidatedActionWithSummary(**last_validated_action_with_summary_model_dict)
+        last_validated_action_with_summary_model_dict = LastValidatedActionWithSummary.from_dict(
+            last_validated_action_with_summary_model_json
+        ).__dict__
+        last_validated_action_with_summary_model2 = LastValidatedActionWithSummary(
+            **last_validated_action_with_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert last_validated_action_with_summary_model == last_validated_action_with_summary_model2
@@ -5112,7 +5273,9 @@ class TestModel_PrePostActionJobSummary:
         assert pre_post_action_job_summary_model != False
 
         # Construct a model instance of PrePostActionJobSummary by calling from_dict on the json representation
-        pre_post_action_job_summary_model_dict = PrePostActionJobSummary.from_dict(pre_post_action_job_summary_model_json).__dict__
+        pre_post_action_job_summary_model_dict = PrePostActionJobSummary.from_dict(
+            pre_post_action_job_summary_model_json
+        ).__dict__
         pre_post_action_job_summary_model2 = PrePostActionJobSummary(**pre_post_action_job_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -5142,12 +5305,18 @@ class TestModel_PrePostActionJobSystemError:
         pre_post_action_job_system_error_model_json['error_response'] = 'testString'
 
         # Construct a model instance of PrePostActionJobSystemError by calling from_dict on the json representation
-        pre_post_action_job_system_error_model = PrePostActionJobSystemError.from_dict(pre_post_action_job_system_error_model_json)
+        pre_post_action_job_system_error_model = PrePostActionJobSystemError.from_dict(
+            pre_post_action_job_system_error_model_json
+        )
         assert pre_post_action_job_system_error_model != False
 
         # Construct a model instance of PrePostActionJobSystemError by calling from_dict on the json representation
-        pre_post_action_job_system_error_model_dict = PrePostActionJobSystemError.from_dict(pre_post_action_job_system_error_model_json).__dict__
-        pre_post_action_job_system_error_model2 = PrePostActionJobSystemError(**pre_post_action_job_system_error_model_dict)
+        pre_post_action_job_system_error_model_dict = PrePostActionJobSystemError.from_dict(
+            pre_post_action_job_system_error_model_json
+        ).__dict__
+        pre_post_action_job_system_error_model2 = PrePostActionJobSystemError(
+            **pre_post_action_job_system_error_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert pre_post_action_job_system_error_model == pre_post_action_job_system_error_model2
@@ -5193,12 +5362,18 @@ class TestModel_PrePostActionJobWithIdAndSummary:
         pre_post_action_job_with_id_and_summary_model_json['summary'] = pre_post_action_job_summary_model
 
         # Construct a model instance of PrePostActionJobWithIdAndSummary by calling from_dict on the json representation
-        pre_post_action_job_with_id_and_summary_model = PrePostActionJobWithIdAndSummary.from_dict(pre_post_action_job_with_id_and_summary_model_json)
+        pre_post_action_job_with_id_and_summary_model = PrePostActionJobWithIdAndSummary.from_dict(
+            pre_post_action_job_with_id_and_summary_model_json
+        )
         assert pre_post_action_job_with_id_and_summary_model != False
 
         # Construct a model instance of PrePostActionJobWithIdAndSummary by calling from_dict on the json representation
-        pre_post_action_job_with_id_and_summary_model_dict = PrePostActionJobWithIdAndSummary.from_dict(pre_post_action_job_with_id_and_summary_model_json).__dict__
-        pre_post_action_job_with_id_and_summary_model2 = PrePostActionJobWithIdAndSummary(**pre_post_action_job_with_id_and_summary_model_dict)
+        pre_post_action_job_with_id_and_summary_model_dict = PrePostActionJobWithIdAndSummary.from_dict(
+            pre_post_action_job_with_id_and_summary_model_json
+        ).__dict__
+        pre_post_action_job_with_id_and_summary_model2 = PrePostActionJobWithIdAndSummary(
+            **pre_post_action_job_with_id_and_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert pre_post_action_job_with_id_and_summary_model == pre_post_action_job_with_id_and_summary_model2
@@ -5249,7 +5424,9 @@ class TestModel_Project:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         project_config_summary_model = {}  # ProjectConfigSummary
         project_config_summary_model['approved_version'] = project_config_version_summary_model
@@ -5283,7 +5460,9 @@ class TestModel_Project:
 
         # Construct a json representation of a Project model
         project_model_json = {}
-        project_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_model_json['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         project_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_model_json['cumulative_needs_attention_view_error'] = False
@@ -5342,7 +5521,9 @@ class TestModel_ProjectCollection:
         project_definition_properties_model['monitoring_enabled'] = False
 
         project_summary_model = {}  # ProjectSummary
-        project_summary_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_summary_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         project_summary_model['created_at'] = '2019-01-01T12:00:00Z'
         project_summary_model['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_summary_model['cumulative_needs_attention_view_error'] = False
@@ -5399,7 +5580,9 @@ class TestModel_ProjectComplianceProfile:
         assert project_compliance_profile_model != False
 
         # Construct a model instance of ProjectComplianceProfile by calling from_dict on the json representation
-        project_compliance_profile_model_dict = ProjectComplianceProfile.from_dict(project_compliance_profile_model_json).__dict__
+        project_compliance_profile_model_dict = ProjectComplianceProfile.from_dict(
+            project_compliance_profile_model_json
+        ).__dict__
         project_compliance_profile_model2 = ProjectComplianceProfile(**project_compliance_profile_model_dict)
 
         # Verify the model instances are equivalent
@@ -5544,7 +5727,9 @@ class TestModel_ProjectConfig:
         code_risk_analyzer_logs_summary_model['failed'] = 'testString'
         code_risk_analyzer_logs_summary_model['skipped'] = 'testString'
 
-        project_config_metadata_code_risk_analyzer_logs_model = {}  # ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204
+        project_config_metadata_code_risk_analyzer_logs_model = (
+            {}
+        )  # ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204
         project_config_metadata_code_risk_analyzer_logs_model['cra_version'] = '2.0.4'
         project_config_metadata_code_risk_analyzer_logs_model['schema_version'] = 'testString'
         project_config_metadata_code_risk_analyzer_logs_model['status'] = 'passed'
@@ -5587,7 +5772,9 @@ class TestModel_ProjectConfig:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         script_model = {}  # Script
         script_model['type'] = 'ansible'
@@ -5595,7 +5782,9 @@ class TestModel_ProjectConfig:
         script_model['short_description'] = 'testString'
 
         schematics_metadata_model = {}  # SchematicsMetadata
-        schematics_metadata_model['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_metadata_model['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         schematics_metadata_model['validate_pre_script'] = script_model
         schematics_metadata_model['validate_post_script'] = script_model
         schematics_metadata_model['deploy_pre_script'] = script_model
@@ -5629,7 +5818,9 @@ class TestModel_ProjectConfig:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
-        project_config_definition_response_model = {}  # ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse
+        project_config_definition_response_model = (
+            {}
+        )  # ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse
         project_config_definition_response_model['compliance_profile'] = project_compliance_profile_model
         project_config_definition_response_model['locator_id'] = 'testString'
         project_config_definition_response_model['description'] = 'testString'
@@ -5765,7 +5956,9 @@ class TestModel_ProjectConfigCollection:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         project_config_summary_model = {}  # ProjectConfigSummary
         project_config_summary_model['approved_version'] = project_config_version_summary_model
@@ -5792,7 +5985,9 @@ class TestModel_ProjectConfigCollection:
         assert project_config_collection_model != False
 
         # Construct a model instance of ProjectConfigCollection by calling from_dict on the json representation
-        project_config_collection_model_dict = ProjectConfigCollection.from_dict(project_config_collection_model_json).__dict__
+        project_config_collection_model_dict = ProjectConfigCollection.from_dict(
+            project_config_collection_model_json
+        ).__dict__
         project_config_collection_model2 = ProjectConfigCollection(**project_config_collection_model_dict)
 
         # Verify the model instances are equivalent
@@ -5857,12 +6052,18 @@ class TestModel_ProjectConfigMetadataCostEstimate:
         project_config_metadata_cost_estimate_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json)
+        project_config_metadata_cost_estimate_model = ProjectConfigMetadataCostEstimate.from_dict(
+            project_config_metadata_cost_estimate_model_json
+        )
         assert project_config_metadata_cost_estimate_model != False
 
         # Construct a model instance of ProjectConfigMetadataCostEstimate by calling from_dict on the json representation
-        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(project_config_metadata_cost_estimate_model_json).__dict__
-        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(**project_config_metadata_cost_estimate_model_dict)
+        project_config_metadata_cost_estimate_model_dict = ProjectConfigMetadataCostEstimate.from_dict(
+            project_config_metadata_cost_estimate_model_json
+        ).__dict__
+        project_config_metadata_cost_estimate_model2 = ProjectConfigMetadataCostEstimate(
+            **project_config_metadata_cost_estimate_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_cost_estimate_model == project_config_metadata_cost_estimate_model2
@@ -5890,12 +6091,18 @@ class TestModel_ProjectConfigMetadataLastApproved:
         project_config_metadata_last_approved_model_json['user_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json)
+        project_config_metadata_last_approved_model = ProjectConfigMetadataLastApproved.from_dict(
+            project_config_metadata_last_approved_model_json
+        )
         assert project_config_metadata_last_approved_model != False
 
         # Construct a model instance of ProjectConfigMetadataLastApproved by calling from_dict on the json representation
-        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(project_config_metadata_last_approved_model_json).__dict__
-        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(**project_config_metadata_last_approved_model_dict)
+        project_config_metadata_last_approved_model_dict = ProjectConfigMetadataLastApproved.from_dict(
+            project_config_metadata_last_approved_model_json
+        ).__dict__
+        project_config_metadata_last_approved_model2 = ProjectConfigMetadataLastApproved(
+            **project_config_metadata_last_approved_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_metadata_last_approved_model == project_config_metadata_last_approved_model2
@@ -5926,12 +6133,18 @@ class TestModel_ProjectConfigNeedsAttentionState:
         project_config_needs_attention_state_model_json['timestamp'] = 'testString'
 
         # Construct a model instance of ProjectConfigNeedsAttentionState by calling from_dict on the json representation
-        project_config_needs_attention_state_model = ProjectConfigNeedsAttentionState.from_dict(project_config_needs_attention_state_model_json)
+        project_config_needs_attention_state_model = ProjectConfigNeedsAttentionState.from_dict(
+            project_config_needs_attention_state_model_json
+        )
         assert project_config_needs_attention_state_model != False
 
         # Construct a model instance of ProjectConfigNeedsAttentionState by calling from_dict on the json representation
-        project_config_needs_attention_state_model_dict = ProjectConfigNeedsAttentionState.from_dict(project_config_needs_attention_state_model_json).__dict__
-        project_config_needs_attention_state_model2 = ProjectConfigNeedsAttentionState(**project_config_needs_attention_state_model_dict)
+        project_config_needs_attention_state_model_dict = ProjectConfigNeedsAttentionState.from_dict(
+            project_config_needs_attention_state_model_json
+        ).__dict__
+        project_config_needs_attention_state_model2 = ProjectConfigNeedsAttentionState(
+            **project_config_needs_attention_state_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_needs_attention_state_model == project_config_needs_attention_state_model2
@@ -5965,7 +6178,9 @@ class TestModel_ProjectConfigPrototype:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
-        project_config_definition_prototype_model = {}  # ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype
+        project_config_definition_prototype_model = (
+            {}
+        )  # ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype
         project_config_definition_prototype_model['compliance_profile'] = project_compliance_profile_model
         project_config_definition_prototype_model['locator_id'] = 'testString'
         project_config_definition_prototype_model['description'] = 'testString'
@@ -5976,7 +6191,9 @@ class TestModel_ProjectConfigPrototype:
         project_config_definition_prototype_model['settings'] = {'anyKey': 'anyValue'}
 
         schematics_workspace_model = {}  # SchematicsWorkspace
-        schematics_workspace_model['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_workspace_model['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Construct a json representation of a ProjectConfigPrototype model
         project_config_prototype_model_json = {}
@@ -5988,7 +6205,9 @@ class TestModel_ProjectConfigPrototype:
         assert project_config_prototype_model != False
 
         # Construct a model instance of ProjectConfigPrototype by calling from_dict on the json representation
-        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(project_config_prototype_model_json).__dict__
+        project_config_prototype_model_dict = ProjectConfigPrototype.from_dict(
+            project_config_prototype_model_json
+        ).__dict__
         project_config_prototype_model2 = ProjectConfigPrototype(**project_config_prototype_model_dict)
 
         # Verify the model instances are equivalent
@@ -6011,7 +6230,9 @@ class TestModel_ProjectConfigResource:
 
         # Construct a json representation of a ProjectConfigResource model
         project_config_resource_model_json = {}
-        project_config_resource_model_json['resource_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_config_resource_model_json['resource_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         project_config_resource_model_json['resource_name'] = 'testString'
         project_config_resource_model_json['resource_type'] = 'testString'
         project_config_resource_model_json['resource_tainted'] = True
@@ -6022,7 +6243,9 @@ class TestModel_ProjectConfigResource:
         assert project_config_resource_model != False
 
         # Construct a model instance of ProjectConfigResource by calling from_dict on the json representation
-        project_config_resource_model_dict = ProjectConfigResource.from_dict(project_config_resource_model_json).__dict__
+        project_config_resource_model_dict = ProjectConfigResource.from_dict(
+            project_config_resource_model_json
+        ).__dict__
         project_config_resource_model2 = ProjectConfigResource(**project_config_resource_model_dict)
 
         # Verify the model instances are equivalent
@@ -6046,7 +6269,9 @@ class TestModel_ProjectConfigResourceCollection:
         # Construct dict forms of any model objects needed in order to build this model.
 
         project_config_resource_model = {}  # ProjectConfigResource
-        project_config_resource_model['resource_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_config_resource_model['resource_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         project_config_resource_model['resource_name'] = 'testString'
         project_config_resource_model['resource_type'] = 'testString'
         project_config_resource_model['resource_tainted'] = True
@@ -6058,12 +6283,18 @@ class TestModel_ProjectConfigResourceCollection:
         project_config_resource_collection_model_json['resources_count'] = 38
 
         # Construct a model instance of ProjectConfigResourceCollection by calling from_dict on the json representation
-        project_config_resource_collection_model = ProjectConfigResourceCollection.from_dict(project_config_resource_collection_model_json)
+        project_config_resource_collection_model = ProjectConfigResourceCollection.from_dict(
+            project_config_resource_collection_model_json
+        )
         assert project_config_resource_collection_model != False
 
         # Construct a model instance of ProjectConfigResourceCollection by calling from_dict on the json representation
-        project_config_resource_collection_model_dict = ProjectConfigResourceCollection.from_dict(project_config_resource_collection_model_json).__dict__
-        project_config_resource_collection_model2 = ProjectConfigResourceCollection(**project_config_resource_collection_model_dict)
+        project_config_resource_collection_model_dict = ProjectConfigResourceCollection.from_dict(
+            project_config_resource_collection_model_json
+        ).__dict__
+        project_config_resource_collection_model2 = ProjectConfigResourceCollection(
+            **project_config_resource_collection_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_resource_collection_model == project_config_resource_collection_model2
@@ -6108,7 +6339,9 @@ class TestModel_ProjectConfigSummary:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Construct a json representation of a ProjectConfigSummary model
         project_config_summary_model_json = {}
@@ -6157,12 +6390,18 @@ class TestModel_ProjectConfigSummaryDefinition:
         project_config_summary_definition_model_json['locator_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigSummaryDefinition by calling from_dict on the json representation
-        project_config_summary_definition_model = ProjectConfigSummaryDefinition.from_dict(project_config_summary_definition_model_json)
+        project_config_summary_definition_model = ProjectConfigSummaryDefinition.from_dict(
+            project_config_summary_definition_model_json
+        )
         assert project_config_summary_definition_model != False
 
         # Construct a model instance of ProjectConfigSummaryDefinition by calling from_dict on the json representation
-        project_config_summary_definition_model_dict = ProjectConfigSummaryDefinition.from_dict(project_config_summary_definition_model_json).__dict__
-        project_config_summary_definition_model2 = ProjectConfigSummaryDefinition(**project_config_summary_definition_model_dict)
+        project_config_summary_definition_model_dict = ProjectConfigSummaryDefinition.from_dict(
+            project_config_summary_definition_model_json
+        ).__dict__
+        project_config_summary_definition_model2 = ProjectConfigSummaryDefinition(
+            **project_config_summary_definition_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_summary_definition_model == project_config_summary_definition_model2
@@ -6306,7 +6545,9 @@ class TestModel_ProjectConfigVersion:
         code_risk_analyzer_logs_summary_model['failed'] = 'testString'
         code_risk_analyzer_logs_summary_model['skipped'] = 'testString'
 
-        project_config_metadata_code_risk_analyzer_logs_model = {}  # ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204
+        project_config_metadata_code_risk_analyzer_logs_model = (
+            {}
+        )  # ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204
         project_config_metadata_code_risk_analyzer_logs_model['cra_version'] = '2.0.4'
         project_config_metadata_code_risk_analyzer_logs_model['schema_version'] = 'testString'
         project_config_metadata_code_risk_analyzer_logs_model['status'] = 'passed'
@@ -6349,7 +6590,9 @@ class TestModel_ProjectConfigVersion:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         script_model = {}  # Script
         script_model['type'] = 'ansible'
@@ -6357,7 +6600,9 @@ class TestModel_ProjectConfigVersion:
         script_model['short_description'] = 'testString'
 
         schematics_metadata_model = {}  # SchematicsMetadata
-        schematics_metadata_model['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_metadata_model['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         schematics_metadata_model['validate_pre_script'] = script_model
         schematics_metadata_model['validate_post_script'] = script_model
         schematics_metadata_model['deploy_pre_script'] = script_model
@@ -6391,7 +6636,9 @@ class TestModel_ProjectConfigVersion:
         project_config_auth_model['method'] = 'api_key'
         project_config_auth_model['api_key'] = 'testString'
 
-        project_config_definition_response_model = {}  # ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse
+        project_config_definition_response_model = (
+            {}
+        )  # ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse
         project_config_definition_response_model['compliance_profile'] = project_compliance_profile_model
         project_config_definition_response_model['locator_id'] = 'testString'
         project_config_definition_response_model['description'] = 'testString'
@@ -6460,19 +6707,30 @@ class TestModel_ProjectConfigVersionDefinitionSummary:
         project_config_version_definition_summary_model_json['locator_id'] = 'testString'
 
         # Construct a model instance of ProjectConfigVersionDefinitionSummary by calling from_dict on the json representation
-        project_config_version_definition_summary_model = ProjectConfigVersionDefinitionSummary.from_dict(project_config_version_definition_summary_model_json)
+        project_config_version_definition_summary_model = ProjectConfigVersionDefinitionSummary.from_dict(
+            project_config_version_definition_summary_model_json
+        )
         assert project_config_version_definition_summary_model != False
 
         # Construct a model instance of ProjectConfigVersionDefinitionSummary by calling from_dict on the json representation
-        project_config_version_definition_summary_model_dict = ProjectConfigVersionDefinitionSummary.from_dict(project_config_version_definition_summary_model_json).__dict__
-        project_config_version_definition_summary_model2 = ProjectConfigVersionDefinitionSummary(**project_config_version_definition_summary_model_dict)
+        project_config_version_definition_summary_model_dict = ProjectConfigVersionDefinitionSummary.from_dict(
+            project_config_version_definition_summary_model_json
+        ).__dict__
+        project_config_version_definition_summary_model2 = ProjectConfigVersionDefinitionSummary(
+            **project_config_version_definition_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_version_definition_summary_model == project_config_version_definition_summary_model2
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_version_definition_summary_model_json2 = project_config_version_definition_summary_model.to_dict()
-        assert project_config_version_definition_summary_model_json2 == project_config_version_definition_summary_model_json
+        project_config_version_definition_summary_model_json2 = (
+            project_config_version_definition_summary_model.to_dict()
+        )
+        assert (
+            project_config_version_definition_summary_model_json2
+            == project_config_version_definition_summary_model_json
+        )
 
 
 class TestModel_ProjectConfigVersionSummary:
@@ -6500,11 +6758,15 @@ class TestModel_ProjectConfigVersionSummary:
         project_config_version_summary_model_json['href'] = 'testString'
 
         # Construct a model instance of ProjectConfigVersionSummary by calling from_dict on the json representation
-        project_config_version_summary_model = ProjectConfigVersionSummary.from_dict(project_config_version_summary_model_json)
+        project_config_version_summary_model = ProjectConfigVersionSummary.from_dict(
+            project_config_version_summary_model_json
+        )
         assert project_config_version_summary_model != False
 
         # Construct a model instance of ProjectConfigVersionSummary by calling from_dict on the json representation
-        project_config_version_summary_model_dict = ProjectConfigVersionSummary.from_dict(project_config_version_summary_model_json).__dict__
+        project_config_version_summary_model_dict = ProjectConfigVersionSummary.from_dict(
+            project_config_version_summary_model_json
+        ).__dict__
         project_config_version_summary_model2 = ProjectConfigVersionSummary(**project_config_version_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -6543,19 +6805,30 @@ class TestModel_ProjectConfigVersionSummaryCollection:
         project_config_version_summary_collection_model_json['versions'] = [project_config_version_summary_model]
 
         # Construct a model instance of ProjectConfigVersionSummaryCollection by calling from_dict on the json representation
-        project_config_version_summary_collection_model = ProjectConfigVersionSummaryCollection.from_dict(project_config_version_summary_collection_model_json)
+        project_config_version_summary_collection_model = ProjectConfigVersionSummaryCollection.from_dict(
+            project_config_version_summary_collection_model_json
+        )
         assert project_config_version_summary_collection_model != False
 
         # Construct a model instance of ProjectConfigVersionSummaryCollection by calling from_dict on the json representation
-        project_config_version_summary_collection_model_dict = ProjectConfigVersionSummaryCollection.from_dict(project_config_version_summary_collection_model_json).__dict__
-        project_config_version_summary_collection_model2 = ProjectConfigVersionSummaryCollection(**project_config_version_summary_collection_model_dict)
+        project_config_version_summary_collection_model_dict = ProjectConfigVersionSummaryCollection.from_dict(
+            project_config_version_summary_collection_model_json
+        ).__dict__
+        project_config_version_summary_collection_model2 = ProjectConfigVersionSummaryCollection(
+            **project_config_version_summary_collection_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_config_version_summary_collection_model == project_config_version_summary_collection_model2
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_version_summary_collection_model_json2 = project_config_version_summary_collection_model.to_dict()
-        assert project_config_version_summary_collection_model_json2 == project_config_version_summary_collection_model_json
+        project_config_version_summary_collection_model_json2 = (
+            project_config_version_summary_collection_model.to_dict()
+        )
+        assert (
+            project_config_version_summary_collection_model_json2
+            == project_config_version_summary_collection_model_json
+        )
 
 
 class TestModel_ProjectDefinitionProperties:
@@ -6576,11 +6849,15 @@ class TestModel_ProjectDefinitionProperties:
         project_definition_properties_model_json['monitoring_enabled'] = False
 
         # Construct a model instance of ProjectDefinitionProperties by calling from_dict on the json representation
-        project_definition_properties_model = ProjectDefinitionProperties.from_dict(project_definition_properties_model_json)
+        project_definition_properties_model = ProjectDefinitionProperties.from_dict(
+            project_definition_properties_model_json
+        )
         assert project_definition_properties_model != False
 
         # Construct a model instance of ProjectDefinitionProperties by calling from_dict on the json representation
-        project_definition_properties_model_dict = ProjectDefinitionProperties.from_dict(project_definition_properties_model_json).__dict__
+        project_definition_properties_model_dict = ProjectDefinitionProperties.from_dict(
+            project_definition_properties_model_json
+        ).__dict__
         project_definition_properties_model2 = ProjectDefinitionProperties(**project_definition_properties_model_dict)
 
         # Verify the model instances are equivalent
@@ -6606,11 +6883,15 @@ class TestModel_ProjectDefinitionReference:
         project_definition_reference_model_json['name'] = 'testString'
 
         # Construct a model instance of ProjectDefinitionReference by calling from_dict on the json representation
-        project_definition_reference_model = ProjectDefinitionReference.from_dict(project_definition_reference_model_json)
+        project_definition_reference_model = ProjectDefinitionReference.from_dict(
+            project_definition_reference_model_json
+        )
         assert project_definition_reference_model != False
 
         # Construct a model instance of ProjectDefinitionReference by calling from_dict on the json representation
-        project_definition_reference_model_dict = ProjectDefinitionReference.from_dict(project_definition_reference_model_json).__dict__
+        project_definition_reference_model_dict = ProjectDefinitionReference.from_dict(
+            project_definition_reference_model_json
+        ).__dict__
         project_definition_reference_model2 = ProjectDefinitionReference(**project_definition_reference_model_dict)
 
         # Verify the model instances are equivalent
@@ -6640,7 +6921,9 @@ class TestModel_ProjectDeleteResponse:
         assert project_delete_response_model != False
 
         # Construct a model instance of ProjectDeleteResponse by calling from_dict on the json representation
-        project_delete_response_model_dict = ProjectDeleteResponse.from_dict(project_delete_response_model_json).__dict__
+        project_delete_response_model_dict = ProjectDeleteResponse.from_dict(
+            project_delete_response_model_json
+        ).__dict__
         project_delete_response_model2 = ProjectDeleteResponse(**project_delete_response_model_dict)
 
         # Verify the model instances are equivalent
@@ -6670,7 +6953,9 @@ class TestModel_ProjectEnvironmentSummary:
         project_reference_model['id'] = 'testString'
         project_reference_model['href'] = 'testString'
         project_reference_model['definition'] = project_definition_reference_model
-        project_reference_model['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         project_environment_summary_definition_model = {}  # ProjectEnvironmentSummaryDefinition
         project_environment_summary_definition_model['description'] = 'testString'
@@ -6689,7 +6974,9 @@ class TestModel_ProjectEnvironmentSummary:
         assert project_environment_summary_model != False
 
         # Construct a model instance of ProjectEnvironmentSummary by calling from_dict on the json representation
-        project_environment_summary_model_dict = ProjectEnvironmentSummary.from_dict(project_environment_summary_model_json).__dict__
+        project_environment_summary_model_dict = ProjectEnvironmentSummary.from_dict(
+            project_environment_summary_model_json
+        ).__dict__
         project_environment_summary_model2 = ProjectEnvironmentSummary(**project_environment_summary_model_dict)
 
         # Verify the model instances are equivalent
@@ -6716,12 +7003,18 @@ class TestModel_ProjectEnvironmentSummaryDefinition:
         project_environment_summary_definition_model_json['name'] = 'testString'
 
         # Construct a model instance of ProjectEnvironmentSummaryDefinition by calling from_dict on the json representation
-        project_environment_summary_definition_model = ProjectEnvironmentSummaryDefinition.from_dict(project_environment_summary_definition_model_json)
+        project_environment_summary_definition_model = ProjectEnvironmentSummaryDefinition.from_dict(
+            project_environment_summary_definition_model_json
+        )
         assert project_environment_summary_definition_model != False
 
         # Construct a model instance of ProjectEnvironmentSummaryDefinition by calling from_dict on the json representation
-        project_environment_summary_definition_model_dict = ProjectEnvironmentSummaryDefinition.from_dict(project_environment_summary_definition_model_json).__dict__
-        project_environment_summary_definition_model2 = ProjectEnvironmentSummaryDefinition(**project_environment_summary_definition_model_dict)
+        project_environment_summary_definition_model_dict = ProjectEnvironmentSummaryDefinition.from_dict(
+            project_environment_summary_definition_model_json
+        ).__dict__
+        project_environment_summary_definition_model2 = ProjectEnvironmentSummaryDefinition(
+            **project_environment_summary_definition_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert project_environment_summary_definition_model == project_environment_summary_definition_model2
@@ -6749,11 +7042,15 @@ class TestModel_ProjectPatchDefinitionBlock:
         project_patch_definition_block_model_json['monitoring_enabled'] = True
 
         # Construct a model instance of ProjectPatchDefinitionBlock by calling from_dict on the json representation
-        project_patch_definition_block_model = ProjectPatchDefinitionBlock.from_dict(project_patch_definition_block_model_json)
+        project_patch_definition_block_model = ProjectPatchDefinitionBlock.from_dict(
+            project_patch_definition_block_model_json
+        )
         assert project_patch_definition_block_model != False
 
         # Construct a model instance of ProjectPatchDefinitionBlock by calling from_dict on the json representation
-        project_patch_definition_block_model_dict = ProjectPatchDefinitionBlock.from_dict(project_patch_definition_block_model_json).__dict__
+        project_patch_definition_block_model_dict = ProjectPatchDefinitionBlock.from_dict(
+            project_patch_definition_block_model_json
+        ).__dict__
         project_patch_definition_block_model2 = ProjectPatchDefinitionBlock(**project_patch_definition_block_model_dict)
 
         # Verify the model instances are equivalent
@@ -6782,11 +7079,15 @@ class TestModel_ProjectPrototypeDefinition:
         project_prototype_definition_model_json['monitoring_enabled'] = False
 
         # Construct a model instance of ProjectPrototypeDefinition by calling from_dict on the json representation
-        project_prototype_definition_model = ProjectPrototypeDefinition.from_dict(project_prototype_definition_model_json)
+        project_prototype_definition_model = ProjectPrototypeDefinition.from_dict(
+            project_prototype_definition_model_json
+        )
         assert project_prototype_definition_model != False
 
         # Construct a model instance of ProjectPrototypeDefinition by calling from_dict on the json representation
-        project_prototype_definition_model_dict = ProjectPrototypeDefinition.from_dict(project_prototype_definition_model_json).__dict__
+        project_prototype_definition_model_dict = ProjectPrototypeDefinition.from_dict(
+            project_prototype_definition_model_json
+        ).__dict__
         project_prototype_definition_model2 = ProjectPrototypeDefinition(**project_prototype_definition_model_dict)
 
         # Verify the model instances are equivalent
@@ -6817,7 +7118,9 @@ class TestModel_ProjectReference:
         project_reference_model_json['id'] = 'testString'
         project_reference_model_json['href'] = 'testString'
         project_reference_model_json['definition'] = project_definition_reference_model
-        project_reference_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_reference_model_json['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Construct a model instance of ProjectReference by calling from_dict on the json representation
         project_reference_model = ProjectReference.from_dict(project_reference_model_json)
@@ -6861,7 +7164,9 @@ class TestModel_ProjectSummary:
 
         # Construct a json representation of a ProjectSummary model
         project_summary_model_json = {}
-        project_summary_model_json['crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        project_summary_model_json['crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         project_summary_model_json['created_at'] = '2019-01-01T12:00:00Z'
         project_summary_model_json['cumulative_needs_attention_view'] = [cumulative_needs_attention_model]
         project_summary_model_json['cumulative_needs_attention_view_error'] = False
@@ -6907,7 +7212,9 @@ class TestModel_SchematicsMetadata:
 
         # Construct a json representation of a SchematicsMetadata model
         schematics_metadata_model_json = {}
-        schematics_metadata_model_json['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_metadata_model_json['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
         schematics_metadata_model_json['validate_pre_script'] = script_model
         schematics_metadata_model_json['validate_post_script'] = script_model
         schematics_metadata_model_json['deploy_pre_script'] = script_model
@@ -6943,7 +7250,9 @@ class TestModel_SchematicsWorkspace:
 
         # Construct a json representation of a SchematicsWorkspace model
         schematics_workspace_model_json = {}
-        schematics_workspace_model_json['workspace_crn'] = 'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        schematics_workspace_model_json['workspace_crn'] = (
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        )
 
         # Construct a model instance of SchematicsWorkspace by calling from_dict on the json representation
         schematics_workspace_model = SchematicsWorkspace.from_dict(schematics_workspace_model_json)
@@ -7015,12 +7324,18 @@ class TestModel_StackConfigDefinitionSummary:
         stack_config_definition_summary_model_json['members'] = [stack_config_member_model]
 
         # Construct a model instance of StackConfigDefinitionSummary by calling from_dict on the json representation
-        stack_config_definition_summary_model = StackConfigDefinitionSummary.from_dict(stack_config_definition_summary_model_json)
+        stack_config_definition_summary_model = StackConfigDefinitionSummary.from_dict(
+            stack_config_definition_summary_model_json
+        )
         assert stack_config_definition_summary_model != False
 
         # Construct a model instance of StackConfigDefinitionSummary by calling from_dict on the json representation
-        stack_config_definition_summary_model_dict = StackConfigDefinitionSummary.from_dict(stack_config_definition_summary_model_json).__dict__
-        stack_config_definition_summary_model2 = StackConfigDefinitionSummary(**stack_config_definition_summary_model_dict)
+        stack_config_definition_summary_model_dict = StackConfigDefinitionSummary.from_dict(
+            stack_config_definition_summary_model_json
+        ).__dict__
+        stack_config_definition_summary_model2 = StackConfigDefinitionSummary(
+            **stack_config_definition_summary_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_config_definition_summary_model == stack_config_definition_summary_model2
@@ -7226,12 +7541,18 @@ class TestModel_StackDefinitionBlockPrototype:
         stack_definition_block_prototype_model_json['members'] = [stack_definition_member_prototype_model]
 
         # Construct a model instance of StackDefinitionBlockPrototype by calling from_dict on the json representation
-        stack_definition_block_prototype_model = StackDefinitionBlockPrototype.from_dict(stack_definition_block_prototype_model_json)
+        stack_definition_block_prototype_model = StackDefinitionBlockPrototype.from_dict(
+            stack_definition_block_prototype_model_json
+        )
         assert stack_definition_block_prototype_model != False
 
         # Construct a model instance of StackDefinitionBlockPrototype by calling from_dict on the json representation
-        stack_definition_block_prototype_model_dict = StackDefinitionBlockPrototype.from_dict(stack_definition_block_prototype_model_json).__dict__
-        stack_definition_block_prototype_model2 = StackDefinitionBlockPrototype(**stack_definition_block_prototype_model_dict)
+        stack_definition_block_prototype_model_dict = StackDefinitionBlockPrototype.from_dict(
+            stack_definition_block_prototype_model_json
+        ).__dict__
+        stack_definition_block_prototype_model2 = StackDefinitionBlockPrototype(
+            **stack_definition_block_prototype_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_definition_block_prototype_model == stack_definition_block_prototype_model2
@@ -7260,12 +7581,18 @@ class TestModel_StackDefinitionExportResponse:
         stack_definition_export_response_model_json['format'] = 'testString'
 
         # Construct a model instance of StackDefinitionExportResponse by calling from_dict on the json representation
-        stack_definition_export_response_model = StackDefinitionExportResponse.from_dict(stack_definition_export_response_model_json)
+        stack_definition_export_response_model = StackDefinitionExportResponse.from_dict(
+            stack_definition_export_response_model_json
+        )
         assert stack_definition_export_response_model != False
 
         # Construct a model instance of StackDefinitionExportResponse by calling from_dict on the json representation
-        stack_definition_export_response_model_dict = StackDefinitionExportResponse.from_dict(stack_definition_export_response_model_json).__dict__
-        stack_definition_export_response_model2 = StackDefinitionExportResponse(**stack_definition_export_response_model_dict)
+        stack_definition_export_response_model_dict = StackDefinitionExportResponse.from_dict(
+            stack_definition_export_response_model_json
+        ).__dict__
+        stack_definition_export_response_model2 = StackDefinitionExportResponse(
+            **stack_definition_export_response_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_definition_export_response_model == stack_definition_export_response_model2
@@ -7295,12 +7622,18 @@ class TestModel_StackDefinitionInputVariable:
         stack_definition_input_variable_model_json['hidden'] = True
 
         # Construct a model instance of StackDefinitionInputVariable by calling from_dict on the json representation
-        stack_definition_input_variable_model = StackDefinitionInputVariable.from_dict(stack_definition_input_variable_model_json)
+        stack_definition_input_variable_model = StackDefinitionInputVariable.from_dict(
+            stack_definition_input_variable_model_json
+        )
         assert stack_definition_input_variable_model != False
 
         # Construct a model instance of StackDefinitionInputVariable by calling from_dict on the json representation
-        stack_definition_input_variable_model_dict = StackDefinitionInputVariable.from_dict(stack_definition_input_variable_model_json).__dict__
-        stack_definition_input_variable_model2 = StackDefinitionInputVariable(**stack_definition_input_variable_model_dict)
+        stack_definition_input_variable_model_dict = StackDefinitionInputVariable.from_dict(
+            stack_definition_input_variable_model_json
+        ).__dict__
+        stack_definition_input_variable_model2 = StackDefinitionInputVariable(
+            **stack_definition_input_variable_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_definition_input_variable_model == stack_definition_input_variable_model2
@@ -7337,7 +7670,9 @@ class TestModel_StackDefinitionMember:
         assert stack_definition_member_model != False
 
         # Construct a model instance of StackDefinitionMember by calling from_dict on the json representation
-        stack_definition_member_model_dict = StackDefinitionMember.from_dict(stack_definition_member_model_json).__dict__
+        stack_definition_member_model_dict = StackDefinitionMember.from_dict(
+            stack_definition_member_model_json
+        ).__dict__
         stack_definition_member_model2 = StackDefinitionMember(**stack_definition_member_model_dict)
 
         # Verify the model instances are equivalent
@@ -7364,11 +7699,15 @@ class TestModel_StackDefinitionMemberInput:
         stack_definition_member_input_model_json['value'] = 'testString'
 
         # Construct a model instance of StackDefinitionMemberInput by calling from_dict on the json representation
-        stack_definition_member_input_model = StackDefinitionMemberInput.from_dict(stack_definition_member_input_model_json)
+        stack_definition_member_input_model = StackDefinitionMemberInput.from_dict(
+            stack_definition_member_input_model_json
+        )
         assert stack_definition_member_input_model != False
 
         # Construct a model instance of StackDefinitionMemberInput by calling from_dict on the json representation
-        stack_definition_member_input_model_dict = StackDefinitionMemberInput.from_dict(stack_definition_member_input_model_json).__dict__
+        stack_definition_member_input_model_dict = StackDefinitionMemberInput.from_dict(
+            stack_definition_member_input_model_json
+        ).__dict__
         stack_definition_member_input_model2 = StackDefinitionMemberInput(**stack_definition_member_input_model_dict)
 
         # Verify the model instances are equivalent
@@ -7394,12 +7733,18 @@ class TestModel_StackDefinitionMemberInputPrototype:
         stack_definition_member_input_prototype_model_json['name'] = 'testString'
 
         # Construct a model instance of StackDefinitionMemberInputPrototype by calling from_dict on the json representation
-        stack_definition_member_input_prototype_model = StackDefinitionMemberInputPrototype.from_dict(stack_definition_member_input_prototype_model_json)
+        stack_definition_member_input_prototype_model = StackDefinitionMemberInputPrototype.from_dict(
+            stack_definition_member_input_prototype_model_json
+        )
         assert stack_definition_member_input_prototype_model != False
 
         # Construct a model instance of StackDefinitionMemberInputPrototype by calling from_dict on the json representation
-        stack_definition_member_input_prototype_model_dict = StackDefinitionMemberInputPrototype.from_dict(stack_definition_member_input_prototype_model_json).__dict__
-        stack_definition_member_input_prototype_model2 = StackDefinitionMemberInputPrototype(**stack_definition_member_input_prototype_model_dict)
+        stack_definition_member_input_prototype_model_dict = StackDefinitionMemberInputPrototype.from_dict(
+            stack_definition_member_input_prototype_model_json
+        ).__dict__
+        stack_definition_member_input_prototype_model2 = StackDefinitionMemberInputPrototype(
+            **stack_definition_member_input_prototype_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_definition_member_input_prototype_model == stack_definition_member_input_prototype_model2
@@ -7430,12 +7775,18 @@ class TestModel_StackDefinitionMemberPrototype:
         stack_definition_member_prototype_model_json['inputs'] = [stack_definition_member_input_prototype_model]
 
         # Construct a model instance of StackDefinitionMemberPrototype by calling from_dict on the json representation
-        stack_definition_member_prototype_model = StackDefinitionMemberPrototype.from_dict(stack_definition_member_prototype_model_json)
+        stack_definition_member_prototype_model = StackDefinitionMemberPrototype.from_dict(
+            stack_definition_member_prototype_model_json
+        )
         assert stack_definition_member_prototype_model != False
 
         # Construct a model instance of StackDefinitionMemberPrototype by calling from_dict on the json representation
-        stack_definition_member_prototype_model_dict = StackDefinitionMemberPrototype.from_dict(stack_definition_member_prototype_model_json).__dict__
-        stack_definition_member_prototype_model2 = StackDefinitionMemberPrototype(**stack_definition_member_prototype_model_dict)
+        stack_definition_member_prototype_model_dict = StackDefinitionMemberPrototype.from_dict(
+            stack_definition_member_prototype_model_json
+        ).__dict__
+        stack_definition_member_prototype_model2 = StackDefinitionMemberPrototype(
+            **stack_definition_member_prototype_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_definition_member_prototype_model == stack_definition_member_prototype_model2
@@ -7467,12 +7818,18 @@ class TestModel_StackDefinitionMetadataConfiguration:
         stack_definition_metadata_configuration_model_json['definition'] = config_definition_reference_model
 
         # Construct a model instance of StackDefinitionMetadataConfiguration by calling from_dict on the json representation
-        stack_definition_metadata_configuration_model = StackDefinitionMetadataConfiguration.from_dict(stack_definition_metadata_configuration_model_json)
+        stack_definition_metadata_configuration_model = StackDefinitionMetadataConfiguration.from_dict(
+            stack_definition_metadata_configuration_model_json
+        )
         assert stack_definition_metadata_configuration_model != False
 
         # Construct a model instance of StackDefinitionMetadataConfiguration by calling from_dict on the json representation
-        stack_definition_metadata_configuration_model_dict = StackDefinitionMetadataConfiguration.from_dict(stack_definition_metadata_configuration_model_json).__dict__
-        stack_definition_metadata_configuration_model2 = StackDefinitionMetadataConfiguration(**stack_definition_metadata_configuration_model_dict)
+        stack_definition_metadata_configuration_model_dict = StackDefinitionMetadataConfiguration.from_dict(
+            stack_definition_metadata_configuration_model_json
+        ).__dict__
+        stack_definition_metadata_configuration_model2 = StackDefinitionMetadataConfiguration(
+            **stack_definition_metadata_configuration_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_definition_metadata_configuration_model == stack_definition_metadata_configuration_model2
@@ -7498,12 +7855,18 @@ class TestModel_StackDefinitionOutputVariable:
         stack_definition_output_variable_model_json['value'] = 'testString'
 
         # Construct a model instance of StackDefinitionOutputVariable by calling from_dict on the json representation
-        stack_definition_output_variable_model = StackDefinitionOutputVariable.from_dict(stack_definition_output_variable_model_json)
+        stack_definition_output_variable_model = StackDefinitionOutputVariable.from_dict(
+            stack_definition_output_variable_model_json
+        )
         assert stack_definition_output_variable_model != False
 
         # Construct a model instance of StackDefinitionOutputVariable by calling from_dict on the json representation
-        stack_definition_output_variable_model_dict = StackDefinitionOutputVariable.from_dict(stack_definition_output_variable_model_json).__dict__
-        stack_definition_output_variable_model2 = StackDefinitionOutputVariable(**stack_definition_output_variable_model_dict)
+        stack_definition_output_variable_model_dict = StackDefinitionOutputVariable.from_dict(
+            stack_definition_output_variable_model_json
+        ).__dict__
+        stack_definition_output_variable_model2 = StackDefinitionOutputVariable(
+            **stack_definition_output_variable_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert stack_definition_output_variable_model == stack_definition_output_variable_model2
@@ -7528,12 +7891,18 @@ class TestModel_TerraformLogAnalyzerErrorMessage:
         terraform_log_analyzer_error_message_model_json['foo'] = 'testString'
 
         # Construct a model instance of TerraformLogAnalyzerErrorMessage by calling from_dict on the json representation
-        terraform_log_analyzer_error_message_model = TerraformLogAnalyzerErrorMessage.from_dict(terraform_log_analyzer_error_message_model_json)
+        terraform_log_analyzer_error_message_model = TerraformLogAnalyzerErrorMessage.from_dict(
+            terraform_log_analyzer_error_message_model_json
+        )
         assert terraform_log_analyzer_error_message_model != False
 
         # Construct a model instance of TerraformLogAnalyzerErrorMessage by calling from_dict on the json representation
-        terraform_log_analyzer_error_message_model_dict = TerraformLogAnalyzerErrorMessage.from_dict(terraform_log_analyzer_error_message_model_json).__dict__
-        terraform_log_analyzer_error_message_model2 = TerraformLogAnalyzerErrorMessage(**terraform_log_analyzer_error_message_model_dict)
+        terraform_log_analyzer_error_message_model_dict = TerraformLogAnalyzerErrorMessage.from_dict(
+            terraform_log_analyzer_error_message_model_json
+        ).__dict__
+        terraform_log_analyzer_error_message_model2 = TerraformLogAnalyzerErrorMessage(
+            **terraform_log_analyzer_error_message_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert terraform_log_analyzer_error_message_model == terraform_log_analyzer_error_message_model2
@@ -7570,12 +7939,18 @@ class TestModel_TerraformLogAnalyzerSuccessMessage:
         terraform_log_analyzer_success_message_model_json['id'] = 'testString'
 
         # Construct a model instance of TerraformLogAnalyzerSuccessMessage by calling from_dict on the json representation
-        terraform_log_analyzer_success_message_model = TerraformLogAnalyzerSuccessMessage.from_dict(terraform_log_analyzer_success_message_model_json)
+        terraform_log_analyzer_success_message_model = TerraformLogAnalyzerSuccessMessage.from_dict(
+            terraform_log_analyzer_success_message_model_json
+        )
         assert terraform_log_analyzer_success_message_model != False
 
         # Construct a model instance of TerraformLogAnalyzerSuccessMessage by calling from_dict on the json representation
-        terraform_log_analyzer_success_message_model_dict = TerraformLogAnalyzerSuccessMessage.from_dict(terraform_log_analyzer_success_message_model_json).__dict__
-        terraform_log_analyzer_success_message_model2 = TerraformLogAnalyzerSuccessMessage(**terraform_log_analyzer_success_message_model_dict)
+        terraform_log_analyzer_success_message_model_dict = TerraformLogAnalyzerSuccessMessage.from_dict(
+            terraform_log_analyzer_success_message_model_json
+        ).__dict__
+        terraform_log_analyzer_success_message_model2 = TerraformLogAnalyzerSuccessMessage(
+            **terraform_log_analyzer_success_message_model_dict
+        )
 
         # Verify the model instances are equivalent
         assert terraform_log_analyzer_success_message_model == terraform_log_analyzer_success_message_model2
@@ -7611,29 +7986,59 @@ class TestModel_ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch:
 
         # Construct a json representation of a ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch model
         project_config_definition_patch_da_config_definition_properties_patch_model_json = {}
-        project_config_definition_patch_da_config_definition_properties_patch_model_json['compliance_profile'] = project_compliance_profile_model
+        project_config_definition_patch_da_config_definition_properties_patch_model_json['compliance_profile'] = (
+            project_compliance_profile_model
+        )
         project_config_definition_patch_da_config_definition_properties_patch_model_json['locator_id'] = 'testString'
         project_config_definition_patch_da_config_definition_properties_patch_model_json['description'] = 'testString'
         project_config_definition_patch_da_config_definition_properties_patch_model_json['name'] = 'testString'
-        project_config_definition_patch_da_config_definition_properties_patch_model_json['environment_id'] = 'testString'
-        project_config_definition_patch_da_config_definition_properties_patch_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_patch_da_config_definition_properties_patch_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_patch_da_config_definition_properties_patch_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_patch_da_config_definition_properties_patch_model_json['environment_id'] = (
+            'testString'
+        )
+        project_config_definition_patch_da_config_definition_properties_patch_model_json['authorizations'] = (
+            project_config_auth_model
+        )
+        project_config_definition_patch_da_config_definition_properties_patch_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_patch_da_config_definition_properties_patch_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch by calling from_dict on the json representation
-        project_config_definition_patch_da_config_definition_properties_patch_model = ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch.from_dict(project_config_definition_patch_da_config_definition_properties_patch_model_json)
+        project_config_definition_patch_da_config_definition_properties_patch_model = (
+            ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch.from_dict(
+                project_config_definition_patch_da_config_definition_properties_patch_model_json
+            )
+        )
         assert project_config_definition_patch_da_config_definition_properties_patch_model != False
 
         # Construct a model instance of ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch by calling from_dict on the json representation
-        project_config_definition_patch_da_config_definition_properties_patch_model_dict = ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch.from_dict(project_config_definition_patch_da_config_definition_properties_patch_model_json).__dict__
-        project_config_definition_patch_da_config_definition_properties_patch_model2 = ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch(**project_config_definition_patch_da_config_definition_properties_patch_model_dict)
+        project_config_definition_patch_da_config_definition_properties_patch_model_dict = (
+            ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch.from_dict(
+                project_config_definition_patch_da_config_definition_properties_patch_model_json
+            ).__dict__
+        )
+        project_config_definition_patch_da_config_definition_properties_patch_model2 = (
+            ProjectConfigDefinitionPatchDAConfigDefinitionPropertiesPatch(
+                **project_config_definition_patch_da_config_definition_properties_patch_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_patch_da_config_definition_properties_patch_model == project_config_definition_patch_da_config_definition_properties_patch_model2
+        assert (
+            project_config_definition_patch_da_config_definition_properties_patch_model
+            == project_config_definition_patch_da_config_definition_properties_patch_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_patch_da_config_definition_properties_patch_model_json2 = project_config_definition_patch_da_config_definition_properties_patch_model.to_dict()
-        assert project_config_definition_patch_da_config_definition_properties_patch_model_json2 == project_config_definition_patch_da_config_definition_properties_patch_model_json
+        project_config_definition_patch_da_config_definition_properties_patch_model_json2 = (
+            project_config_definition_patch_da_config_definition_properties_patch_model.to_dict()
+        )
+        assert (
+            project_config_definition_patch_da_config_definition_properties_patch_model_json2
+            == project_config_definition_patch_da_config_definition_properties_patch_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch:
@@ -7655,28 +8060,60 @@ class TestModel_ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPa
 
         # Construct a json representation of a ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch model
         project_config_definition_patch_resource_config_definition_properties_patch_model_json = {}
-        project_config_definition_patch_resource_config_definition_properties_patch_model_json['resource_crns'] = ['crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::']
-        project_config_definition_patch_resource_config_definition_properties_patch_model_json['description'] = 'testString'
+        project_config_definition_patch_resource_config_definition_properties_patch_model_json['resource_crns'] = [
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        ]
+        project_config_definition_patch_resource_config_definition_properties_patch_model_json['description'] = (
+            'testString'
+        )
         project_config_definition_patch_resource_config_definition_properties_patch_model_json['name'] = 'testString'
-        project_config_definition_patch_resource_config_definition_properties_patch_model_json['environment_id'] = 'testString'
-        project_config_definition_patch_resource_config_definition_properties_patch_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_patch_resource_config_definition_properties_patch_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_patch_resource_config_definition_properties_patch_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_patch_resource_config_definition_properties_patch_model_json['environment_id'] = (
+            'testString'
+        )
+        project_config_definition_patch_resource_config_definition_properties_patch_model_json['authorizations'] = (
+            project_config_auth_model
+        )
+        project_config_definition_patch_resource_config_definition_properties_patch_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_patch_resource_config_definition_properties_patch_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch by calling from_dict on the json representation
-        project_config_definition_patch_resource_config_definition_properties_patch_model = ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch.from_dict(project_config_definition_patch_resource_config_definition_properties_patch_model_json)
+        project_config_definition_patch_resource_config_definition_properties_patch_model = (
+            ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch.from_dict(
+                project_config_definition_patch_resource_config_definition_properties_patch_model_json
+            )
+        )
         assert project_config_definition_patch_resource_config_definition_properties_patch_model != False
 
         # Construct a model instance of ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch by calling from_dict on the json representation
-        project_config_definition_patch_resource_config_definition_properties_patch_model_dict = ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch.from_dict(project_config_definition_patch_resource_config_definition_properties_patch_model_json).__dict__
-        project_config_definition_patch_resource_config_definition_properties_patch_model2 = ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch(**project_config_definition_patch_resource_config_definition_properties_patch_model_dict)
+        project_config_definition_patch_resource_config_definition_properties_patch_model_dict = (
+            ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch.from_dict(
+                project_config_definition_patch_resource_config_definition_properties_patch_model_json
+            ).__dict__
+        )
+        project_config_definition_patch_resource_config_definition_properties_patch_model2 = (
+            ProjectConfigDefinitionPatchResourceConfigDefinitionPropertiesPatch(
+                **project_config_definition_patch_resource_config_definition_properties_patch_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_patch_resource_config_definition_properties_patch_model == project_config_definition_patch_resource_config_definition_properties_patch_model2
+        assert (
+            project_config_definition_patch_resource_config_definition_properties_patch_model
+            == project_config_definition_patch_resource_config_definition_properties_patch_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_patch_resource_config_definition_properties_patch_model_json2 = project_config_definition_patch_resource_config_definition_properties_patch_model.to_dict()
-        assert project_config_definition_patch_resource_config_definition_properties_patch_model_json2 == project_config_definition_patch_resource_config_definition_properties_patch_model_json
+        project_config_definition_patch_resource_config_definition_properties_patch_model_json2 = (
+            project_config_definition_patch_resource_config_definition_properties_patch_model.to_dict()
+        )
+        assert (
+            project_config_definition_patch_resource_config_definition_properties_patch_model_json2
+            == project_config_definition_patch_resource_config_definition_properties_patch_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch:
@@ -7709,30 +8146,64 @@ class TestModel_ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch
 
         # Construct a json representation of a ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch model
         project_config_definition_patch_stack_config_definition_properties_patch_model_json = {}
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json['compliance_profile'] = project_compliance_profile_model
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json['compliance_profile'] = (
+            project_compliance_profile_model
+        )
         project_config_definition_patch_stack_config_definition_properties_patch_model_json['locator_id'] = 'testString'
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json['members'] = [stack_config_member_model]
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json['description'] = 'testString'
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json['members'] = [
+            stack_config_member_model
+        ]
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json['description'] = (
+            'testString'
+        )
         project_config_definition_patch_stack_config_definition_properties_patch_model_json['name'] = 'testString'
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json['environment_id'] = 'testString'
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json['environment_id'] = (
+            'testString'
+        )
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json['authorizations'] = (
+            project_config_auth_model
+        )
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch by calling from_dict on the json representation
-        project_config_definition_patch_stack_config_definition_properties_patch_model = ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch.from_dict(project_config_definition_patch_stack_config_definition_properties_patch_model_json)
+        project_config_definition_patch_stack_config_definition_properties_patch_model = (
+            ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch.from_dict(
+                project_config_definition_patch_stack_config_definition_properties_patch_model_json
+            )
+        )
         assert project_config_definition_patch_stack_config_definition_properties_patch_model != False
 
         # Construct a model instance of ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch by calling from_dict on the json representation
-        project_config_definition_patch_stack_config_definition_properties_patch_model_dict = ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch.from_dict(project_config_definition_patch_stack_config_definition_properties_patch_model_json).__dict__
-        project_config_definition_patch_stack_config_definition_properties_patch_model2 = ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch(**project_config_definition_patch_stack_config_definition_properties_patch_model_dict)
+        project_config_definition_patch_stack_config_definition_properties_patch_model_dict = (
+            ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch.from_dict(
+                project_config_definition_patch_stack_config_definition_properties_patch_model_json
+            ).__dict__
+        )
+        project_config_definition_patch_stack_config_definition_properties_patch_model2 = (
+            ProjectConfigDefinitionPatchStackConfigDefinitionPropertiesPatch(
+                **project_config_definition_patch_stack_config_definition_properties_patch_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_patch_stack_config_definition_properties_patch_model == project_config_definition_patch_stack_config_definition_properties_patch_model2
+        assert (
+            project_config_definition_patch_stack_config_definition_properties_patch_model
+            == project_config_definition_patch_stack_config_definition_properties_patch_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_patch_stack_config_definition_properties_patch_model_json2 = project_config_definition_patch_stack_config_definition_properties_patch_model.to_dict()
-        assert project_config_definition_patch_stack_config_definition_properties_patch_model_json2 == project_config_definition_patch_stack_config_definition_properties_patch_model_json
+        project_config_definition_patch_stack_config_definition_properties_patch_model_json2 = (
+            project_config_definition_patch_stack_config_definition_properties_patch_model.to_dict()
+        )
+        assert (
+            project_config_definition_patch_stack_config_definition_properties_patch_model_json2
+            == project_config_definition_patch_stack_config_definition_properties_patch_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype:
@@ -7761,29 +8232,63 @@ class TestModel_ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesProt
 
         # Construct a json representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
         project_config_definition_prototype_da_config_definition_properties_prototype_model_json = {}
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['compliance_profile'] = project_compliance_profile_model
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['locator_id'] = 'testString'
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['description'] = 'testString'
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json[
+            'compliance_profile'
+        ] = project_compliance_profile_model
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['locator_id'] = (
+            'testString'
+        )
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['description'] = (
+            'testString'
+        )
         project_config_definition_prototype_da_config_definition_properties_prototype_model_json['name'] = 'testString'
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['environment_id'] = 'testString'
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['environment_id'] = (
+            'testString'
+        )
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['authorizations'] = (
+            project_config_auth_model
+        )
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype by calling from_dict on the json representation
-        project_config_definition_prototype_da_config_definition_properties_prototype_model = ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype.from_dict(project_config_definition_prototype_da_config_definition_properties_prototype_model_json)
+        project_config_definition_prototype_da_config_definition_properties_prototype_model = (
+            ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype.from_dict(
+                project_config_definition_prototype_da_config_definition_properties_prototype_model_json
+            )
+        )
         assert project_config_definition_prototype_da_config_definition_properties_prototype_model != False
 
         # Construct a model instance of ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype by calling from_dict on the json representation
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_dict = ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype.from_dict(project_config_definition_prototype_da_config_definition_properties_prototype_model_json).__dict__
-        project_config_definition_prototype_da_config_definition_properties_prototype_model2 = ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype(**project_config_definition_prototype_da_config_definition_properties_prototype_model_dict)
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_dict = (
+            ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype.from_dict(
+                project_config_definition_prototype_da_config_definition_properties_prototype_model_json
+            ).__dict__
+        )
+        project_config_definition_prototype_da_config_definition_properties_prototype_model2 = (
+            ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype(
+                **project_config_definition_prototype_da_config_definition_properties_prototype_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_prototype_da_config_definition_properties_prototype_model == project_config_definition_prototype_da_config_definition_properties_prototype_model2
+        assert (
+            project_config_definition_prototype_da_config_definition_properties_prototype_model
+            == project_config_definition_prototype_da_config_definition_properties_prototype_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_prototype_da_config_definition_properties_prototype_model_json2 = project_config_definition_prototype_da_config_definition_properties_prototype_model.to_dict()
-        assert project_config_definition_prototype_da_config_definition_properties_prototype_model_json2 == project_config_definition_prototype_da_config_definition_properties_prototype_model_json
+        project_config_definition_prototype_da_config_definition_properties_prototype_model_json2 = (
+            project_config_definition_prototype_da_config_definition_properties_prototype_model.to_dict()
+        )
+        assert (
+            project_config_definition_prototype_da_config_definition_properties_prototype_model_json2
+            == project_config_definition_prototype_da_config_definition_properties_prototype_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype:
@@ -7805,28 +8310,64 @@ class TestModel_ProjectConfigDefinitionPrototypeResourceConfigDefinitionProperti
 
         # Construct a json representation of a ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype model
         project_config_definition_prototype_resource_config_definition_properties_prototype_model_json = {}
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['resource_crns'] = ['crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::']
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['description'] = 'testString'
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['name'] = 'testString'
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['environment_id'] = 'testString'
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json[
+            'resource_crns'
+        ] = [
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        ]
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json[
+            'description'
+        ] = 'testString'
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['name'] = (
+            'testString'
+        )
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json[
+            'environment_id'
+        ] = 'testString'
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype by calling from_dict on the json representation
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model = ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype.from_dict(project_config_definition_prototype_resource_config_definition_properties_prototype_model_json)
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model = (
+            ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype.from_dict(
+                project_config_definition_prototype_resource_config_definition_properties_prototype_model_json
+            )
+        )
         assert project_config_definition_prototype_resource_config_definition_properties_prototype_model != False
 
         # Construct a model instance of ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype by calling from_dict on the json representation
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_dict = ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype.from_dict(project_config_definition_prototype_resource_config_definition_properties_prototype_model_json).__dict__
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model2 = ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype(**project_config_definition_prototype_resource_config_definition_properties_prototype_model_dict)
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_dict = (
+            ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype.from_dict(
+                project_config_definition_prototype_resource_config_definition_properties_prototype_model_json
+            ).__dict__
+        )
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model2 = (
+            ProjectConfigDefinitionPrototypeResourceConfigDefinitionPropertiesPrototype(
+                **project_config_definition_prototype_resource_config_definition_properties_prototype_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_prototype_resource_config_definition_properties_prototype_model == project_config_definition_prototype_resource_config_definition_properties_prototype_model2
+        assert (
+            project_config_definition_prototype_resource_config_definition_properties_prototype_model
+            == project_config_definition_prototype_resource_config_definition_properties_prototype_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json2 = project_config_definition_prototype_resource_config_definition_properties_prototype_model.to_dict()
-        assert project_config_definition_prototype_resource_config_definition_properties_prototype_model_json2 == project_config_definition_prototype_resource_config_definition_properties_prototype_model_json
+        project_config_definition_prototype_resource_config_definition_properties_prototype_model_json2 = (
+            project_config_definition_prototype_resource_config_definition_properties_prototype_model.to_dict()
+        )
+        assert (
+            project_config_definition_prototype_resource_config_definition_properties_prototype_model_json2
+            == project_config_definition_prototype_resource_config_definition_properties_prototype_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties:
@@ -7859,30 +8400,62 @@ class TestModel_ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties:
 
         # Construct a json representation of a ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties model
         project_config_definition_prototype_stack_config_definition_properties_model_json = {}
-        project_config_definition_prototype_stack_config_definition_properties_model_json['compliance_profile'] = project_compliance_profile_model
+        project_config_definition_prototype_stack_config_definition_properties_model_json['compliance_profile'] = (
+            project_compliance_profile_model
+        )
         project_config_definition_prototype_stack_config_definition_properties_model_json['locator_id'] = 'testString'
-        project_config_definition_prototype_stack_config_definition_properties_model_json['members'] = [stack_config_member_model]
+        project_config_definition_prototype_stack_config_definition_properties_model_json['members'] = [
+            stack_config_member_model
+        ]
         project_config_definition_prototype_stack_config_definition_properties_model_json['description'] = 'testString'
         project_config_definition_prototype_stack_config_definition_properties_model_json['name'] = 'testString'
-        project_config_definition_prototype_stack_config_definition_properties_model_json['environment_id'] = 'testString'
-        project_config_definition_prototype_stack_config_definition_properties_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_prototype_stack_config_definition_properties_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_prototype_stack_config_definition_properties_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_prototype_stack_config_definition_properties_model_json['environment_id'] = (
+            'testString'
+        )
+        project_config_definition_prototype_stack_config_definition_properties_model_json['authorizations'] = (
+            project_config_auth_model
+        )
+        project_config_definition_prototype_stack_config_definition_properties_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_prototype_stack_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties by calling from_dict on the json representation
-        project_config_definition_prototype_stack_config_definition_properties_model = ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties.from_dict(project_config_definition_prototype_stack_config_definition_properties_model_json)
+        project_config_definition_prototype_stack_config_definition_properties_model = (
+            ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties.from_dict(
+                project_config_definition_prototype_stack_config_definition_properties_model_json
+            )
+        )
         assert project_config_definition_prototype_stack_config_definition_properties_model != False
 
         # Construct a model instance of ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties by calling from_dict on the json representation
-        project_config_definition_prototype_stack_config_definition_properties_model_dict = ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties.from_dict(project_config_definition_prototype_stack_config_definition_properties_model_json).__dict__
-        project_config_definition_prototype_stack_config_definition_properties_model2 = ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(**project_config_definition_prototype_stack_config_definition_properties_model_dict)
+        project_config_definition_prototype_stack_config_definition_properties_model_dict = (
+            ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties.from_dict(
+                project_config_definition_prototype_stack_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_definition_prototype_stack_config_definition_properties_model2 = (
+            ProjectConfigDefinitionPrototypeStackConfigDefinitionProperties(
+                **project_config_definition_prototype_stack_config_definition_properties_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_prototype_stack_config_definition_properties_model == project_config_definition_prototype_stack_config_definition_properties_model2
+        assert (
+            project_config_definition_prototype_stack_config_definition_properties_model
+            == project_config_definition_prototype_stack_config_definition_properties_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_prototype_stack_config_definition_properties_model_json2 = project_config_definition_prototype_stack_config_definition_properties_model.to_dict()
-        assert project_config_definition_prototype_stack_config_definition_properties_model_json2 == project_config_definition_prototype_stack_config_definition_properties_model_json
+        project_config_definition_prototype_stack_config_definition_properties_model_json2 = (
+            project_config_definition_prototype_stack_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_definition_prototype_stack_config_definition_properties_model_json2
+            == project_config_definition_prototype_stack_config_definition_properties_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse:
@@ -7911,29 +8484,63 @@ class TestModel_ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesRespo
 
         # Construct a json representation of a ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse model
         project_config_definition_response_da_config_definition_properties_response_model_json = {}
-        project_config_definition_response_da_config_definition_properties_response_model_json['compliance_profile'] = project_compliance_profile_model
-        project_config_definition_response_da_config_definition_properties_response_model_json['locator_id'] = 'testString'
-        project_config_definition_response_da_config_definition_properties_response_model_json['description'] = 'testString'
+        project_config_definition_response_da_config_definition_properties_response_model_json['compliance_profile'] = (
+            project_compliance_profile_model
+        )
+        project_config_definition_response_da_config_definition_properties_response_model_json['locator_id'] = (
+            'testString'
+        )
+        project_config_definition_response_da_config_definition_properties_response_model_json['description'] = (
+            'testString'
+        )
         project_config_definition_response_da_config_definition_properties_response_model_json['name'] = 'testString'
-        project_config_definition_response_da_config_definition_properties_response_model_json['environment_id'] = 'testString'
-        project_config_definition_response_da_config_definition_properties_response_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_response_da_config_definition_properties_response_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_response_da_config_definition_properties_response_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_response_da_config_definition_properties_response_model_json['environment_id'] = (
+            'testString'
+        )
+        project_config_definition_response_da_config_definition_properties_response_model_json['authorizations'] = (
+            project_config_auth_model
+        )
+        project_config_definition_response_da_config_definition_properties_response_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_response_da_config_definition_properties_response_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse by calling from_dict on the json representation
-        project_config_definition_response_da_config_definition_properties_response_model = ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse.from_dict(project_config_definition_response_da_config_definition_properties_response_model_json)
+        project_config_definition_response_da_config_definition_properties_response_model = (
+            ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse.from_dict(
+                project_config_definition_response_da_config_definition_properties_response_model_json
+            )
+        )
         assert project_config_definition_response_da_config_definition_properties_response_model != False
 
         # Construct a model instance of ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse by calling from_dict on the json representation
-        project_config_definition_response_da_config_definition_properties_response_model_dict = ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse.from_dict(project_config_definition_response_da_config_definition_properties_response_model_json).__dict__
-        project_config_definition_response_da_config_definition_properties_response_model2 = ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse(**project_config_definition_response_da_config_definition_properties_response_model_dict)
+        project_config_definition_response_da_config_definition_properties_response_model_dict = (
+            ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse.from_dict(
+                project_config_definition_response_da_config_definition_properties_response_model_json
+            ).__dict__
+        )
+        project_config_definition_response_da_config_definition_properties_response_model2 = (
+            ProjectConfigDefinitionResponseDAConfigDefinitionPropertiesResponse(
+                **project_config_definition_response_da_config_definition_properties_response_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_response_da_config_definition_properties_response_model == project_config_definition_response_da_config_definition_properties_response_model2
+        assert (
+            project_config_definition_response_da_config_definition_properties_response_model
+            == project_config_definition_response_da_config_definition_properties_response_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_response_da_config_definition_properties_response_model_json2 = project_config_definition_response_da_config_definition_properties_response_model.to_dict()
-        assert project_config_definition_response_da_config_definition_properties_response_model_json2 == project_config_definition_response_da_config_definition_properties_response_model_json
+        project_config_definition_response_da_config_definition_properties_response_model_json2 = (
+            project_config_definition_response_da_config_definition_properties_response_model.to_dict()
+        )
+        assert (
+            project_config_definition_response_da_config_definition_properties_response_model_json2
+            == project_config_definition_response_da_config_definition_properties_response_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse:
@@ -7955,28 +8562,64 @@ class TestModel_ProjectConfigDefinitionResponseResourceConfigDefinitionPropertie
 
         # Construct a json representation of a ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse model
         project_config_definition_response_resource_config_definition_properties_response_model_json = {}
-        project_config_definition_response_resource_config_definition_properties_response_model_json['resource_crns'] = ['crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::']
-        project_config_definition_response_resource_config_definition_properties_response_model_json['description'] = 'testString'
-        project_config_definition_response_resource_config_definition_properties_response_model_json['name'] = 'testString'
-        project_config_definition_response_resource_config_definition_properties_response_model_json['environment_id'] = 'testString'
-        project_config_definition_response_resource_config_definition_properties_response_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_response_resource_config_definition_properties_response_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_response_resource_config_definition_properties_response_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_response_resource_config_definition_properties_response_model_json[
+            'resource_crns'
+        ] = [
+            'crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::'
+        ]
+        project_config_definition_response_resource_config_definition_properties_response_model_json['description'] = (
+            'testString'
+        )
+        project_config_definition_response_resource_config_definition_properties_response_model_json['name'] = (
+            'testString'
+        )
+        project_config_definition_response_resource_config_definition_properties_response_model_json[
+            'environment_id'
+        ] = 'testString'
+        project_config_definition_response_resource_config_definition_properties_response_model_json[
+            'authorizations'
+        ] = project_config_auth_model
+        project_config_definition_response_resource_config_definition_properties_response_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_response_resource_config_definition_properties_response_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse by calling from_dict on the json representation
-        project_config_definition_response_resource_config_definition_properties_response_model = ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse.from_dict(project_config_definition_response_resource_config_definition_properties_response_model_json)
+        project_config_definition_response_resource_config_definition_properties_response_model = (
+            ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse.from_dict(
+                project_config_definition_response_resource_config_definition_properties_response_model_json
+            )
+        )
         assert project_config_definition_response_resource_config_definition_properties_response_model != False
 
         # Construct a model instance of ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse by calling from_dict on the json representation
-        project_config_definition_response_resource_config_definition_properties_response_model_dict = ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse.from_dict(project_config_definition_response_resource_config_definition_properties_response_model_json).__dict__
-        project_config_definition_response_resource_config_definition_properties_response_model2 = ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse(**project_config_definition_response_resource_config_definition_properties_response_model_dict)
+        project_config_definition_response_resource_config_definition_properties_response_model_dict = (
+            ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse.from_dict(
+                project_config_definition_response_resource_config_definition_properties_response_model_json
+            ).__dict__
+        )
+        project_config_definition_response_resource_config_definition_properties_response_model2 = (
+            ProjectConfigDefinitionResponseResourceConfigDefinitionPropertiesResponse(
+                **project_config_definition_response_resource_config_definition_properties_response_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_response_resource_config_definition_properties_response_model == project_config_definition_response_resource_config_definition_properties_response_model2
+        assert (
+            project_config_definition_response_resource_config_definition_properties_response_model
+            == project_config_definition_response_resource_config_definition_properties_response_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_response_resource_config_definition_properties_response_model_json2 = project_config_definition_response_resource_config_definition_properties_response_model.to_dict()
-        assert project_config_definition_response_resource_config_definition_properties_response_model_json2 == project_config_definition_response_resource_config_definition_properties_response_model_json
+        project_config_definition_response_resource_config_definition_properties_response_model_json2 = (
+            project_config_definition_response_resource_config_definition_properties_response_model.to_dict()
+        )
+        assert (
+            project_config_definition_response_resource_config_definition_properties_response_model_json2
+            == project_config_definition_response_resource_config_definition_properties_response_model_json
+        )
 
 
 class TestModel_ProjectConfigDefinitionResponseStackConfigDefinitionProperties:
@@ -8009,30 +8652,62 @@ class TestModel_ProjectConfigDefinitionResponseStackConfigDefinitionProperties:
 
         # Construct a json representation of a ProjectConfigDefinitionResponseStackConfigDefinitionProperties model
         project_config_definition_response_stack_config_definition_properties_model_json = {}
-        project_config_definition_response_stack_config_definition_properties_model_json['compliance_profile'] = project_compliance_profile_model
+        project_config_definition_response_stack_config_definition_properties_model_json['compliance_profile'] = (
+            project_compliance_profile_model
+        )
         project_config_definition_response_stack_config_definition_properties_model_json['locator_id'] = 'testString'
-        project_config_definition_response_stack_config_definition_properties_model_json['members'] = [stack_config_member_model]
+        project_config_definition_response_stack_config_definition_properties_model_json['members'] = [
+            stack_config_member_model
+        ]
         project_config_definition_response_stack_config_definition_properties_model_json['description'] = 'testString'
         project_config_definition_response_stack_config_definition_properties_model_json['name'] = 'testString'
-        project_config_definition_response_stack_config_definition_properties_model_json['environment_id'] = 'testString'
-        project_config_definition_response_stack_config_definition_properties_model_json['authorizations'] = project_config_auth_model
-        project_config_definition_response_stack_config_definition_properties_model_json['inputs'] = {'anyKey': 'anyValue'}
-        project_config_definition_response_stack_config_definition_properties_model_json['settings'] = {'anyKey': 'anyValue'}
+        project_config_definition_response_stack_config_definition_properties_model_json['environment_id'] = (
+            'testString'
+        )
+        project_config_definition_response_stack_config_definition_properties_model_json['authorizations'] = (
+            project_config_auth_model
+        )
+        project_config_definition_response_stack_config_definition_properties_model_json['inputs'] = {
+            'anyKey': 'anyValue'
+        }
+        project_config_definition_response_stack_config_definition_properties_model_json['settings'] = {
+            'anyKey': 'anyValue'
+        }
 
         # Construct a model instance of ProjectConfigDefinitionResponseStackConfigDefinitionProperties by calling from_dict on the json representation
-        project_config_definition_response_stack_config_definition_properties_model = ProjectConfigDefinitionResponseStackConfigDefinitionProperties.from_dict(project_config_definition_response_stack_config_definition_properties_model_json)
+        project_config_definition_response_stack_config_definition_properties_model = (
+            ProjectConfigDefinitionResponseStackConfigDefinitionProperties.from_dict(
+                project_config_definition_response_stack_config_definition_properties_model_json
+            )
+        )
         assert project_config_definition_response_stack_config_definition_properties_model != False
 
         # Construct a model instance of ProjectConfigDefinitionResponseStackConfigDefinitionProperties by calling from_dict on the json representation
-        project_config_definition_response_stack_config_definition_properties_model_dict = ProjectConfigDefinitionResponseStackConfigDefinitionProperties.from_dict(project_config_definition_response_stack_config_definition_properties_model_json).__dict__
-        project_config_definition_response_stack_config_definition_properties_model2 = ProjectConfigDefinitionResponseStackConfigDefinitionProperties(**project_config_definition_response_stack_config_definition_properties_model_dict)
+        project_config_definition_response_stack_config_definition_properties_model_dict = (
+            ProjectConfigDefinitionResponseStackConfigDefinitionProperties.from_dict(
+                project_config_definition_response_stack_config_definition_properties_model_json
+            ).__dict__
+        )
+        project_config_definition_response_stack_config_definition_properties_model2 = (
+            ProjectConfigDefinitionResponseStackConfigDefinitionProperties(
+                **project_config_definition_response_stack_config_definition_properties_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_definition_response_stack_config_definition_properties_model == project_config_definition_response_stack_config_definition_properties_model2
+        assert (
+            project_config_definition_response_stack_config_definition_properties_model
+            == project_config_definition_response_stack_config_definition_properties_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_definition_response_stack_config_definition_properties_model_json2 = project_config_definition_response_stack_config_definition_properties_model.to_dict()
-        assert project_config_definition_response_stack_config_definition_properties_model_json2 == project_config_definition_response_stack_config_definition_properties_model_json
+        project_config_definition_response_stack_config_definition_properties_model_json2 = (
+            project_config_definition_response_stack_config_definition_properties_model.to_dict()
+        )
+        assert (
+            project_config_definition_response_stack_config_definition_properties_model_json2
+            == project_config_definition_response_stack_config_definition_properties_model_json
+        )
 
 
 class TestModel_ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204:
@@ -8058,23 +8733,45 @@ class TestModel_ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204:
         project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json['cra_version'] = '2.0.4'
         project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json['schema_version'] = 'testString'
         project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json['status'] = 'passed'
-        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json['summary'] = code_risk_analyzer_logs_summary_model
+        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json['summary'] = (
+            code_risk_analyzer_logs_summary_model
+        )
         project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json['timestamp'] = '2019-01-01T12:00:00Z'
 
         # Construct a model instance of ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204 by calling from_dict on the json representation
-        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model = ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204.from_dict(project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json)
+        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model = (
+            ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204.from_dict(
+                project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json
+            )
+        )
         assert project_config_metadata_code_risk_analyzer_logs_version2_0_4_model != False
 
         # Construct a model instance of ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204 by calling from_dict on the json representation
-        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_dict = ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204.from_dict(project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json).__dict__
-        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model2 = ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204(**project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_dict)
+        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_dict = (
+            ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204.from_dict(
+                project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json
+            ).__dict__
+        )
+        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model2 = (
+            ProjectConfigMetadataCodeRiskAnalyzerLogsVersion204(
+                **project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert project_config_metadata_code_risk_analyzer_logs_version2_0_4_model == project_config_metadata_code_risk_analyzer_logs_version2_0_4_model2
+        assert (
+            project_config_metadata_code_risk_analyzer_logs_version2_0_4_model
+            == project_config_metadata_code_risk_analyzer_logs_version2_0_4_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json2 = project_config_metadata_code_risk_analyzer_logs_version2_0_4_model.to_dict()
-        assert project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json2 == project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json
+        project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json2 = (
+            project_config_metadata_code_risk_analyzer_logs_version2_0_4_model.to_dict()
+        )
+        assert (
+            project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json2
+            == project_config_metadata_code_risk_analyzer_logs_version2_0_4_model_json
+        )
 
 
 class TestModel_StackDefinitionExportRequestStackDefinitionExportCatalogRequest:
@@ -8090,25 +8787,47 @@ class TestModel_StackDefinitionExportRequestStackDefinitionExportCatalogRequest:
         # Construct a json representation of a StackDefinitionExportRequestStackDefinitionExportCatalogRequest model
         stack_definition_export_request_stack_definition_export_catalog_request_model_json = {}
         stack_definition_export_request_stack_definition_export_catalog_request_model_json['catalog_id'] = 'testString'
-        stack_definition_export_request_stack_definition_export_catalog_request_model_json['target_version'] = 'testString'
+        stack_definition_export_request_stack_definition_export_catalog_request_model_json['target_version'] = (
+            'testString'
+        )
         stack_definition_export_request_stack_definition_export_catalog_request_model_json['variation'] = 'testString'
         stack_definition_export_request_stack_definition_export_catalog_request_model_json['label'] = 'testString'
         stack_definition_export_request_stack_definition_export_catalog_request_model_json['tags'] = ['testString']
 
         # Construct a model instance of StackDefinitionExportRequestStackDefinitionExportCatalogRequest by calling from_dict on the json representation
-        stack_definition_export_request_stack_definition_export_catalog_request_model = StackDefinitionExportRequestStackDefinitionExportCatalogRequest.from_dict(stack_definition_export_request_stack_definition_export_catalog_request_model_json)
+        stack_definition_export_request_stack_definition_export_catalog_request_model = (
+            StackDefinitionExportRequestStackDefinitionExportCatalogRequest.from_dict(
+                stack_definition_export_request_stack_definition_export_catalog_request_model_json
+            )
+        )
         assert stack_definition_export_request_stack_definition_export_catalog_request_model != False
 
         # Construct a model instance of StackDefinitionExportRequestStackDefinitionExportCatalogRequest by calling from_dict on the json representation
-        stack_definition_export_request_stack_definition_export_catalog_request_model_dict = StackDefinitionExportRequestStackDefinitionExportCatalogRequest.from_dict(stack_definition_export_request_stack_definition_export_catalog_request_model_json).__dict__
-        stack_definition_export_request_stack_definition_export_catalog_request_model2 = StackDefinitionExportRequestStackDefinitionExportCatalogRequest(**stack_definition_export_request_stack_definition_export_catalog_request_model_dict)
+        stack_definition_export_request_stack_definition_export_catalog_request_model_dict = (
+            StackDefinitionExportRequestStackDefinitionExportCatalogRequest.from_dict(
+                stack_definition_export_request_stack_definition_export_catalog_request_model_json
+            ).__dict__
+        )
+        stack_definition_export_request_stack_definition_export_catalog_request_model2 = (
+            StackDefinitionExportRequestStackDefinitionExportCatalogRequest(
+                **stack_definition_export_request_stack_definition_export_catalog_request_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert stack_definition_export_request_stack_definition_export_catalog_request_model == stack_definition_export_request_stack_definition_export_catalog_request_model2
+        assert (
+            stack_definition_export_request_stack_definition_export_catalog_request_model
+            == stack_definition_export_request_stack_definition_export_catalog_request_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        stack_definition_export_request_stack_definition_export_catalog_request_model_json2 = stack_definition_export_request_stack_definition_export_catalog_request_model.to_dict()
-        assert stack_definition_export_request_stack_definition_export_catalog_request_model_json2 == stack_definition_export_request_stack_definition_export_catalog_request_model_json
+        stack_definition_export_request_stack_definition_export_catalog_request_model_json2 = (
+            stack_definition_export_request_stack_definition_export_catalog_request_model.to_dict()
+        )
+        assert (
+            stack_definition_export_request_stack_definition_export_catalog_request_model_json2
+            == stack_definition_export_request_stack_definition_export_catalog_request_model_json
+        )
 
 
 class TestModel_StackDefinitionExportRequestStackDefinitionExportProductRequest:
@@ -8124,24 +8843,46 @@ class TestModel_StackDefinitionExportRequestStackDefinitionExportProductRequest:
         # Construct a json representation of a StackDefinitionExportRequestStackDefinitionExportProductRequest model
         stack_definition_export_request_stack_definition_export_product_request_model_json = {}
         stack_definition_export_request_stack_definition_export_product_request_model_json['catalog_id'] = 'testString'
-        stack_definition_export_request_stack_definition_export_product_request_model_json['target_version'] = 'testString'
+        stack_definition_export_request_stack_definition_export_product_request_model_json['target_version'] = (
+            'testString'
+        )
         stack_definition_export_request_stack_definition_export_product_request_model_json['variation'] = 'testString'
         stack_definition_export_request_stack_definition_export_product_request_model_json['product_id'] = 'testString'
 
         # Construct a model instance of StackDefinitionExportRequestStackDefinitionExportProductRequest by calling from_dict on the json representation
-        stack_definition_export_request_stack_definition_export_product_request_model = StackDefinitionExportRequestStackDefinitionExportProductRequest.from_dict(stack_definition_export_request_stack_definition_export_product_request_model_json)
+        stack_definition_export_request_stack_definition_export_product_request_model = (
+            StackDefinitionExportRequestStackDefinitionExportProductRequest.from_dict(
+                stack_definition_export_request_stack_definition_export_product_request_model_json
+            )
+        )
         assert stack_definition_export_request_stack_definition_export_product_request_model != False
 
         # Construct a model instance of StackDefinitionExportRequestStackDefinitionExportProductRequest by calling from_dict on the json representation
-        stack_definition_export_request_stack_definition_export_product_request_model_dict = StackDefinitionExportRequestStackDefinitionExportProductRequest.from_dict(stack_definition_export_request_stack_definition_export_product_request_model_json).__dict__
-        stack_definition_export_request_stack_definition_export_product_request_model2 = StackDefinitionExportRequestStackDefinitionExportProductRequest(**stack_definition_export_request_stack_definition_export_product_request_model_dict)
+        stack_definition_export_request_stack_definition_export_product_request_model_dict = (
+            StackDefinitionExportRequestStackDefinitionExportProductRequest.from_dict(
+                stack_definition_export_request_stack_definition_export_product_request_model_json
+            ).__dict__
+        )
+        stack_definition_export_request_stack_definition_export_product_request_model2 = (
+            StackDefinitionExportRequestStackDefinitionExportProductRequest(
+                **stack_definition_export_request_stack_definition_export_product_request_model_dict
+            )
+        )
 
         # Verify the model instances are equivalent
-        assert stack_definition_export_request_stack_definition_export_product_request_model == stack_definition_export_request_stack_definition_export_product_request_model2
+        assert (
+            stack_definition_export_request_stack_definition_export_product_request_model
+            == stack_definition_export_request_stack_definition_export_product_request_model2
+        )
 
         # Convert model instance back to dict and verify no loss of data
-        stack_definition_export_request_stack_definition_export_product_request_model_json2 = stack_definition_export_request_stack_definition_export_product_request_model.to_dict()
-        assert stack_definition_export_request_stack_definition_export_product_request_model_json2 == stack_definition_export_request_stack_definition_export_product_request_model_json
+        stack_definition_export_request_stack_definition_export_product_request_model_json2 = (
+            stack_definition_export_request_stack_definition_export_product_request_model.to_dict()
+        )
+        assert (
+            stack_definition_export_request_stack_definition_export_product_request_model_json2
+            == stack_definition_export_request_stack_definition_export_product_request_model_json
+        )
 
 
 # endregion
