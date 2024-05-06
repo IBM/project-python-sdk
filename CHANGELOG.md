@@ -1,3 +1,12 @@
+## [0.0.6](https://github.com/IBM/project-python-sdk/compare/v0.0.5...v0.0.6) (2024-05-06)
+
+
+### Bug Fixes
+
+* fix lint ([c4a0da7](https://github.com/IBM/project-python-sdk/commit/c4a0da7e5f8c8d7ccd2090e9ed2cb2737695389e))
+* latest fix ([a5d8f8a](https://github.com/IBM/project-python-sdk/commit/a5d8f8a5b8e31007c7bb48b5cae97441a02f3815))
+* new May release ([6cf7ac6](https://github.com/IBM/project-python-sdk/commit/6cf7ac6fd927a451dc7d7065925f3f03647d14b2))
+
 ## [0.0.5](https://github.com/IBM/project-python-sdk/compare/v0.0.4...v0.0.5) (2024-04-03)
 
 
