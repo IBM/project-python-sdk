@@ -63,7 +63,8 @@ class TestProjectV1Examples:
 
             # begin-common
 
-            project_service = ProjectV1.new_instance()
+            project_service = ProjectV1.new_instance(
+            )
 
             # end-common
             assert project_service is not None
@@ -91,12 +92,12 @@ class TestProjectV1Examples:
             # begin-create_project
 
             project_prototype_definition_model = {
-                'name': 'acme-microservice',
+                'name': 'acme-microservice-15',
                 'description': 'A microservice to deploy on top of ACME infrastructure.',
             }
 
             project_config_definition_prototype_model = {
-                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
+                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.b44f3f10-8ee1-410b-883c-0800005b167d-global',
                 'description': 'The stage account configuration.',
                 'name': 'account-stage',
             }
@@ -108,7 +109,7 @@ class TestProjectV1Examples:
             response = project_service.create_project(
                 definition=project_prototype_definition_model,
                 location='us-south',
-                resource_group='Default',
+                resource_group='default',
                 configs=[project_config_prototype_model],
             )
             project = response.get_result()
@@ -134,16 +135,10 @@ class TestProjectV1Examples:
             # begin-create_config
 
             project_config_definition_prototype_model = {
-                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
+                'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.b44f3f10-8ee1-410b-883c-0800005b167d-global',
                 'description': 'The stage environment configuration.',
                 'name': 'env-stage',
-                'inputs': {
-                    'account_id': 'account_id',
-                    'resource_group': 'stage',
-                    'access_tags': ['env:stage'],
-                    'logdna_name': 'LogDNA_stage_service',
-                    'sysdig_name': 'SysDig_stage_service',
-                },
+                'inputs': {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'},
             }
 
             response = project_service.create_config(
@@ -437,13 +432,7 @@ class TestProjectV1Examples:
 
             project_config_definition_patch_model = {
                 'name': 'env-stage',
-                'inputs': {
-                    'account_id': 'account_id',
-                    'resource_group': 'stage',
-                    'access_tags': ['env:stage'],
-                    'logdna_name': 'LogDNA_stage_service',
-                    'sysdig_name': 'SysDig_stage_service',
-                },
+                'inputs': {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'},
             }
 
             response = project_service.update_config(
@@ -647,19 +636,9 @@ class TestProjectV1Examples:
                 'value': 'cluster_id',
             }
 
-            stack_definition_member_input_prototype_model = {
-                'name': 'region',
-            }
-
-            stack_definition_member_prototype_model = {
-                'name': 'foundation-deployable-architecture',
-                'inputs': [stack_definition_member_input_prototype_model],
-            }
-
             stack_definition_block_prototype_model = {
                 'inputs': [stack_definition_input_variable_model],
                 'outputs': [stack_definition_output_variable_model],
-                'members': [stack_definition_member_prototype_model],
             }
 
             response = project_service.create_stack_definition(
@@ -717,18 +696,8 @@ class TestProjectV1Examples:
                 'hidden': False,
             }
 
-            stack_definition_member_input_prototype_model = {
-                'name': 'cluster_name',
-            }
-
-            stack_definition_member_prototype_model = {
-                'name': 'foundation-deployable-architecture',
-                'inputs': [stack_definition_member_input_prototype_model],
-            }
-
             stack_definition_block_prototype_model = {
                 'inputs': [stack_definition_input_variable_model],
-                'members': [stack_definition_member_prototype_model],
             }
 
             response = project_service.update_stack_definition(

@@ -40,7 +40,8 @@ class TestProjectV1:
         if os.path.exists(config_file):
             os.environ['IBM_CREDENTIALS_FILE'] = config_file
 
-            cls.project_service = ProjectV1.new_instance()
+            cls.project_service = ProjectV1.new_instance(
+            )
             assert cls.project_service is not None
 
             cls.config = read_external_sources(ProjectV1.DEFAULT_SERVICE_NAME)
@@ -60,7 +61,7 @@ class TestProjectV1:
 
         # Construct a dict representation of a ProjectPrototypeDefinition model
         project_prototype_definition_model = {
-            'name': 'acme-microservice',
+            'name': 'acme-microservice-16',
             'destroy_on_delete': True,
             'description': 'A microservice to deploy on top of ACME infrastructure.',
             'monitoring_enabled': False,
@@ -69,7 +70,7 @@ class TestProjectV1:
         project_compliance_profile_model = {
             'id': 'testString',
             'instance_id': 'testString',
-            'instance_location': 'testString',
+            'instance_location': 'us-south',
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
@@ -82,7 +83,7 @@ class TestProjectV1:
         # Construct a dict representation of a ProjectConfigDefinitionPrototypeDAConfigDefinitionPropertiesPrototype model
         project_config_definition_prototype_model = {
             'compliance_profile': project_compliance_profile_model,
-            'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.018edf04-e772-4ca2-9785-03e8e03bef72-global',
+            'locator_id': '1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc.b44f3f10-8ee1-410b-883c-0800005b167d-global',
             'description': 'The stage account configuration.',
             'name': 'account-stage',
             'environment_id': 'testString',
@@ -134,7 +135,7 @@ class TestProjectV1:
         project_compliance_profile_model = {
             'id': 'testString',
             'instance_id': 'testString',
-            'instance_location': 'testString',
+            'instance_location': 'us-south',
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
@@ -152,13 +153,7 @@ class TestProjectV1:
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {
-                'account_id': 'account_id',
-                'resource_group': 'stage',
-                'access_tags': ['env:stage'],
-                'logdna_name': 'LogDNA_stage_service',
-                'sysdig_name': 'SysDig_stage_service',
-            },
+            'inputs': {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'},
             'settings': {'anyKey': 'anyValue'},
         }
         # Construct a dict representation of a SchematicsWorkspace model
@@ -314,9 +309,7 @@ class TestProjectV1:
         assert all_items is not None
 
         assert len(all_results) == len(all_items)
-        print(
-            f'\nlist_project_environments() returned a total of {len(all_results)} items(s) using ProjectEnvironmentsPager.'
-        )
+        print(f'\nlist_project_environments() returned a total of {len(all_results)} items(s) using ProjectEnvironmentsPager.')
 
     @needscredentials
     def test_get_project_environment(self):
@@ -420,7 +413,7 @@ class TestProjectV1:
         project_compliance_profile_model = {
             'id': 'testString',
             'instance_id': 'testString',
-            'instance_location': 'testString',
+            'instance_location': 'us-south',
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
@@ -438,13 +431,7 @@ class TestProjectV1:
             'name': 'env-stage',
             'environment_id': 'testString',
             'authorizations': project_config_auth_model,
-            'inputs': {
-                'account_id': 'account_id',
-                'resource_group': 'stage',
-                'access_tags': ['env:stage'],
-                'logdna_name': 'LogDNA_stage_service',
-                'sysdig_name': 'SysDig_stage_service',
-            },
+            'inputs': {'account_id': 'account_id', 'resource_group': 'stage', 'access_tags': ['env:stage'], 'logdna_name': 'LogDNA_stage_service', 'sysdig_name': 'SysDig_stage_service'},
             'settings': {'anyKey': 'anyValue'},
         }
 
@@ -557,20 +544,10 @@ class TestProjectV1:
             'name': 'vpc_cluster_id',
             'value': 'cluster_id',
         }
-        # Construct a dict representation of a StackDefinitionMemberInputPrototype model
-        stack_definition_member_input_prototype_model = {
-            'name': 'region',
-        }
-        # Construct a dict representation of a StackDefinitionMemberPrototype model
-        stack_definition_member_prototype_model = {
-            'name': 'foundation-deployable-architecture',
-            'inputs': [stack_definition_member_input_prototype_model],
-        }
         # Construct a dict representation of a StackDefinitionBlockPrototype model
         stack_definition_block_prototype_model = {
             'inputs': [stack_definition_input_variable_model],
             'outputs': [stack_definition_output_variable_model],
-            'members': [stack_definition_member_prototype_model],
         }
 
         response = self.project_service.create_stack_definition(
@@ -610,20 +587,10 @@ class TestProjectV1:
             'name': 'testString',
             'value': 'testString',
         }
-        # Construct a dict representation of a StackDefinitionMemberInputPrototype model
-        stack_definition_member_input_prototype_model = {
-            'name': 'cluster_name',
-        }
-        # Construct a dict representation of a StackDefinitionMemberPrototype model
-        stack_definition_member_prototype_model = {
-            'name': 'foundation-deployable-architecture',
-            'inputs': [stack_definition_member_input_prototype_model],
-        }
         # Construct a dict representation of a StackDefinitionBlockPrototype model
         stack_definition_block_prototype_model = {
             'inputs': [stack_definition_input_variable_model],
             'outputs': [stack_definition_output_variable_model],
-            'members': [stack_definition_member_prototype_model],
         }
 
         response = self.project_service.update_stack_definition(
