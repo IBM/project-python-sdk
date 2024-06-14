@@ -7550,6 +7550,7 @@ class ProjectDefinitionProperties:
     :param str description: A brief explanation of the project's use in the
           configuration of a deployable architecture. You can create a project without
           providing a description.
+    :param bool auto_deploy: A boolean flag to enable auto deploy.
     :param bool monitoring_enabled: (optional) A boolean flag to enable automatic
           drift detection. Use this field to run a daily check to compare your
           configurations to your deployed resources to detect any difference.
@@ -7560,6 +7561,7 @@ class ProjectDefinitionProperties:
         name: str,
         destroy_on_delete: bool,
         description: str,
+        auto_deploy: bool,
         *,
         monitoring_enabled: Optional[bool] = None,
     ) -> None:
@@ -7573,6 +7575,7 @@ class ProjectDefinitionProperties:
         :param str description: A brief explanation of the project's use in the
                configuration of a deployable architecture. You can create a project
                without providing a description.
+        :param bool auto_deploy: A boolean flag to enable auto deploy.
         :param bool monitoring_enabled: (optional) A boolean flag to enable
                automatic drift detection. Use this field to run a daily check to compare
                your configurations to your deployed resources to detect any difference.
@@ -7580,6 +7583,7 @@ class ProjectDefinitionProperties:
         self.name = name
         self.destroy_on_delete = destroy_on_delete
         self.description = description
+        self.auto_deploy = auto_deploy
         self.monitoring_enabled = monitoring_enabled
 
     @classmethod
@@ -7598,6 +7602,10 @@ class ProjectDefinitionProperties:
             args['description'] = description
         else:
             raise ValueError('Required property \'description\' not present in ProjectDefinitionProperties JSON')
+        if (auto_deploy := _dict.get('auto_deploy')) is not None:
+            args['auto_deploy'] = auto_deploy
+        else:
+            raise ValueError('Required property \'auto_deploy\' not present in ProjectDefinitionProperties JSON')
         if (monitoring_enabled := _dict.get('monitoring_enabled')) is not None:
             args['monitoring_enabled'] = monitoring_enabled
         return cls(**args)
@@ -7616,6 +7624,8 @@ class ProjectDefinitionProperties:
             _dict['destroy_on_delete'] = self.destroy_on_delete
         if hasattr(self, 'description') and self.description is not None:
             _dict['description'] = self.description
+        if hasattr(self, 'auto_deploy') and self.auto_deploy is not None:
+            _dict['auto_deploy'] = self.auto_deploy
         if hasattr(self, 'monitoring_enabled') and self.monitoring_enabled is not None:
             _dict['monitoring_enabled'] = self.monitoring_enabled
         return _dict
@@ -7694,6 +7704,93 @@ class ProjectDefinitionReference:
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: 'ProjectDefinitionReference') -> bool:
+        """Return `true` when self and other are not equal, false otherwise."""
+        return not self == other
+
+
+class ProjectDefinitionSummary:
+    """
+    The definition of the project.
+
+    :param str name: The name of the project.  It's unique within the account across
+          regions.
+    :param bool destroy_on_delete: The policy that indicates whether the resources
+          are destroyed or not when a project is deleted.
+    :param str description: A brief explanation of the project's use in the
+          configuration of a deployable architecture. You can create a project without
+          providing a description.
+    """
+
+    def __init__(
+        self,
+        name: str,
+        destroy_on_delete: bool,
+        description: str,
+    ) -> None:
+        """
+        Initialize a ProjectDefinitionSummary object.
+
+        :param str name: The name of the project.  It's unique within the account
+               across regions.
+        :param bool destroy_on_delete: The policy that indicates whether the
+               resources are destroyed or not when a project is deleted.
+        :param str description: A brief explanation of the project's use in the
+               configuration of a deployable architecture. You can create a project
+               without providing a description.
+        """
+        self.name = name
+        self.destroy_on_delete = destroy_on_delete
+        self.description = description
+
+    @classmethod
+    def from_dict(cls, _dict: Dict) -> 'ProjectDefinitionSummary':
+        """Initialize a ProjectDefinitionSummary object from a json dictionary."""
+        args = {}
+        if (name := _dict.get('name')) is not None:
+            args['name'] = name
+        else:
+            raise ValueError('Required property \'name\' not present in ProjectDefinitionSummary JSON')
+        if (destroy_on_delete := _dict.get('destroy_on_delete')) is not None:
+            args['destroy_on_delete'] = destroy_on_delete
+        else:
+            raise ValueError('Required property \'destroy_on_delete\' not present in ProjectDefinitionSummary JSON')
+        if (description := _dict.get('description')) is not None:
+            args['description'] = description
+        else:
+            raise ValueError('Required property \'description\' not present in ProjectDefinitionSummary JSON')
+        return cls(**args)
+
+    @classmethod
+    def _from_dict(cls, _dict):
+        """Initialize a ProjectDefinitionSummary object from a json dictionary."""
+        return cls.from_dict(_dict)
+
+    def to_dict(self) -> Dict:
+        """Return a json dictionary representing this model."""
+        _dict = {}
+        if hasattr(self, 'name') and self.name is not None:
+            _dict['name'] = self.name
+        if hasattr(self, 'destroy_on_delete') and self.destroy_on_delete is not None:
+            _dict['destroy_on_delete'] = self.destroy_on_delete
+        if hasattr(self, 'description') and self.description is not None:
+            _dict['description'] = self.description
+        return _dict
+
+    def _to_dict(self):
+        """Return a json dictionary representing this model."""
+        return self.to_dict()
+
+    def __str__(self) -> str:
+        """Return a `str` version of this ProjectDefinitionSummary object."""
+        return json.dumps(self.to_dict(), indent=2)
+
+    def __eq__(self, other: 'ProjectDefinitionSummary') -> bool:
+        """Return `true` when self and other are equal, false otherwise."""
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__dict__ == other.__dict__
+
+    def __ne__(self, other: 'ProjectDefinitionSummary') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
@@ -7951,6 +8048,7 @@ class ProjectPatchDefinitionBlock:
           account across regions.
     :param bool destroy_on_delete: (optional) The policy that indicates whether the
           resources are destroyed or not when a project is deleted.
+    :param bool auto_deploy: (optional) A boolean flag to enable auto deploy.
     :param str description: (optional) A brief explanation of the project's use in
           the configuration of a deployable architecture. You can create a project without
           providing a description.
@@ -7964,6 +8062,7 @@ class ProjectPatchDefinitionBlock:
         *,
         name: Optional[str] = None,
         destroy_on_delete: Optional[bool] = None,
+        auto_deploy: Optional[bool] = None,
         description: Optional[str] = None,
         monitoring_enabled: Optional[bool] = None,
     ) -> None:
@@ -7974,6 +8073,7 @@ class ProjectPatchDefinitionBlock:
                the account across regions.
         :param bool destroy_on_delete: (optional) The policy that indicates whether
                the resources are destroyed or not when a project is deleted.
+        :param bool auto_deploy: (optional) A boolean flag to enable auto deploy.
         :param str description: (optional) A brief explanation of the project's use
                in the configuration of a deployable architecture. You can create a project
                without providing a description.
@@ -7983,6 +8083,7 @@ class ProjectPatchDefinitionBlock:
         """
         self.name = name
         self.destroy_on_delete = destroy_on_delete
+        self.auto_deploy = auto_deploy
         self.description = description
         self.monitoring_enabled = monitoring_enabled
 
@@ -7994,6 +8095,8 @@ class ProjectPatchDefinitionBlock:
             args['name'] = name
         if (destroy_on_delete := _dict.get('destroy_on_delete')) is not None:
             args['destroy_on_delete'] = destroy_on_delete
+        if (auto_deploy := _dict.get('auto_deploy')) is not None:
+            args['auto_deploy'] = auto_deploy
         if (description := _dict.get('description')) is not None:
             args['description'] = description
         if (monitoring_enabled := _dict.get('monitoring_enabled')) is not None:
@@ -8012,6 +8115,8 @@ class ProjectPatchDefinitionBlock:
             _dict['name'] = self.name
         if hasattr(self, 'destroy_on_delete') and self.destroy_on_delete is not None:
             _dict['destroy_on_delete'] = self.destroy_on_delete
+        if hasattr(self, 'auto_deploy') and self.auto_deploy is not None:
+            _dict['auto_deploy'] = self.auto_deploy
         if hasattr(self, 'description') and self.description is not None:
             _dict['description'] = self.description
         if hasattr(self, 'monitoring_enabled') and self.monitoring_enabled is not None:
@@ -8048,6 +8153,7 @@ class ProjectPrototypeDefinition:
     :param str description: (optional) A brief explanation of the project's use in
           the configuration of a deployable architecture. You can create a project without
           providing a description.
+    :param bool auto_deploy: (optional) A boolean flag to enable auto deploy.
     :param bool monitoring_enabled: (optional) A boolean flag to enable automatic
           drift detection. Use this field to run a daily check to compare your
           configurations to your deployed resources to detect any difference.
@@ -8059,6 +8165,7 @@ class ProjectPrototypeDefinition:
         *,
         destroy_on_delete: Optional[bool] = None,
         description: Optional[str] = None,
+        auto_deploy: Optional[bool] = None,
         monitoring_enabled: Optional[bool] = None,
     ) -> None:
         """
@@ -8071,6 +8178,7 @@ class ProjectPrototypeDefinition:
         :param str description: (optional) A brief explanation of the project's use
                in the configuration of a deployable architecture. You can create a project
                without providing a description.
+        :param bool auto_deploy: (optional) A boolean flag to enable auto deploy.
         :param bool monitoring_enabled: (optional) A boolean flag to enable
                automatic drift detection. Use this field to run a daily check to compare
                your configurations to your deployed resources to detect any difference.
@@ -8078,6 +8186,7 @@ class ProjectPrototypeDefinition:
         self.name = name
         self.destroy_on_delete = destroy_on_delete
         self.description = description
+        self.auto_deploy = auto_deploy
         self.monitoring_enabled = monitoring_enabled
 
     @classmethod
@@ -8092,6 +8201,8 @@ class ProjectPrototypeDefinition:
             args['destroy_on_delete'] = destroy_on_delete
         if (description := _dict.get('description')) is not None:
             args['description'] = description
+        if (auto_deploy := _dict.get('auto_deploy')) is not None:
+            args['auto_deploy'] = auto_deploy
         if (monitoring_enabled := _dict.get('monitoring_enabled')) is not None:
             args['monitoring_enabled'] = monitoring_enabled
         return cls(**args)
@@ -8110,6 +8221,8 @@ class ProjectPrototypeDefinition:
             _dict['destroy_on_delete'] = self.destroy_on_delete
         if hasattr(self, 'description') and self.description is not None:
             _dict['description'] = self.description
+        if hasattr(self, 'auto_deploy') and self.auto_deploy is not None:
+            _dict['auto_deploy'] = self.auto_deploy
         if hasattr(self, 'monitoring_enabled') and self.monitoring_enabled is not None:
             _dict['monitoring_enabled'] = self.monitoring_enabled
         return _dict
@@ -8249,7 +8362,7 @@ class ProjectSummary:
           tools are created.
     :param str state: The project status value.
     :param str href: A URL.
-    :param ProjectDefinitionProperties definition: The definition of the project.
+    :param ProjectDefinitionSummary definition: The definition of the project.
     """
 
     def __init__(
@@ -8262,7 +8375,7 @@ class ProjectSummary:
         resource_group_id: str,
         state: str,
         href: str,
-        definition: 'ProjectDefinitionProperties',
+        definition: 'ProjectDefinitionSummary',
         *,
         cumulative_needs_attention_view_error: Optional[bool] = None,
     ) -> None:
@@ -8283,8 +8396,7 @@ class ProjectSummary:
                data and tools are created.
         :param str state: The project status value.
         :param str href: A URL.
-        :param ProjectDefinitionProperties definition: The definition of the
-               project.
+        :param ProjectDefinitionSummary definition: The definition of the project.
         :param bool cumulative_needs_attention_view_error: (optional) A value of
                `true` indicates that the fetch of the needs attention items failed. This
                property only exists if there was an error when you retrieved the
@@ -8342,7 +8454,7 @@ class ProjectSummary:
         else:
             raise ValueError('Required property \'href\' not present in ProjectSummary JSON')
         if (definition := _dict.get('definition')) is not None:
-            args['definition'] = ProjectDefinitionProperties.from_dict(definition)
+            args['definition'] = ProjectDefinitionSummary.from_dict(definition)
         else:
             raise ValueError('Required property \'definition\' not present in ProjectSummary JSON')
         return cls(**args)

@@ -108,7 +108,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "auto_deploy": false, "monitoring_enabled": false}}'
         responses.add(
             responses.POST,
             url,
@@ -122,6 +122,7 @@ class TestCreateProject:
         project_prototype_definition_model['name'] = 'acme-microservice'
         project_prototype_definition_model['destroy_on_delete'] = True
         project_prototype_definition_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
+        project_prototype_definition_model['auto_deploy'] = False
         project_prototype_definition_model['monitoring_enabled'] = False
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -218,7 +219,7 @@ class TestCreateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "auto_deploy": false, "monitoring_enabled": false}}'
         responses.add(
             responses.POST,
             url,
@@ -232,6 +233,7 @@ class TestCreateProject:
         project_prototype_definition_model['name'] = 'acme-microservice'
         project_prototype_definition_model['destroy_on_delete'] = True
         project_prototype_definition_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
+        project_prototype_definition_model['auto_deploy'] = False
         project_prototype_definition_model['monitoring_enabled'] = False
 
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -324,7 +326,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "first": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}]}'
+        mock_response = '{"limit": 10, "first": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "definition": {"name": "name", "destroy_on_delete": false, "description": "description"}}]}'
         responses.add(
             responses.GET,
             url,
@@ -369,7 +371,7 @@ class TestListProjects:
         """
         # Set up mock
         url = preprocess_url('/v1/projects')
-        mock_response = '{"limit": 10, "first": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}]}'
+        mock_response = '{"limit": 10, "first": {"href": "href"}, "next": {"href": "href"}, "projects": [{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "definition": {"name": "name", "destroy_on_delete": false, "description": "description"}}]}'
         responses.add(
             responses.GET,
             url,
@@ -401,8 +403,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?token=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description","monitoring_enabled":false}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description","monitoring_enabled":false}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?token=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description"}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description"}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -437,8 +439,8 @@ class TestListProjects:
         """
         # Set up a two-page mock response
         url = preprocess_url('/v1/projects')
-        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?token=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description","monitoring_enabled":false}}],"total_count":2,"limit":1}'
-        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description","monitoring_enabled":false}}],"total_count":2,"limit":1}'
+        mock_response1 = '{"next":{"href":"https://myhost.com/somePath?token=1"},"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description"}}],"total_count":2,"limit":1}'
+        mock_response2 = '{"projects":[{"crn":"crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::","created_at":"2019-01-01T12:00:00.000Z","cumulative_needs_attention_view":[{"event":"event","event_id":"event_id","config_id":"config_id","config_version":14}],"cumulative_needs_attention_view_error":false,"id":"id","location":"location","resource_group_id":"resource_group_id","state":"ready","href":"href","definition":{"name":"name","destroy_on_delete":false,"description":"description"}}],"total_count":2,"limit":1}'
         responses.add(
             responses.GET,
             url,
@@ -476,7 +478,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "auto_deploy": false, "monitoring_enabled": false}}'
         responses.add(
             responses.GET,
             url,
@@ -514,7 +516,7 @@ class TestGetProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "auto_deploy": false, "monitoring_enabled": false}}'
         responses.add(
             responses.GET,
             url,
@@ -557,7 +559,7 @@ class TestUpdateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "auto_deploy": false, "monitoring_enabled": false}}'
         responses.add(
             responses.PATCH,
             url,
@@ -570,6 +572,7 @@ class TestUpdateProject:
         project_patch_definition_block_model = {}
         project_patch_definition_block_model['name'] = 'acme-microservice'
         project_patch_definition_block_model['destroy_on_delete'] = True
+        project_patch_definition_block_model['auto_deploy'] = True
         project_patch_definition_block_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
         project_patch_definition_block_model['monitoring_enabled'] = True
 
@@ -607,7 +610,7 @@ class TestUpdateProject:
         """
         # Set up mock
         url = preprocess_url('/v1/projects/testString')
-        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "monitoring_enabled": false}}'
+        mock_response = '{"crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::", "created_at": "2019-01-01T12:00:00.000Z", "cumulative_needs_attention_view": [{"event": "event", "event_id": "event_id", "config_id": "config_id", "config_version": 14}], "cumulative_needs_attention_view_error": false, "id": "id", "location": "location", "resource_group_id": "resource_group_id", "state": "ready", "href": "href", "resource_group": "resource_group", "event_notifications_crn": "event_notifications_crn", "configs": [{"approved_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "deployed_version": {"definition": {"environment_id": "environment_id", "locator_id": "locator_id"}, "state": "approved", "state_code": "awaiting_input", "version": 7, "href": "href"}, "id": "id", "version": 7, "state": "approved", "created_at": "2019-01-01T12:00:00.000Z", "modified_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name", "locator_id": "locator_id"}, "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "deployment_model": "project_deployed"}], "environments": [{"id": "id", "project": {"id": "id", "href": "href", "definition": {"name": "name"}, "crn": "crn:v1:staging:public:project:us-south:a/4e1c48fcf8ac33c0a2441e4139f189ae:bf40ad13-b107-446a-8286-c6d576183bb1::"}, "created_at": "2019-01-01T12:00:00.000Z", "href": "href", "definition": {"description": "description", "name": "name"}}], "definition": {"name": "name", "destroy_on_delete": false, "description": "description", "auto_deploy": false, "monitoring_enabled": false}}'
         responses.add(
             responses.PATCH,
             url,
@@ -620,6 +623,7 @@ class TestUpdateProject:
         project_patch_definition_block_model = {}
         project_patch_definition_block_model['name'] = 'acme-microservice'
         project_patch_definition_block_model['destroy_on_delete'] = True
+        project_patch_definition_block_model['auto_deploy'] = True
         project_patch_definition_block_model['description'] = 'A microservice to deploy on top of ACME infrastructure.'
         project_patch_definition_block_model['monitoring_enabled'] = True
 
@@ -5416,6 +5420,7 @@ class TestModel_Project:
         project_definition_properties_model['name'] = 'testString'
         project_definition_properties_model['destroy_on_delete'] = True
         project_definition_properties_model['description'] = 'testString'
+        project_definition_properties_model['auto_deploy'] = False
         project_definition_properties_model['monitoring_enabled'] = False
 
         # Construct a json representation of a Project model
@@ -5474,11 +5479,10 @@ class TestModel_ProjectCollection:
         cumulative_needs_attention_model['config_id'] = 'testString'
         cumulative_needs_attention_model['config_version'] = 38
 
-        project_definition_properties_model = {}  # ProjectDefinitionProperties
-        project_definition_properties_model['name'] = 'testString'
-        project_definition_properties_model['destroy_on_delete'] = True
-        project_definition_properties_model['description'] = 'testString'
-        project_definition_properties_model['monitoring_enabled'] = False
+        project_definition_summary_model = {}  # ProjectDefinitionSummary
+        project_definition_summary_model['name'] = 'testString'
+        project_definition_summary_model['destroy_on_delete'] = True
+        project_definition_summary_model['description'] = 'testString'
 
         project_summary_model = {}  # ProjectSummary
         project_summary_model['crn'] = (
@@ -5492,7 +5496,7 @@ class TestModel_ProjectCollection:
         project_summary_model['resource_group_id'] = 'testString'
         project_summary_model['state'] = 'ready'
         project_summary_model['href'] = 'testString'
-        project_summary_model['definition'] = project_definition_properties_model
+        project_summary_model['definition'] = project_definition_summary_model
 
         # Construct a json representation of a ProjectCollection model
         project_collection_model_json = {}
@@ -6806,6 +6810,7 @@ class TestModel_ProjectDefinitionProperties:
         project_definition_properties_model_json['name'] = 'testString'
         project_definition_properties_model_json['destroy_on_delete'] = True
         project_definition_properties_model_json['description'] = 'testString'
+        project_definition_properties_model_json['auto_deploy'] = False
         project_definition_properties_model_json['monitoring_enabled'] = False
 
         # Construct a model instance of ProjectDefinitionProperties by calling from_dict on the json representation
@@ -6860,6 +6865,40 @@ class TestModel_ProjectDefinitionReference:
         # Convert model instance back to dict and verify no loss of data
         project_definition_reference_model_json2 = project_definition_reference_model.to_dict()
         assert project_definition_reference_model_json2 == project_definition_reference_model_json
+
+
+class TestModel_ProjectDefinitionSummary:
+    """
+    Test Class for ProjectDefinitionSummary
+    """
+
+    def test_project_definition_summary_serialization(self):
+        """
+        Test serialization/deserialization for ProjectDefinitionSummary
+        """
+
+        # Construct a json representation of a ProjectDefinitionSummary model
+        project_definition_summary_model_json = {}
+        project_definition_summary_model_json['name'] = 'testString'
+        project_definition_summary_model_json['destroy_on_delete'] = True
+        project_definition_summary_model_json['description'] = 'testString'
+
+        # Construct a model instance of ProjectDefinitionSummary by calling from_dict on the json representation
+        project_definition_summary_model = ProjectDefinitionSummary.from_dict(project_definition_summary_model_json)
+        assert project_definition_summary_model != False
+
+        # Construct a model instance of ProjectDefinitionSummary by calling from_dict on the json representation
+        project_definition_summary_model_dict = ProjectDefinitionSummary.from_dict(
+            project_definition_summary_model_json
+        ).__dict__
+        project_definition_summary_model2 = ProjectDefinitionSummary(**project_definition_summary_model_dict)
+
+        # Verify the model instances are equivalent
+        assert project_definition_summary_model == project_definition_summary_model2
+
+        # Convert model instance back to dict and verify no loss of data
+        project_definition_summary_model_json2 = project_definition_summary_model.to_dict()
+        assert project_definition_summary_model_json2 == project_definition_summary_model_json
 
 
 class TestModel_ProjectDeleteResponse:
@@ -6998,6 +7037,7 @@ class TestModel_ProjectPatchDefinitionBlock:
         project_patch_definition_block_model_json = {}
         project_patch_definition_block_model_json['name'] = 'testString'
         project_patch_definition_block_model_json['destroy_on_delete'] = True
+        project_patch_definition_block_model_json['auto_deploy'] = True
         project_patch_definition_block_model_json['description'] = 'testString'
         project_patch_definition_block_model_json['monitoring_enabled'] = True
 
@@ -7036,6 +7076,7 @@ class TestModel_ProjectPrototypeDefinition:
         project_prototype_definition_model_json['name'] = 'testString'
         project_prototype_definition_model_json['destroy_on_delete'] = True
         project_prototype_definition_model_json['description'] = 'testString'
+        project_prototype_definition_model_json['auto_deploy'] = False
         project_prototype_definition_model_json['monitoring_enabled'] = False
 
         # Construct a model instance of ProjectPrototypeDefinition by calling from_dict on the json representation
@@ -7116,11 +7157,10 @@ class TestModel_ProjectSummary:
         cumulative_needs_attention_model['config_id'] = 'testString'
         cumulative_needs_attention_model['config_version'] = 38
 
-        project_definition_properties_model = {}  # ProjectDefinitionProperties
-        project_definition_properties_model['name'] = 'testString'
-        project_definition_properties_model['destroy_on_delete'] = True
-        project_definition_properties_model['description'] = 'testString'
-        project_definition_properties_model['monitoring_enabled'] = False
+        project_definition_summary_model = {}  # ProjectDefinitionSummary
+        project_definition_summary_model['name'] = 'testString'
+        project_definition_summary_model['destroy_on_delete'] = True
+        project_definition_summary_model['description'] = 'testString'
 
         # Construct a json representation of a ProjectSummary model
         project_summary_model_json = {}
@@ -7135,7 +7175,7 @@ class TestModel_ProjectSummary:
         project_summary_model_json['resource_group_id'] = 'testString'
         project_summary_model_json['state'] = 'ready'
         project_summary_model_json['href'] = 'testString'
-        project_summary_model_json['definition'] = project_definition_properties_model
+        project_summary_model_json['definition'] = project_definition_summary_model
 
         # Construct a model instance of ProjectSummary by calling from_dict on the json representation
         project_summary_model = ProjectSummary.from_dict(project_summary_model_json)

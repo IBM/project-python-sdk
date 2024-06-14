@@ -63,6 +63,7 @@ class TestProjectV1:
             'name': 'acme-microservice',
             'destroy_on_delete': True,
             'description': 'A microservice to deploy on top of ACME infrastructure.',
+            'auto_deploy': False,
             'monitoring_enabled': False,
         }
         # Construct a dict representation of a ProjectComplianceProfile model
@@ -230,6 +231,7 @@ class TestProjectV1:
         project_patch_definition_block_model = {
             'name': 'acme-microservice',
             'destroy_on_delete': True,
+            'auto_deploy': True,
             'description': 'A microservice to deploy on top of ACME infrastructure.',
             'monitoring_enabled': True,
         }
