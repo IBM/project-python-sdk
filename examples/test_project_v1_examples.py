@@ -647,19 +647,9 @@ class TestProjectV1Examples:
                 'value': 'cluster_id',
             }
 
-            stack_definition_member_input_prototype_model = {
-                'name': 'region',
-            }
-
-            stack_definition_member_prototype_model = {
-                'name': 'foundation-deployable-architecture',
-                'inputs': [stack_definition_member_input_prototype_model],
-            }
-
             stack_definition_block_prototype_model = {
                 'inputs': [stack_definition_input_variable_model],
                 'outputs': [stack_definition_output_variable_model],
-                'members': [stack_definition_member_prototype_model],
             }
 
             response = project_service.create_stack_definition(
@@ -717,18 +707,8 @@ class TestProjectV1Examples:
                 'hidden': False,
             }
 
-            stack_definition_member_input_prototype_model = {
-                'name': 'cluster_name',
-            }
-
-            stack_definition_member_prototype_model = {
-                'name': 'foundation-deployable-architecture',
-                'inputs': [stack_definition_member_input_prototype_model],
-            }
-
             stack_definition_block_prototype_model = {
                 'inputs': [stack_definition_input_variable_model],
-                'members': [stack_definition_member_prototype_model],
             }
 
             response = project_service.update_stack_definition(

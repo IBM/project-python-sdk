@@ -69,7 +69,7 @@ class TestProjectV1:
         project_compliance_profile_model = {
             'id': 'testString',
             'instance_id': 'testString',
-            'instance_location': 'testString',
+            'instance_location': 'us-south',
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
@@ -134,7 +134,7 @@ class TestProjectV1:
         project_compliance_profile_model = {
             'id': 'testString',
             'instance_id': 'testString',
-            'instance_location': 'testString',
+            'instance_location': 'us-south',
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
@@ -420,7 +420,7 @@ class TestProjectV1:
         project_compliance_profile_model = {
             'id': 'testString',
             'instance_id': 'testString',
-            'instance_location': 'testString',
+            'instance_location': 'us-south',
             'attachment_id': 'testString',
             'profile_name': 'testString',
         }
@@ -557,20 +557,10 @@ class TestProjectV1:
             'name': 'vpc_cluster_id',
             'value': 'cluster_id',
         }
-        # Construct a dict representation of a StackDefinitionMemberInputPrototype model
-        stack_definition_member_input_prototype_model = {
-            'name': 'region',
-        }
-        # Construct a dict representation of a StackDefinitionMemberPrototype model
-        stack_definition_member_prototype_model = {
-            'name': 'foundation-deployable-architecture',
-            'inputs': [stack_definition_member_input_prototype_model],
-        }
         # Construct a dict representation of a StackDefinitionBlockPrototype model
         stack_definition_block_prototype_model = {
             'inputs': [stack_definition_input_variable_model],
             'outputs': [stack_definition_output_variable_model],
-            'members': [stack_definition_member_prototype_model],
         }
 
         response = self.project_service.create_stack_definition(
@@ -610,20 +600,10 @@ class TestProjectV1:
             'name': 'testString',
             'value': 'testString',
         }
-        # Construct a dict representation of a StackDefinitionMemberInputPrototype model
-        stack_definition_member_input_prototype_model = {
-            'name': 'cluster_name',
-        }
-        # Construct a dict representation of a StackDefinitionMemberPrototype model
-        stack_definition_member_prototype_model = {
-            'name': 'foundation-deployable-architecture',
-            'inputs': [stack_definition_member_input_prototype_model],
-        }
         # Construct a dict representation of a StackDefinitionBlockPrototype model
         stack_definition_block_prototype_model = {
             'inputs': [stack_definition_input_variable_model],
             'outputs': [stack_definition_output_variable_model],
-            'members': [stack_definition_member_prototype_model],
         }
 
         response = self.project_service.update_stack_definition(

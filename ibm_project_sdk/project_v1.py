@@ -5066,6 +5066,17 @@ class ProjectComplianceProfile:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
+    class InstanceLocationEnum(str, Enum):
+        """
+        The location of the compliance instance.
+        """
+
+        US_SOUTH = 'us-south'
+        US_EAST = 'us-east'
+        EU_GB = 'eu-gb'
+        EU_DE = 'eu-de'
+        CA_TOR = 'ca-tor'
+
 
 class ProjectConfig:
     """
@@ -9113,8 +9124,6 @@ class StackDefinitionBlockPrototype:
           private catalog.
     :param List[StackDefinitionOutputVariable] outputs: (optional) The outputs
           associated with this stack definition.
-    :param List[StackDefinitionMemberPrototype] members: (optional) Defines the
-          member deployable architectures that are included in your stack.
     """
 
     def __init__(
@@ -9122,7 +9131,6 @@ class StackDefinitionBlockPrototype:
         *,
         inputs: Optional[List['StackDefinitionInputVariable']] = None,
         outputs: Optional[List['StackDefinitionOutputVariable']] = None,
-        members: Optional[List['StackDefinitionMemberPrototype']] = None,
     ) -> None:
         """
         Initialize a StackDefinitionBlockPrototype object.
@@ -9133,12 +9141,9 @@ class StackDefinitionBlockPrototype:
                exported to a private catalog.
         :param List[StackDefinitionOutputVariable] outputs: (optional) The outputs
                associated with this stack definition.
-        :param List[StackDefinitionMemberPrototype] members: (optional) Defines the
-               member deployable architectures that are included in your stack.
         """
         self.inputs = inputs
         self.outputs = outputs
-        self.members = members
 
     @classmethod
     def from_dict(cls, _dict: Dict) -> 'StackDefinitionBlockPrototype':
@@ -9148,8 +9153,6 @@ class StackDefinitionBlockPrototype:
             args['inputs'] = [StackDefinitionInputVariable.from_dict(v) for v in inputs]
         if (outputs := _dict.get('outputs')) is not None:
             args['outputs'] = [StackDefinitionOutputVariable.from_dict(v) for v in outputs]
-        if (members := _dict.get('members')) is not None:
-            args['members'] = [StackDefinitionMemberPrototype.from_dict(v) for v in members]
         return cls(**args)
 
     @classmethod
@@ -9176,14 +9179,6 @@ class StackDefinitionBlockPrototype:
                 else:
                     outputs_list.append(v.to_dict())
             _dict['outputs'] = outputs_list
-        if hasattr(self, 'members') and self.members is not None:
-            members_list = []
-            for v in self.members:
-                if isinstance(v, dict):
-                    members_list.append(v)
-                else:
-                    members_list.append(v.to_dict())
-            _dict['members'] = members_list
         return _dict
 
     def _to_dict(self):
@@ -9452,8 +9447,8 @@ class StackDefinitionMember:
     :param str name: The name matching the alias in the stack definition.
     :param str version_locator: The version locator of the member deployable
           architecture.
-    :param List[StackDefinitionMemberInput] inputs: (optional) The member input
-          names to use for the stack definition.
+    :param List[StackDefinitionMemberInput] inputs: (optional) The member inputs to
+          use for the stack definition.
     """
 
     def __init__(
@@ -9469,8 +9464,8 @@ class StackDefinitionMember:
         :param str name: The name matching the alias in the stack definition.
         :param str version_locator: The version locator of the member deployable
                architecture.
-        :param List[StackDefinitionMemberInput] inputs: (optional) The member input
-               names to use for the stack definition.
+        :param List[StackDefinitionMemberInput] inputs: (optional) The member
+               inputs to use for the stack definition.
         """
         self.name = name
         self.version_locator = version_locator
@@ -9535,7 +9530,7 @@ class StackDefinitionMember:
 
 class StackDefinitionMemberInput:
     """
-    The member input definition.
+    StackDefinitionMemberInput.
 
     :param str name: The member input name to use.
     :param object value: The value of the stack definition output.
@@ -9598,142 +9593,6 @@ class StackDefinitionMemberInput:
         return self.__dict__ == other.__dict__
 
     def __ne__(self, other: 'StackDefinitionMemberInput') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
-
-
-class StackDefinitionMemberInputPrototype:
-    """
-    The member input definition.
-
-    :param str name: The member input name to use.
-    """
-
-    def __init__(
-        self,
-        name: str,
-    ) -> None:
-        """
-        Initialize a StackDefinitionMemberInputPrototype object.
-
-        :param str name: The member input name to use.
-        """
-        self.name = name
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'StackDefinitionMemberInputPrototype':
-        """Initialize a StackDefinitionMemberInputPrototype object from a json dictionary."""
-        args = {}
-        if (name := _dict.get('name')) is not None:
-            args['name'] = name
-        else:
-            raise ValueError('Required property \'name\' not present in StackDefinitionMemberInputPrototype JSON')
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a StackDefinitionMemberInputPrototype object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this StackDefinitionMemberInputPrototype object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'StackDefinitionMemberInputPrototype') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'StackDefinitionMemberInputPrototype') -> bool:
-        """Return `true` when self and other are not equal, false otherwise."""
-        return not self == other
-
-
-class StackDefinitionMemberPrototype:
-    """
-    Defines the input values from member deployable architectures that are included in the
-    catalog entry when the stack is exported to a private catalog.
-
-    :param str name: The name matching the alias in the stack definition.
-    :param List[StackDefinitionMemberInputPrototype] inputs: (optional) The member
-          input names to use for the deployable architecture stack definition.
-    """
-
-    def __init__(
-        self,
-        name: str,
-        *,
-        inputs: Optional[List['StackDefinitionMemberInputPrototype']] = None,
-    ) -> None:
-        """
-        Initialize a StackDefinitionMemberPrototype object.
-
-        :param str name: The name matching the alias in the stack definition.
-        :param List[StackDefinitionMemberInputPrototype] inputs: (optional) The
-               member input names to use for the deployable architecture stack definition.
-        """
-        self.name = name
-        self.inputs = inputs
-
-    @classmethod
-    def from_dict(cls, _dict: Dict) -> 'StackDefinitionMemberPrototype':
-        """Initialize a StackDefinitionMemberPrototype object from a json dictionary."""
-        args = {}
-        if (name := _dict.get('name')) is not None:
-            args['name'] = name
-        else:
-            raise ValueError('Required property \'name\' not present in StackDefinitionMemberPrototype JSON')
-        if (inputs := _dict.get('inputs')) is not None:
-            args['inputs'] = [StackDefinitionMemberInputPrototype.from_dict(v) for v in inputs]
-        return cls(**args)
-
-    @classmethod
-    def _from_dict(cls, _dict):
-        """Initialize a StackDefinitionMemberPrototype object from a json dictionary."""
-        return cls.from_dict(_dict)
-
-    def to_dict(self) -> Dict:
-        """Return a json dictionary representing this model."""
-        _dict = {}
-        if hasattr(self, 'name') and self.name is not None:
-            _dict['name'] = self.name
-        if hasattr(self, 'inputs') and self.inputs is not None:
-            inputs_list = []
-            for v in self.inputs:
-                if isinstance(v, dict):
-                    inputs_list.append(v)
-                else:
-                    inputs_list.append(v.to_dict())
-            _dict['inputs'] = inputs_list
-        return _dict
-
-    def _to_dict(self):
-        """Return a json dictionary representing this model."""
-        return self.to_dict()
-
-    def __str__(self) -> str:
-        """Return a `str` version of this StackDefinitionMemberPrototype object."""
-        return json.dumps(self.to_dict(), indent=2)
-
-    def __eq__(self, other: 'StackDefinitionMemberPrototype') -> bool:
-        """Return `true` when self and other are equal, false otherwise."""
-        if not isinstance(other, self.__class__):
-            return False
-        return self.__dict__ == other.__dict__
-
-    def __ne__(self, other: 'StackDefinitionMemberPrototype') -> bool:
         """Return `true` when self and other are not equal, false otherwise."""
         return not self == other
 
