@@ -19,7 +19,7 @@ import os
 import sys
 import pkg_resources
 
-__version__ = '0.0.6'
+__version__ = '0.0.7'
 PACKAGE_NAME = 'ibm_project_sdk'
 PACKAGE_DESC = 'Project Services Python SDK'
 
