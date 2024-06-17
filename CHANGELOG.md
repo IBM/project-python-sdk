@@ -1,3 +1,10 @@
+## [0.0.7](https://github.com/IBM/project-python-sdk/compare/v0.0.6...v0.0.7) (2024-06-17)
+
+
+### Bug Fixes
+
+* latest code ([89c1063](https://github.com/IBM/project-python-sdk/commit/89c106320f28fcad9b9c28d013e7787008240783))
+
 ## [0.0.6](https://github.com/IBM/project-python-sdk/compare/v0.0.5...v0.0.6) (2024-05-06)
 
 
